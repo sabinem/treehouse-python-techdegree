@@ -85,11 +85,9 @@ class Player:
         self.ships_afloat = []
         self.ships_afloat.append(BattleShip(self, self.board))
         self.ships_afloat.append(Submarine(self, self.board))
-
-#            Cruiser(self, self.board),
-#            AircraftCarrier(self, self.board),
-#            PatrolBoat(self, self.board)
-#        ]
+        self.ships_afloat.append(Cruiser(self, self.board))
+        self.ships_afloat.append(AircraftCarrier(self, self.board))
+        self.ships_afloat.append(PatrolBoat(self, self.board))
         clear_screen()
         print("Bravo {}, you are done with your setup. It looks fantastic:"
               .format(self))
