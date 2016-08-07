@@ -83,10 +83,10 @@ class Player:
               .format(self))
         self.board.print()
         self.ships_afloat = [
-            #BattleShip(self, self.board),
-            #Submarine(self, self.board),
-            #Cruiser(self, self.board),
-            #AircraftCarrier(self, self.board),
+            BattleShip(self, self.board),
+            Submarine(self, self.board),
+            Cruiser(self, self.board),
+            AircraftCarrier(self, self.board),
             PatrolBoat(self, self.board)
         ]
         clear_screen()
