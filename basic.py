@@ -1,7 +1,7 @@
 """
 This files contains some basic functions that are used by several classes
 """
-from battleshipgame.board import COLS, ROWS
+from board import COLS, ROWS
 
 
 def clear_screen():

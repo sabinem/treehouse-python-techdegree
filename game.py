@@ -2,8 +2,8 @@
 This is the main file of the Battleship Game.
 It includes and initiates the Game-Class
 """
-from battleshipgame.basic import clear_screen
-from battleshipgame.player import Player
+from basic import clear_screen
+from player import Player
 
 
 class Game:

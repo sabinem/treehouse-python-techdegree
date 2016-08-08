@@ -3,11 +3,11 @@ This file contains the Player Class.
 """
 import sys
 
-from battleshipgame.board import BOARD_HIT, BOARD_HIDDEN, \
+from board import BOARD_HIT, BOARD_HIDDEN, \
     BOARD_EMPTY, BOARD_UNHIT_CHOICES
-from battleshipgame.board import Board
-from battleshipgame.basic import clear_screen, check_gridpoint, check_input
-from battleshipgame.ship import BattleShip, PatrolBoat, Cruiser, \
+from board import Board
+from basic import clear_screen, check_gridpoint, check_input
+from ship import BattleShip, PatrolBoat, Cruiser, \
     AircraftCarrier, Submarine
 
 

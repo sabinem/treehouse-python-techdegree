@@ -1,9 +1,9 @@
 """
 This file contains the Ship Classes. Each ship type has its owm class.
 """
-from battleshipgame.board import BOARD_HORIZONTAL_SHIP, BOARD_VERTICAL_SHIP
-from battleshipgame.board import HORIZONTALLY, VERTICALLY
-from battleshipgame.basic import check_gridpoint, check_input, clear_screen
+from board import BOARD_HORIZONTAL_SHIP, BOARD_VERTICAL_SHIP
+from board import HORIZONTALLY, VERTICALLY
+from basic import check_gridpoint, check_input, clear_screen
 
 
 class Ship:
