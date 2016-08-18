@@ -2,6 +2,8 @@
 This file contains the session class. The session controls
 the dialog, when the user interacts with the workfile.
 """
+import os
+
 from .worklog import WorkLog
 from .logentry import LogEntry
 from .helpers import input_wrapper
@@ -16,8 +18,8 @@ class Session:
     ACTION_CREATE = {'code': 'c', 'menu': '[c]reate logentry'}
     BASIC_OPTIONS = [ACTION_QUIT]
     ADVANCED_OPTIONS = [ACTION_QUIT, ACTION_CREATE, ACTION_SEARCH]
-    STATE_CREATE = 'Search Worklog'
-    STATE_SEARCH = 'Create Logentry'
+    STATE_CREATE = 'Create Logentry'
+    STATE_SEARCH = 'Search Worklog'
     STATE_FETCH = 'Fetch Worklog'
     STATE_LIST = 'Search Result'
     STATE_BASE = 'Your worklog is ready for you!'
@@ -101,6 +103,55 @@ class Session:
         self.active_logentry = logentry
         self.next_state = self.base_state
 
+    def search_worklog(self):
+        """
+        Ask the user for a searchoption and searchterm and perform the search.
+        The search parameters are returned for further use.
+        """
+        self.result = None
+        self.searchoption = None
+        self.searchterm = None
+        self.active_menu_options = Session.BASIC_OPTIONS
+        self.active_state = Session.STATE_SEARCH
+        self._print_page()
+        if not os.path.isfile(self.worklog.filename):
+            self.msg = (
+                "There is no worklog yet established in the file {}.\nYou must first "
+                "create logentries. Afterwards you can search!"
+                    .format(self.worklog.filename))
+            self.next_state = self.base_state
+        else:    
+            (self.searchoption,
+             self.searchterm,
+             self.data,
+             self.result,
+             self.result_row_nrs) = self.worklog.search_worklog()
+            if self.result:
+                self.msg = (
+                    "This is the result of your search with '{} {}':"
+                    .format(self.searchterm, self.searchoption['text']))
+                self.next_state = self.list_search_result
+            else:
+                self.msg = (
+                    "No entries where found"
+                    " for this search with '{} {}'.\n"
+                    .format(self.searchterm, self.searchoption['text']))
+                self.next_state = self.base_state
+
+    def list_search_result(self):
+        """
+        List the search results and ask the user to choose a logentry
+        for the detail view by row number.
+        """
+        self.active_state = Session.STATE_LIST
+        self.active_menu_options = Session.ADVANCED_OPTIONS
+        self._print_page()
+        self.worklog.print_list_header()
+        for row in self.result:
+            print(self.worklog.format_list_row(row))
+        self.next_state = self.logentry_result_detail
+        self.active_row_nr = self._list_search_result_select_row_nr()
+
     def logentry_result_detail(self):
         """
         Detail view of the search result: you can scroll
@@ -171,48 +222,6 @@ class Session:
                       "See the above for your options"
                       .format(userinput))
                 continue
-
-    def search_worklog(self):
-        """
-        Ask the user for a searchoption and searchterm and perform the search.
-        The search parameters are returned for further use.
-        """
-        self.result = None
-        self.searchoption = None
-        self.searchterm = None
-        self.active_menu_options = Session.BASIC_OPTIONS
-        self.active_state = Session.STATE_SEARCH
-        self._print_page()
-        (self.searchoption,
-         self.searchterm,
-         self.data,
-         self.result,
-         self.result_row_nrs) = self.worklog.search_worklog()
-        if self.result:
-            self.msg = (
-                "This is the result of your search with '{} {}':"
-                .format(self.searchterm, self.searchoption['text']))
-            self.next_state = self.list_search_result
-        else:
-            self.msg = (
-                "No entries where found"
-                " for this search with '{} {}'.\n"
-                .format(self.searchterm, self.searchoption['text']))
-            self.next_state = self.base_state
-
-    def list_search_result(self):
-        """
-        List the search results and ask the user to choose a logentry
-        for the detail view by row number.
-        """
-        self.active_state = Session.STATE_LIST
-        self.active_menu_options = Session.ADVANCED_OPTIONS
-        self._print_page()
-        self.worklog.print_list_header()
-        for row in self.result:
-            print(self.worklog.format_list_row(row))
-        self.next_state = self.logentry_result_detail
-        self.active_row_nr = self._list_search_result_select_row_nr()
 
     def _list_search_result_select_row_nr(self):
         """
