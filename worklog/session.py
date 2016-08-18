@@ -178,31 +178,27 @@ class Session:
         The search parameters are returned for further use.
         """
         self.result = None
+        self.searchoption = None
+        self.searchterm = None
         self.active_menu_options = Session.BASIC_OPTIONS
-        if not self.repeat_search:
-            self.searchoption = None
-            self.searchterm = None
+        self.active_state = Session.STATE_SEARCH
+        self._print_page()
+        (self.searchoption,
+         self.searchterm,
+         self.data,
+         self.result,
+         self.result_row_nrs) = self.worklog.search_worklog()
+        if self.result:
+            self.msg = (
+                "This is the result of your search with '{} {}':"
+                .format(self.searchterm, self.searchoption['text']))
+            self.next_state = self.list_search_result
         else:
-            self.repeat_search = False
-        while not self.result:
-            self.active_state = Session.STATE_SEARCH
-            self._print_page()
-            (self.searchoption,
-             self.searchterm,
-             self.data,
-             self.result,
-             self.result_row_nrs) = self.worklog.search_worklog()
-            if self.result:
-                self.msg = (
-                    "This is the result of your search with '{} {}':"
-                    .format(self.searchterm, self.searchoption['text']))
-                self.next_state = self.list_search_result
-            else:
-                self.msg = (
-                    "No entries where found"
-                    " for this search with '{} {}'.\n"
-                    .format(self.searchterm, self.searchoption['text']))
-                self.next_state = self.base_state
+            self.msg = (
+                "No entries where found"
+                " for this search with '{} {}'.\n"
+                .format(self.searchterm, self.searchoption['text']))
+            self.next_state = self.base_state
 
     def list_search_result(self):
         """
