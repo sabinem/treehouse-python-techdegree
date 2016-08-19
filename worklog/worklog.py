@@ -146,7 +146,7 @@ class WorkLog():
         """
         Read the Worklog and return its data as a list of rows.
         """
-        with open('sabine-worklog.csv', newline='\n') as f:
+        with open(self.filename, newline='\n') as f:
             reader = csv.DictReader(f, delimiter=WorkLog.DELIMITER)
             return list(reader)
 
