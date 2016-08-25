@@ -1,5 +1,5 @@
 docs/*
 worklog.db
-.cache
-.idea
+.cache/**
+.idea/**
 *.pyc

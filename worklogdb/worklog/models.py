@@ -1,6 +1,7 @@
 from peewee import *
 
-from worklogdb.worklog.settings import db
+
+db = SqliteDatabase('worklog.db')
 
 
 class Employee(Model):
