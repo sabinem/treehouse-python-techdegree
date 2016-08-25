@@ -69,18 +69,18 @@ class Session:
                     elif choice_func == self.register:
                         nextstep, msg = self.register(**kwargs)
                 elif nextstep:
-                    if nextstep == self.check_firstname_input_and_get_employee_list:
+                    if nextstep == self.get_employee_list:
                         nextstep, msg, employee_list\
-                            = self.check_firstname_input_and_get_employee_list(**kwargs)
+                            = self.get_employee_list(**kwargs)
                         if employee_list:
                             kwargs['employee_list'] = employee_list
                     elif nextstep == self.login_from_list:
                         nextstep, msg, user = self.login_from_list(**kwargs)
                         if user:
                             self.user = user
-                    elif nextstep == self.check_fullname_input_and_create_employee:
+                    elif nextstep == self.create_employee:
                         nextstep, msg, user\
-                            = self.check_fullname_input_and_create_employee(**kwargs)
+                            = self.create_employee(**kwargs)
                         if user:
                             self.user = user
             except DialogError as e:
@@ -89,9 +89,9 @@ class Session:
     def login(self, **kwargs):
         """login"""
         msg = 'Please type in your first name\n> '
-        return self.check_firstname_input_and_get_employee_list, msg
+        return self.get_employee_list, msg
 
-    def check_firstname_input_and_get_employee_list(self, **kwargs):
+    def get_employee_list(self, **kwargs):
         """check firstname and return all employees with that name as a list to choose from."""
         userinput = kwargs.pop('userinput', '')
         if userinput == '':
@@ -117,7 +117,7 @@ class Session:
                 msg = ("We could not find anybody with first name '{}'.\n"
                        "Did you misspell your name?\n"
                        "Try again or register with [r]!\n> ".format(userinput))
-                return self.check_firstname_input_and_get_employee_list, msg, None
+                return self.get_employee_list, msg, None
 
 
     def login_from_list(self, *args, **kwargs):
@@ -137,9 +137,9 @@ class Session:
         """register """
         msg = ("Please register with your first and last"
                "name, such as: 'Mickey Mouse'\n> ")
-        return self.check_fullname_input_and_create_employee, msg
+        return self.create_employee, msg
 
-    def check_fullname_input_and_create_employee(self, **kwargs):
+    def create_employee(self, **kwargs):
         """check full name input and create employee"""
         userinput = kwargs.pop('userinput', '')
         if userinput == '':
@@ -161,16 +161,6 @@ class Session:
         """Add logentry"""
         print('you can now enter a logentry')
 
-    def add_entry():
-        """Add an entry."""
-        print("Enter your entry. Press ctrl+d when finished.")
-        data = sys.stdin.read().strip()
-
-        if data:
-            if input('Save entry? [Yn] ').lower() != 'n':
-                LogEntry.create(content=data)
-                print("Saved successfully!")
-
     def view_own_entries(self):
         """View your own logentries"""
         print('you can now view your own entries')
@@ -179,26 +169,5 @@ class Session:
         """View other logentries"""
         print('you can now view all entries')
 
-    def get_input(self, msg):
-        return input(msg)
-
-    def _check_firstname(self, userinput):
-        firstname_pattern = r'(?P<firstname>^[A-Za-z]+$)'
-        match = re.match(firstname_pattern, userinput)
-        if match:
-            firstname = match.group('firstname')
-            return firstname
-        else:
-            raise ValueError('{} has not the right format.'.format(userinput))
-
-
 class DialogError(Exception):
     pass
-
-class Data:
-    __slots__ = ["firstname", "employee_list", "user"]
-
-    def __init__(self, firstname=None, employee_list=None, user=None):
-        self.firstname = firstname
-        self.employee_list = employee_list
-        self.user = user
