@@ -10,7 +10,6 @@
 4. Install the requirements
     `
     pip install -r requirements.txt
-    `
 ### Start Application
 
 Start the application with
@@ -25,7 +24,7 @@ So you can immadiately try it out.
 To see the test coverage you can install:
     `
     pip install -r requirements-test.txt`
-    `
+
 After that you get a coverage report by running:
     `
     python3 manage.py
