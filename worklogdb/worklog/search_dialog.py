@@ -72,7 +72,7 @@ class SearchDialog(BaseDialog):
             DialogStep(
                 checkinput_func=self.check_date,
                 prompt="Please provide a date or range of dates\n"
-                       "such as '30.8.2016' or '30.9.2016\n"
+                       "such as \n'30.8.2016' or \n'30.8.2016 - 2.9.2016\n"
                        "or request [l]ist of available logdates")
 
     def search_by_employee(self):
@@ -171,8 +171,11 @@ class SearchDialog(BaseDialog):
                 fmt_func=_logentry_to_date,
                 choice_func=self.choice_date
             )
-            self.choice = True
-            return
+            if logentries:
+                self.choice = True
+                return
+            else:
+                self.msg = "No logentries are in the database yet."
         else:
             try:
                 search_parameters = \

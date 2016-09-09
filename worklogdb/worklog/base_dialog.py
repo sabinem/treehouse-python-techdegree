@@ -202,11 +202,11 @@ class BaseDialog:
                     row_nr +
                     self.choice_list.fmt_detail_func(self.active_choice_item)
                 )
+        self.add_to_print_stack(print_stack)
         if self.msg:
             print_stack.append(self.msg)
             self.msg = None
-            print_stack.append("-" * 60)
-        self.add_to_print_stack(print_stack)
+            print_stack.append("+" * 60)
         return print_stack
 
     def add_to_print_stack(self, print_stack):

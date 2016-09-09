@@ -149,16 +149,6 @@ class TestBaseDialogInLoop(unittest.TestCase):
         self.assertEqual(self.dialog.menu, "menu")
         self.assertEqual(self.dialog.activestep, "step")
 
-    @patch.object(BaseDialog, 'print_data')
-    @patch.object(BaseDialog, 'update_menu')
-    def test_base_print_screen(self, mock_menu, mock_print):
-        """
-        the menu is update and the screen is printed
-        """
-        self.dialog.print_screen()
-        mock_menu.assert_called_once_with()
-        mock_print.assert_called_once_with()
-
 
 class TestBaseDialogWithChoiceList(unittest.TestCase):
     """
@@ -294,33 +284,6 @@ class TestBaseDialogInLoopNoStepNoChoice(unittest.TestCase):
         choice_check_mock.assert_called_once_with("4")
         self.assertFalse(choice_process_mock.called)
 
-
-
-"""
-    userinput = userinput.strip()
-    menuchoice = userinput.lower()
-
-    if menuchoice in self.menu:
-        self.menu[menuchoice]()
-        return
-
-    if not (self.choice or self.activestep):
-        self.msg = '{} is no valid menu choice'.format(menuchoice)
-        return
-
-    else:
-        process_func = None
-        if self.choice:
-            if not self.check_valid_choice_list_index(userinput):
-                return
-            if self.choice_list.choice_func:
-                process_func = self.choice_list.choice_func()
-        else:
-            process_func = self.activestep.checkinput_func(userinput)
-        if process_func:
-            self.msg = process_func()
-            if self.quit_dialog:
-                return self.msg"""
 
 
 

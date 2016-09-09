@@ -86,7 +86,7 @@ task_set_k = [
 task_sets = {1: task_set_l, 2: task_set_k, 3: task_set_m}
 
 
-def add_employees():
+def add_data():
     count = 0
     for employee_record in employees:
         try:
@@ -139,7 +139,6 @@ class LogEntry(BaseModel):
 def initialize():
     db.connect()
     db.create_tables([Employee, LogEntry], safe=True)
-    add_employees()
 
 
 def _get_employee_from_name(name):
