@@ -122,7 +122,7 @@ class LogEntry(BaseModel):
 
     def __repr__(self):
         logdate_fmt = _format_date(self.logdate)
-        return (("{0:<20s} {1}\n{2:<20s} {3}\n"
+        return (("\n{0:<20s} {1}\n{2:<20s} {3}\n"
                 "{4:<20s} {5}\n{6:<20s} {7} min\n{8}\n{9}").
                 format('Employee:',
                        self.employee,
