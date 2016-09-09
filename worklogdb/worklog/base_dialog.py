@@ -122,10 +122,7 @@ class BaseDialog:
         menuchoice = userinput.lower()
 
         if menuchoice in self.menu:
-            print(self.menu[menuchoice])
             self.menu[menuchoice]()
-            print(self.update_menu)
-            self.update_menu()
             return
 
         if not (self.choice or self.activestep):
