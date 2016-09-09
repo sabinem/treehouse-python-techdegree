@@ -1,11 +1,11 @@
-import sys
-from peewee import *
-
+"""
+Script to start the Worklogdb Application
+"""
 from worklogdb.worklog.models import initialize
-from worklogdb.worklog.session import Session
+from worklogdb.worklog.main_dialog import MainDialog
 
 
 if __name__ == '__main__':
     initialize()
-    session = Session()
-    session.login_dialog()
+    m = MainDialog()
+    m.main()
