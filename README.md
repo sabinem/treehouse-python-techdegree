@@ -9,7 +9,7 @@
     `
 4. Install the requirements
     `
-    pip install -r requirements.txt
+    pip install -r requirements.txt`
 ### Start Application
 
 Start the application with
