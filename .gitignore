@@ -5,5 +5,7 @@ __pycache__
 *.db
 docs/*
 .coverage
+.coveragerc
+coverage/*
 htmlcov/*
 worklogdb/worklog/new*
