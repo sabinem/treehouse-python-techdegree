@@ -5,6 +5,8 @@
 2. Go into the directory worklog
 3. Install a virtual environment:
     `python3 -m venv worklogdb`
+4. Activate the virtuale environment:
+    `source worklogdb/bin/activate`
 4. Install the requirements
     `pip install -r requirements.txt`
 

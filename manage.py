@@ -16,7 +16,7 @@ def cov():
     """Runs the unit tests with coverage."""
     cov = coverage.coverage(
         branch=True,
-        include='worklogdb/*'
+        include='worklogdb/worklog/*',
     )
     cov.start()
     tests = unittest.TestLoader().discover('tests')
