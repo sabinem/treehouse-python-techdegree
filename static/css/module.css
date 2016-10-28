@@ -1,0 +1,88 @@
+/* ===========================================
+   Markdown
+============================================== */
+
+/* ------- Rendering Markdown ------------------*/
+
+.highlight {
+    border: 1px dashed #64716f;
+    background: #e1e6d0;
+    padding: 10px;
+    margin-bottom: 30px;
+}
+
+/* ------- Breadcrumbs and Links ------------------*/
+
+.breadcrumb {
+    color: #afd1bc;
+    padding-top: 0.5em;
+    font-size: 1.2em;
+}
+
+/* ------- Entry Detail ------------------*/
+
+.blog_date {
+    text-align: right;
+    margin-bottom: 0;
+    color: #afd1bc;
+}
+
+.time_spent {
+    padding-top: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    text-align: right;
+    color: #99a298;
+}
+
+.page-title {
+    text-decoration: underline;
+    padding-top: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.tags {
+    font-family: "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;
+    padding-top: 0;
+    margin-top: 0;
+    text-transform: lowercase;
+}
+
+/* ------- Resources for Entries ------------------*/
+
+.secondary {
+    padding-left: 10px;
+    background: #afd1bc;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+}
+
+.secondary-title {
+    text-decoration: underline;
+    font-size: 1.2em;
+    padding-top: 0.5em;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.secondary-list {
+    list-style: disc;
+    list-style-position: inside;
+}
+
+/* ------- List View for Entries ------------------*/
+
+.list-subtitle {
+    margin-top:0;
+    padding-top: 0;
+    color: #99a298;
+}
+
+.list-title {
+    margin-bottom:0;
+    padding-bottom: 0;
+    display: inline-block;
+}

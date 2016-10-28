@@ -1,0 +1,299 @@
+/* ==========================================================================
+   Global Styles
+   ========================================================================== */
+
+body {
+	font-size: 16px;
+	color: #404a49;
+	font-family: 'Cousine', serif;
+	font-weight: 400;
+}
+.container {
+	margin: 0 auto;
+	padding: 0 25px;
+}
+header .site-header {
+	margin: 0 auto;
+	height: 95px;
+}
+header .nav-lists {
+	color: #678f89;
+	margin: 20px 0 0 -5px;
+	float: left;
+	font-size: 40px;
+}
+header .nav-buttons {
+	float: right;
+	margin: 33px 0 0 0;
+}
+footer {
+	text-align: center;
+	padding: 35px 0;
+	border-top: 2px dotted #678f89;
+}
+
+.website-header {
+	margin-top: 50px;
+	margin-left:50px;
+}
+
+
+
+
+/* ==========================================================================
+   Button Styles
+   ========================================================================== */
+
+.button {
+	padding: 8px 10px 6px 10px;
+	background: #678f89;
+	border: 2px solid #678f89;
+	border-radius: 4px;
+	text-decoration: none;
+	color: #FFF;
+	position: relative;
+	text-align: center;
+	font-size: 14px;
+}
+.button.button-secondary {
+	background: #FFF;
+	border: 2px solid #e1e1e1;
+	color: #404a49;
+}
+.button.icon-right {
+	padding-right: 30px;
+	top: -10px;
+}
+.button.icon-left {
+	padding-left: 30px;
+	top: -10px;
+}
+.button.icon-right i {
+	position: absolute;
+	top: 3px;
+	right: 3px;
+}
+.button.icon-left i {
+	position: absolute;
+	top: 3px;
+	left: 3px;
+}
+.button:focus {
+	outline: 0;
+}
+
+
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+
+h1,
+h2,
+h3 {
+	margin: 0;
+	font-weight: 400;
+	line-height: 1em;
+	color: #000;
+}
+h1 {
+	font-size: 44px;
+	margin-bottom: 12px;
+}
+h2 {
+	font-size: 32px;
+}
+h2 a {
+	text-decoration: none;
+	color: #000;
+}
+h3 {
+	font-size: 18px;
+	font-family: 'Work Sans', serif;
+	font-weight: 600;
+	text-transform: uppercase;
+}
+p {
+	line-height: 1.8em;
+	font-size: 18px;
+}
+p a {
+	border-bottom: 2px solid #678f89;
+	padding: 0;
+	color: #678f89;
+	text-decoration: none;
+}
+ul li {
+	line-height: 1.8em;
+	font-size: 18px;
+}
+ul li a {
+	border-bottom: 2px solid #678f89;
+	line-height: 1.8em;
+	color: #678f89;
+	text-decoration: none;
+}
+
+
+
+/* ==========================================================================
+   Page Styles
+   ========================================================================== */
+
+.dataheader{
+	font-size: 28px;
+	color:#678f89;
+	text-align: center;
+}
+
+.entry-list,
+.edit-entry,
+.new-entry {
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 70px 0 150px 0;
+}
+.entry-list li {
+	list-style: none;
+}
+
+.edit-entry h2,
+.new-entry h2 {
+	margin-bottom: 35px;
+}
+.entry-list article {
+	margin-bottom: 70px;
+	text-align: center;
+}
+.entry-list article:last-child {
+	margin-bottom: 0;
+}
+.entry-list article h2 {
+	margin-bottom: 8px;
+}
+.entry-list.single {
+	padding-bottom: 70px;
+}
+.entry-list.single time {
+	font-size: 18px;
+}
+.entry {
+	max-width: 800px;
+	margin: 75px auto 0 auto;
+	text-align: left;
+	margin-bottom: 40px;
+}
+.edit {
+	padding-bottom: 80px;
+	text-align: center;
+	margin: 0 auto;
+}
+.edit a {
+	font-weight: 400;
+	text-transform: uppercase;
+	font-size: 18px;
+}
+
+.a {
+	color: #678f89;
+}
+
+/* ==========================================================================
+   Form Styles
+   ========================================================================== */
+
+
+form label {
+	display: block;
+	margin-bottom: 8px;
+}
+form input[type=text],
+form input[type=password],
+form input[type=date],
+form input[type=time]{
+	border: 2px solid #e1e1e1;
+	font-size: 18px;
+	line-height: 1.8em;
+	padding:10px 13px;
+	margin-bottom: 30px;
+	border-radius: 4px;
+	width: calc(100% - 32px);
+}
+form input[type=text]:focus,
+form input[type=date]:focus,
+form input[type=password]:focus,
+form input[type=time]:focus,
+form textarea:focus {
+	outline: 0;
+	border-color: #678f89;
+}
+form input[type=text]:hover,
+form input[type=date]:hover,
+form input[type=time]:hover,
+form textarea:hover {
+	border-color: #678f89;
+}
+.edit-entry form textarea,
+.new-entry form textarea {
+	min-height: 200px;
+}
+input[type=submit] {
+	margin-right: 5px;
+}
+
+.notification, .error {
+	text-align: center;
+	color:red;
+}
+
+form input.has_errors {
+	border: 1px solid red;
+}
+
+form .flask-pagedown-preview {
+	border: 1px dashed black;
+}
+
+code {
+	background-color:lightgoldenrodyellow;
+	padding:5px;
+	border:1px solid grey;
+}
+form textarea {
+	border: 2px solid #e1e1e1;
+	font-size: 15px;
+	line-height: 1.5em;
+	padding:10px 13px;
+	margin-bottom: 30px;
+	border-radius: 4px;
+	width: calc(100% - 32px);
+}
+
+a.search-choice-close {
+	display:none;
+}
+
+.highlight {
+	border:1px dashed #678f89;
+	background: #f7f7f7;
+	padding:10px;
+	margin-bottom: 30px;
+}
+
+a .outgoing{
+	border-bottom: 2px solid #678f89;
+	line-height: 1.8em;
+	color: #678f89;
+	text-decoration: none;
+}
+
+
+
+
+
+
+
+
+
+
+

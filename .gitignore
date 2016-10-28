@@ -9,4 +9,3 @@ docs/*
 coverage/*
 htmlcov/*
 worklogdb/worklog/new*
-static/**

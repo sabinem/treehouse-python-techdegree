@@ -1,0 +1,115 @@
+/* ===========================================
+   Base Element Styles
+============================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  line-height: 1.6;
+  color: #10232e;
+  background: white;
+}
+
+
+a {
+  color: #d1645c;
+  text-decoration: none;
+}
+
+/* ===========================================
+   Base Layout Styles
+============================================== */
+
+/* ------- Blog Header ------------------*/
+
+.name {
+  font-size: 1.25em;
+  color: #294959;
+  padding:0;
+  margin:0;
+}
+
+.user_status {
+  margin:0;
+  padding:0;
+}
+
+/* ------- Navigation ------------------*/
+
+.main-nav li {
+  text-align: center;
+  background: #284757;
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+.main-nav li.active {
+  background: #e1e6d0;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.main-nav a {
+  font-size: .95em;
+  color:#e1e6d0;
+}
+
+.main-nav li.active a {
+  color:#d1645c;
+}
+
+.main-nav a:hover {
+  color:#afd1bc;
+}
+
+.main-nav a {
+  padding: 5px 3px;
+}
+
+/* ------- Layout Containers ------------------*/
+
+.container {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.main_header {
+  background: #e1e6d0;
+  padding-top: 1em;
+}
+
+.main_footer {
+  padding: 2em 0;
+  background: #e1e6d0;
+  text-align: center;
+}
+
+/* ===========================================
+   Media Queries
+============================================== */
+
+@media(min-width: 769px) {
+
+  .wrap {
+      min-height: calc(100vh - 89px);
+  }
+
+  .container {
+    width: 70%;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .main-nav,
+  .main-nav li {
+    display: inline-block;
+    padding: 10px;
+  }
+
+  .main-nav li {
+    margin-right: 2px;
+  }
+
+}
