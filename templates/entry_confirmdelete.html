@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% from 'macro_render_entry.html' import render_entry %}
+{% block content %}
+    {{ render_entry(entry, resources, tags) }}
+    <div class="edit-entry">
+        <h2>Delete Entry</h2>
+        <form method='POST' action=''>
+            {{ form.hidden_tag() }}
+            <p>Do you really want to delete this entry?</p>
+            <input type="submit" value="Yes, delete Entry" class="button">
+            <a href="{{ url_for('list_entries')  }}" class="button button-secondary">No, Cancel</a>
+        </form>
+    </div>
+{% endblock %}

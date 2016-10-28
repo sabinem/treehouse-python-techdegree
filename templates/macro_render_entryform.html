@@ -1,0 +1,11 @@
+{% macro render_entryform(form) %}
+    {% from 'macro_render_field.html' import render_field %}
+    {{form.hidden_tag()}}
+    {{render_field(form.title)}}
+    {{render_field(form.date)}}
+    {{render_field(form.time_spent)}}
+    {{render_field(form.learned)}}
+    {{render_field(form.resources)}}
+    {{render_field(form.tags)}}
+    <p></p>
+{% endmacro %}

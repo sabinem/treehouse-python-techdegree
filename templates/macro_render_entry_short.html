@@ -1,0 +1,13 @@
+{% macro render_entry_short(entry) %}
+    {% from 'macro_render_date.html' import render_date %}
+    <div class="entry-list single">
+        <article>
+            <h3>
+                <a href="{{ url_for('view_entry', entry_id = entry.id) }}">
+                    {{ entry.title }}
+                </a>
+            </h3>
+            <p>{{ render_date(entry.date) }}</p>
+        </article>
+    </div>
+{% endmacro %}

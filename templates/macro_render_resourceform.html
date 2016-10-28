@@ -1,0 +1,8 @@
+{% macro render_resourceform(form) %}
+    {% from 'macro_render_field.html' import render_field %}
+    {{ form.hidden_tag() }}
+    {{ render_field(form.title) }}
+    {{ render_field(form.abstract) }}
+    {{ render_field(form.links) }}
+    <p></p>
+{% endmacro %}

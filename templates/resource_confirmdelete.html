@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% from 'macro_render_resource.html' import render_resource %}
+{% block content %}
+    {{ render_resource(resource) }}
+    <div class="edit-entry">
+        <h2>Delete Resource</h2>
+        <form method='POST' action=''>
+            {{ form.hidden_tag() }}
+            <p>Do you really want to delete this resource?</p>
+            <input type="submit" value="Yes, delete Resource" class="button">
+            <a href="{{ url_for('list_resources')  }}" class="button button-secondary">No, Cancel</a>
+        </form>
+    </div>
+{% endblock %}

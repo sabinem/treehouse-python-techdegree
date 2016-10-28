@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% set active_page = "resources" %}
+{% block content %}
+    <div class="entry-list">
+    <p class="breadcrumb">Resources</p>
+    {% if resources.count() %}
+        {% for resource in resources %}
+        <article>
+            <h2 class="list-title">
+                <a href="{{ url_for('view_resource', resource_id=resource.id) }}">
+                    {{ resource.title }}
+                </a>
+            </h2>
+            <p class="list-subtitle">{{ resource.abstract }}</p>
+        </article>
+        {% endfor %}
+    {% else %}
+        <div class="edit">
+            <p>
+                <a href="{{ url_for('add_resource') }}">
+                    No resources yet: Add your first resource now!
+                </a>
+            </p>
+        </div>
+    {% endif %}
+    </div>
+{% endblock %}

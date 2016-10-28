@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% from 'macro_render_tag.html' import render_tag %}
+{% from 'macro_render_entry_short.html' import render_entry_short %}
+{% block content %}
+    <div class="breadcrumb">
+        Tag / <a href="{{ url_for('edit_tag', tag_id = tag.id) }}">Edit</a>
+        / <a href="{{ url_for('delete_tag', tag_id = tag.id) }}">Delete</a>
+    </div>
+    {{ render_tag(tag) }}
+    <div class="entry">
+        {% for entry in entries %}
+            {{ render_entry_short(entry) }}
+        {% endfor %}
+    </div>
+{% endblock %}

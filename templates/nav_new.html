@@ -1,0 +1,18 @@
+<div class="nav-buttons">
+    <p>
+    <a class="button icon-right" href="{{ url_for('add_entry') }}">
+        <span>New Entry</span>
+        <i class="material-icons">add</i></a>
+    </p>
+    <p>
+    <a class="button icon-right" href="{{ url_for('add_resource') }}">
+        <span>New Resource</span>
+        <i class="material-icons">add</i></a>
+    </p>
+    <p>
+    <a class="button icon-right" href="{{ url_for('add_tag') }}">
+        <span>New Tag</span>
+        <i class="material-icons">add</i></a>
+    </p>
+    <p>{{ current_user.user }}</p>
+</div>

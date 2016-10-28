@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+{% include 'head.html' %}
+<body>
+<div class="wrap">
+    <header class="main_header">
+        <div class="container">
+            <h3 class="name">Sabine Maennel: Learning Journal</h3>
+            {% if current_user.is_authenticated %}
+                <p class="user_status">You are currently logged in /
+                    <a href="{{ url_for('logout') }}">logout</a>
+                </p>
+            {% endif %}
+            {% set navigation_bar_visitor = [
+                ('list_entries', 'entries', 'List Entries'),
+                ('list_resources', 'resources', 'List Resources'),
+                ('list_tags', 'tags', 'List Tags')
+            ] -%}
+            {% set navigation_bar_admin = [
+                ('add_entry', 'add_entry', 'Add Entry'),
+                ('add_resource', 'add_resource', 'Add Resource'),
+                ('add_tag', 'add_tag', 'Add Tag')
+            ] -%}
+            {% set active_page = active_page|default('entries') -%}
+            {% if start is not defined %}
+                <ul class="main-nav">
+                    {% for href, id, caption in navigation_bar_visitor %}
+                        <li{% if id == active_page %} class="active"{% endif %}>
+                            <a href="{{ url_for(href) }}">{{ caption|e }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <ul class="main-nav">
+                    {% if current_user.is_authenticated %}
+                        {% for href, id, caption in navigation_bar_admin %}
+                            <li{% if id == active_page %} class="active"{% endif %}>
+                                <a href="{{ url_for(href) }}">{{ caption|e }}</a>
+                            </li>
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+            {% endif %}
+        </div>
+    </header>
+    <section>
+        <div class="container">
+            {% block content %}{% endblock %}
+            {% block links %}{% endblock %}
+        </div>
+    </section>
+</div>
+<footer class="main_footer">
+    <div>
+        &copy; Sabine Maennel
+    </div>
+</footer>
+</body>
+</html>

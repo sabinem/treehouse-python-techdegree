@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% set active_page = "add_resource" %}
+{% from 'macro_render_resourceform.html' import render_resourceform %}
+{% block content %}
+    <div class="edit-entry">
+        <h2>Add Resource</h2>
+        <form method='POST' action=''>
+            {{ render_resourceform(form) }}
+            <input type="submit" value="Publish Resource" class="button">
+            <a href="{{ url_for('list_resources')  }}" class="button button-secondary">Cancel</a>
+        </form>
+    </div>
+{% endblock %}

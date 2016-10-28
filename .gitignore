@@ -1,0 +1,12 @@
+__pycache__
+.idea/*
+.cache/*
+*.pyc
+*.db
+docs/*
+.coverage
+.coveragerc
+coverage/*
+htmlcov/*
+worklogdb/worklog/new*
+static/**

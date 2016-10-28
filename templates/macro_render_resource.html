@@ -1,0 +1,12 @@
+{% macro render_resource(resource) %}
+    <div class="entry-list single">
+        <article>
+            <h1>{{ resource.title }}</h1>
+            <p>{{ resource.abstract }}</p>
+            <div class="description">
+                <h3>Description:</h3>
+                {{ resource.links | mistune_markdown | safe }}
+            </div>
+        </article>
+    </div>
+{% endmacro %}
