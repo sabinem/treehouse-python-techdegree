@@ -10,7 +10,6 @@ Jinja2==2.8
 jinja2-markdown==0.0.3
 Markdown==2.6.6
 MarkupSafe==0.23
-misaka==2.0.0
 mistune==0.7.3
 peewee==2.8.3
 Pygments==2.1.3
