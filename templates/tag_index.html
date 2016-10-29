@@ -1,8 +1,7 @@
 {% extends "layout.html" %}
 {% set active_page = "tags" %}
 {% block content %}
-    <div class="entry-list">
-    <div class="dataheader"><p>Tags</p></div>
+    <p class="breadcrumb">Tags</p>
     {% if tags.count() %}
         {% for tag in tags %}
 
@@ -23,5 +22,4 @@
             </p>
         </div>
     {% endif %}
-    </div>
 {% endblock %}

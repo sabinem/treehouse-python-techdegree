@@ -2,8 +2,11 @@
 {% from 'macro_render_entry.html' import render_entry %}
 {% block content %}
     <div class="breadcrumb">
-        Entry / <a href="{{ url_for('edit_entry', entry_id = entry.id) }}">Edit</a>
-        / <a href="{{ url_for('delete_entry', entry_id = entry.id) }}">Delete</a>
+        Entry
+        {% if current_user.is_authenticated %}
+            / <a href="{{ url_for('edit_entry', entry_id = entry.id) }}">Edit</a>
+            / <a href="{{ url_for('delete_entry', entry_id = entry.id) }}">Delete</a>
+        {% endif %}
     </div>
     {{ render_entry(entry, resources, tags) }}
 {% endblock %}

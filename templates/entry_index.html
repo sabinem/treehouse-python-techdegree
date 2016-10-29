@@ -3,7 +3,6 @@
 {% from 'macro_render_date.html' import render_date %}
 {% block content %}
     <h1 class="breadcrumb">Entries</h1>
-    <div class="entry-list">
     {% if entries.count() %}
         {% for entry in entries %}
         <article>
@@ -16,12 +15,10 @@
         </article>
         {% endfor %}
     {% else %}
-        <div class="edit">
-            <p>
-                <a href="{{ url_for('add_entry') }}">
-                    No entries yet: Write your first entry now!
-                </a>
-            </p>
-        </div>
+        <p>
+            <a href="{{ url_for('add_entry') }}">
+                No entries yet: Write your first entry now!
+            </a>
+        </p>
     {% endif %}
 {% endblock %}

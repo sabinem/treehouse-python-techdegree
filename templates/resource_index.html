@@ -1,7 +1,6 @@
 {% extends "layout.html" %}
 {% set active_page = "resources" %}
 {% block content %}
-    <div class="entry-list">
     <p class="breadcrumb">Resources</p>
     {% if resources.count() %}
         {% for resource in resources %}
@@ -23,5 +22,4 @@
             </p>
         </div>
     {% endif %}
-    </div>
 {% endblock %}

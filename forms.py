@@ -98,7 +98,6 @@ class ResourceForm(Form):
                     validators.Length(max=200,
                                       message='The abstract can only be 200 characters long'),
                     customfields.title_exists],
-        #filters=[lambda x: x.strip() ],
     )
     links = TextAreaField(
         'Enter description in markdown',

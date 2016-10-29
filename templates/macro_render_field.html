@@ -1,4 +1,5 @@
 {% macro render_field(field) %}
+    <div class="field">
     {% if field.name != 'csrf_token' %}
         <label for="{{ field.name }}">
              {{ field.label }}
@@ -10,4 +11,5 @@
         {% endfor %}
     {% endif %}
     {{ field() }}
+    </div>
 {% endmacro %}

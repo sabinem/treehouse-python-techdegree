@@ -1,11 +1,9 @@
 {% macro render_tag(tag) %}
-    <div class="entry-list single">
-        <article>
-            <h1 class="page-title">{{ tag.tag }}</h1>
-            <div class="page-content">
-                <h3>Description:</h3>
-                {{ tag.description | mistune_markdown | safe }}
-            </div>
-        </article>
-    </div>
+    <article>
+        <h1 class="page-title">{{ tag.tag }}</h1>
+        <div class="page-content">
+            <h3>Description:</h3>
+            {{ tag.description | mistune_markdown | safe }}
+        </div>
+    </article>
 {% endmacro %}

@@ -1,17 +1,15 @@
 {% extends "layout.html" %}
 {% from 'macro_render_field.html' import render_field %}
 {% block content %}
-    <div class="edit-entry">
-        <h2>Welcome!</h2>
-        <p>To start your blog, you must first register,
-        so that updating your content will be password protected in the future.
-        </p>
-        <form method="POST" action="" class="form">
-            {{ form.hidden_tag() }}
-            {% for field in form %}
-                {{ render_field(field) }}
-            {% endfor %}
-            <input type="submit" id="submit" class="button" value="Register">
-        </form>
-    </div>
+    <h2>Welcome!</h2>
+    <p>To start your blog, you must first register,
+    so that updating your content will be password protected in the future.
+    </p>
+    <form method="POST" action="" class="form">
+        {{ form.hidden_tag() }}
+        {% for field in form %}
+            {{ render_field(field) }}
+        {% endfor %}
+        <input type="submit" id="submit" class="button" value="Register">
+    </form>
 {% endblock %}

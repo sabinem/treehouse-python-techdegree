@@ -1,12 +1,10 @@
 {% extends "layout.html" %}
 {% from 'macro_render_tagform.html' import render_tagform %}
 {% block content %}
-    <div class="edit-entry">
-        <h2>Edit Entry</h2>
-        <form method='POST' action=''>
-            {{ render_tagform(form) }}
-            <input type="submit" value="Update Entry" class="button">
-            <a href="{{ url_for('list_tags')  }}" class="button button-secondary">Cancel</a>
-        </form>
-    </div>
+    <h2>Edit Entry</h2>
+    <form method='POST' action=''>
+        {{ render_tagform(form) }}
+        <input type="submit" value="Update Entry" class="button">
+        <a href="{{ url_for('list_tags')  }}" class="button button-secondary">Cancel</a>
+    </form>
 {% endblock %}

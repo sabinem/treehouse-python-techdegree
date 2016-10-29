@@ -211,8 +211,6 @@ def edit_entry(entry_id):
         abort(404)
     entrywithresourcesandtags = models.EntryWithResourcesandTags(entry)
     form = forms.EntryForm(obj=entrywithresourcesandtags)
-    print('????????????????????')
-    print(form.tags.choices)
     if form.validate_on_submit():
         entrywithresourcesandtags.update(form)
         flash("Entry updated")

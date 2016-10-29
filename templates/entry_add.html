@@ -2,12 +2,10 @@
 {% set active_page = "add_entry" %}
 {% from 'macro_render_entryform.html' import render_entryform %}
 {% block content %}
-    <div class="edit-entry">
-        <h2>Add Entry</h2>
-        <form method='POST' action=''>
-            {{ render_entryform(form) }}
-            <input type="submit" value="Publish Entry" class="button">
-            <a href="{{ url_for('list_entries')  }}" class="button button-secondary">Cancel</a>
-        </form>
-    </div>
+    <h2>Add Entry</h2>
+    <form method='POST' action=''>
+        {{ render_entryform(form) }}
+        <input type="submit" value="Publish Entry" class="button">
+        <a href="{{ url_for('list_entries')  }}" class="button button-secondary">Cancel</a>
+    </form>
 {% endblock %}

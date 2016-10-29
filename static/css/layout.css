@@ -114,3 +114,107 @@ a {
   }
 
 }
+
+/* ===========================================
+   Buttons
+============================================== */
+
+.button {
+	padding: 8px 10px 6px 10px;
+	background: #294959;
+	border: 2px solid #294959;
+	border-radius: 4px;
+	text-decoration: none;
+	color: #FFF;
+	position: relative;
+	text-align: center;
+	font-size: 14px;
+}
+
+/* ===========================================
+   Forms
+============================================== */
+
+form {
+    padding-bottom: 30px;
+}
+
+
+form textarea {
+	border: 2px solid #e1e1e1;
+	font-size: 15px;
+	line-height: 1.5em;
+	padding:10px 13px;
+	margin-bottom: 30px;
+	border-radius: 4px;
+}
+
+form input[type=text]{
+  width: calc(100% - 32px);
+  display:block;
+}
+
+form label[type=textarea] {
+	display:block;
+    font-weight: bold;
+}
+
+form .field {
+    display:block;
+    padding-top: 10px;
+}
+
+form .field .chosen-choices{
+    background: #e1e6d0;
+}
+
+form .field .chosen-container {
+    font-size:1em;
+}
+
+form .field .chosen-container .chosen-results li.highlighted {
+  background-color: #d1645c;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(20%, #d1645c), color-stop(90%, #d1645c));
+  background-image: -webkit-linear-gradient(#d1645c 20%, #d1645c 90%);
+  background-image: -moz-linear-gradient(#d1645c 20%, #d1645c 90%);
+  background-image: -o-linear-gradient(#d1645c 20%, #d1645c 90%);
+  background-image: linear-gradient(#d1645c 20%, #d1645c 90%);
+  color: #fff;
+}
+
+form .field .chosen-container-active .chosen-choices  {
+    border: 3px solid #d1645c;
+}
+
+.field .chosen-container-multi .chosen-results {
+  background: #e1e6d0;
+}
+
+
+form input[type=text],
+form input[type=password],
+form input[type=date],
+form input[type=time]{
+	border: 2px solid #e1e1e1;
+	line-height: 1.8em;
+	margin-bottom: 5px;
+	border-radius: 4px;
+}
+form input[type=text]:focus,
+form input[type=date]:focus,
+form input[type=password]:focus,
+form input[type=time]:focus,
+form textarea:focus {
+	outline: 0;
+	border-color: #678f89;
+}
+form input[type=text]:hover,
+form input[type=date]:hover,
+form input[type=time]:hover,
+form textarea:hover {
+	border-color: #678f89;
+}
+
+input[type=submit] {
+	margin-right: 5px;
+}

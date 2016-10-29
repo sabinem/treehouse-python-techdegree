@@ -2,13 +2,11 @@
 {% from 'macro_render_tag.html' import render_tag %}
 {% block content %}
     {{ render_tag(tag) }}
-    <div class="edit-entry">
-        <h2>Delete Resource</h2>
-        <form method='POST' action=''>
-            {{ form.hidden_tag() }}
-            <p>Do you really want to delete this resource?</p>
-            <input type="submit" value="Yes, delete Resource" class="button">
-            <a href="{{ url_for('list_tags')  }}" class="button button-secondary">No, Cancel</a>
-        </form>
-    </div>
+    <h2>Delete Resource</h2>
+    <form method='POST' action=''>
+        {{ form.hidden_tag() }}
+        <p>Do you really want to delete this resource?</p>
+        <input type="submit" value="Yes, delete Resource" class="button">
+        <a href="{{ url_for('list_tags')  }}" class="button button-secondary">No, Cancel</a>
+    </form>
 {% endblock %}
