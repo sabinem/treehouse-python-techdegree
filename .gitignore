@@ -9,4 +9,4 @@ coverage/*
 htmlcov/*
 worklogdb/worklog/new*
 static/css/chosen.css
-learnjournal1.db
+*.db
