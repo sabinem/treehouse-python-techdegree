@@ -4,16 +4,16 @@
 1. Download project on your computer
 2. Go into the directory worklog
 3. Install a virtual environment:
-    `python3 -m venv worklogdb`
+    `python3 -m venv lj_venv`
 4. Activate the virtuale environment:
-    `source worklogdb/bin/activate`
+    `source lj_venv/bin/activate`
 4. Install the requirements
     `pip install -r requirements.txt`
 
 ###Start Application
 
 Start the application with
-    `python3 worklog.py`
+    `python3 runserver.py`
 ###Testdata
 The application comes preconfigured with some test data.
 So you can immadiately try it out.
