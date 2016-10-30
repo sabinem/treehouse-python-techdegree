@@ -28,8 +28,7 @@ class RegisterForm(Form):
         validators=[validators.DataRequired()]
     )
     blog_title = StringField(
-        'Give your Learning Journal a Title. Do not include your name in it.'
-        'The actual title will then be <Your name>: <title>',
+        'Give your Learning Journal a Title. Do not include your name in it!',
         validators=[
             validators.DataRequired(),
         ])
@@ -64,7 +63,7 @@ class EntryForm(Form):
     )
     tags = customfields.ChosenSelectField(
         "Select Tags",
-        choices=list(models.Tag.select().select(models.Tag.id, models.Tag.tag).tuples()),
+        choices=models.get_tag_choices,
         widget=customwidgets.ChosenSelect(multiple=True))
     time_spent = customfields.TimeField(
         'Enter Time Spent as HH:MM (Hours:Minutes)',
@@ -78,7 +77,7 @@ class EntryForm(Form):
     )
     resources = customfields.ChosenSelectField(
         "List Resources",
-        choices=list(models.Resource.select().select(models.Resource.id, models.Resource.title).tuples()),
+        choices=models.get_resource_choices,
         widget=customwidgets.ChosenSelect(multiple=True))
 
 

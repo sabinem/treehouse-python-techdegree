@@ -173,6 +173,8 @@ class Tag(Model):
                 .where(Tag.id == self.id))
 
 
+
+
 class EntryToTag(Model):
     """A simple "through" table for many-to-many relationship."""
     entry = ForeignKeyField(Entry)
@@ -227,6 +229,13 @@ class EntryWithResourcesandTags:
         tag_ids_start = [tuple[0] for tuple in self.tags]
         tag_ids_form = [int(tag_str) for tag_str in form.tags.data]
         self.entry.update_tags(tag_ids_start, tag_ids_form)
+
+
+def get_tag_choices():
+    return list(Tag.select().select(Tag.id, Tag.tag).tuples()),
+
+def get_resource_choices():
+    return list(Resource.select().select(Resource.id, Resource.title).tuples())
 
 
 def initialize():
