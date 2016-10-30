@@ -2,12 +2,8 @@ import datetime
 from dateutil.parser import parse
 from wtforms import widgets, validators, Field, SelectMultipleField, \
     ValidationError
-from wtforms.compat import text_type
-from copy import copy
 
-import widgets as customwidgets
-
-from models import Entry
+from learning_journal.models import Entry
 date_display_fmt = '%B, %d %Y'
 
 

@@ -2,9 +2,9 @@ import datetime
 from flask_wtf import Form
 from wtforms import validators, StringField, \
     TextAreaField, HiddenField, PasswordField
-import widgets as customwidgets
-import fields as customfields
-import models
+from learning_journal import widgets as customwidgets
+from learning_journal import fields as customfields
+from learning_journal import models
 from wtforms.widgets.html5 import DateInput
 date_display_fmt = '%B, %d %Y'
 
@@ -24,16 +24,18 @@ class RegisterForm(Form):
             validators.EqualTo('password2', message='Passwords must match')
         ])
     password2 = PasswordField(
-        'Confirm Password',
+        'Confirm',
         validators=[validators.DataRequired()]
     )
-    blog_owner = StringField(
-        'Blog Owner for Copyright',
+    blog_title = StringField(
+        'Give your Learning Journal a Title. Do not include your name in it.'
+        'The actual title will then be <Your name>: <title>',
         validators=[
             validators.DataRequired(),
         ])
-    blog_title = StringField(
-        'Blog Title',
+
+    blog_owner = StringField(
+        'Now we need your Name for the Copyright Statement',
         validators=[
             validators.DataRequired(),
         ])

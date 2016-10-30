@@ -5,7 +5,13 @@
 <div class="wrap">
     <header class="main_header">
         <div class="container">
-            <h3 class="name">Sabine Maennel: Learning Journal</h3>
+            <h3 class="name">
+                {% if owner %}
+                    {{ owner.blog_owner }}: {{ owner.blog_title }}
+                {% else %}
+                    Welcome to your Learning Journal
+                {% endif %}
+            </h3>
             {% if current_user.is_authenticated %}
                 <p class="user_status">You are currently logged in /
                     <a href="{{ url_for('logout') }}">logout</a>
@@ -45,13 +51,17 @@
     <section>
         <div class="container">
             {% block content %}{% endblock %}
-            {% block links %}{% endblock %}
         </div>
     </section>
 </div>
 <footer class="main_footer">
     <div>
-        &copy; Sabine Maennel
+        {% if owner %}
+            &copy:
+            {{ owner.blog_owner }}
+        {% else %}
+            powered by Sabine Maennel
+        {% endif %}
     </div>
 </footer>
 </body>

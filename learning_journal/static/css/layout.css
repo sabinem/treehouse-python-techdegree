@@ -77,7 +77,8 @@ a {
 
 .main_header {
   background: #e1e6d0;
-  padding-top: 1em;
+  padding-top: 2em;
+  padding-bottom: 2em;
 }
 
 .main_footer {
@@ -149,7 +150,8 @@ form textarea {
 	border-radius: 4px;
 }
 
-form input[type=text]{
+form input[type=text],
+form input[type=password] {
   width: calc(100% - 32px);
   display:block;
 }
@@ -183,7 +185,7 @@ form .field .chosen-container .chosen-results li.highlighted {
 }
 
 form .field .chosen-container-active .chosen-choices  {
-    border: 3px solid #d1645c;
+    border: 3px solid #284757;
 }
 
 .field .chosen-container-multi .chosen-results {
@@ -204,13 +206,12 @@ form input[type=text]:focus,
 form input[type=date]:focus,
 form input[type=password]:focus,
 form input[type=time]:focus,
+form .field:focus,
 form textarea:focus {
 	outline: 0;
 	border-color: #678f89;
 }
-form input[type=text]:hover,
-form input[type=date]:hover,
-form input[type=time]:hover,
+form .field input:hover,
 form textarea:hover {
 	border-color: #678f89;
 }

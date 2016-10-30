@@ -4,8 +4,8 @@ from flask_bcrypt import check_password_hash
 from flask_login import (LoginManager, login_user, logout_user,
                              login_required, current_user)
 
-import forms
 import models
+#import forms
 import renderer
 
 DEBUG = True
@@ -32,7 +32,7 @@ def load_user(userid):
 def inject_owner():
     try:
         return dict(user=g.owner)
-    except models.DoesNotExist:
+    except AttributeError:
         return None
 
 
@@ -41,8 +41,11 @@ def before_request():
     """Connect to the database before each request."""
     g.db = models.DATABASE
     g.db.connect()
-    g.user = current_user
-    g.owner = models.User.get()
+    try:
+        g.user = current_user
+        g.owner = models.User.get()
+    except models.DoesNotExist:
+        pass
 
 
 @app.after_request
@@ -56,6 +59,7 @@ def after_request(response):
 def not_found(error):
     return render_template('404.html'), 404
 
+import forms
 
 @app.route('/register', methods=('GET', 'POST'))
 @app.route('/', methods=('GET', 'POST'))
