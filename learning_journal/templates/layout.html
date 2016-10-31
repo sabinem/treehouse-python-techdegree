@@ -17,9 +17,11 @@
                         <a href="{{ url_for('logout') }}">logout</a>
                     </p>
                 {% else %}
+                    {% if owner %}
                     <p class="user_status">You are currently logged out /
                         <a href="{{ url_for('login') }}">Are you the owner of this journal?</a>
                     </p>
+                    {% endif %}
                 {% endif %}
                 {% set navigation_bar_visitor = [
                     ('list_entries', 'entries', 'List Entries'),

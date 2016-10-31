@@ -8,9 +8,7 @@ from flask_bcrypt import check_password_hash
 from flask_login import (LoginManager, login_user,
                          logout_user, current_user, login_required)
 
-from learning_journal import models
-from learning_journal import forms
-from learning_journal import app
+from learning_journal import (models, forms, app, decorators)
 
 
 login_manager = LoginManager()
@@ -97,6 +95,7 @@ def register():
 
 
 @app.route('/login', methods=('GET', 'POST'))
+@decorators.owner_required
 def login():
     """login-view"""
     form = forms.LoginForm()
