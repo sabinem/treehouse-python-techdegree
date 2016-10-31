@@ -176,7 +176,7 @@ def edit_resource(resource_id):
         form.populate_obj(resource)
         resource.save()
         flash("Resource updated")
-        return redirect(url_for('list_resources'))
+        return redirect(url_for('view_resource', resource_id=resource_id))
     return render_template('resource_edit.html', form=form)
 
 
@@ -195,7 +195,7 @@ def edit_tag(tag_id):
         form.populate_obj(tag)
         tag.save()
         flash("Tag updated")
-        return redirect(url_for('list_tags'))
+        return redirect(url_for('view_tag', tag_id=tag_id))
     return render_template('tag_edit.html', form=form)
 
 
