@@ -1,4 +1,4 @@
-// Chosen module
+// Chosen js module field
 $(function() {
     $(".chzn-select").chosen();
 });

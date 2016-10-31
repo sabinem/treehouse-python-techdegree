@@ -1,11 +1,17 @@
-from flask import (g, render_template, flash, redirect, url_for, request)
+"""
+This file contains the user-handling views and other
+essential helpers such as user-loader and before
+and after request processors
+"""
+from flask import (g, render_template, flash, redirect, url_for)
 from flask_bcrypt import check_password_hash
-from flask_login import (LoginManager, login_user, logout_user, current_user, login_required)
+from flask_login import (LoginManager, login_user,
+                         logout_user, current_user, login_required)
 
 from learning_journal import models
 from learning_journal import forms
 from learning_journal import app
-from learning_journal import decorators
+
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -14,6 +20,7 @@ login_manager.login_view = 'login'
 
 @login_manager.user_loader
 def load_user(userid):
+    """user loader, required by flask_login"""
     try:
         return models.User.get(models.User.id == userid)
     except models.DoesNotExist:
@@ -22,6 +29,7 @@ def load_user(userid):
 
 @app.context_processor
 def inject_owner():
+    """context processor to inject the owner of the journal"""
     try:
         return dict(owner=g.owner)
     except AttributeError:
@@ -52,12 +60,17 @@ def after_request(response):
 
 @app.errorhandler(404)
 def not_found(error):
+    """404 handler"""
     return render_template('404.html'), 404
 
 
 @app.route('/register', methods=('GET', 'POST'))
 @app.route('/', methods=('GET', 'POST'))
 def register():
+    """
+    registers the owner: since there is only one journal owner,
+    registration is a one time event.
+    """
     try:
         models.User.select().get()
     except models.DoesNotExist:
@@ -66,19 +79,26 @@ def register():
         return redirect(url_for('list_entries'))
     form = forms.RegisterForm()
     if form.validate_on_submit():
-        flash("Yay, you registered! Now please log in and you are all set to start your journal", "success")
+        flash("Yay, you registered! "
+              "Now please log in and you are all "
+              "set to start your journal", "success")
         models.User.create_user(
             email=form.email.data,
             password=form.password.data,
-            blog_owner = form.blog_owner.data,
-            blog_title = form.blog_title.data,
+            blog_owner=form.blog_owner.data,
+            blog_title=form.blog_title.data,
         )
         return redirect(url_for('login'))
-    return render_template('register.html', form=form, start=True)
+    return render_template(
+        'register.html',
+        form=form,
+        start=True
+    )
 
 
 @app.route('/login', methods=('GET', 'POST'))
 def login():
+    """login-view"""
     form = forms.LoginForm()
     if form.validate_on_submit():
         try:
@@ -98,6 +118,7 @@ def login():
 @app.route('/logout')
 @login_required
 def logout():
+    """logout view"""
     logout_user()
     flash("You've been logged out! Come back soon!", "success")
     return redirect(url_for('list_entries'))
