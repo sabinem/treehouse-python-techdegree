@@ -9,3 +9,4 @@ app.secret_key = 'auoesh.bouoastuh.43,uoausoehuosth3ououea.auoub!'
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 from learning_journal import views_admin, views_content
+

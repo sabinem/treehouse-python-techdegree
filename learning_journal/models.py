@@ -4,7 +4,8 @@ from flask_bcrypt import generate_password_hash
 from flask_login import UserMixin
 from peewee import *
 
-DATABASE = SqliteDatabase('learnjournal.db')
+
+DATABASE = SqliteDatabase('learningjournal.db')
 
 
 class User(UserMixin, Model):
@@ -130,12 +131,16 @@ class Entry(Model):
 
     def delete_resource_connections(self):
         resourcestoentry = EntryToResource.select().where(EntryToResource.entry_id == self.id)
-        for resourcetoentry in resourcestoentry:
+        for item in resourcestoentry:
+            resourcetoentry = EntryToResource.get(EntryToResource.entry_id == item.entry_id,
+                              EntryToResource.resource_id == item.resource_id)
             resourcetoentry.delete_instance()
 
     def delete_tag_connections(self):
         tagstoentry = EntryToTag.select().where(EntryToTag.entry_id == self.id)
-        for tagtoentry in tagstoentry:
+        for item in tagstoentry:
+            tagtoentry = EntryToTag.get(EntryToTag.entry_id == item.entry_id,
+                                        EntryToTag.tag_id == item.tag_id)
             tagtoentry.delete_instance()
 
 
@@ -152,9 +157,16 @@ class Resource(Model):
         for resourcetoentry in resourcestoentries:
             resourcetoentry.delete_instance()
 
+    def get_entries(self):
+        return (Entry
+                .select()
+                .join(EntryToResource)
+                .join(Resource)
+                .where(Resource.id == self.id))
+
 
 class Tag(Model):
-    tag = CharField(max_length=30)
+    title = CharField(max_length=30)
     description = TextField()
 
     class Meta:
@@ -171,6 +183,13 @@ class Tag(Model):
                 .join(EntryToTag)
                 .join(Tag)
                 .where(Tag.id == self.id))
+
+    def get_count(self):
+        return (Entry
+                .select()
+                .join(EntryToTag)
+                .join(Tag)
+                .where(Tag.id == self.id).count())
 
 
 
@@ -214,7 +233,7 @@ class EntryWithResourcesandTags:
         _tags = self.entry.get_tags()
         self.resources = [(resource.id, resource.title)
                           for resource in list(_resources)]
-        self.tags = [(tag.id, tag.tag)
+        self.tags = [(tag.id, tag.title)
                           for tag in list(_tags)]
 
     def update(self, form):
@@ -232,7 +251,7 @@ class EntryWithResourcesandTags:
 
 
 def get_tag_choices():
-    return list(Tag.select().select(Tag.id, Tag.tag).tuples()),
+    return list(Tag.select().select(Tag.id, Tag.title).tuples())
 
 def get_resource_choices():
     return list(Resource.select().select(Resource.id, Resource.title).tuples())

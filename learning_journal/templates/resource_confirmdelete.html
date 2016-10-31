@@ -2,11 +2,13 @@
 {% from 'macro_render_resource.html' import render_resource %}
 {% block content %}
     {{ render_resource(resource) }}
-    <h2>Delete Resource</h2>
     <form method='POST' action=''>
         {{ form.hidden_tag() }}
-        <p>Do you really want to delete this resource?</p>
-        <input type="submit" value="Yes, delete Resource" class="button">
-        <a href="{{ url_for('list_resources')  }}" class="button button-secondary">No, Cancel</a>
+        <h3 class="notification">Delete Resource</h3>
+        <p class="notification">Do you really want to delete this resource?</p>
+        <div class="buttons">
+            <input type="submit" value="Yes, delete Resource" class="button">
+            <a href="{{ url_for('view_resource', resource_id = resource.id) }}" class="button button-secondary">No, Cancel</a>
+        </div>
     </form>
 {% endblock %}

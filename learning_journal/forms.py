@@ -7,6 +7,7 @@ from learning_journal import fields as customfields
 from learning_journal import models
 from wtforms.widgets.html5 import DateInput
 date_display_fmt = '%B, %d %Y'
+from learning_journal import validators as customvalidators
 
 
 class RegisterForm(Form):
@@ -53,7 +54,7 @@ class EntryForm(Form):
         validators=[validators.DataRequired(),
                     validators.Length(max=100,
                                       message='The title can only be 100 characters long'),
-                    customfields.title_exists],
+                    customvalidators.title_exists(models.Entry,'Entry')],
         filters=[lambda x: x.strip() ],
     )
     date = customfields.DateField(
@@ -63,7 +64,7 @@ class EntryForm(Form):
     )
     tags = customfields.ChosenSelectField(
         "Select Tags",
-        choices=models.get_tag_choices,
+        choice_func = models.get_tag_choices,
         widget=customwidgets.ChosenSelect(multiple=True))
     time_spent = customfields.TimeField(
         'Enter Time Spent as HH:MM (Hours:Minutes)',
@@ -77,7 +78,7 @@ class EntryForm(Form):
     )
     resources = customfields.ChosenSelectField(
         "List Resources",
-        choices=models.get_resource_choices,
+        choice_func=models.get_resource_choices,
         widget=customwidgets.ChosenSelect(multiple=True))
 
 
@@ -89,7 +90,7 @@ class ResourceForm(Form):
         validators=[validators.DataRequired(),
                     validators.Length(max=100,
                                       message='The title can only be 100 characters long'),
-                    customfields.title_exists],
+                    customvalidators.title_exists(models.Resource, 'Resource')],
         filters=[lambda x: x.strip() ],
     )
     abstract = StringField(
@@ -97,8 +98,7 @@ class ResourceForm(Form):
         default='',
         validators=[validators.DataRequired(),
                     validators.Length(max=200,
-                                      message='The abstract can only be 200 characters long'),
-                    customfields.title_exists],
+                                      message='The abstract can only be 200 characters long')],
     )
     links = TextAreaField(
         'Enter description in markdown',
@@ -109,13 +109,13 @@ class ResourceForm(Form):
 
 class TagForm(Form):
     id = HiddenField()
-    tag = StringField(
+    title = StringField(
         'Enter Tag',
         default='',
         validators=[validators.DataRequired(),
                     validators.Length(max=30,
                                       message='The tag can only be 30 characters long'),
-                    customfields.title_exists],
+                    customvalidators.title_exists(models.Tag, 'Tag')],
         filters=[lambda x: x.strip()],
     )
     description = TextAreaField(

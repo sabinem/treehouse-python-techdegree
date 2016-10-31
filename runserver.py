@@ -1,4 +1,6 @@
 from learning_journal import models, app
 
-models.initialize()
-app.run(debug=True)
+
+if __name__ == "__main__":
+    models.initialize()
+    app.run(debug=True)

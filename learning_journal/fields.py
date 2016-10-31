@@ -1,15 +1,7 @@
 import datetime
 from dateutil.parser import parse
-from wtforms import widgets, validators, Field, SelectMultipleField, \
-    ValidationError
-
-from learning_journal.models import Entry
+from wtforms import widgets, validators, Field, SelectMultipleField
 date_display_fmt = '%B, %d %Y'
-
-
-def title_exists(form, field):
-    if Entry.select().where(Entry.title == field.data).exists() and form.id.data == '':
-        raise ValidationError('Entry with that title already exists.')
 
 
 def time_valid(value):
@@ -76,7 +68,13 @@ class DateField(Field):
 
 
 class ChosenSelectField(SelectMultipleField):
+    def __init__(self, *args, choice_func=None, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.choice_func = choice_func
+
     def iter_choices(self):
+        print('in iter_choices', self.choice_func)
+        self.choices = self.choices or self.choice_func()
         for value, label in self.choices:
             if self.data is not None and not self.data == self.raw_data:
                 from ast import literal_eval as make_tuple
@@ -89,6 +87,8 @@ class ChosenSelectField(SelectMultipleField):
             yield (value, label, selected)
 
     def pre_validate(self, form):
+        print('in pre_validate', self.choice_func)
+        self.choices = self.choices or self.choice_func()
         if self.data:
             values = list(str(c[0]) for c in self.choices)
             for d in self.data:

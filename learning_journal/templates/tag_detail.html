@@ -9,8 +9,5 @@
             / <a href="{{ url_for('delete_tag', tag_id = tag.id) }}">Delete</a>
         {% endif %}
     </div>
-    {{ render_tag(tag) }}
-    {% for entry in entries %}
-        {{ render_entry_short(entry) }}
-    {% endfor %}
+    {{ render_tag(tag, entries) }}
 {% endblock %}

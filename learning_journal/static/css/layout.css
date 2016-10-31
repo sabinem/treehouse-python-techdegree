@@ -128,8 +128,15 @@ a {
 	text-decoration: none;
 	color: #FFF;
 	position: relative;
+    display: inline-block;
 	text-align: center;
-	font-size: 14px;
+    font: inherit;
+    line-height:1.6em;
+}
+
+.buttons {
+    display: block;
+    padding-top: 15px;
 }
 
 /* ===========================================

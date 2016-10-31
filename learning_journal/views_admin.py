@@ -1,11 +1,11 @@
-from flask import (g, render_template, flash, redirect, url_for)
+from flask import (g, render_template, flash, redirect, url_for, request)
 from flask_bcrypt import check_password_hash
-from flask_login import (LoginManager, login_user, logout_user,
-                             login_required, current_user)
+from flask_login import (LoginManager, login_user, logout_user, current_user, login_required)
 
 from learning_journal import models
 from learning_journal import forms
 from learning_journal import app
+from learning_journal import decorators
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -35,9 +35,12 @@ def before_request():
     g.db.connect()
     try:
         g.user = current_user
-        g.owner = models.User.get()
     except models.DoesNotExist:
         pass
+    try:
+        g.owner = models.User.get()
+    except models.DoesNotExist:
+        g.owner = None
 
 
 @app.after_request
@@ -63,14 +66,14 @@ def register():
         return redirect(url_for('list_entries'))
     form = forms.RegisterForm()
     if form.validate_on_submit():
-        flash("Yay, you registered!", "success")
+        flash("Yay, you registered! Now please log in and you are all set to start your journal", "success")
         models.User.create_user(
             email=form.email.data,
             password=form.password.data,
             blog_owner = form.blog_owner.data,
             blog_title = form.blog_title.data,
         )
-        return redirect(url_for('list_entries'))
+        return redirect(url_for('login'))
     return render_template('register.html', form=form, start=True)
 
 
@@ -85,7 +88,7 @@ def login():
         else:
             if check_password_hash(user.password, form.password.data):
                 login_user(user)
-                flash("You've been logged in!", "success")
+                flash("You are logged in now!", "success")
                 return redirect(url_for('list_entries'))
             else:
                 flash("Your email or password doesn't match!", "error")

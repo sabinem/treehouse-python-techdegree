@@ -5,7 +5,9 @@
     <h2>Add Tag</h2>
     <form method='POST' action=''>
         {{ render_tagform(form) }}
-        <input type="submit" value="Publish Tag" class="button">
-        <a href="{{ url_for('list_tags')  }}" class="button button-secondary">Cancel</a>
+        <div class="buttons">
+            <input type="submit" value="Publish Tag" class="button">
+            <a href="{{ url_for('list_tags')  }}" class="button button-secondary">Cancel</a>
+        </div>
     </form>
 {% endblock %}

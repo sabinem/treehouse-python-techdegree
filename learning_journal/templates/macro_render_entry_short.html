@@ -1,11 +1,11 @@
 {% macro render_entry_short(entry) %}
     {% from 'macro_render_date.html' import render_date %}
     <article>
-        <h3>
+        <h3 class="list-title inline-block">
             <a href="{{ url_for('view_entry', entry_id = entry.id) }}">
                 {{ entry.title }}
             </a>
         </h3>
-        <p>{{ render_date(entry.date) }}</p>
+        <p class="list-subtitle inline-block">{{ render_date(entry.date) }}</p>
     </article>
 {% endmacro %}

@@ -2,67 +2,77 @@
 <html>
 {% include 'head.html' %}
 <body>
-<div class="wrap">
-    <header class="main_header">
-        <div class="container">
-            <h3 class="name">
-                {% if owner %}
-                    {{ owner.blog_owner }}: {{ owner.blog_title }}
+    <div class="wrap">
+        <header class="main_header">
+            <div class="container">
+                <h3 class="name">
+                    {% if owner %}
+                        {{ owner.blog_owner }}: {{ owner.blog_title }}
+                    {% else %}
+                        Welcome to your Learning Journal
+                    {% endif %}
+                </h3>
+                {% if current_user.is_authenticated %}
+                    <p class="user_status">You are currently logged in /
+                        <a href="{{ url_for('logout') }}">logout</a>
+                    </p>
                 {% else %}
-                    Welcome to your Learning Journal
+                    <p class="user_status">You are currently logged out /
+                        <a href="{{ url_for('login') }}">Are you the owner of this journal?</a>
+                    </p>
                 {% endif %}
-            </h3>
-            {% if current_user.is_authenticated %}
-                <p class="user_status">You are currently logged in /
-                    <a href="{{ url_for('logout') }}">logout</a>
-                </p>
-            {% endif %}
-            {% set navigation_bar_visitor = [
-                ('list_entries', 'entries', 'List Entries'),
-                ('list_resources', 'resources', 'List Resources'),
-                ('list_tags', 'tags', 'List Tags')
-            ] -%}
-            {% set navigation_bar_admin = [
-                ('add_entry', 'add_entry', 'Add Entry'),
-                ('add_resource', 'add_resource', 'Add Resource'),
-                ('add_tag', 'add_tag', 'Add Tag')
-            ] -%}
-            {% set active_page = active_page|default('entries') -%}
-            {% if start is not defined %}
-                <ul class="main-nav">
-                    {% for href, id, caption in navigation_bar_visitor %}
-                        <li{% if id == active_page %} class="active"{% endif %}>
-                            <a href="{{ url_for(href) }}">{{ caption|e }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-                <ul class="main-nav">
-                    {% if current_user.is_authenticated %}
-                        {% for href, id, caption in navigation_bar_admin %}
+                {% set navigation_bar_visitor = [
+                    ('list_entries', 'entries', 'List Entries'),
+                    ('list_resources', 'resources', 'List Resources'),
+                    ('list_tags', 'tags', 'List Tags')
+                ] -%}
+                {% set navigation_bar_admin = [
+                    ('add_entry', 'add_entry', 'Add Entry'),
+                    ('add_resource', 'add_resource', 'Add Resource'),
+                    ('add_tag', 'add_tag', 'Add Tag')
+                ] -%}
+                {% set active_page = active_page|default('entries') -%}
+                {% if start is not defined %}
+                    <ul class="main-nav">
+                        {% for href, id, caption in navigation_bar_visitor %}
                             <li{% if id == active_page %} class="active"{% endif %}>
                                 <a href="{{ url_for(href) }}">{{ caption|e }}</a>
                             </li>
                         {% endfor %}
+                        {% if current_user.is_authenticated %}
+                            {% for href, id, caption in navigation_bar_admin %}
+                                <li{% if id == active_page %} class="active"{% endif %}>
+                                    <a href="{{ url_for(href) }}">{{ caption|e }}</a>
+                                </li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                {% endif %}
+            </div>
+        </header>
+        <section>
+            <div class="container">
+                <!-- Flash messages -->
+                {% with messages = get_flashed_messages(with_categories=True) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="notification {{ category }}">{{ message }}</div>
+                        {% endfor %}
                     {% endif %}
-                </ul>
+                {% endwith %}
+                {% block content %}{% endblock %}
+            </div>
+        </section>
+    </div>
+    <footer class="main_footer">
+        <div>
+            {% if owner %}
+                &copy
+                {{ owner.blog_owner }}
+            {% else %}
+                powered by Sabine Maennel
             {% endif %}
         </div>
-    </header>
-    <section>
-        <div class="container">
-            {% block content %}{% endblock %}
-        </div>
-    </section>
-</div>
-<footer class="main_footer">
-    <div>
-        {% if owner %}
-            &copy:
-            {{ owner.blog_owner }}
-        {% else %}
-            powered by Sabine Maennel
-        {% endif %}
-    </div>
-</footer>
+    </footer>
 </body>
 </html>

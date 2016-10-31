@@ -5,7 +5,9 @@
     <h2>Add Resource</h2>
     <form method='POST' action=''>
         {{ render_resourceform(form) }}
-        <input type="submit" value="Publish Resource" class="button">
-        <a href="{{ url_for('list_resources')  }}" class="button button-secondary">Cancel</a>
+        <div class="buttons">
+            <input type="submit" value="Publish Resource" class="button">
+            <a href="{{ url_for('list_resources')  }}" class="button button-secondary">Cancel</a>
+        </div>
     </form>
 {% endblock %}

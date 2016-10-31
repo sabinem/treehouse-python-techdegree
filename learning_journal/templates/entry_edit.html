@@ -1,10 +1,15 @@
 {% extends "layout.html" %}
 {% from 'macro_render_entryform.html' import render_entryform %}
 {% block content %}
+    <div class="breadcrumb">
+        Entry
+    </div>
     <h2>Edit Entry</h2>
     <form method='POST' action=''>
         {{ render_entryform(form) }}
-        <input type="submit" value="Update Entry" class="button">
-        <a href="{{ url_for('list_entries')  }}" class="button button-secondary">Cancel</a>
+        <div class="buttons">
+            <input type="submit" value="Update Entry" class="button">
+            <a href="{{ url_for('view_entry', entry_id = form.id.data) }}" class="button">Cancel</a>
+        </div>
     </form>
 {% endblock %}

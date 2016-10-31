@@ -8,7 +8,7 @@
         <article>
             <h2>
                 <a href="{{ url_for('view_tag', tag_id=tag.id) }}">
-                    {{ tag.tag }}
+                    {{ tag.title }} ({{ tag.get_count() }})
                 </a>
             </h2>
         </article>
