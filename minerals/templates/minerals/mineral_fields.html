@@ -1,0 +1,9 @@
+{% load minerals_extras %}
+{% for field in mineral_field_list %}
+      <tr>
+        <td class="mineral__category">{{ field.label | capitalize }}</td>
+        <td>
+             {{ field.data | safe }}
+        </td>
+      </tr>
+{% endfor %}

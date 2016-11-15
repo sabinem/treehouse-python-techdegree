@@ -1,0 +1,22 @@
+Fieldname                |occurence count|max length     |distinct count 
+-------------------------|---------------|---------------|---------------
+image caption            |            874|            409|            757
+category                 |            874|             46|            164
+image filename           |            874|            157|            868
+name                     |            874|             57|            871
+group                    |            874|             16|             13
+formula                  |            867|            277|            846
+strunz classification    |            805|            106|            639
+crystal system           |            798|            127|            232
+mohs scale hardness      |            785|             68|            211
+luster                   |            771|             72|            298
+color                    |            757|            190|            710
+specific gravity         |            712|             65|            642
+cleavage                 |            700|            169|            471
+diaphaneity              |            694|             75|             89
+crystal habit            |            686|            238|            655
+streak                   |            676|             58|            249
+optical properties       |            635|             82|            106
+refractive index         |            616|            124|            610
+crystal symmetry         |            542|            105|            334
+unit cell                |            542|            139|            541
