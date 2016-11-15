@@ -3,12 +3,5 @@ __pycache__
 .cache/*
 *.pyc
 docs/*
-.coverage
-.coveragerc
-coverage/*
-htmlcov/*
-worklogdb/worklog/new*
-static/css/chosen.css
 *.db*
-drawer*
-minerals_data/**
+*.txt
