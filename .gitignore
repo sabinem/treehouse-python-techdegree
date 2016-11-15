@@ -9,7 +9,7 @@ coverage/*
 htmlcov/*
 worklogdb/worklog/new*
 static/css/chosen.css
-*.db
+*.db*
 drawer*
 *.json
 minerals_data/**
