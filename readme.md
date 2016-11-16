@@ -17,8 +17,8 @@ project has no external dependencies, other then Python 3
 
 ###Analyze Data (optional: you can skip that step)
 If you want you can analyze the data by starting
-`python3 analyze/analyze_minerals.py` this will output two
-testfile `analyze_minerals_summary.txt` and `analyze_minerals_detail.txt`
+`python analyze.py` this will output two
+testfile `data_summary.txt` and `data_detail.txt`
 in you directory: the summary contains information about the data
 that resides in `data/minerals.json`. The second file contains all the
 different values for each field, that has been found in there.

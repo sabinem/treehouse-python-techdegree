@@ -26,6 +26,10 @@ def load_minerals(apps, schema_editor):
     The data contains duplicates that are eliminated.
     """
     datapath = os.path.join(DATA_DIR, 'minerals.json')
+    try:
+        os.stat(MINERALS_IMAGE_DIR)
+    except:
+        os.mkdir(MINERALS_IMAGE_DIR)
     with open(datapath) as datafile:
         mineralsjson = json.load(datafile)
         minerals_nameset = set()
