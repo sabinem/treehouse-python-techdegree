@@ -35,7 +35,7 @@ appropriate for a select field.
 ###Load the data into the database
 Run:
 ```
-python3 manage.py migrate
+python manage.py migrate
 ```
 This will load the data into the database and copy the image-files
 into the static directory `minerals/static/minerals/images` directory.
@@ -43,7 +43,7 @@ into the static directory `minerals/static/minerals/images` directory.
 ###Start the application
 Run:
 ```
-python3 manage.py runserver
+python manage.py runserver
 ```
 This will start the application.
 
