@@ -7,7 +7,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 
 urlpatterns = [
-    url(r'^minerals/', include('minerals.urls', namespace='minerals')),
+    url(r'^', include('minerals.urls', namespace='minerals')),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

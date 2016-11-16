@@ -5,3 +5,4 @@ __pycache__
 docs/*
 *.db*
 *.txt
+db.sqlite3

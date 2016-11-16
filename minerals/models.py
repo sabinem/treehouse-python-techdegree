@@ -1,6 +1,11 @@
+"""
+This file contains the model for the minerals app
+"""
 import os
-from django.db import models
+import re
 from collections import defaultdict
+
+from django.db import models
 
 
 GROUP_CHOICES = (
@@ -19,16 +24,13 @@ GROUP_CHOICES = (
     ('ox', 'Oxides'),
 )
 
-def file_exists(value):
-    file = os.path.join('minerals_data', 'data', 'images', value)
-    return os.path.isfile(file)
 
 class Mineral(models.Model):
+    """Model for a Mineral, see Readme File for Details on the Data."""
     name = models.CharField(max_length=255, unique=True)
     category = models.CharField(max_length=255)
     image_caption = models.TextField()
-    image_filename = models.CharField(max_length=255, blank=True, validators=
-                                      [file_exists])
+    image_filename = models.CharField(max_length=255, blank=True)
     group = models.CharField(max_length=2, choices=GROUP_CHOICES)
     formula = models.TextField(blank=True)
     strunz_classification = models.CharField(max_length=255, blank=True)
@@ -47,15 +49,20 @@ class Mineral(models.Model):
     crystal_symmetry = models.CharField(max_length=255, blank=True)
 
     class Meta:
-        ordering = ['name',]
+        ordering = ['name', ]
 
     @classmethod
     def attributes_weighted(cls):
+        """returns a weigthed list of fields for this module:
+        It sorts the field by the number of their occurence
+        in the data"""
         occurences = defaultdict(int)
         minerals = Mineral.objects.all()
-        exclude_fields = ['id', 'name',  'image_filename',  'image_caption' ]
+        exclude_fields = ['id', 'name',  'image_filename',  'image_caption']
         relevant_fields = [
-            field for field in cls._meta.get_fields() if field.name not in exclude_fields
+            field
+            for field in cls._meta.get_fields()
+            if field.name not in exclude_fields
         ]
         for mineral in minerals:
             for field in relevant_fields:
@@ -66,13 +73,26 @@ class Mineral(models.Model):
             fields_sorted.append(key)
         return fields_sorted
 
+    @property
     def image_path(self):
+        """returns the path for the image. Only the filename is
+        stored in the database."""
         if self.image_filename != '':
             return os.path.join('minerals', 'images', self.image_filename)
         else:
             return None
 
+    @property
+    def short_name(self):
+        """returns a short name of the mineral,
+        which is usually the first word in the name."""
+        return re.match('^[\w]+', self.name).group(0)
+
+    @property
+    def url_name(self):
+        """the url_name is the short name in lower case"""
+        return self.short_name.lower()
+
     def __str__(self):
-        return(self.name)
-
-
+        """the mineral is represented by its short name in outputs"""
+        return self.short_name

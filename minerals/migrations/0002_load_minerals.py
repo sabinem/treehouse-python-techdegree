@@ -7,19 +7,26 @@ takes care of special charaters, that the filename
 might include
 """
 from __future__ import unicode_literals
-
-from django.db import migrations, models
-import os
-
-
 import json
-from ..models import GROUP_CHOICES
+import os
 from shutil import copyfile
+
+from django.db import migrations
 from django.template.defaultfilters import slugify
+
+from mineral_catalog.settings import DATA_DIR, MINERALS_IMAGE_DIR
+from ..models import GROUP_CHOICES
 
 
 def load_minerals(apps, schema_editor):
-    with open('minerals_data/data/minerals.json') as datafile:
+    """
+    This migration reads the datafile of minerals and imports
+    it into the database. The images that go along with the data
+    are copied into the static directory of the package 'minerals'.
+    The data contains duplicates that are eliminated.
+    """
+    datapath = os.path.join(DATA_DIR, 'minerals.json')
+    with open(datapath) as datafile:
         mineralsjson = json.load(datafile)
         minerals_nameset = set()
         Mineral = apps.get_model("minerals", "Mineral")
@@ -32,13 +39,20 @@ def load_minerals(apps, schema_editor):
             for key, value in mineral_json.items():
                 if key == 'group':
                     setattr(mineral, key,
-                            [(cd, name) for (cd, name) in GROUP_CHOICES if name == value][0])
+                            [(cd, name) for (cd, name)
+                             in GROUP_CHOICES
+                             if name == value][0])
                 elif key == 'image filename':
-                    file = os.path.join('minerals_data', 'data', 'images', value)
+                    file = os.path.join(
+                        DATA_DIR, 'images', value)
                     if os.path.isfile(file):
                         fileparts = value.split('.')
-                        new_filename = '.'.join([slugify(fileparts[0]), fileparts[-1]])
-                        filepath = os.path.join('minerals/static/minerals/images', new_filename)
+                        new_filename = '.'.join(
+                            [slugify(fileparts[0]),
+                             fileparts[-1]])
+                        filepath = os.path.join(
+                            MINERALS_IMAGE_DIR,
+                            new_filename)
                         copyfile(file, filepath)
                         setattr(mineral, 'image_filename', new_filename)
                 else:
