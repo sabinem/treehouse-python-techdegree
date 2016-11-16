@@ -7,7 +7,12 @@ It is not password protected and can only be displayed.
 ###Installation
 1. Download the project on your computer
 2. Go into the directory mineral_catalog
-3. You do not need a virtual environment, since this
+3. Install a virtual environment:
+    `python3 -m venv mc_venv`
+4. Activate the virtuale environment:
+    `source mc_venv/bin/activate`
+5. Install the requirements
+    `pip install -r requirements.txt`
 project has no external dependencies, other then Python 3
 
 ###Analyze Data (optional: you can skip that step)
