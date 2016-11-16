@@ -6,7 +6,7 @@ It is not password protected and can only be displayed.
 
 ###Installation
 1. Download the project on your computer
-2. Go into the directory mineral_catalog
+2. Unzip and go into the newly established directory
 3. Install a virtual environment:
     `python3 -m venv mc_venv`
 4. Activate the virtuale environment:

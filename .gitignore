@@ -4,6 +4,6 @@ __pycache__
 *.pyc
 docs/*
 *.db*
-*.txt
+data*.txt
 db.sqlite3
 minerals/static/minerals/images/*
