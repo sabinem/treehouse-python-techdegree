@@ -1,0 +1,9 @@
+{% extends 'layout.html' %}
+{% block nav %}
+    <h1>Update your Avatar!</h1>
+{% endblock %}
+{% block content %}
+    <p>This is your avatar</p>
+    <img src="{{ profile.avatar.url }}">
+    {{ avatar_img.rotate(45).show }}
+{% endblock %}

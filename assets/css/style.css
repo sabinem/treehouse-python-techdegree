@@ -1,0 +1,111 @@
+/* ----------------------- */
+/* Error treatement styles */
+/* ----------------------- */
+
+/* Fieldwrapper changes background color in case of field error */
+.fieldWrapper.error {
+    background: linen;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+/* Formwrapper changes background color in case of non field error */
+form.error  {
+    background: linen;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+/* Treatment of errors: color red */
+.errorlist, .messages li.error{
+    color: red;
+}
+
+/* Nonfield errorlists should not have a list symbol */
+.errorlist.nonfield {
+    list-style: none;
+}
+
+/* --------------------------- */
+/* Email confirmation in form  */
+/* --------------------------- */
+
+
+/* Email field needs confirmation or not */
+.no_confirm_needed {
+    display:none;
+}
+
+
+/* ----------------------- */
+/* Circle image uses       */
+/* ----------------------- */
+
+/* circle image as background to the sign in and sign up fields */
+.circle-image-img-25, .circle-image-img-75 {
+    background-image: url("../images/green-circle.png");
+    display: inline-block;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+/* the text, that is placed on the circle image is centered and padded from the image */
+.circle-image-text-25, .circle-image-text-75 {
+    padding:70px 0;
+    display:block;
+    text-align: center;
+}
+
+/* in the sidebar the circle image must be small */
+.circle-image-img-25 {
+    height: 150px;
+    width: 150px;
+}
+
+/* in the sidebar the circle text must be small */
+.circle-image-text-25 {
+    padding:60px 0;
+}
+
+/* in the sidebar the circle image must be big */
+.circle-image-img-75 {
+    height: 300px;
+    width: 300px;
+}
+
+/* in the sidebar the circle text must be big */
+.circle-image-text-75 {
+    padding:140px 0;
+}
+
+/* ----------------------- */
+/* Success Messages styles */
+/* ----------------------- */
+
+ul.messages.centered {
+    width:100%;
+    padding-top:30px;
+    margin:0;
+    color:orange;
+    list-style: none;
+}
+
+/* ----------------------- */
+/* mark active link        */
+/* ----------------------- */
+
+.circle--header .active_url {
+    color:white;
+}
+
+/* ----------------------- */
+/* form labels             */
+/* ----------------------- */
+
+.fieldWrapper label {
+    color:black;
+    font-size: 2em;
+
+}

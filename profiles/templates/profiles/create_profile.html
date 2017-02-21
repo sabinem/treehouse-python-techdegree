@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+{% block nav %}
+    <h1>Please create your Profile!</h1>
+{% endblock %}
+{% block content %}
+    <form method="POST" action="{% url 'profiles:create' %}" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ user_form.as_p }}
+       <img src="{{ user_form.avatar.url }}">{{ profile.avatar.url }}
+      {{ profile_form.as_p }}
+      <button type="submit">Save changes</button>
+    </form>
+{% endblock %}

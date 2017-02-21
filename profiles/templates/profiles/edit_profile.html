@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+{% block nav %}
+    <h1>Update your Profile!</h1>
+{% endblock %}
+{% block content %}
+    <form method="post" action="{% url 'profiles:edit' %}" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% include "form_template.html" with form=user_form %}
+       <img src="{{ profile_form.instance.avatar.url }}">
+      {% include "form_template.html" with form=profile_form %}
+      <button type="submit">Save changes</button>
+    </form>
+{% endblock %}

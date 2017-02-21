@@ -1,0 +1,15 @@
+.errorlist, .messages li.error, ul.centered li {
+    color: yellow;
+
+}
+
+.messages {
+   border: 1px solid lime;
+}
+
+
+.errorlist  + p {
+    background: linen;
+    border-radius: 5px;
+    padding: 5px;
+}

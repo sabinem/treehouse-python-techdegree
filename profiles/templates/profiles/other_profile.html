@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+{% block nav %}
+    <h2>Circle Community</h2>
+    <p>You can circle through it</p>
+    {% if next_profile %}
+        <a class="circle-image-img-25" href="{% url 'profiles:other' pk=next_profile.user_id %}">
+           <span class="circle-image-text-25">next</span>
+        </a>
+    {% endif %}
+{% endblock %}
+{% block content %}
+    <h1>{{ profile.user.first_name }} {{ profile.user.last_name }}</h1>
+    <img src="{{ profile.avatar.url }}">
+    <table class="profile">
+    {% if profile.show_email %}
+    <tr>
+    <td>Date of birth:</td><td>{{ profile.date_of_birth }}</td>
+    </tr>
+    {% endif %}
+    {% if profile.show_email %}
+    <tr>
+    <td>Email address:</td><td>{{ user.email }}</td>
+    </tr>
+    {% endif %}
+    <tr>
+    <td>On github:</td><td>{{ profile.github_account }}</td>
+    </tr>
+    </table>
+    <h2>Biography</h2>
+    <div>{{ profile.bio }}</div>
+{% endblock %}

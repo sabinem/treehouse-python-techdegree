@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+{% block nav %}
+    <p class="circle-image-img-25">
+    <span class="circle-image-text-25">Circle<br>Community</span></p>
+{% endblock %}
+{% block content %}
+    <h1>Circle Community</h1>
+    <ul>
+       {% for profile in profiles %}
+           <li>
+               <a href="{% url 'profiles:other' pk=profile.user.pk %}">
+                   {{ profile.user.username }}
+               </a>
+           </li>
+       {% endfor %}
+    </ul>
+{% endblock %}

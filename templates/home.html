@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block nav %}
+    <p>If you already have an account with us</p>
+    <a class="circle-image-img-25" href="{% url 'accounts:sign_in' %}">
+    <span class="circle-image-text-25">Sign in<br>here</span></a>
+{% endblock %}
+{% block content %}
+    <h1>Welcome to the Circle!</h1>
+    <p>
+        Sign up with us and make your user profile
+    </p>
+    <ul>
+        <li>design your avatar</li>
+        <li>provide your bio</li>
+    </ul>
+    <a class="circle-image-img-75" href="{% url 'accounts:sign_up' %}">
+    <h3 class="circle-image-text-75">Get started now</h3></a>
+{% endblock %}
+

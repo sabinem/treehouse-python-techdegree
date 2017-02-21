@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block title %}Sign Up | {{ super }}{% endblock %}
+{% block nav %}
+    <p class="circle-image-img-25" href="{% url 'accounts:sign_in' %}">
+    <span class="circle-image-text-25">Sign up</span></p>
+    <p class="messages">Please pick a username and password to sign up with us!</p>
+{% endblock %}
+{% block content %}
+<form method="POST" action="{% url 'accounts:sign_up' %}">
+    {% csrf_token %}
+    {% include "form_template.html" with form=form %}
+    <input type="submit" class="button-primary" value="Sign Up">
+</form>
+{% endblock %}
