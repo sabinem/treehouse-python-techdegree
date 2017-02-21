@@ -1,16 +1,14 @@
-import unicodedata
-
+"""
+custom forms for User Authentication
+"""
 from django import forms
-from django.contrib.auth import password_validation, get_user_model, authenticate
-from django.contrib.auth.models import User
+from django.contrib.auth import password_validation
 from django.contrib.auth import forms as authforms
-from django.utils.text import capfirst
 
 
 class UserCreationForm(authforms.UserCreationForm):
     """
-    A form that creates a user, with no privileges, from the given username and
-    password.
+    custom error messages and widget settings for user creation form
     """
     error_messages = {
         'password_mismatch': ("The two password fields didn't match."),
@@ -36,8 +34,7 @@ class UserCreationForm(authforms.UserCreationForm):
 
 class AuthenticationForm(authforms.AuthenticationForm):
     """
-    Base class for authenticating users. Extend this to get a form that accepts
-    username/password logins.
+    custom error messages and widget settings for user authentication form
     """
     username = authforms.UsernameField(
         max_length=254,
@@ -48,7 +45,6 @@ class AuthenticationForm(authforms.AuthenticationForm):
         strip=False,
         widget=forms.PasswordInput(render_value=True),
     )
-
     error_messages = {
         'invalid_login': (
             "Please enter a correct %(username)s and password. Note that both "

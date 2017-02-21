@@ -1,3 +1,6 @@
+"""
+This file contains authentications views, that sign users in and out
+"""
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -9,6 +12,11 @@ from .forms import AuthenticationForm, UserCreationForm
 
 
 def sign_in(request):
+    """
+    signs users in:
+    - superusers are directly signed in into the admin
+    - active users are taken to their profiles
+    """
     form = AuthenticationForm()
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
@@ -37,6 +45,9 @@ def sign_in(request):
 
 
 def sign_up(request):
+    """
+    sign up for new users
+    """
     form = UserCreationForm()
     if request.method == 'POST':
         form = UserCreationForm(data=request.POST)
@@ -57,6 +68,9 @@ def sign_up(request):
 
 @login_required
 def sign_out(request):
+    """
+    logs users out
+    """
     logout(request)
     messages.success(request, "You've been signed out. Come back soon!")
     return HttpResponseRedirect(reverse('home'))

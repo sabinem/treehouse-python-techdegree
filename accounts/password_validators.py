@@ -1,5 +1,5 @@
 """
-must not be the same as the current password
+custom password validators
 """
 import string
 import re
