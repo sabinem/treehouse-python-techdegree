@@ -1,23 +1,38 @@
-from django.core.urlresolvers import reverse
-from django.db import models
-from django.contrib.auth.models import User
-from django.conf import settings
-from django.contrib.gis.db import models
-from django.contrib.gis.geos import Point
-from location_field.models.spatial import LocationField
-from io import StringIO
-import os
-
-from django.db import models
-from django.core.files.base import ContentFile
-from django.core.files.storage import default_storage as storage
-
+"""
+model for the user profile
+- one on one with user
+"""
+from io import BytesIO
 from PIL import Image
 
-# Thumbnail size tuple defined in an app-specific settings module - e.g. (400, 400)
-THUMB_SIZE = (200,200)
+from django.contrib.auth.models import User
+from django.contrib.gis.db import models
+from django.db import models
+from django.core.files.base import ContentFile
+
+
+def image_path(instance, filename):
+    """sets the upload path for images"""
+    return 'images/{}'.format(filename)
+
+
+def get_filename(filename):
+    """the last part of the avatar url is the filename"""
+    return filename.split(sep="/")[-1]
+
 
 class Profile(models.Model):
+    """
+    user profile
+    - primary key is the user
+    - date of birth
+    - biography
+    - avatar
+    - avatar thumbnail
+    - github account: the username is stored
+    - setting for showing the email to other users
+    - setting for showing the birthday to other users
+    """
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
@@ -26,48 +41,41 @@ class Profile(models.Model):
     date_of_birth = models.DateField()
     bio = models.TextField()
     avatar = models.ImageField(
-        upload_to='pic_folder/'
+        upload_to=image_path
     )
-    avatar_thumbnail = models.ImageField(
-        upload_to='pic_folder/thumbnails/',
+    show_email = models.BooleanField(
+        default=True
+    )
+    show_birthday = models.BooleanField(
+        default=True
+    )
+    github_account = models.CharField(
         blank=True,
-        null=True,
-        editable=False,
+        max_length=20
     )
-    show_email = models.BooleanField(default=True)
-    show_birthday = models.BooleanField(default=True)
-    github_account = models.CharField(blank=True, max_length=20)
 
     class Meta:
         ordering = ['user']
 
     def __str__(self):
+        """
+        users are represented by their username
+        """
         return self.user.username
 
-
-
-from PIL import Image
-from io import BytesIO
-from django.core.files.base import ContentFile
-
-
-class TestModel(models.Model):
-    image = models.ImageField(upload_to='test/')
-
-    def save(self, *args, **kwargs):
-        pil_image_obj = Image.open(self.image)
-        new_image = pil_image_obj.rotate(90)
-
-        new_image_io = BytesIO()
-        new_image.save(new_image_io, format='JPEG')
-
-        temp_name = self.image.name
-        self.image.delete(save=False)
-
-        self.image.save(
-            temp_name,
-            content=ContentFile(new_image_io.getvalue()),
-            save=False
-        )
-
-        super(TestModel, self).save(*args, **kwargs)
+    def save(self, new_image=None, *args, **kwargs):
+        """
+        saves updated avatar image:
+        - if new_image is set this is saved as an updated avatar image
+        """
+        if new_image:
+            temp_name = get_filename(self.avatar.name)
+            new_image_io = BytesIO()
+            new_image.save(new_image_io, format='JPEG')
+            self.avatar.delete(save=False)
+            self.avatar.save(
+                temp_name,
+                content=ContentFile(new_image_io.getvalue()),
+                save=False
+            )
+        super().save(*args, **kwargs)

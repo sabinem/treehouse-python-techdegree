@@ -1,3 +1,4 @@
+"""deals with user profiles"""
 from django.apps import AppConfig
 
 

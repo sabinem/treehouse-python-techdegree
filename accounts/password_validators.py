@@ -1,5 +1,6 @@
 """
-custom password validators
+custom password validators, they are attached in the setting file
+see https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
 """
 import string
 import re

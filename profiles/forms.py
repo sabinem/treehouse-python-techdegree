@@ -1,24 +1,19 @@
 import urllib.request
 import datetime
 from PIL import Image
-import glob, os
-
-
-import io
-from django.core.files.uploadedfile import InMemoryUploadedFile
-
+from django.contrib.auth import forms as authforms
 from django import forms
-from django.forms import inlineformset_factory
 from django.contrib.auth.models import User
 from django.utils.html import escape, strip_tags
-from django.forms import PasswordInput
-from django.contrib.auth import password_validation
-from django.contrib.auth import forms as authforms
 
+from . import models
 
-from .models import Profile
 
 class UserForm(forms.ModelForm):
+    """
+    User Form as part of the Userprofile Form
+    - the email confirm field is only shown when the user changes the email address
+    """
     email_confirm = forms.EmailField(
         required=False,
         help_text="In case you change your email, please confirm the email address in the field above",
@@ -37,28 +32,47 @@ class UserForm(forms.ModelForm):
             'last_name': "What is your last name?",
         }
 
+
     def clean(self):
+        """
+        the email confirm field is checked if the user changes the email
+        """
         cleaned_data = super(UserForm, self).clean()
-        if self.instance.pk is not None:
-            if self.instance.email != cleaned_data['email']:
-                if cleaned_data['email_confirm'] == "":
-                    raise forms.ValidationError(
-                        {"email_confirm": "change of email requires confirmation"}
-                    )
-                if cleaned_data['email'] != cleaned_data['email_confirm']:
-                    raise forms.ValidationError(
-                        {"email_confirm": "email changed, but confirmation does not match"}
-                    )
+        if self.is_valid():
+            if self.instance.pk is not None:
+                if self.instance.email != cleaned_data['email']:
+                    if cleaned_data['email_confirm'] == "":
+                        raise forms.ValidationError(
+                            {"email_confirm": "change of email requires confirmation"}
+                        )
+                    if cleaned_data['email'] != cleaned_data['email_confirm']:
+                        raise forms.ValidationError(
+                            {"email_confirm": "email changed, but confirmation does not match"}
+                        )
         return cleaned_data
 
 
 class ProfileForm(forms.ModelForm):
+    """
+    Profile Form
+    - the date input format is checked by "input_formats"
+    """
     default_error_messages = {
         'required': u'Value required!!!!.',
     }
     class Meta:
-        model = Profile
-        fields = ('show_email', 'github_account', 'avatar', 'date_of_birth', 'show_birthday' ,'bio')
+        model = models.Profile
+        fields = (
+            'avatar',
+            'github_account',
+            'date_of_birth',
+            'bio',
+            'show_birthday' ,
+            'show_email',
+        )
+        input_formats = {
+            'date_of_birth': ['%m.%d.%Y', '%Y-%m-%d', '%m.%d.%y']
+        }
         labels = {
             'date_of_birth' : "Date of Birth",
             'bio': "Biography",
@@ -81,15 +95,13 @@ class ProfileForm(forms.ModelForm):
                 'required': "Please provide your date of birth!",
             },
         }
-        widget = {
-            'email' : forms.widgets.EmailInput(attrs={'id': "email_input"}),
-            'date_of_birth': forms.widgets.DateInput(
-                format=['%m.%d.%Y', '%Y-%m-%d', '%m.%d.%y']
-            )
-        }
-
 
     def clean_bio(self):
+        """
+        check the bio form field
+        - HTML tags are not allowed
+        - it must be at least 10 characters long
+        """
         data = self.cleaned_data['bio']
         escaped_data = escape(data)
         stripped_data = strip_tags(data)
@@ -100,12 +112,16 @@ class ProfileForm(forms.ModelForm):
         return stripped_data
 
     def clean_github_account(self):
+        """
+        check the github account
+        - it must be an existing github account
+        """
         data = self.cleaned_data['github_account']
-        if (self.instance.pk is None or
-           self.instance.github_account != data):
+        if ((self.instance.pk is None) or
+            (self.instance.github_account != data)):
             github_url = '/'.join(["https://github.com/", data])
             try:
-                response = urllib.request.urlopen(github_url)
+                response = urllib.request.urlopen(github_url).getcode()
             except urllib.request.HTTPError:
                 raise forms.ValidationError("This is not a valid Github account")
             except urllib.request.URLError:
@@ -113,73 +129,92 @@ class ProfileForm(forms.ModelForm):
         return data
 
     def clean_date_of_birth(self):
+        """
+        check the birthdate
+        - it should not be in the future
+        """
         data = self.cleaned_data['date_of_birth']
         if data > datetime.date.today():
             corrected_data = data.replace(year=data.year-100)
             return corrected_data
         return data
 
-    def clean_avatar(self):
-        avatar = self.cleaned_data['avatar']
-        infile = avatar.file
-        im = Image.open(infile)
-        new_im = im.rotate(90).resize((128,128))
-        new_im.show()
-        import io
-        new_im_io = io.BytesIO()
-        new_im.save(new_im_io, format='JPEG')
-        temp_name = avatar.name
-        avatar.delete(save=False)
-        from django.core.files.base import ContentFile
-        avatar.save(
-            temp_name,
-            content=ContentFile(new_im_io.getvalue()),
-            save=False
-        )
-        return avatar
 
-
-class PasswordChangeForm(authforms.PasswordChangeForm):
+class AvatarForm(forms.Form):
     """
-    A form that lets a user change their password by entering their old
-    password.
+    Form for transforming the Avatar
     """
-    error_messages = dict(authforms.SetPasswordForm.error_messages, **{
-        'password_incorrect': ("Your old password was entered incorrectly. Please enter it again."),
-    })
-    old_password = forms.CharField(
-        label=("Old password"),
-        strip=False,
-        widget=forms.PasswordInput(attrs={'autofocus': True}, render_value=True),
+    FLIP_LEFT_RIGHT = 'lr'
+    FLIP_TOP_BOTTOM = 'tb'
+    ROTATE = 'r'
+    CROP = 'c'
+    WELCOME = 'w'
+    ACTION_CHOICES = (
+        (ROTATE, "rotate"),
+        (FLIP_LEFT_RIGHT, 'flip left right'),
+        (FLIP_TOP_BOTTOM, 'flip top bottom'),
+        (CROP, 'crop'),
+        (WELCOME, 'Welcome to styling your avatar'),
     )
-    new_password1 = forms.CharField(
-        label=("New password"),
-        widget=forms.PasswordInput(
-            render_value=True,
-            attrs={'pattern': "(?=^.{14,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$",
-                   'title': "expected: uppercase, lowercase, number and special character "
-                            "and it must be at least 14 characters long"}),
-        help_text=password_validation.password_validators_help_text_html(),
+    action = forms.ChoiceField(
+        choices=ACTION_CHOICES,
+        required=False,
+        initial=WELCOME,
+        label=("Action"),
+        widget=forms.Select(),
+        help_text="Please chose an action and save when you are done",
     )
-    new_password2 = forms.CharField(
-        label=("New password confirmation"),
-        strip=False,
-        widget=forms.PasswordInput,
+    rotate = forms.IntegerField(
+        required=False,
+        label = "",
+        widget=forms.NumberInput(attrs={
+            'id': "angleInputId",
+            'type': 'range',
+            'min': 0,
+            'max': 360,
+            'step': 1,
+            'value': 0,
+            'oninput': "angleOutputId.value = angleInputId.value"
+        })
     )
-    field_order = ['old_password', 'new_password1', 'new_password2']
+    crop_left = forms.IntegerField(
+        required=False,
+        widget = forms.HiddenInput,
+        initial=0,
+    )
+    crop_top = forms.IntegerField(
+        required=False,
+        widget=forms.HiddenInput,
+        initial=0,
+    )
+    crop_right = forms.IntegerField(
+        required=False,
+        widget=forms.HiddenInput,
+        initial=0,
+    )
+    crop_bottom = forms.IntegerField(
+        required=False,
+        widget=forms.HiddenInput,
+        initial=0,
+    )
 
-    def clean_new_password1(self):
-        password1 = self.cleaned_data.get('new_password1')
-        password_validation.validate_password(password1, self.user)
-        return password1
-
-    def clean_new_password2(self):
-        password1 = self.cleaned_data.get('new_password1')
-        password2 = self.cleaned_data.get('new_password2')
-        if password1 and password2:
-            if password1 != password2:
+    def clean(self):
+        """
+        the email confirm field is checked if the user changes the email
+        """
+        cleaned_data = super(AvatarForm, self).clean()
+        if cleaned_data['action'] == self.CROP:
+            if (cleaned_data['crop_top'] == 0 and
+                cleaned_data['crop_bottom'] == 0 and
+                cleaned_data['crop_left'] == 0 and
+                cleaned_data['crop_right'] == 0
+                ):
                 raise forms.ValidationError(
-                    self.error_messages['password_mismatch'],
-                    code='password_mismatch',
+                    "You must select an error on your image, if you want to crop it!"
+            )
+        if cleaned_data['action'] == self.ROTATE:
+            if cleaned_data['rotate'] == 0:
+                raise forms.ValidationError(
+                    "You must select an angle, if you want to rotate your image!"
                 )
-        return password2
+        return cleaned_data

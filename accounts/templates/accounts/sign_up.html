@@ -1,14 +1,36 @@
 {% extends "layout.html" %}
-{% block title %}Sign Up | {{ super }}{% endblock %}
+{% load static from staticfiles %}
+
+<!-- Page Title
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{% block title %}Sign Up{% endblock %}
+
+<!-- Nav Header
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{% block navheader %}Sign Up{% endblock %}
+
+<!-- Sidebar Navigation
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
 {% block nav %}
-    <p class="circle-image-img-25" href="{% url 'accounts:sign_in' %}">
-    <span class="circle-image-text-25">Sign up</span></p>
     <p class="messages">Please pick a username and password to sign up with us!</p>
 {% endblock %}
+
+<!-- Main Content
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
 {% block content %}
-<form method="POST" action="{% url 'accounts:sign_up' %}">
-    {% csrf_token %}
-    {% include "form_template.html" with form=form %}
-    <input type="submit" class="button-primary" value="Sign Up">
-</form>
+    {%  include 'client_side_form_checking.html' %}
+    <form method="POST" action="{% url 'accounts:sign_up' %}">
+        {% csrf_token %}
+        {% include "form_template.html" with form=form %}
+        <input type="submit" class="button-primary" value="Sign Up">
+        <a class=".circle--search button" id="reset" type="button" href="{% url 'accounts:sign_up' %}">
+            Reset
+        </a>
+    </form>
+{% endblock %}
+
+<!-- Extra JS
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{% block js %}
+    {% include "form_js.html" %}
 {% endblock %}

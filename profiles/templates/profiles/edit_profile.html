@@ -1,13 +1,40 @@
 {% extends 'layout.html' %}
+{% load static from staticfiles %}
+
+<!-- Page Title
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{% block title %}Edit Profile{% endblock %}
+
+<!-- Nav Header
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{% block navheader %}Edit Profile{% endblock %}
+
+<!-- Sidebar Navigation
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
 {% block nav %}
-    <h1>Update your Profile!</h1>
+    <p>Here you can update your Profile!</p>
 {% endblock %}
+
+<!-- Main Content
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
 {% block content %}
-    <form method="post" action="{% url 'profiles:edit' %}" enctype="multipart/form-data">
-      {% csrf_token %}
-      {% include "form_template.html" with form=user_form %}
-       <img src="{{ profile_form.instance.avatar.url }}">
-      {% include "form_template.html" with form=profile_form %}
-      <button type="submit">Save changes</button>
+    <h1>Update your Profile!</h1>
+    {%  include 'client_side_form_checking.html' %}
+    <form method="post" action="{% url 'profiles:edit' %}" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+        {% include "form_template.html" with form=user_form %}
+        <img src="{{ profile_form.instance.avatar.url }}">
+        {% include "form_template.html" with form=profile_form %}
+        <button type="submit">Save changes</button>
+        <a class=".circle--search button" id="reset" type="button" href="{% url 'profiles:edit' %}">
+          Reset
+        </a>
     </form>
+{% endblock %}
+
+<!-- Extra JS
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{% block js %}
+    {% include "form_js.html" %}
+    <script type="text/javascript" src="{% static "js/confirm_email.js" %}"></script>
 {% endblock %}

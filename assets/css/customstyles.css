@@ -6,7 +6,11 @@
 .fieldWrapper.error {
     background: linen;
     border-radius: 5px;
-    padding: 5px;
+}
+
+.fieldWrapper li, .fieldWrapper p {
+    margin-bottom: 0;
+    font-size: 1em;
 }
 
 /* Formwrapper changes background color in case of non field error */
@@ -19,6 +23,8 @@ form.error  {
 /* Treatment of errors: color red */
 .errorlist, .messages li.error{
     color: red;
+    padding-bottom: 0;
+    margin-bottom: 0;
 }
 
 /* Nonfield errorlists should not have a list symbol */
@@ -62,6 +68,7 @@ form.error  {
 .circle-image-img-25 {
     height: 150px;
     width: 150px;
+    margin-bottom: 50px;
 }
 
 /* in the sidebar the circle text must be small */
@@ -107,5 +114,24 @@ ul.messages.centered {
 .fieldWrapper label {
     color:black;
     font-size: 2em;
+}
 
+/* ----------------------- */
+/* active helptext         */
+/* ----------------------- */
+
+.activehelp {
+    color:orange;
+}
+
+/* ----------------------- */
+/* canvas                  */
+/* ----------------------- */
+
+#c {
+    border:none;
+}
+
+.display_none {
+    background:red;
 }

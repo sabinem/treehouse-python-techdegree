@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+{% load static from staticfiles %}
+
+<!-- Page Title
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{% block title %}Transform Avatar{% endblock %}
+
+<!-- Extra CSS
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/imgareaselect-default.css' %}" />
+{% endblock %}
+
+<!-- Nav Header
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{% block navheader %}Transform<br>Avatar{% endblock %}
+
+<!-- Sidebar Navigation
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{% block nav %}
+    <p>Here you can style your avatar!</p>
+    <ul>
+        <li><a href="{% url 'profiles:edit' %}">If you messed up, upload a new image</a></li>
+        <li><a href="{% url 'profiles:own' %}">Finished? Go to your profile</a></li>
+    </ul>
+{% endblock %}
+
+<!-- Main Content
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{% block content %}
+<h1>Style your avatar</h1>
+<form method="post"
+      action="{% url 'profiles:transform_avatar' %}"
+      enctype="multipart/form-data"
+      novalidate>
+  {% csrf_token %}
+  {{ form.as_p }}
+  <div id="angleWrapperId">
+      <output id="angleOutputId">0</output> degrees<br>
+  </div>
+  <button id="submit" type="submit">Transform</button>
+  <a class=".circle--search button" id="reset" type="button" href="{% url 'profiles:transform_avatar' %}">
+      Reset Form
+  </a>
+</form>
+
+<img id="avatar" src="{{ profile.avatar.url }}">
+<canvas id="c" width="500" height="500"></canvas>
+
+{% endblock %}
+
+<!-- Extra JS
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{% block js %}
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.7.7/fabric.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.imgareaselect.pack.js' %}"></script>
+    <script type="text/javascript" src="{% static "js/transform_avatar.js" %}"></script>
+{% endblock %}

@@ -1,11 +1,9 @@
-import os
+"""
+views for viewing and editing profiles
+"""
 from PIL import Image
 
-from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
-#rom django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
@@ -13,27 +11,36 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.core import exceptions
 
-from .models import Profile
-from .forms import UserForm, ProfileForm, PasswordChangeForm
+from . import models
+from . import forms
 
 
 @login_required()
 def own_profile(request):
+    """
+    view own profile
+    - if the profile does not exist yet, the user is send to create profile
+    """
     try:
-        profile = Profile.objects.get(user=request.user)
+        profile = models.Profile.objects.get(user=request.user)
     except exceptions.ObjectDoesNotExist:
         return HttpResponseRedirect(reverse('profiles:create'))
     return render(request, 'profiles/own_profile.html', {'profile': profile})
 
 
-
 @login_required()
 def other_profile(request, pk):
-    profile = get_object_or_404(Profile, user_id=pk)
-    next_profile = Profile.objects.filter(user__username__gt=profile.user.username)\
+    """
+    - view own profile as others see it
+    - view profile of somebody else
+    - the user can cycle through the profiles: he can always request to see
+    the next one
+    """
+    profile = get_object_or_404(models.Profile, user_id=pk)
+    next_profile = models.Profile.objects.filter(user__username__gt=profile.user.username)\
         .order_by('user__username').first()
     if not next_profile:
-        next_profile = Profile.objects.all()\
+        next_profile = models.Profile.objects.all()\
             .order_by('user__username').first()
     if profile.user == request.user:
         messages.success(
@@ -50,37 +57,21 @@ def other_profile(request, pk):
 
 @login_required
 def list_profiles(request):
-    profiles = Profile.objects.all().select_related('user').order_by('user__username')
+    """
+    list all profiles
+    """
+    profiles = models.Profile.objects.all().select_related('user').order_by('user__username')
     return render(request, 'profiles/list_profiles.html', {'profiles': profiles})
-
-
-@login_required()
-def change_password(request):
-    form = PasswordChangeForm(user=request.user)
-    print(form)
-    if request.method == 'POST':
-        form = PasswordChangeForm(data=request.POST, user=request.user)
-        if form.is_valid():
-            form.save()
-            user = authenticate(
-                username=request.user.username,
-                password=form.cleaned_data['new_password1']
-            )
-            login(request, user)
-            messages.success(
-                request,
-                "Your password has been changed."
-            )
-            return HttpResponseRedirect(reverse('profiles:own'))
-    return render(request, 'profiles/change_password.html', {'form': form})
 
 
 @login_required
 def edit_profile(request):
+    """
+    edit profile
+    """
     if request.method == 'POST':
-        user_form = UserForm(request.POST, instance=request.user)
-
-        profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        user_form = forms.UserForm(request.POST, instance=request.user)
+        profile_form = forms.ProfileForm(request.POST, request.FILES, instance=request.user.profile)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
@@ -89,8 +80,8 @@ def edit_profile(request):
         else:
             messages.error(request,('Please correct the error below.'))
     else:
-        user_form = UserForm(instance=request.user)
-        profile_form = ProfileForm(instance=request.user.profile)
+        user_form = forms.UserForm(instance=request.user)
+        profile_form = forms.ProfileForm(instance=request.user.profile)
     return render(request, 'profiles/edit_profile.html', {
         'user_form': user_form,
         'profile_form': profile_form
@@ -99,21 +90,24 @@ def edit_profile(request):
 
 @login_required
 def create_profile(request):
+    """
+    create profile
+    """
     if request.method == 'POST':
-        user_form = UserForm(request.POST, instance=request.user)
-        profile_form = ProfileForm(request.POST, request.FILES)
+        user_form = forms.UserForm(request.POST, instance=request.user)
+        profile_form = forms.ProfileForm(request.POST, request.FILES)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile = profile_form.save(commit=False)
             profile.user = request.user
             profile.save()
             messages.success(request, ('Your profile was successfully updated!'))
-            return HttpResponseRedirect(reverse('profiles:view'))
+            return HttpResponseRedirect(reverse('profiles:own'))
         else:
             messages.error(request,('Please correct the error below.'))
     else:
-        user_form = UserForm(instance=request.user)
-        profile_form = ProfileForm()
+        user_form = forms.UserForm(instance=request.user)
+        profile_form = forms.ProfileForm()
     return render(request, 'profiles/create_profile.html', {
         'user_form': user_form,
         'profile_form': profile_form
@@ -121,54 +115,60 @@ def create_profile(request):
 
 
 @login_required
-def edit_avatar(request):
-    profile = Profile.objects.get(user= request.user)
-    print(profile.avatar.url)
-    avatar_img = Image.open('/Users/sabinemaennel/PycharmProjects/userprofile/profile_project/media/pic_folder/51679728_s_ydF0Ni0.jpg')
-
-    return render(request, 'profiles/edit_avatar.html', {'profile': profile, 'avatar_img': avatar_img})
-
-
-
-from django.http import HttpResponse
-from PIL import Image
-
-import random
-INK = "red", "blue", "green", "yellow"
-
-def image(request):
-
-    # ... create/load image here ...
-    image = Image.new("RGB", (800, 600), random.choice(INK))
-
-    # serialize to HTTP response
-    response = HttpResponse(content_type="image/png")
-    image.save(response, "PNG")
-    return response
+def transform_avatar(request):
+    if request.method == 'POST':
+        form = forms.AvatarForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, ('Your avatar was successfully updated!'))
+            return HttpResponseRedirect(reverse('profiles:own'))
+        else:
+            messages.error(request, ('Please correct the error below.'))
+    else:
+        form = forms.AvatarForm()
+    return render(request, 'profiles/edit_avatar.html', {
+        'form': form,
+    })
 
 
+@login_required
+def transform_avatar(request):
+    profile = get_object_or_404(models.Profile, user_id=request.user.id)
+    img = Image.open(profile.avatar)
+    if request.method == "POST":
+        form = forms.AvatarForm(request.POST)
+        if form.is_valid():
+            if form.cleaned_data['action'] == form.CROP:
+                box = (form.cleaned_data['crop_left'],
+                       form.cleaned_data['crop_top'],
+                       form.cleaned_data['crop_right'],
+                       form.cleaned_data['crop_bottom'])
+                img = img.crop(box)
+            if form.cleaned_data['action'] == form.FLIP_TOP_BOTTOM:
+                img = img.transpose(Image.FLIP_TOP_BOTTOM)
+            if form.cleaned_data['action'] == form.FLIP_LEFT_RIGHT:
+                img = img.transpose(Image.FLIP_LEFT_RIGHT)
+            if form.cleaned_data['action'] == form.ROTATE:
+                degree = int(form.cleaned_data['rotate'])
+                # converted to have an alpha layer
+                im2 = img.convert('RGBA')
+                # rotated image: rotation is clockwise -> calculate counter clockwise for PIL
+                rot = im2.rotate(360 - degree, expand=1)
+                # a white image same size as rotated image
+                fff = Image.new('RGBA', rot.size, (255,) * 4)
+                # create a composite image using the alpha layer of rot as a mask
+                out = Image.composite(rot, fff, rot)
+                img = out
+            profile.save(new_image=img)
+            return HttpResponseRedirect(reverse('profiles:transform_avatar'))
+        else:
+            messages.error(request, ('Please correct the error below.'))
+    else:
+        form = forms.AvatarForm()
+    context = {'profile': profile, 'form': form}
+    return render(
+        request,
+        'profiles/transform_avatar.html',
+        context
+    )
 
-def pil_image(request):
-    ''' A View that Returns a PNG Image generated using PIL'''
-
-    from PIL import Image, ImageDraw
-
-    size = (400,500)             # size of the image to create
-    im = Image.new('RGB', size) # create the image
-    draw = ImageDraw.Draw(im)   # create a drawing object that is
-                                # used to draw on the new image
-    red = (255,0,0)    # color of our text
-    text_pos = (10,10) # top-left position of our text
-    text = "Hello World!" # text to draw
-    # Now, we'll do the drawing:
-    draw.text(text_pos, text, fill=red)
-
-    del draw # I'm done drawing so I don't need this anymore
-
-    # We need an HttpResponse object with the correct mimetype
-    response = HttpResponse(content_type="image/png")
-    # now, we tell the image to save as a PNG to the
-    # provided file-like object
-    im.save(response, 'PNG')
-
-    return response # and we're done!
