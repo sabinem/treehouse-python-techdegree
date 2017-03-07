@@ -9,7 +9,6 @@
 var client_form_checking = $('#client_form_checking');
 var myform = $('form');
 var client_form_checking_checked = localStorage.getItem('client_form_checking_checked');
-alert(client_form_checking_checked);
 
 if (client_form_checking_checked === "n") {
     client_form_checking.prop("checked", false);
