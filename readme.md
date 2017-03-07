@@ -25,12 +25,14 @@
 3. Install a virtual environment:
     `python3 -m venv up_venv`
 4. Activate the virtuale environment:
-    `source mc_venv/bin/activate`
+    `source up_venv/bin/activate`
 5. Install the requirements
     `pip install -r requirements.txt`
    project has external dependencies: Python 3 and Pillow
 6. Run `python manage.py migrate`
-7. Create superuser with `python manage.py createsuperuser`
+7. Create superuser with `python manage.py createsuperuser`.
+   - The password must be 14 Characters, have lower- and uppercase letters,
+   special characters and numbers.
 8. Start the application with `python manage.py runserver`
 
 

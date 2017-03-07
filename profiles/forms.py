@@ -19,19 +19,23 @@ class UserForm(forms.ModelForm):
         help_text="In case you change your email, please confirm the email address in the field above",
         label = "Please confirm your email address"
     )
+    first_name = forms.CharField(
+        required=True,
+        max_length=30,
+        label=("First name"),
+    )
+    last_name = forms.CharField(
+        required=True,
+        max_length=30,
+        label=("Last name"),
+    )
+    email = forms.EmailField(
+        required=True,
+        label="Email"
+    )
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'email')
-        labels = {
-            'email_confirm': "please confirm your email",
-            'last_name': "Last name",
-            'first_name': "First name",
-        }
-        help_texts = {
-            'email_confirm': "Please repeat your email",
-            'last_name': "What is your last name?",
-        }
-
 
     def clean(self):
         """
@@ -122,9 +126,12 @@ class ProfileForm(forms.ModelForm):
             github_url = '/'.join(["https://github.com/", data])
             try:
                 response = urllib.request.urlopen(github_url).getcode()
+                print(response)
             except urllib.request.HTTPError:
                 raise forms.ValidationError("This is not a valid Github account")
             except urllib.request.URLError:
+                print(github_url)
+
                 raise forms.ValidationError("The Internet Connection is not working. Please try again later")
         return data
 

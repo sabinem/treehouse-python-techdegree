@@ -15,6 +15,23 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   display: block;
 }
 
+/* line 38, ../sass/circle/core/reset.sass */
+audio, canvas, progress, video {
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+/* line 48, ../sass/circle/core/reset.sass */
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+/* line 56, ../sass/circle/core/reset.sass */
+[hidden], template {
+  display: none;
+}
+
 /* line 65, ../sass/circle/core/reset.sass */
 a {
   background-color: transparent;
@@ -242,6 +259,79 @@ body {
   box-sizing: border-box;
   position: relative;
 }
+/* line 16, ../sass/circle/core/layout.sass */
+.grid-5 {
+  width: 5%;
+  padding: 0 15px;
+}
+/* line 22, ../sass/circle/core/layout.sass */
+.grid-pull-5 {
+  left: -5%;
+}
+/* line 27, ../sass/circle/core/layout.sass */
+.grid-push-5 {
+  left: 5%;
+}
+@media screen and (max-width: 640px) {
+  /* line 31, ../sass/circle/core/layout.sass */
+  .grid-5 {
+    width: 100%;
+    left: 0;
+  }
+}
+/* line 16, ../sass/circle/core/layout.sass */
+.grid-10 {
+  width: 10%;
+  padding: 0 15px;
+}
+/* line 22, ../sass/circle/core/layout.sass */
+.grid-pull-10 {
+  left: -10%;
+}
+/* line 27, ../sass/circle/core/layout.sass */
+.grid-push-10 {
+  left: 10%;
+}
+@media screen and (max-width: 640px) {
+  /* line 31, ../sass/circle/core/layout.sass */
+  .grid-10 {
+    width: 100%;
+    left: 0;
+  }
+}
+/* line 16, ../sass/circle/core/layout.sass */
+.grid-15 {
+  width: 15%;
+  padding: 0 15px;
+}
+/* line 22, ../sass/circle/core/layout.sass */
+.grid-pull-15 {
+  left: -15%;
+}
+/* line 27, ../sass/circle/core/layout.sass */
+.grid-push-15 {
+  left: 15%;
+}
+@media screen and (max-width: 640px) {
+  /* line 31, ../sass/circle/core/layout.sass */
+  .grid-15 {
+    width: 100%;
+    left: 0;
+  }
+}
+/* line 16, ../sass/circle/core/layout.sass */
+.grid-20 {
+  width: 20%;
+  padding: 0 15px;
+}
+/* line 22, ../sass/circle/core/layout.sass */
+.grid-pull-20 {
+  left: -20%;
+}
+/* line 27, ../sass/circle/core/layout.sass */
+.grid-push-20 {
+  left: 20%;
+}
 @media screen and (max-width: 640px) {
   /* line 31, ../sass/circle/core/layout.sass */
   .grid-20 {
@@ -269,8 +359,235 @@ body {
     left: 0;
   }
 }
-
-
+/* line 16, ../sass/circle/core/layout.sass */
+.grid-30 {
+  width: 30%;
+  padding: 0 15px;
+}
+/* line 22, ../sass/circle/core/layout.sass */
+.grid-pull-30 {
+  left: -30%;
+}
+/* line 27, ../sass/circle/core/layout.sass */
+.grid-push-30 {
+  left: 30%;
+}
+@media screen and (max-width: 640px) {
+  /* line 31, ../sass/circle/core/layout.sass */
+  .grid-30 {
+    width: 100%;
+    left: 0;
+  }
+}
+/* line 16, ../sass/circle/core/layout.sass */
+.grid-33 {
+  width: 33.333%;
+  padding: 0 15px;
+}
+/* line 22, ../sass/circle/core/layout.sass */
+.grid-pull-33 {
+  left: -33.333%;
+}
+/* line 27, ../sass/circle/core/layout.sass */
+.grid-push-33 {
+  left: 33.333%;
+}
+@media screen and (max-width: 640px) {
+  /* line 31, ../sass/circle/core/layout.sass */
+  .grid-33 {
+    width: 100%;
+    left: 0;
+  }
+}
+/* line 16, ../sass/circle/core/layout.sass */
+.grid-35 {
+  width: 35%;
+  padding: 0 15px;
+}
+/* line 22, ../sass/circle/core/layout.sass */
+.grid-pull-35 {
+  left: -35%;
+}
+/* line 27, ../sass/circle/core/layout.sass */
+.grid-push-35 {
+  left: 35%;
+}
+@media screen and (max-width: 640px) {
+  /* line 31, ../sass/circle/core/layout.sass */
+  .grid-35 {
+    width: 100%;
+    left: 0;
+  }
+}
+/* line 16, ../sass/circle/core/layout.sass */
+.grid-40 {
+  width: 40%;
+  padding: 0 15px;
+}
+/* line 22, ../sass/circle/core/layout.sass */
+.grid-pull-40 {
+  left: -40%;
+}
+/* line 27, ../sass/circle/core/layout.sass */
+.grid-push-40 {
+  left: 40%;
+}
+@media screen and (max-width: 640px) {
+  /* line 31, ../sass/circle/core/layout.sass */
+  .grid-40 {
+    width: 100%;
+    left: 0;
+  }
+}
+/* line 16, ../sass/circle/core/layout.sass */
+.grid-45 {
+  width: 45%;
+  padding: 0 15px;
+}
+/* line 22, ../sass/circle/core/layout.sass */
+.grid-pull-45 {
+  left: -45%;
+}
+/* line 27, ../sass/circle/core/layout.sass */
+.grid-push-45 {
+  left: 45%;
+}
+@media screen and (max-width: 640px) {
+  /* line 31, ../sass/circle/core/layout.sass */
+  .grid-45 {
+    width: 100%;
+    left: 0;
+  }
+}
+/* line 16, ../sass/circle/core/layout.sass */
+.grid-50 {
+  width: 50%;
+  padding: 0 15px;
+}
+/* line 22, ../sass/circle/core/layout.sass */
+.grid-pull-50 {
+  left: -50%;
+}
+/* line 27, ../sass/circle/core/layout.sass */
+.grid-push-50 {
+  left: 50%;
+}
+@media screen and (max-width: 640px) {
+  /* line 31, ../sass/circle/core/layout.sass */
+  .grid-50 {
+    width: 100%;
+    left: 0;
+  }
+}
+/* line 16, ../sass/circle/core/layout.sass */
+.grid-55 {
+  width: 55%;
+  padding: 0 15px;
+}
+/* line 22, ../sass/circle/core/layout.sass */
+.grid-pull-55 {
+  left: -55%;
+}
+/* line 27, ../sass/circle/core/layout.sass */
+.grid-push-55 {
+  left: 55%;
+}
+@media screen and (max-width: 640px) {
+  /* line 31, ../sass/circle/core/layout.sass */
+  .grid-55 {
+    width: 100%;
+    left: 0;
+  }
+}
+/* line 16, ../sass/circle/core/layout.sass */
+.grid-60 {
+  width: 60%;
+  padding: 0 15px;
+}
+/* line 22, ../sass/circle/core/layout.sass */
+.grid-pull-60 {
+  left: -60%;
+}
+/* line 27, ../sass/circle/core/layout.sass */
+.grid-push-60 {
+  left: 60%;
+}
+@media screen and (max-width: 640px) {
+  /* line 31, ../sass/circle/core/layout.sass */
+  .grid-60 {
+    width: 100%;
+    left: 0;
+  }
+}
+/* line 16, ../sass/circle/core/layout.sass */
+.grid-65 {
+  width: 65%;
+  padding: 0 15px;
+}
+/* line 22, ../sass/circle/core/layout.sass */
+.grid-pull-65 {
+  left: -65%;
+}
+/* line 27, ../sass/circle/core/layout.sass */
+.grid-push-65 {
+  left: 65%;
+}
+@media screen and (max-width: 640px) {
+  /* line 31, ../sass/circle/core/layout.sass */
+  .grid-65 {
+    width: 100%;
+    left: 0;
+  }
+}
+/* line 16, ../sass/circle/core/layout.sass */
+.grid-66 {
+  width: 66.666%;
+  padding: 0 15px;
+}
+/* line 22, ../sass/circle/core/layout.sass */
+.grid-pull-66 {
+  left: -66.666%;
+}
+/* line 27, ../sass/circle/core/layout.sass */
+.grid-push-66 {
+  left: 66.666%;
+}
+@media screen and (max-width: 640px) {
+  /* line 31, ../sass/circle/core/layout.sass */
+  .grid-66 {
+    width: 100%;
+    left: 0;
+  }
+}
+/* line 16, ../sass/circle/core/layout.sass */
+.grid-70 {
+  width: 70%;
+  padding: 0 15px;
+}
+/* line 22, ../sass/circle/core/layout.sass */
+.grid-pull-70 {
+  left: -70%;
+}
+/* line 27, ../sass/circle/core/layout.sass */
+.grid-push-70 {
+  left: 70%;
+}
+@media screen and (max-width: 640px) {
+  /* line 31, ../sass/circle/core/layout.sass */
+  .grid-70 {
+    width: 100%;
+    left: 0;
+  }
+}
+/* line 16, ../sass/circle/core/layout.sass */
+.grid-75 {
+  width: 75%;
+  padding: 0 15px;
+}
+/* line 22, ../sass/circle/core/layout.sass */
+.grid-pull-75 {
+  left: -75%;
+}
 /* line 27, ../sass/circle/core/layout.sass */
 .grid-push-75 {
   left: 75%;
@@ -281,6 +598,101 @@ body {
     width: 100%;
     left: 0;
   }
+}
+/* line 16, ../sass/circle/core/layout.sass */
+.grid-80 {
+  width: 80%;
+  padding: 0 15px;
+}
+/* line 22, ../sass/circle/core/layout.sass */
+.grid-pull-80 {
+  left: -80%;
+}
+/* line 27, ../sass/circle/core/layout.sass */
+.grid-push-80 {
+  left: 80%;
+}
+@media screen and (max-width: 640px) {
+  /* line 31, ../sass/circle/core/layout.sass */
+  .grid-80 {
+    width: 100%;
+    left: 0;
+  }
+}
+/* line 16, ../sass/circle/core/layout.sass */
+.grid-90 {
+  width: 90%;
+  padding: 0 15px;
+}
+/* line 22, ../sass/circle/core/layout.sass */
+.grid-pull-90 {
+  left: -90%;
+}
+/* line 27, ../sass/circle/core/layout.sass */
+.grid-push-90 {
+  left: 90%;
+}
+@media screen and (max-width: 640px) {
+  /* line 31, ../sass/circle/core/layout.sass */
+  .grid-90 {
+    width: 100%;
+    left: 0;
+  }
+}
+/* line 16, ../sass/circle/core/layout.sass */
+.grid-95 {
+  width: 95%;
+  padding: 0 15px;
+}
+/* line 22, ../sass/circle/core/layout.sass */
+.grid-pull-95 {
+  left: -95%;
+}
+/* line 27, ../sass/circle/core/layout.sass */
+.grid-push-95 {
+  left: 95%;
+}
+@media screen and (max-width: 640px) {
+  /* line 31, ../sass/circle/core/layout.sass */
+  .grid-95 {
+    width: 100%;
+    left: 0;
+  }
+}
+/* line 16, ../sass/circle/core/layout.sass */
+.grid-100 {
+  width: 100%;
+  padding: 0 15px;
+}
+/* line 22, ../sass/circle/core/layout.sass */
+.grid-pull-100 {
+  left: -100%;
+}
+/* line 27, ../sass/circle/core/layout.sass */
+.grid-push-100 {
+  left: 100%;
+}
+@media screen and (max-width: 640px) {
+  /* line 31, ../sass/circle/core/layout.sass */
+  .grid-100 {
+    width: 100%;
+    left: 0;
+  }
+}
+/* line 37, ../sass/circle/core/layout.sass */
+.grid-parent {
+  margin: 0;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+/* line 2, ../sass/circle/core/mixins.sass */
+.grid-parent:before, .grid-parent:after {
+  content: " ";
+  display: table;
+}
+/* line 5, ../sass/circle/core/mixins.sass */
+.grid-parent:after {
+  clear: both;
 }
 
 /* line 4, ../sass/circle/core/type.sass */
@@ -1218,7 +1630,297 @@ li:only-child .circle--clone--remove {
   min-height: 0;
   padding: 11px 15px;
 }
+/* line 29, ../sass/circle/components/forms.sass */
+.circle--input--h1, input[type="email"].circle--input--h1, input[type="number"].circle--input--h1, input[type="search"].circle--input--h1, input[type="text"].circle--input--h1, select.circle--input--h1, input[type="tel"].circle--input--h1, input[type="url"].circle--input--h1, input[type="password"].circle--input--h1, input[type="email"].circle--input--h2, input[type="number"].circle--input--h2, input[type="search"].circle--input--h2, input[type="text"].circle--input--h2, select.circle--input--h2, input[type="tel"].circle--input--h2, input[type="url"].circle--input--h2, input[type="password"].circle--input--h2, input[type="email"].circle--input--h3, input[type="number"].circle--input--h3, input[type="search"].circle--input--h3, input[type="text"].circle--input--h3, select.circle--input--h3, input[type="tel"].circle--input--h3, input[type="url"].circle--input--h3, input[type="password"].circle--input--h3, input[type="email"].circle--input--h4, input[type="number"].circle--input--h4, input[type="search"].circle--input--h4, input[type="text"].circle--input--h4, select.circle--input--h4, input[type="tel"].circle--input--h4, input[type="url"].circle--input--h4, input[type="password"].circle--input--h4, input[type="email"].circle--input--h5, input[type="number"].circle--input--h5, input[type="search"].circle--input--h5, input[type="text"].circle--input--h5, select.circle--input--h5, input[type="tel"].circle--input--h5, input[type="url"].circle--input--h5, input[type="password"].circle--input--h5, input[type="email"].circle--input--h6, input[type="number"].circle--input--h6, input[type="search"].circle--input--h6, input[type="text"].circle--input--h6, select.circle--input--h6, input[type="tel"].circle--input--h6, input[type="url"].circle--input--h6, input[type="password"].circle--input--h6 {
+  font-weight: bold;
+  color: #222;
+  font-family: "Work Sans", sans-serif;
+}
+/* line 62, ../sass/circle/core/mixins.sass */
+.circle--input--h1::-webkit-input-placeholder, input[type="email"].circle--input--h1::-webkit-input-placeholder, input[type="number"].circle--input--h1::-webkit-input-placeholder, input[type="search"].circle--input--h1::-webkit-input-placeholder, input[type="text"].circle--input--h1::-webkit-input-placeholder, select.circle--input--h1::-webkit-input-placeholder, input[type="tel"].circle--input--h1::-webkit-input-placeholder, input[type="url"].circle--input--h1::-webkit-input-placeholder, input[type="password"].circle--input--h1::-webkit-input-placeholder, input[type="email"].circle--input--h2::-webkit-input-placeholder, input[type="number"].circle--input--h2::-webkit-input-placeholder, input[type="search"].circle--input--h2::-webkit-input-placeholder, input[type="text"].circle--input--h2::-webkit-input-placeholder, select.circle--input--h2::-webkit-input-placeholder, input[type="tel"].circle--input--h2::-webkit-input-placeholder, input[type="url"].circle--input--h2::-webkit-input-placeholder, input[type="password"].circle--input--h2::-webkit-input-placeholder, input[type="email"].circle--input--h3::-webkit-input-placeholder, input[type="number"].circle--input--h3::-webkit-input-placeholder, input[type="search"].circle--input--h3::-webkit-input-placeholder, input[type="text"].circle--input--h3::-webkit-input-placeholder, select.circle--input--h3::-webkit-input-placeholder, input[type="tel"].circle--input--h3::-webkit-input-placeholder, input[type="url"].circle--input--h3::-webkit-input-placeholder, input[type="password"].circle--input--h3::-webkit-input-placeholder, input[type="email"].circle--input--h4::-webkit-input-placeholder, input[type="number"].circle--input--h4::-webkit-input-placeholder, input[type="search"].circle--input--h4::-webkit-input-placeholder, input[type="text"].circle--input--h4::-webkit-input-placeholder, select.circle--input--h4::-webkit-input-placeholder, input[type="tel"].circle--input--h4::-webkit-input-placeholder, input[type="url"].circle--input--h4::-webkit-input-placeholder, input[type="password"].circle--input--h4::-webkit-input-placeholder, input[type="email"].circle--input--h5::-webkit-input-placeholder, input[type="number"].circle--input--h5::-webkit-input-placeholder, input[type="search"].circle--input--h5::-webkit-input-placeholder, input[type="text"].circle--input--h5::-webkit-input-placeholder, select.circle--input--h5::-webkit-input-placeholder, input[type="tel"].circle--input--h5::-webkit-input-placeholder, input[type="url"].circle--input--h5::-webkit-input-placeholder, input[type="password"].circle--input--h5::-webkit-input-placeholder, input[type="email"].circle--input--h6::-webkit-input-placeholder, input[type="number"].circle--input--h6::-webkit-input-placeholder, input[type="search"].circle--input--h6::-webkit-input-placeholder, input[type="text"].circle--input--h6::-webkit-input-placeholder, select.circle--input--h6::-webkit-input-placeholder, input[type="tel"].circle--input--h6::-webkit-input-placeholder, input[type="url"].circle--input--h6::-webkit-input-placeholder, input[type="password"].circle--input--h6::-webkit-input-placeholder {
+  font-weight: bold;
+}
+/* line 64, ../sass/circle/core/mixins.sass */
+.circle--input--h1:-moz-placeholder, input[type="email"].circle--input--h1:-moz-placeholder, input[type="number"].circle--input--h1:-moz-placeholder, input[type="search"].circle--input--h1:-moz-placeholder, input[type="text"].circle--input--h1:-moz-placeholder, select.circle--input--h1:-moz-placeholder, input[type="tel"].circle--input--h1:-moz-placeholder, input[type="url"].circle--input--h1:-moz-placeholder, input[type="password"].circle--input--h1:-moz-placeholder, input[type="email"].circle--input--h2:-moz-placeholder, input[type="number"].circle--input--h2:-moz-placeholder, input[type="search"].circle--input--h2:-moz-placeholder, input[type="text"].circle--input--h2:-moz-placeholder, select.circle--input--h2:-moz-placeholder, input[type="tel"].circle--input--h2:-moz-placeholder, input[type="url"].circle--input--h2:-moz-placeholder, input[type="password"].circle--input--h2:-moz-placeholder, input[type="email"].circle--input--h3:-moz-placeholder, input[type="number"].circle--input--h3:-moz-placeholder, input[type="search"].circle--input--h3:-moz-placeholder, input[type="text"].circle--input--h3:-moz-placeholder, select.circle--input--h3:-moz-placeholder, input[type="tel"].circle--input--h3:-moz-placeholder, input[type="url"].circle--input--h3:-moz-placeholder, input[type="password"].circle--input--h3:-moz-placeholder, input[type="email"].circle--input--h4:-moz-placeholder, input[type="number"].circle--input--h4:-moz-placeholder, input[type="search"].circle--input--h4:-moz-placeholder, input[type="text"].circle--input--h4:-moz-placeholder, select.circle--input--h4:-moz-placeholder, input[type="tel"].circle--input--h4:-moz-placeholder, input[type="url"].circle--input--h4:-moz-placeholder, input[type="password"].circle--input--h4:-moz-placeholder, input[type="email"].circle--input--h5:-moz-placeholder, input[type="number"].circle--input--h5:-moz-placeholder, input[type="search"].circle--input--h5:-moz-placeholder, input[type="text"].circle--input--h5:-moz-placeholder, select.circle--input--h5:-moz-placeholder, input[type="tel"].circle--input--h5:-moz-placeholder, input[type="url"].circle--input--h5:-moz-placeholder, input[type="password"].circle--input--h5:-moz-placeholder, input[type="email"].circle--input--h6:-moz-placeholder, input[type="number"].circle--input--h6:-moz-placeholder, input[type="search"].circle--input--h6:-moz-placeholder, input[type="text"].circle--input--h6:-moz-placeholder, select.circle--input--h6:-moz-placeholder, input[type="tel"].circle--input--h6:-moz-placeholder, input[type="url"].circle--input--h6:-moz-placeholder, input[type="password"].circle--input--h6:-moz-placeholder {
+  font-weight: bold;
+}
+/* line 66, ../sass/circle/core/mixins.sass */
+.circle--input--h1::-moz-placeholder, input[type="email"].circle--input--h1::-moz-placeholder, input[type="number"].circle--input--h1::-moz-placeholder, input[type="search"].circle--input--h1::-moz-placeholder, input[type="text"].circle--input--h1::-moz-placeholder, select.circle--input--h1::-moz-placeholder, input[type="tel"].circle--input--h1::-moz-placeholder, input[type="url"].circle--input--h1::-moz-placeholder, input[type="password"].circle--input--h1::-moz-placeholder, input[type="email"].circle--input--h2::-moz-placeholder, input[type="number"].circle--input--h2::-moz-placeholder, input[type="search"].circle--input--h2::-moz-placeholder, input[type="text"].circle--input--h2::-moz-placeholder, select.circle--input--h2::-moz-placeholder, input[type="tel"].circle--input--h2::-moz-placeholder, input[type="url"].circle--input--h2::-moz-placeholder, input[type="password"].circle--input--h2::-moz-placeholder, input[type="email"].circle--input--h3::-moz-placeholder, input[type="number"].circle--input--h3::-moz-placeholder, input[type="search"].circle--input--h3::-moz-placeholder, input[type="text"].circle--input--h3::-moz-placeholder, select.circle--input--h3::-moz-placeholder, input[type="tel"].circle--input--h3::-moz-placeholder, input[type="url"].circle--input--h3::-moz-placeholder, input[type="password"].circle--input--h3::-moz-placeholder, input[type="email"].circle--input--h4::-moz-placeholder, input[type="number"].circle--input--h4::-moz-placeholder, input[type="search"].circle--input--h4::-moz-placeholder, input[type="text"].circle--input--h4::-moz-placeholder, select.circle--input--h4::-moz-placeholder, input[type="tel"].circle--input--h4::-moz-placeholder, input[type="url"].circle--input--h4::-moz-placeholder, input[type="password"].circle--input--h4::-moz-placeholder, input[type="email"].circle--input--h5::-moz-placeholder, input[type="number"].circle--input--h5::-moz-placeholder, input[type="search"].circle--input--h5::-moz-placeholder, input[type="text"].circle--input--h5::-moz-placeholder, select.circle--input--h5::-moz-placeholder, input[type="tel"].circle--input--h5::-moz-placeholder, input[type="url"].circle--input--h5::-moz-placeholder, input[type="password"].circle--input--h5::-moz-placeholder, input[type="email"].circle--input--h6::-moz-placeholder, input[type="number"].circle--input--h6::-moz-placeholder, input[type="search"].circle--input--h6::-moz-placeholder, input[type="text"].circle--input--h6::-moz-placeholder, select.circle--input--h6::-moz-placeholder, input[type="tel"].circle--input--h6::-moz-placeholder, input[type="url"].circle--input--h6::-moz-placeholder, input[type="password"].circle--input--h6::-moz-placeholder {
+  font-weight: bold;
+}
+/* line 68, ../sass/circle/core/mixins.sass */
+.circle--input--h1:-ms-input-placeholder, input[type="email"].circle--input--h1:-ms-input-placeholder, input[type="number"].circle--input--h1:-ms-input-placeholder, input[type="search"].circle--input--h1:-ms-input-placeholder, input[type="text"].circle--input--h1:-ms-input-placeholder, select.circle--input--h1:-ms-input-placeholder, input[type="tel"].circle--input--h1:-ms-input-placeholder, input[type="url"].circle--input--h1:-ms-input-placeholder, input[type="password"].circle--input--h1:-ms-input-placeholder, input[type="email"].circle--input--h2:-ms-input-placeholder, input[type="number"].circle--input--h2:-ms-input-placeholder, input[type="search"].circle--input--h2:-ms-input-placeholder, input[type="text"].circle--input--h2:-ms-input-placeholder, select.circle--input--h2:-ms-input-placeholder, input[type="tel"].circle--input--h2:-ms-input-placeholder, input[type="url"].circle--input--h2:-ms-input-placeholder, input[type="password"].circle--input--h2:-ms-input-placeholder, input[type="email"].circle--input--h3:-ms-input-placeholder, input[type="number"].circle--input--h3:-ms-input-placeholder, input[type="search"].circle--input--h3:-ms-input-placeholder, input[type="text"].circle--input--h3:-ms-input-placeholder, select.circle--input--h3:-ms-input-placeholder, input[type="tel"].circle--input--h3:-ms-input-placeholder, input[type="url"].circle--input--h3:-ms-input-placeholder, input[type="password"].circle--input--h3:-ms-input-placeholder, input[type="email"].circle--input--h4:-ms-input-placeholder, input[type="number"].circle--input--h4:-ms-input-placeholder, input[type="search"].circle--input--h4:-ms-input-placeholder, input[type="text"].circle--input--h4:-ms-input-placeholder, select.circle--input--h4:-ms-input-placeholder, input[type="tel"].circle--input--h4:-ms-input-placeholder, input[type="url"].circle--input--h4:-ms-input-placeholder, input[type="password"].circle--input--h4:-ms-input-placeholder, input[type="email"].circle--input--h5:-ms-input-placeholder, input[type="number"].circle--input--h5:-ms-input-placeholder, input[type="search"].circle--input--h5:-ms-input-placeholder, input[type="text"].circle--input--h5:-ms-input-placeholder, select.circle--input--h5:-ms-input-placeholder, input[type="tel"].circle--input--h5:-ms-input-placeholder, input[type="url"].circle--input--h5:-ms-input-placeholder, input[type="password"].circle--input--h5:-ms-input-placeholder, input[type="email"].circle--input--h6:-ms-input-placeholder, input[type="number"].circle--input--h6:-ms-input-placeholder, input[type="search"].circle--input--h6:-ms-input-placeholder, input[type="text"].circle--input--h6:-ms-input-placeholder, select.circle--input--h6:-ms-input-placeholder, input[type="tel"].circle--input--h6:-ms-input-placeholder, input[type="url"].circle--input--h6:-ms-input-placeholder, input[type="password"].circle--input--h6:-ms-input-placeholder {
+  font-weight: bold;
+}
+/* line 29, ../sass/circle/components/forms.sass */
+.circle--input--h2 {
+  font-weight: bold;
+  color: #222;
+  font-family: "Work Sans", sans-serif;
+}
+/* line 62, ../sass/circle/core/mixins.sass */
+.circle--input--h2::-webkit-input-placeholder {
+  font-weight: bold;
+}
+/* line 64, ../sass/circle/core/mixins.sass */
+.circle--input--h2:-moz-placeholder {
+  font-weight: bold;
+}
+/* line 66, ../sass/circle/core/mixins.sass */
+.circle--input--h2::-moz-placeholder {
+  font-weight: bold;
+}
+/* line 68, ../sass/circle/core/mixins.sass */
+.circle--input--h2:-ms-input-placeholder {
+  font-weight: bold;
+}
+/* line 29, ../sass/circle/components/forms.sass */
+.circle--input--h3 {
+  font-weight: bold;
+  color: #222;
+  font-family: "Work Sans", sans-serif;
+}
+/* line 62, ../sass/circle/core/mixins.sass */
+.circle--input--h3::-webkit-input-placeholder {
+  font-weight: bold;
+}
+/* line 64, ../sass/circle/core/mixins.sass */
+.circle--input--h3:-moz-placeholder {
+  font-weight: bold;
+}
+/* line 66, ../sass/circle/core/mixins.sass */
+.circle--input--h3::-moz-placeholder {
+  font-weight: bold;
+}
+/* line 68, ../sass/circle/core/mixins.sass */
+.circle--input--h3:-ms-input-placeholder {
+  font-weight: bold;
+}
+/* line 29, ../sass/circle/components/forms.sass */
+.circle--input--h4 {
+  font-weight: bold;
+  color: #222;
+  font-family: "Work Sans", sans-serif;
+}
+/* line 62, ../sass/circle/core/mixins.sass */
+.circle--input--h4::-webkit-input-placeholder {
+  font-weight: bold;
+}
+/* line 64, ../sass/circle/core/mixins.sass */
+.circle--input--h4:-moz-placeholder {
+  font-weight: bold;
+}
+/* line 66, ../sass/circle/core/mixins.sass */
+.circle--input--h4::-moz-placeholder {
+  font-weight: bold;
+}
+/* line 68, ../sass/circle/core/mixins.sass */
+.circle--input--h4:-ms-input-placeholder {
+  font-weight: bold;
+}
+/* line 29, ../sass/circle/components/forms.sass */
+.circle--input--h5 {
+  font-weight: bold;
+  color: #222;
+  font-family: "Work Sans", sans-serif;
+}
+/* line 62, ../sass/circle/core/mixins.sass */
+.circle--input--h5::-webkit-input-placeholder {
+  font-weight: bold;
+}
+/* line 64, ../sass/circle/core/mixins.sass */
+.circle--input--h5:-moz-placeholder {
+  font-weight: bold;
+}
+/* line 66, ../sass/circle/core/mixins.sass */
+.circle--input--h5::-moz-placeholder {
+  font-weight: bold;
+}
+/* line 68, ../sass/circle/core/mixins.sass */
+.circle--input--h5:-ms-input-placeholder {
+  font-weight: bold;
+}
+/* line 29, ../sass/circle/components/forms.sass */
+.circle--input--h6 {
+  font-weight: bold;
+  color: #222;
+  font-family: "Work Sans", sans-serif;
+}
+/* line 62, ../sass/circle/core/mixins.sass */
+.circle--input--h6::-webkit-input-placeholder {
+  font-weight: bold;
+}
+/* line 64, ../sass/circle/core/mixins.sass */
+.circle--input--h6:-moz-placeholder {
+  font-weight: bold;
+}
+/* line 66, ../sass/circle/core/mixins.sass */
+.circle--input--h6::-moz-placeholder {
+  font-weight: bold;
+}
+/* line 68, ../sass/circle/core/mixins.sass */
+.circle--input--h6:-ms-input-placeholder {
+  font-weight: bold;
+}
+/* line 35, ../sass/circle/components/forms.sass */
+.circle--input--h1, input[type="email"].circle--input--h1, input[type="number"].circle--input--h1, input[type="search"].circle--input--h1, input[type="text"].circle--input--h1, select.circle--input--h1, input[type="tel"].circle--input--h1, input[type="url"].circle--input--h1, input[type="password"].circle--input--h1, input[type="email"].circle--input--h2, input[type="number"].circle--input--h2, input[type="search"].circle--input--h2, input[type="text"].circle--input--h2, select.circle--input--h2, input[type="tel"].circle--input--h2, input[type="url"].circle--input--h2, input[type="password"].circle--input--h2, input[type="email"].circle--input--h3, input[type="number"].circle--input--h3, input[type="search"].circle--input--h3, input[type="text"].circle--input--h3, select.circle--input--h3, input[type="tel"].circle--input--h3, input[type="url"].circle--input--h3, input[type="password"].circle--input--h3, input[type="email"].circle--input--h4, input[type="number"].circle--input--h4, input[type="search"].circle--input--h4, input[type="text"].circle--input--h4, select.circle--input--h4, input[type="tel"].circle--input--h4, input[type="url"].circle--input--h4, input[type="password"].circle--input--h4, input[type="email"].circle--input--h5, input[type="number"].circle--input--h5, input[type="search"].circle--input--h5, input[type="text"].circle--input--h5, select.circle--input--h5, input[type="tel"].circle--input--h5, input[type="url"].circle--input--h5, input[type="password"].circle--input--h5, input[type="email"].circle--input--h6, input[type="number"].circle--input--h6, input[type="search"].circle--input--h6, input[type="text"].circle--input--h6, select.circle--input--h6, input[type="tel"].circle--input--h6, input[type="url"].circle--input--h6, input[type="password"].circle--input--h6 {
+  font-size: 3.8rem;
+}
+/* line 37, ../sass/circle/components/forms.sass */
+.circle--input--h2 {
+  font-size: 2.4rem;
+}
+/* line 39, ../sass/circle/components/forms.sass */
+.circle--input--h3 {
+  font-size: 1.8rem;
+}
+/* line 41, ../sass/circle/components/forms.sass */
+.circle--input--h4 {
+  font-size: 1.6rem;
+}
+/* line 43, ../sass/circle/components/forms.sass */
+.circle--input--h5 {
+  font-size: 1.4rem;
+}
+/* line 45, ../sass/circle/components/forms.sass */
+.circle--input--h6 {
+  font-size: 1.4rem;
+  font-weight: normal;
+  color: #999;
+}
 
+/* line 63, ../sass/circle/components/forms.sass */
+input[type="email"].circle--input--h2, input[type="number"].circle--input--h2, input[type="search"].circle--input--h2, input[type="text"].circle--input--h2, select.circle--input--h2, input[type="tel"].circle--input--h2, input[type="url"].circle--input--h2, input[type="password"].circle--input--h2 {
+  font-size: 2.4rem;
+}
+/* line 65, ../sass/circle/components/forms.sass */
+input[type="email"].circle--input--h3, input[type="number"].circle--input--h3, input[type="search"].circle--input--h3, input[type="text"].circle--input--h3, select.circle--input--h3, input[type="tel"].circle--input--h3, input[type="url"].circle--input--h3, input[type="password"].circle--input--h3 {
+  font-size: 1.8rem;
+}
+/* line 67, ../sass/circle/components/forms.sass */
+input[type="email"].circle--input--h4, input[type="number"].circle--input--h4, input[type="search"].circle--input--h4, input[type="text"].circle--input--h4, select.circle--input--h4, input[type="tel"].circle--input--h4, input[type="url"].circle--input--h4, input[type="password"].circle--input--h4 {
+  font-size: 1.6rem;
+}
+/* line 69, ../sass/circle/components/forms.sass */
+input[type="email"].circle--input--h5, input[type="number"].circle--input--h5, input[type="search"].circle--input--h5, input[type="text"].circle--input--h5, select.circle--input--h5, input[type="tel"].circle--input--h5, input[type="url"].circle--input--h5, input[type="password"].circle--input--h5 {
+  font-size: 1.4rem;
+}
+/* line 71, ../sass/circle/components/forms.sass */
+input[type="email"].circle--input--h6, input[type="number"].circle--input--h6, input[type="search"].circle--input--h6, input[type="text"].circle--input--h6, select.circle--input--h6, input[type="tel"].circle--input--h6, input[type="url"].circle--input--h6, input[type="password"].circle--input--h6 {
+  font-size: 1.4rem;
+  font-weight: normal;
+  color: #999;
+}
+/* line 63, ../sass/circle/components/forms.sass */
+input[type="email"].circle--input--h2, input[type="number"].circle--input--h2, input[type="search"].circle--input--h2, input[type="text"].circle--input--h2, select.circle--input--h2, input[type="tel"].circle--input--h2, input[type="url"].circle--input--h2, input[type="password"].circle--input--h2 {
+  font-size: 2.4rem;
+}
+/* line 65, ../sass/circle/components/forms.sass */
+input[type="email"].circle--input--h3, input[type="number"].circle--input--h3, input[type="search"].circle--input--h3, input[type="text"].circle--input--h3, select.circle--input--h3, input[type="tel"].circle--input--h3, input[type="url"].circle--input--h3, input[type="password"].circle--input--h3 {
+  font-size: 1.8rem;
+}
+/* line 67, ../sass/circle/components/forms.sass */
+input[type="email"].circle--input--h4, input[type="number"].circle--input--h4, input[type="search"].circle--input--h4, input[type="text"].circle--input--h4, select.circle--input--h4, input[type="tel"].circle--input--h4, input[type="url"].circle--input--h4, input[type="password"].circle--input--h4 {
+  font-size: 1.6rem;
+}
+/* line 69, ../sass/circle/components/forms.sass */
+input[type="email"].circle--input--h5, input[type="number"].circle--input--h5, input[type="search"].circle--input--h5, input[type="text"].circle--input--h5, select.circle--input--h5, input[type="tel"].circle--input--h5, input[type="url"].circle--input--h5, input[type="password"].circle--input--h5 {
+  font-size: 1.4rem;
+}
+/* line 71, ../sass/circle/components/forms.sass */
+input[type="email"].circle--input--h6, input[type="number"].circle--input--h6, input[type="search"].circle--input--h6, input[type="text"].circle--input--h6, select.circle--input--h6, input[type="tel"].circle--input--h6, input[type="url"].circle--input--h6, input[type="password"].circle--input--h6 {
+  font-size: 1.4rem;
+  font-weight: normal;
+  color: #999;
+}
+/* line 63, ../sass/circle/components/forms.sass */
+input[type="email"].circle--input--h2, input[type="number"].circle--input--h2, input[type="search"].circle--input--h2, input[type="text"].circle--input--h2, select.circle--input--h2, input[type="tel"].circle--input--h2, input[type="url"].circle--input--h2, input[type="password"].circle--input--h2 {
+  font-size: 2.4rem;
+}
+/* line 65, ../sass/circle/components/forms.sass */
+input[type="email"].circle--input--h3, input[type="number"].circle--input--h3, input[type="search"].circle--input--h3, input[type="text"].circle--input--h3, select.circle--input--h3, input[type="tel"].circle--input--h3, input[type="url"].circle--input--h3, input[type="password"].circle--input--h3 {
+  font-size: 1.8rem;
+}
+/* line 67, ../sass/circle/components/forms.sass */
+input[type="email"].circle--input--h4, input[type="number"].circle--input--h4, input[type="search"].circle--input--h4, input[type="text"].circle--input--h4, select.circle--input--h4, input[type="tel"].circle--input--h4, input[type="url"].circle--input--h4, input[type="password"].circle--input--h4 {
+  font-size: 1.6rem;
+}
+/* line 69, ../sass/circle/components/forms.sass */
+input[type="email"].circle--input--h5, input[type="number"].circle--input--h5, input[type="search"].circle--input--h5, input[type="text"].circle--input--h5, select.circle--input--h5, input[type="tel"].circle--input--h5, input[type="url"].circle--input--h5, input[type="password"].circle--input--h5 {
+  font-size: 1.4rem;
+}
+/* line 71, ../sass/circle/components/forms.sass */
+input[type="email"].circle--input--h6, input[type="number"].circle--input--h6, input[type="search"].circle--input--h6, input[type="text"].circle--input--h6, select.circle--input--h6, input[type="tel"].circle--input--h6, input[type="url"].circle--input--h6, input[type="password"].circle--input--h6 {
+  font-size: 1.4rem;
+  font-weight: normal;
+  color: #999;
+}
+/* line 63, ../sass/circle/components/forms.sass */
+input[type="email"].circle--input--h2, input[type="number"].circle--input--h2, input[type="search"].circle--input--h2, input[type="text"].circle--input--h2, select.circle--input--h2, input[type="tel"].circle--input--h2, input[type="url"].circle--input--h2, input[type="password"].circle--input--h2 {
+  font-size: 2.4rem;
+}
+/* line 65, ../sass/circle/components/forms.sass */
+input[type="email"].circle--input--h3, input[type="number"].circle--input--h3, input[type="search"].circle--input--h3, input[type="text"].circle--input--h3, select.circle--input--h3, input[type="tel"].circle--input--h3, input[type="url"].circle--input--h3, input[type="password"].circle--input--h3 {
+  font-size: 1.8rem;
+}
+/* line 67, ../sass/circle/components/forms.sass */
+input[type="email"].circle--input--h4, input[type="number"].circle--input--h4, input[type="search"].circle--input--h4, input[type="text"].circle--input--h4, select.circle--input--h4, input[type="tel"].circle--input--h4, input[type="url"].circle--input--h4, input[type="password"].circle--input--h4 {
+  font-size: 1.6rem;
+}
+/* line 69, ../sass/circle/components/forms.sass */
+input[type="email"].circle--input--h5, input[type="number"].circle--input--h5, input[type="search"].circle--input--h5, input[type="text"].circle--input--h5, select.circle--input--h5, input[type="tel"].circle--input--h5, input[type="url"].circle--input--h5, input[type="password"].circle--input--h5 {
+  font-size: 1.4rem;
+}
+/* line 71, ../sass/circle/components/forms.sass */
+input[type="email"].circle--input--h6, input[type="number"].circle--input--h6, input[type="search"].circle--input--h6, input[type="text"].circle--input--h6, select.circle--input--h6, input[type="tel"].circle--input--h6, input[type="url"].circle--input--h6, input[type="password"].circle--input--h6 {
+  font-size: 1.4rem;
+  font-weight: normal;
+  color: #999;
+}
+/* line 63, ../sass/circle/components/forms.sass */
+input[type="email"].circle--input--h2, input[type="number"].circle--input--h2, input[type="search"].circle--input--h2, input[type="text"].circle--input--h2, select.circle--input--h2, input[type="tel"].circle--input--h2, input[type="url"].circle--input--h2, input[type="password"].circle--input--h2 {
+  font-size: 2.4rem;
+}
+/* line 65, ../sass/circle/components/forms.sass */
+input[type="email"].circle--input--h3, input[type="number"].circle--input--h3, input[type="search"].circle--input--h3, input[type="text"].circle--input--h3, select.circle--input--h3, input[type="tel"].circle--input--h3, input[type="url"].circle--input--h3, input[type="password"].circle--input--h3 {
+  font-size: 1.8rem;
+}
+/* line 67, ../sass/circle/components/forms.sass */
+input[type="email"].circle--input--h4, input[type="number"].circle--input--h4, input[type="search"].circle--input--h4, input[type="text"].circle--input--h4, select.circle--input--h4, input[type="tel"].circle--input--h4, input[type="url"].circle--input--h4, input[type="password"].circle--input--h4 {
+  font-size: 1.6rem;
+}
+/* line 69, ../sass/circle/components/forms.sass */
+input[type="email"].circle--input--h5, input[type="number"].circle--input--h5, input[type="search"].circle--input--h5, input[type="text"].circle--input--h5, select.circle--input--h5, input[type="tel"].circle--input--h5, input[type="url"].circle--input--h5, input[type="password"].circle--input--h5 {
+  font-size: 1.4rem;
+}
+/* line 71, ../sass/circle/components/forms.sass */
+input[type="email"].circle--input--h6, input[type="number"].circle--input--h6, input[type="search"].circle--input--h6, input[type="text"].circle--input--h6, select.circle--input--h6, input[type="tel"].circle--input--h6, input[type="url"].circle--input--h6, input[type="password"].circle--input--h6 {
+  font-size: 1.4rem;
+  font-weight: normal;
+  color: #999;
+}
+/* line 63, ../sass/circle/components/forms.sass */
+input[type="email"].circle--input--h2, input[type="number"].circle--input--h2, input[type="search"].circle--input--h2, input[type="text"].circle--input--h2, select.circle--input--h2, input[type="tel"].circle--input--h2, input[type="url"].circle--input--h2, input[type="password"].circle--input--h2 {
+  font-size: 2.4rem;
+}
+/* line 65, ../sass/circle/components/forms.sass */
+input[type="email"].circle--input--h3, input[type="number"].circle--input--h3, input[type="search"].circle--input--h3, input[type="text"].circle--input--h3, select.circle--input--h3, input[type="tel"].circle--input--h3, input[type="url"].circle--input--h3, input[type="password"].circle--input--h3 {
+  font-size: 1.8rem;
+}
+/* line 67, ../sass/circle/components/forms.sass */
+input[type="email"].circle--input--h4, input[type="number"].circle--input--h4, input[type="search"].circle--input--h4, input[type="text"].circle--input--h4, select.circle--input--h4, input[type="tel"].circle--input--h4, input[type="url"].circle--input--h4, input[type="password"].circle--input--h4 {
+  font-size: 1.6rem;
+}
+/* line 69, ../sass/circle/components/forms.sass */
+input[type="email"].circle--input--h5, input[type="number"].circle--input--h5, input[type="search"].circle--input--h5, input[type="text"].circle--input--h5, select.circle--input--h5, input[type="tel"].circle--input--h5, input[type="url"].circle--input--h5, input[type="password"].circle--input--h5 {
+  font-size: 1.4rem;
+}
+/* line 71, ../sass/circle/components/forms.sass */
+input[type="email"].circle--input--h6, input[type="number"].circle--input--h6, input[type="search"].circle--input--h6, input[type="text"].circle--input--h6, select.circle--input--h6, input[type="tel"].circle--input--h6, input[type="url"].circle--input--h6, input[type="password"].circle--input--h6 {
+  font-size: 1.4rem;
+  font-weight: normal;
+  color: #999;
+}
 
 /* line 2, ../sass/circle/components/containers.sass */
 .circle--fluid {
@@ -1256,7 +1958,50 @@ li:only-child .circle--clone--remove {
 .circle--fluid--secondary {
   text-align: right;
 }
-
+/* line 24, ../sass/circle/components/containers.sass */
+.circle--secondary--module {
+  margin-bottom: 50px;
+}
+/* line 2, ../sass/circle/core/mixins.sass */
+.circle--secondary--module:before, .circle--secondary--module:after {
+  content: " ";
+  display: table;
+}
+/* line 5, ../sass/circle/core/mixins.sass */
+.circle--secondary--module:after {
+  clear: both;
+}
+/* line 28, ../sass/circle/components/containers.sass */
+.circle--secondary--module > h1, .circle--secondary--module > h2, .circle--secondary--module > h3, .circle--secondary--module > h4, .circle--secondary--module > h5, .circle--secondary--module > h6 {
+  font-family: "Cousine";
+  color: rgba(34, 34, 34, 0.3);
+  font-size: 1.4rem;
+  font-weight: normal;
+}
+/* line 33, ../sass/circle/components/containers.sass */
+.circle--secondary--module > h1 a, .circle--secondary--module > h2 a, .circle--secondary--module > h3 a, .circle--secondary--module > h4 a, .circle--secondary--module > h5 a, .circle--secondary--module > h6 a {
+  color: #a5c4c2;
+}
+/* line 35, ../sass/circle/components/containers.sass */
+.circle--secondary--module p {
+  font-size: 1.4rem;
+  color: #999999;
+}
+/* line 40, ../sass/circle/components/containers.sass */
+.circle--secondary--module .circle--clone--list li {
+  margin-bottom: 30px;
+  font-size: 1.4rem;
+}
+/* line 44, ../sass/circle/components/containers.sass */
+.circle--secondary--module textarea,
+.circle--secondary--module input,
+.circle--secondary--module select {
+  font-size: 1.4rem;
+}
+/* line 48, ../sass/circle/components/containers.sass */
+.circle--secondary--module .circle--textarea--input {
+  height: 48px;
+}
 /* line 51, ../sass/circle/components/containers.sass */
 .circle--page {
   margin-bottom: 100px;
@@ -1269,6 +2014,77 @@ li:only-child .circle--clone--remove {
 /* line 5, ../sass/circle/core/mixins.sass */
 .circle--page:after {
   clear: both;
+}
+/* line 55, ../sass/circle/components/containers.sass */
+.circle--article {
+  padding-top: 30px;
+}
+/* line 57, ../sass/circle/components/containers.sass */
+.circle--article--body {
+  line-height: 1.8;
+  margin-bottom: 50px;
+}
+/* line 62, ../sass/circle/components/containers.sass */
+.circle--actions--bar {
+  margin: -30px 0 30px;
+  background: #f9f9f9;
+  padding: 20px 0;
+}
+/* line 2, ../sass/circle/core/mixins.sass */
+.circle--actions--bar:before, .circle--actions--bar:after {
+  content: " ";
+  display: table;
+}
+/* line 5, ../sass/circle/core/mixins.sass */
+.circle--actions--bar:after {
+  clear: both;
+}
+/* line 67, ../sass/circle/components/containers.sass */
+.circle--actions--bar .button {
+  margin-bottom: 0;
+}
+/* line 71, ../sass/circle/components/containers.sass */
+.circle--primary--avatar {
+  width: 100%;
+  border-radius: 8px;
+  background: #f9f9f9;
+  overflow: hidden;
+  text-align: center;
+  box-sizing: border-box;
+  position: relative;
+  position: relative;
+}
+/* line 73, ../sass/circle/core/mixins.sass */
+.circle--primary--avatar:before {
+  display: block;
+  content: "";
+  width: 100%;
+  padding-top: 100%;
+}
+/* line 78, ../sass/circle/core/mixins.sass */
+.circle--primary--avatar > .placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+/* line 80, ../sass/circle/components/containers.sass */
+.circle--primary--avatar .button {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -moz-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+/* line 87, ../sass/circle/components/containers.sass */
+.circle--section > p {
+  font-size: 1.8rem;
+  font-family: "Work Sans", sans-serif;
+  line-height: 2;
 }
 
 /* line 5, ../sass/global.sass */

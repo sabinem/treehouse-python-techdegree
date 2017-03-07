@@ -9,11 +9,14 @@
 var client_form_checking = $('#client_form_checking');
 var myform = $('form');
 var client_form_checking_checked = localStorage.getItem('client_form_checking_checked');
+alert(client_form_checking_checked);
 
 if (client_form_checking_checked === "n") {
     client_form_checking.prop("checked", false);
+    myform.attr('novalidate', 'novalidate');
 } else {
     client_form_checking.prop("checked", true);
+    myform.removeAttr('novalidate');
 }
 
 client_form_checking.change(function() {
