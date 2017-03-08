@@ -64,7 +64,7 @@ class UpperAndLowerCaseValidator(object):
 
 class IncludeSpecialCharacterValidator(object):
     """
-    must use of both uppercase and lowercase letters
+    must use special character
     """
     def validate(self, password, user=None):
         special_chars = set(string.punctuation.replace("_", ""))

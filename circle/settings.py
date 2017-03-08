@@ -85,7 +85,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME':
-            'accounts.password_validators.IncludesNumericCharacterValidator',
+            'accounts.password_validators.IncludesSpecialCharacterValidator',
     },
     {
         'NAME': 'accounts.password_validators.ContainsUserAttributeValidator',
