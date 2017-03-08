@@ -49,6 +49,17 @@ show their birthday or email to user users
 - **regular users must fill in their profile** before they can see other users profiles
 
 
+### Intentions
+
+I played around a lot with the user profile. My goal was to complete it in a way that I could imagine in a real project:
+I did not include many extra fields, but rather put the focus on a smooth workflow:
+
+- I wanted the admin to be extra with no profile:
+the superuser is just logged in and out of the admin, he is not part of the real site.
+- I imagined the user to be able to sign up,
+but he is only able to be part of the community after he finishes his profile, so he is redirected every time he logs in
+- once he has filled out his profile, he can see all profiles of other users, to the extent that they allow him
+
 ###Installation
 1. Download the project on your computer
 2. Unzip and go into the newly established directory
