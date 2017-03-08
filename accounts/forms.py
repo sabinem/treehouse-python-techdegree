@@ -125,7 +125,7 @@ class PasswordChangeForm(authforms.PasswordChangeForm):
     new_password2 = forms.CharField(
         label=("New password confirmation"),
         strip=False,
-        widget=forms.PasswordInput,
+        widget=forms.PasswordInput(render_value=True),
     )
     field_order = ['old_password', 'new_password1', 'new_password2']
 
@@ -137,7 +137,6 @@ class PasswordChangeForm(authforms.PasswordChangeForm):
 
     def clean_new_password2(self):
         """validates the confirmation of the new password"""
-        # TODO: Check signup form
         password1 = self.cleaned_data.get('new_password1')
         password2 = self.cleaned_data.get('new_password2')
         if password1 and password2:

@@ -3,7 +3,7 @@
 ## User-Profile Site
 
 ### Description
-#### Site
+#### Requirements
 - has user authentication
 - the superuser can only acccess the admin
 - a user is supposed to make a profile for himself
