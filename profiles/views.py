@@ -37,6 +37,7 @@ def other_profile(request, pk):
     the next one
     """
     profile = get_object_or_404(models.Profile, user_id=pk)
+    count = models.Profile.objects.count()
     next_profile = models.Profile.objects.filter(
         user__username__gt=profile.user.username)\
         .order_by('user__username').first()
@@ -52,6 +53,7 @@ def other_profile(request, pk):
         )
     return render(request, 'profiles/other_profile.html',
                   {'profile': profile,
+                   'count': count,
                    'next_profile': next_profile})
 
 
