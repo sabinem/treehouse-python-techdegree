@@ -76,19 +76,23 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'accounts.password_validators.DifferentPasswordValidator',
     },
     {
-        'NAME': 'accounts.password_validators.IncludesNumericCharacterValidator',
+        'NAME':
+            'accounts.password_validators.IncludesNumericCharacterValidator',
     },
     {
-        'NAME': 'accounts.password_validators.UpperAndLowerCaseValidator',
+        'NAME':
+            'accounts.password_validators.UpperAndLowerCaseValidator',
     },
     {
-        'NAME': 'accounts.password_validators.IncludesNumericCharacterValidator',
+        'NAME':
+            'accounts.password_validators.IncludesNumericCharacterValidator',
     },
     {
         'NAME': 'accounts.password_validators.ContainsUserAttributeValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME':
+            'django.contrib.auth.password_validation.MinimumLengthValidator',
         'OPTIONS': {
             'min_length': 14,
         }
@@ -118,5 +122,3 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-
-

@@ -11,8 +11,9 @@ class UserCreationForm(authforms.UserCreationForm):
     signup form
     - custom error messages and widget settings for user creation form
     - password remains if it is wrong
-    - djangos password validation is customized, so that the errors in the password
-    pick are shown as errors of password1
+    - djangos password validation is customized,
+      so that the errors in the password
+      pick are shown as errors of password1
     """
     error_messages = {
         'password_mismatch': ("The two password fields didn't match."),
@@ -22,9 +23,14 @@ class UserCreationForm(authforms.UserCreationForm):
         strip=False,
         widget=forms.PasswordInput(
             render_value=True,
-            attrs={'pattern': "(?=^.{14,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$",
-                   'title': "expected: uppercase, lowercase, number and special character "
-                            "and it must be at least 14 characters long"}),
+            attrs={
+                'pattern':
+                    "(?=^.{14,}$)(?=.*\d)(?=.*\W+)"
+                    "(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$",
+                'title':
+                    "expected: uppercase, lowercase, number and "
+                    "special character "
+                    "and it must be at least 14 characters long"}),
         help_text=password_validation.password_validators_help_text_html(),
     )
     password2 = forms.CharField(
@@ -32,7 +38,7 @@ class UserCreationForm(authforms.UserCreationForm):
         widget=forms.PasswordInput(render_value=True),
         strip=False,
         help_text=("Enter the same password as before, for verification."),
-        error_messages = {
+        error_messages={
             'required': "You must confirm the password"
         }
     )
@@ -76,7 +82,8 @@ class AuthenticationForm(authforms.AuthenticationForm):
     )
     error_messages = {
         'invalid_login': (
-            "Please enter a correct %(username)s and password. Note that both "
+            "Please enter a correct %(username)s and password. "
+            "Note that both "
             "fields may be case-sensitive."
         ),
     }
@@ -86,24 +93,33 @@ class PasswordChangeForm(authforms.PasswordChangeForm):
     """
     A form that lets a user change their password by entering their old
     password.
-    - djangos password validation is customized, so that the errors in the password
-    pick are shown as errors of new_password1
+    - djangos password validation is customized,
+      so that the errors in the password
+      pick are shown as errors of new_password1
     """
     error_messages = dict(authforms.SetPasswordForm.error_messages, **{
-        'password_incorrect': ("Your old password was entered incorrectly. Please enter it again."),
+        'password_incorrect':
+            ("Your old password was entered incorrectly. "
+             "Please enter it again."),
     })
     old_password = forms.CharField(
         label=("Old password"),
         strip=False,
-        widget=forms.PasswordInput(attrs={'autofocus': True}, render_value=True),
+        widget=forms.PasswordInput(attrs={'autofocus': True},
+                                   render_value=True),
     )
     new_password1 = forms.CharField(
         label=("New password"),
         widget=forms.PasswordInput(
             render_value=True,
-            attrs={'pattern': "(?=^.{14,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$",
-                   'title': "expected: uppercase, lowercase, number and special character "
-                            "and it must be at least 14 characters long"}),
+            attrs={
+                'pattern':
+                    "(?=^.{14,}$)(?=.*\d)(?=.*\W+)"
+                    "(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$",
+                'title':
+                    "expected: uppercase, lowercase, number and "
+                    "special character "
+                    "and it must be at least 14 characters long"}),
         help_text=password_validation.password_validators_help_text_html(),
     )
     new_password2 = forms.CharField(
@@ -131,36 +147,3 @@ class PasswordChangeForm(authforms.PasswordChangeForm):
                     code='password_mismatch',
                 )
         return password2
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

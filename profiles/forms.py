@@ -17,12 +17,14 @@ def check_confirm_email(email, instance):
 class UserForm(forms.ModelForm):
     """
     User Form as part of the Userprofile Form
-    - the email confirm field is only shown when the user changes the email address
+    - the email confirm field is only shown when
+      the user changes the email address
     """
     email_confirm = forms.EmailField(
         required=False,
-        help_text="In case you change your email, please confirm the email address in the field above",
-        label = "Please confirm your email address"
+        help_text="In case you change your email, "
+                  "please confirm the email address in the field above",
+        label="Please confirm your email address"
     )
     first_name = forms.CharField(
         required=True,
@@ -38,6 +40,7 @@ class UserForm(forms.ModelForm):
         required=True,
         label="Email"
     )
+
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'email')
@@ -52,11 +55,13 @@ class UserForm(forms.ModelForm):
             if check_confirm_email(cleaned_data['email'], self.instance):
                 if cleaned_data['email_confirm'] == "":
                     raise forms.ValidationError(
-                        {"email_confirm": "change of email requires confirmation"}
+                        {"email_confirm":
+                            "change of email requires confirmation"}
                     )
                 if cleaned_data['email'] != cleaned_data['email_confirm']:
                     raise forms.ValidationError(
-                        {"email_confirm": "email changed, but confirmation does not match"}
+                        {"email_confirm":
+                            "email changed, but confirmation does not match"}
                     )
         return cleaned_data
 
@@ -69,32 +74,39 @@ class ProfileForm(forms.ModelForm):
     default_error_messages = {
         'required': u'Value required!!!!.',
     }
+
     class Meta:
         model = models.Profile
         fields = (
             'avatar',
             'date_of_birth',
             'bio',
-            'show_birthday' ,
+            'show_birthday',
             'show_email',
         )
         input_formats = {
             'date_of_birth': ['%m.%d.%Y', '%Y-%m-%d', '%m.%d.%y']
         }
         labels = {
-            'date_of_birth' : "Date of Birth",
+            'date_of_birth': "Date of Birth",
             'bio': "Biography",
             'avatar': "Avatar",
             'show_email': "Email visibility",
             'show_birthday': "Birthday visibility",
         }
         help_texts = {
-            'date_of_birth': "Allowed formats are: YYYY-MM-DD, MM/DD/YYYY or MM/DD/YY",
+            'date_of_birth':
+                "Allowed formats are: YYYY-MM-DD, MM/DD/YYYY or MM/DD/YY",
             'bio': "Please write something about yourself",
-            'avatar': """<ul><li>You can choose an image from your Desktop and uplaod it.</li>
-                      <li>Later on you can edit your avatar and make it look cool.</li></ul>""",
-            'show_email': "you can keep your email private or show it to other Circle users",
-            'show_birthday': "you can keep your birthday private or show it to other Circle users",
+            'avatar':
+                """<ul><li>You can choose an image from
+                your Desktop and uplaod it.</li>
+                <li>Later on you can edit your avatar
+                and make it look cool.</li></ul>""",
+            'show_email': "you can keep your email private or"
+                          " show it to other Circle users",
+            'show_birthday': "you can keep your birthday private"
+                             " or show it to other Circle users",
         }
         error_messages = {
             'date_of_birth': {
@@ -114,7 +126,8 @@ class ProfileForm(forms.ModelForm):
         if escaped_data != data or stripped_data != data:
             raise forms.ValidationError("Html-Tags are not allowed here")
         if len(data) < 10:
-            raise forms.ValidationError("You must write at least 10 characters.")
+            raise forms.ValidationError(
+                "You must write at least 10 characters.")
         return stripped_data
 
     def clean_date_of_birth(self):
@@ -155,7 +168,7 @@ class AvatarForm(forms.Form):
     )
     rotate = forms.IntegerField(
         required=False,
-        label = "",
+        label="",
         widget=forms.NumberInput(attrs={
             'id': "angleInputId",
             'type': 'range',
@@ -168,7 +181,7 @@ class AvatarForm(forms.Form):
     )
     crop_left = forms.IntegerField(
         required=False,
-        widget = forms.HiddenInput,
+        widget=forms.HiddenInput,
         initial=0,
     )
     crop_top = forms.IntegerField(
@@ -196,14 +209,14 @@ class AvatarForm(forms.Form):
             if (cleaned_data['crop_top'] == 0 and
                 cleaned_data['crop_bottom'] == 0 and
                 cleaned_data['crop_left'] == 0 and
-                cleaned_data['crop_right'] == 0
-                ):
+                cleaned_data['crop_right'] == 0):
                 raise forms.ValidationError(
-                    "You must select an error on your image, if you want to crop it!"
-            )
+                    "You must select an error on your image, "
+                    "if you want to crop it!")
         if cleaned_data['action'] == self.ROTATE:
             if cleaned_data['rotate'] == 0:
                 raise forms.ValidationError(
-                    "You must select an angle, if you want to rotate your image!"
+                    "You must select an angle, if you want to "
+                    "rotate your image!"
                 )
         return cleaned_data

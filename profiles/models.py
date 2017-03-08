@@ -3,10 +3,8 @@ model for the user profile
 - one on one with user
 """
 from io import BytesIO
-from PIL import Image
 
 from django.contrib.auth.models import User
-from django.contrib.gis.db import models
 from django.db import models
 from django.core.files.base import ContentFile
 

@@ -37,7 +37,8 @@ def other_profile(request, pk):
     the next one
     """
     profile = get_object_or_404(models.Profile, user_id=pk)
-    next_profile = models.Profile.objects.filter(user__username__gt=profile.user.username)\
+    next_profile = models.Profile.objects.filter(
+        user__username__gt=profile.user.username)\
         .order_by('user__username').first()
     if not next_profile:
         next_profile = models.Profile.objects.all()\
@@ -45,8 +46,8 @@ def other_profile(request, pk):
     if profile.user == request.user:
         messages.success(
             request,
-           "This is your profile! Go to it <a href='{}'>here</a> if you like"
-           .format(reverse('profiles:own')),
+            "This is your profile! Go to it <a href='{}'>here</a> if you like"
+            .format(reverse('profiles:own')),
             extra_tags='safe'
         )
     return render(request, 'profiles/other_profile.html',
@@ -59,8 +60,10 @@ def list_profiles(request):
     """
     list all profiles
     """
-    profiles = models.Profile.objects.all().select_related('user').order_by('user__username')
-    return render(request, 'profiles/list_profiles.html', {'profiles': profiles})
+    profiles = models.Profile.objects.all()\
+        .select_related('user').order_by('user__username')
+    return render(
+        request, 'profiles/list_profiles.html', {'profiles': profiles})
 
 
 @login_required
@@ -70,14 +73,17 @@ def edit_profile(request):
     """
     if request.method == 'POST':
         user_form = forms.UserForm(request.POST, instance=request.user)
-        profile_form = forms.ProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        profile_form = forms.ProfileForm(
+            request.POST, request.FILES, instance=request.user.profile)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            messages.success(request, ('Your profile was successfully updated!'))
+            messages.success(request,
+                             ('Your profile was successfully updated!'))
             return HttpResponseRedirect(reverse('profiles:own'))
         else:
-            messages.error(request,('Please correct the error below.'))
+            messages.error(request,
+                           ('Please correct the error below.'))
     else:
         user_form = forms.UserForm(instance=request.user)
         profile_form = forms.ProfileForm(instance=request.user.profile)
@@ -100,33 +106,18 @@ def create_profile(request):
             profile = profile_form.save(commit=False)
             profile.user = request.user
             profile.save()
-            messages.success(request, ('Your profile was successfully updated!'))
+            messages.success(request,
+                             ('Your profile was successfully updated!'))
             return HttpResponseRedirect(reverse('profiles:own'))
         else:
-            messages.error(request,('Please correct the error below.'))
+            messages.error(request,
+                           ('Please correct the error below.'))
     else:
         user_form = forms.UserForm(instance=request.user)
         profile_form = forms.ProfileForm()
     return render(request, 'profiles/create_profile.html', {
         'user_form': user_form,
         'profile_form': profile_form
-    })
-
-
-@login_required
-def transform_avatar(request):
-    if request.method == 'POST':
-        form = forms.AvatarForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, ('Your avatar was successfully updated!'))
-            return HttpResponseRedirect(reverse('profiles:own'))
-        else:
-            messages.error(request, ('Please correct the error below.'))
-    else:
-        form = forms.AvatarForm()
-    return render(request, 'profiles/edit_avatar.html', {
-        'form': form,
     })
 
 
@@ -151,11 +142,13 @@ def transform_avatar(request):
                 degree = int(form.cleaned_data['rotate'])
                 # converted to have an alpha layer
                 im2 = img.convert('RGBA')
-                # rotated image: rotation is clockwise -> calculate counter clockwise for PIL
+                # rotated image: rotation is clockwise -> calculate
+                # counter clockwise for PIL
                 rot = im2.rotate(360 - degree, expand=1)
                 # a white image same size as rotated image
                 fff = Image.new('RGBA', rot.size, (255,) * 4)
-                # create a composite image using the alpha layer of rot as a mask
+                # create a composite image using the alpha layer
+                #  of rot as a mask
                 out = Image.composite(rot, fff, rot)
                 img = out
             profile.save(new_image=img)
@@ -170,4 +163,3 @@ def transform_avatar(request):
         'profiles/transform_avatar.html',
         context
     )
-

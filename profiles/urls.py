@@ -16,5 +16,6 @@ urlpatterns = [
     url(r'^list$', views.list_profiles, name='list'),
     url(r'^edit$', views.edit_profile, name='edit'),
     url(r'^create$', views.create_profile, name='create'),
-    url(r'^transform_avatar$', views.transform_avatar, name='transform_avatar'),
+    url(r'^transform_avatar$', views.transform_avatar,
+        name='transform_avatar'),
 ]
