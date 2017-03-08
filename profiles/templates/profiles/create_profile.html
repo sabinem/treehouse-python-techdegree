@@ -22,9 +22,9 @@
     {%  include 'client_side_form_checking.html' %}
     <form method="POST" action="{% url 'profiles:create' %}" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ user_form.as_p }}
+        {% include "form_template.html" with form=user_form %}
         <img src="{{ user_form.avatar.url }}">{{ profile.avatar.url }}
-        {{ profile_form.as_p }}
+        {% include "form_template.html" with form=profile_form %}
         <button type="submit">Save changes</button>
         <a class=".circle--search button" id="reset" type="button" href="{% url 'profiles:create' %}">
             Reset
@@ -36,5 +36,4 @@
 –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 {% block js %}
     {% include "form_js.html" %}
-    <script type="text/javascript" src="{% static "js/confirm_email.js" %}"></script>
 {% endblock %}

@@ -54,7 +54,6 @@ def other_profile(request, pk):
                    'next_profile': next_profile})
 
 
-
 @login_required
 def list_profiles(request):
     """

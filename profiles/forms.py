@@ -1,12 +1,17 @@
-import urllib.request
 import datetime
-from PIL import Image
-from django.contrib.auth import forms as authforms
 from django import forms
 from django.contrib.auth.models import User
 from django.utils.html import escape, strip_tags
 
 from . import models
+
+
+def check_confirm_email(email, instance):
+    if instance.pk is None:
+        return True
+    elif email != instance.email:
+        return True
+    return False
 
 
 class UserForm(forms.ModelForm):
@@ -40,19 +45,19 @@ class UserForm(forms.ModelForm):
     def clean(self):
         """
         the email confirm field is checked if the user changes the email
+        or when
         """
         cleaned_data = super(UserForm, self).clean()
-        if self.is_valid():
-            if self.instance.pk is not None:
-                if self.instance.email != cleaned_data['email']:
-                    if cleaned_data['email_confirm'] == "":
-                        raise forms.ValidationError(
-                            {"email_confirm": "change of email requires confirmation"}
-                        )
-                    if cleaned_data['email'] != cleaned_data['email_confirm']:
-                        raise forms.ValidationError(
-                            {"email_confirm": "email changed, but confirmation does not match"}
-                        )
+        if 'email' in cleaned_data:
+            if check_confirm_email(cleaned_data['email'], self.instance):
+                if cleaned_data['email_confirm'] == "":
+                    raise forms.ValidationError(
+                        {"email_confirm": "change of email requires confirmation"}
+                    )
+                if cleaned_data['email'] != cleaned_data['email_confirm']:
+                    raise forms.ValidationError(
+                        {"email_confirm": "email changed, but confirmation does not match"}
+                    )
         return cleaned_data
 
 
@@ -68,7 +73,6 @@ class ProfileForm(forms.ModelForm):
         model = models.Profile
         fields = (
             'avatar',
-            'github_account',
             'date_of_birth',
             'bio',
             'show_birthday' ,
@@ -83,7 +87,6 @@ class ProfileForm(forms.ModelForm):
             'avatar': "Avatar",
             'show_email': "Email visibility",
             'show_birthday': "Birthday visibility",
-            'github_account': "Github username",
         }
         help_texts = {
             'date_of_birth': "Allowed formats are: YYYY-MM-DD, MM/DD/YYYY or MM/DD/YY",
@@ -92,7 +95,6 @@ class ProfileForm(forms.ModelForm):
                       <li>Later on you can edit your avatar and make it look cool.</li></ul>""",
             'show_email': "you can keep your email private or show it to other Circle users",
             'show_birthday': "you can keep your birthday private or show it to other Circle users",
-            'github_account': "Enter your github username to provide a link to your github account"
         }
         error_messages = {
             'date_of_birth': {
@@ -114,26 +116,6 @@ class ProfileForm(forms.ModelForm):
         if len(data) < 10:
             raise forms.ValidationError("You must write at least 10 characters.")
         return stripped_data
-
-    def clean_github_account(self):
-        """
-        check the github account
-        - it must be an existing github account
-        """
-        data = self.cleaned_data['github_account']
-        if ((self.instance.pk is None) or
-            (self.instance.github_account != data)):
-            github_url = '/'.join(["https://github.com/", data])
-            try:
-                response = urllib.request.urlopen(github_url).getcode()
-                print(response)
-            except urllib.request.HTTPError:
-                raise forms.ValidationError("This is not a valid Github account")
-            except urllib.request.URLError:
-                print(github_url)
-
-                raise forms.ValidationError("The Internet Connection is not working. Please try again later")
-        return data
 
     def clean_date_of_birth(self):
         """

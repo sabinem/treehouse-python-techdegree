@@ -49,10 +49,6 @@ class Profile(models.Model):
     show_birthday = models.BooleanField(
         default=True
     )
-    github_account = models.CharField(
-        blank=True,
-        max_length=20
-    )
 
     class Meta:
         ordering = ['user']

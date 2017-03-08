@@ -4,27 +4,27 @@
 // enable or disable clientside form checking
 // - to be better able to test server side form checking:
 //   html-form checking can be disabled
-// - settings regarding form checking are stored
 
-var client_form_checking = $('#client_form_checking');
-var myform = $('form');
-var client_form_checking_checked = localStorage.getItem('client_form_checking_checked');
-
-if (client_form_checking_checked === "n") {
-    client_form_checking.prop("checked", false);
-    myform.attr('novalidate', 'novalidate');
-} else {
-    client_form_checking.prop("checked", true);
-    myform.removeAttr('novalidate');
-}
-
-client_form_checking.change(function() {
-    if (!$(this).prop("checked")) {
-        myform.attr('novalidate', 'novalidate');
-        localStorage.setItem('client_form_checking_checked', "n");
-    } else {
+jQuery(function($) {
+    var myform = $('form');
+    var form_check_stored = localStorage.getItem('form_checking');
+    var form_checkbox = $("#chk");
+    if (form_check_stored == "yes") {
+        form_checkbox.prop("checked", true);
         myform.removeAttr('novalidate');
-        localStorage.setItem('client_form_checking_checked', "y");
+    } else {
+        form_checkbox.prop("checked", false);
+         myform.attr('novalidate', 'novalidate');
     }
-});
 
+    form_checkbox.change(function() {
+        var isChecked = $(this).is(":checked") ? "yes" : "no";
+        localStorage.setItem('form_checking', isChecked);
+
+        if (isChecked == "yes") {
+            myform.removeAttr('novalidate');
+        } else {
+            myform.attr('novalidate', 'novalidate');
+        }
+    })
+});

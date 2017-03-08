@@ -14,7 +14,6 @@
 
 #### Profile Fields:
 - email
-- github username
 - birthday
 - biography
 - he can decide whether to show email and or birthday to other users

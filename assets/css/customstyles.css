@@ -13,13 +13,6 @@
     font-size: 1em;
 }
 
-/* Formwrapper changes background color in case of non field error */
-form.error  {
-    background: linen;
-    border-radius: 5px;
-    padding: 5px;
-}
-
 /* Treatment of errors: color red */
 .errorlist, .messages li.error{
     color: red;

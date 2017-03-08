@@ -35,17 +35,6 @@
             <td>Email address:</td>
             <td>{{ user.email }}</td>
         </tr>
-        {% if profile.account %}
-        <tr>
-            <td>On github:</td>
-            <td>
-                <a href="https://github.com/{{ profile.github_account }}">
-                    {{ profile.github_account }}
-                </a>
-            </td>
-
-        </tr>
-        {% endif %}
     </table>
     <h2>Biography</h2>
     <div>{{ profile.bio }}</div>
