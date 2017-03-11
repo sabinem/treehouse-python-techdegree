@@ -6,7 +6,7 @@
 - The program reads a file [data/soccer_player.csv](data/soccer_player.csv) of players.
 - It makes a team assignments to get balanced teams
 - it prints out letters for the team assignment and first practice to the players
-- [Details of the Assignment](docs/assignment.md)
+- [Details of the Assignment](docs/assigment.md)
 
 ## Installation
 - Download the zip file to your computer and unzip
