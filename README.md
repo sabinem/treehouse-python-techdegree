@@ -1,4 +1,3 @@
-# treehouse_soccer_league
 # Treehouse Python Techdegree: 1. Project Soccer League Team Assigments
 
 ### Assignment: 
