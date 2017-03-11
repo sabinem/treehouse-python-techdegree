@@ -2,7 +2,7 @@
 
 ## Assignment: 
 
-### in Text
+### Description
 You have volunteered to be the Coordinator for your town’s youth soccer league. As part of your job you need to divide the 18 children who have signed up for the league into three even teams - Dragons, Sharks and Raptors. In years past, the teams have been unevenly matched, so this year you are doing your best to fix that. For each child, you will have the following information: Name, height (in inches), whether or not they have played soccer before, and their guardians’ names.
 
 The project has three major parts. For each part choose from the tools we have covered in the courses so far. Please don’t employ more advanced tools we haven’t covered yet, even if they are right for the job. However, if you identify a place where a more advanced tool is appropriate, please mention that in a code comment as you and your mentor may want to discuss it later.
@@ -19,7 +19,7 @@ When your complete code is run, it should output individual letters to file. The
 
 As always, meaningful and concise code comments are expected. Your code should be written and refined in workspaces or on your local machine, but be sure to upload it to GitHub, as per the instructions in this tutorial.
 
-## as steps
+### Project Instructions
 
 - Manually create a single collection that contains all information for all 18 players. Each player should themselves be represented by their own collection.
 
@@ -35,5 +35,5 @@ As always, meaningful and concise code comments are expected. Your code should b
 
 ## Installation
 
-- Download
+- Download the zip file to your computer and unzip
 - 
