@@ -3,7 +3,7 @@
 
 ## Abstract
 - The app consists of one program `soccer_league.py`.
-- The program reads a file [data/soccer_player.csv](data/soccer_player.csv) of players.
+- The program reads a file [data/soccer_players.csv](data/soccer_players.csv) of players.
 - It makes a team assignments to get balanced teams
 - it prints out letters for the team assignment and first practice to the players
 - [Details of the Assignment](docs/assigment.md)
