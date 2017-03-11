@@ -20,7 +20,7 @@ def print_letter_to_guardian(teamname, player):
                           player['Name'],
                           teamname,
                           PRACTICE_DATETIME[teamname])
-    filename = '.'.join(['_'.join(player['Name'].lower().split(' ')),'txt'])
+    filename = '/'.join(['result','.'.join(['_'.join(player['Name'].lower().split(' ')),'txt'])])
     with open(filename, 'w') as file:
         file.write(letter)
     return filename
@@ -59,7 +59,7 @@ def process_team(teamname, players):
 
 if __name__ == "__main__":
     # read players from csv files
-    with open('soccer_players.csv', newline='\n') as playerfile:
+    with open('data/soccer_players.csv', newline='\n') as playerfile:
 
         # read form csv file into a dictionary
         players = csv.DictReader(playerfile, delimiter=',')
