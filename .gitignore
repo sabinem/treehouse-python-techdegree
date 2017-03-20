@@ -1,0 +1,15 @@
+docs/**
+htmlcov/**
+minerals/static/minerals/images/**
+.coveragerc
+data_*.txt
+db.*
+data/**
+.idea/**
+minerals
+static/**
+*.__pychache__
+readme*
+minerals_catalog/**
+.coverage
+*.pyc
