@@ -39,7 +39,7 @@ class MineralTemplateTagTests(TestCase):
         return Template(string).render(context)
 
     def test_random_mineral(self):
-        """returns a valid mineral link to an existing mineral"""
+        """renders link to a  random mineral"""
         rendered = self.render_template(
             '{% load minerals_extras %}'
             '{% random_mineral %}'
@@ -53,7 +53,7 @@ class MineralTemplateTagTests(TestCase):
             Mineral.minerals.filter(mineral_slug=url).count(), 1)
 
     def test_mineral_fields(self):
-        """returns attributes of a mineral in a template"""
+        """renders attributes of a mineral in a template"""
         mineral = self.mineral
         rendered = self.render_template(
             '{% load minerals_extras %}'
@@ -71,7 +71,7 @@ class MineralTemplateTagTests(TestCase):
             self.assertIn(match, fields_capitalized)
 
     def test_search_letter(self):
-        """templatetag returns links for
+        """renders links for
         letters of the alphabet"""
         letters = string.ascii_lowercase
         search_letter = 'a'
@@ -85,7 +85,7 @@ class MineralTemplateTagTests(TestCase):
             self.assertIn(html, rendered)
 
     def test_search_group(self):
-        """templatetag returns groups in
+        """renders group links in
         the mineral group navigation"""
         groups = Mineral.minerals.get_ordered_groups()
         rendered = self.render_template(
@@ -97,7 +97,7 @@ class MineralTemplateTagTests(TestCase):
             self.assertIn(html, rendered)
 
     def test_search_form(self):
-        """templatetag returns search form"""
+        """renders search form"""
         rendered = self.render_template(
             '{% load minerals_extras %}'
             '{% search_form %}',

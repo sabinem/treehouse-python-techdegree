@@ -2,7 +2,6 @@
 import string
 
 from django import template
-from django.utils.text import slugify
 
 from .. import forms, models
 
@@ -12,14 +11,14 @@ register = template.Library()
 
 @register.inclusion_tag('minerals/random_link.html')
 def random_mineral():
-    '''returns random mineral'''
+    '''renders random mineral'''
     random_mineral = models.Mineral.minerals.get_random_mineral()
     return {'random_mineral': random_mineral}
 
 
 @register.inclusion_tag('minerals/mineral_fields.html')
 def mineral_fields(mineral):
-    '''Returns fields of the mineral in order of occurence'''
+    '''renders attributes of the mineral in order of occurence'''
     weigthed_attributes_list = models.Mineral.attributes_weighted()
     weigthed_field_list = []
     for fieldname in weigthed_attributes_list:
@@ -32,13 +31,13 @@ def mineral_fields(mineral):
 
 @register.filter('capitalize')
 def capitalize(name):
-    """Filter that capitalizes attribute names: all words are capitalized"""
+    """Filter that capitalizes all words in a string"""
     return ' '.join([part.capitalize() for part in name.split(' ')])
 
 
 @register.inclusion_tag('minerals/search_letter.html', takes_context=True)
 def search_letter(context):
-    '''Include the alphabet as search navigation for filtering
+    '''renders the alphabet as search navigation for filtering
      the minerals by their first letter'''
     letters = string.ascii_lowercase
     if 'search_letter' in context:
@@ -50,7 +49,7 @@ def search_letter(context):
 
 @register.inclusion_tag('minerals/search_group.html', takes_context=True)
 def search_group(context):
-    '''Include groups as search navigation for filtering
+    '''renders groups as search navigation for filtering
     mineral by their group'''
     groups = models.Mineral.minerals.get_ordered_groups()
     if 'search_group' in context:
@@ -63,6 +62,7 @@ def search_group(context):
 
 @register.inclusion_tag('minerals/search_form.html')
 def search_form():
-    '''Include search box for filtering minerals'''
+    '''renders a search form for different kind of
+    searches: see forms.SearchForm'''
     form = forms.SearchForm
     return {'form': form}

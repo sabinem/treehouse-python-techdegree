@@ -1,7 +1,7 @@
 """
 urls for the minerals app
 Each mineral has a pretty url, which is
-derived from the name of the mineral: the url_name
+stored as slug in the database
 """
 from django.conf.urls import include, url
 from django.conf import settings
@@ -29,4 +29,3 @@ if settings.DEBUG:
     urlpatterns += [
         url(r'^__debug__/', include(debug_toolbar.urls))
     ]
-

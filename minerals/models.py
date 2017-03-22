@@ -13,21 +13,33 @@ from django.utils.text import slugify
 
 
 class MineralManager(models.Manager):
+    """querysets for Minerals"""
     def get_minerals_by_group(self, group):
+        """get queryset of minerals that belog to
+         a group"""
         return self.filter(group=group)
 
     def get_minerals_for_letter(self, letter):
+        """return queryset of minerals
+        that have a name that starts with a
+        letter: note that the slug is evaluated instead of the
+        mineral name since some minerals start with a special
+        letter"""
         return self.filter(mineral_slug__startswith=letter)
 
     def get_mineral_from_slug(self, mineral_slug):
+        """get mineral from its slug"""
         return get_object_or_404(self, mineral_slug=mineral_slug)
 
     def get_random_mineral(self):
+        """return a random mineral"""
         mineral_ids = self.values_list('id', flat=True)
         random_pk = random.choice(mineral_ids)
         return self.get(pk=random_pk)
 
     def get_ordered_groups(self):
+        """return a sorted list of all groups where
+        the 'Other' group comes last"""
         group_nav = list(
             self.exclude(group="Other")
                 .order_by('group')
@@ -38,12 +50,16 @@ class MineralManager(models.Manager):
         return group_nav
 
     def filter_minerals_by_chem_element(self, chem_element_code):
+        """return queryset of minerals, where the formula
+        contains a chemical element code """
         chem_pattern = chem_element_code + "[^a-z]"
         qs = self.filter(formula__contains=chem_element_code)
         exclude = [m.id for m in qs if not re.search(chem_pattern, m.formula)]
         return qs.exclude(id__in=exclude)
 
     def filter_minerals_by_searchterm(self, searchterm):
+        """return a queryset of minerals derived by a fulltext
+        search in its attributes"""
         return self.filter(
             models.Q(name__icontains=searchterm) |
             models.Q(category__icontains=searchterm) |
@@ -67,6 +83,9 @@ class MineralManager(models.Manager):
         )
 
     def filter_minerals_by_specific_gravity(self, gravity_bounds):
+        """read gravity bounds from the field 'special gravity' of
+        minerals: this is a class method in order to avoid hitting
+        the database each time the method is called"""
         gravity_from, gravity_to = gravity_bounds
 
         gravity_values = self.all().exclude(specific_gravity="") \
@@ -82,9 +101,13 @@ class MineralManager(models.Manager):
         return self.filter_minerals_by_id_list(id_list)
 
     def filter_minerals_by_id_list(self, id_list):
+        """returns queryset of minerals
+        with ids in a given list"""
         return self.filter(id__in=id_list)
 
     def get_minerals_from_search_params(self, search_params):
+        """combines querysets of minerals according to
+        seacrh parameters"""
         minerals_c = minerals_s = minerals_g = self.all()
         if search_params.chem_element_code:
             minerals_c = \
@@ -105,7 +128,11 @@ class MineralManager(models.Manager):
 
 
 class Mineral(models.Model):
-    """Model for a Mineral, see Readme File for Details on the Data."""
+    """Model for a Mineral, see Readme File for Details on the Data.
+    - the data is loaded by a migration
+    - the only additional field is a slug
+      derived from the mineral name
+    """
     name = models.CharField(max_length=255, unique=True)
     mineral_slug = models.SlugField(max_length=255, unique=True)
     category = models.CharField(max_length=255)
@@ -187,14 +214,17 @@ class Mineral(models.Model):
 
     @classmethod
     def get_group_slug(cls, group):
+        """gets a slug from the group"""
         return slugify(group)
 
     @classmethod
     def get_group_from_slug(cls, slug):
+        """get group from slug"""
         return ' '.join([word.capitalize() for word in slug.split('-')])
 
     @classmethod
     def get_search_letter(cls, letter=None):
+        """get search_letter: return letter or provide default"""
         return letter if letter else settings.MINERALS_DEFAULT_LIST_LETTER
 
 

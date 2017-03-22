@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 This migraton is used to load the initial data into
 the database. The file minerals.json is read and
@@ -6,7 +5,6 @@ the images are copied under a new name, that
 takes care of special charaters, that the filename
 might include
 """
-from __future__ import unicode_literals
 import json
 import os
 import csv
@@ -24,6 +22,7 @@ def load_data(apps, schema_editor):
     it into the database. The images that go along with the data
     are copied into the static directory of the package 'minerals'.
     The data contains duplicates that are eliminated.
+    A slug is derived from the mineral name.
     """
     datapath = os.path.join(DATA_DIR, 'minerals.json')
     with open(datapath) as datafile:

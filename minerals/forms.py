@@ -1,9 +1,18 @@
+"""
+forms for the minerals app
+"""
 from django import forms
 
 from . import models
 
 
 class SearchForm(forms.Form):
+    """Searchform: combines 3 kind of searches:
+    - fulltext search for a searchterm
+    - search for a specific gravity range
+    - search for a chemical element to be part
+      of the minerals formula
+    """
     searchterm = forms.CharField(
         required=False,
         widget=forms.TextInput(
