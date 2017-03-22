@@ -43,7 +43,8 @@ def analyze_minerals():
                               key=occurences.get,
                               reverse=True):
                 resultfile.write(
-                    "{4}\nField: {0:25s}\n{4}\noccurence: #{1:3d}, max_length: {2:3d} \nValues: {3}\n"
+                    ("{4}\nField: {0:25s}\n{4}\noccurence: #{1:3d}, "
+                     "max_length: {2:3d} \nValues: {3}\n")
                     .format(
                         key,
                         occurences[key],
@@ -73,6 +74,7 @@ def analyze_minerals():
                     len(valuesets[key]),
                     fields[key]['length'],
                 ))
+
 
 if __name__ == '__main__':
     analyze_minerals()

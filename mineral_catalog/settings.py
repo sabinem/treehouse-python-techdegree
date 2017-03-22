@@ -127,7 +127,12 @@ STATICFILES_DIRS = (
 
 DATA_DIR = 'data'
 MINERALS_IMAGE_DIR = 'minerals/static/minerals/images'
+MINERALS_STATIC_DIR = 'minerals/static/'
 
 # Debug Toolbar Settings
 INTERNAL_IPS = '127.0.0.1'
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
+
+
+# Default letter to be listed in minerals list view
+MINERALS_DEFAULT_LIST_LETTER = "a"
