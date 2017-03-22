@@ -6,3 +6,4 @@ db.*
 *.pyc
 *.__pychache__
 *.txt
+.coverage
