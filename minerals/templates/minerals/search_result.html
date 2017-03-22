@@ -1,0 +1,20 @@
+{% load minerals_extras %}
+{% search_form %}
+{% search_letter %}
+<p class="searchresult">
+    {% if search_params %}
+        Results for:
+        <span class="active_search">
+            {% if search_params.searchterm %}
+                [ Term: "{{ search_params.searchterm }}" ]
+            {% endif %}
+            {% if search_params.gravity_bounds %}
+                [ Specific gravity: {{ search_params.gravity_bounds.0 }} - {{ search_params.gravity_bounds.1 }} ]
+            {% endif %}
+            {% if search_params.chem_element_code %}
+               [ Chemical Element {{ search_params.chem_element_code }} ]
+            {% endif %}
+         </span>
+    {% endif %}
+</p>
+{% search_group %}

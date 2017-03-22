@@ -1,0 +1,12 @@
+<ul class="letter-search">
+   {% for letter in letters %}
+      <li>
+          <a class="search {% if active_letter == letter %}
+               active_search
+             {% endif %}"
+              href="{% url 'minerals:filter_by_letter' search_letter=letter %}">
+              {{ letter | upper }}
+          </a>
+      </li>
+   {% endfor %}
+</ul>

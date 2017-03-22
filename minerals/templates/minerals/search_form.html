@@ -1,0 +1,18 @@
+<div class="minerals__search">
+    <form action="{% url 'minerals:filter_by_form' %}" id="search-form">
+        {{ form.searchterm.errors }}
+        <label for="{{ form.searchterm.id_for_label }}">{{form.searchterm.label}}</label>
+        <div class="minerals__search">
+            <div class="minerals__anchor">
+               {{ form.searchterm }}
+            </div>
+        </div>
+        {{ form.gravity_from.label_tag }}
+        {{ form.gravity_from }} - {{ form.gravity_to }}
+        {{ form.chemical_element.label_tag }}
+        {{ form.chemical_element }}
+        <button class="search-button" type="submit">
+            Go
+        </button>
+    </form>
+</div>
