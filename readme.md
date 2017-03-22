@@ -1,4 +1,4 @@
-# Project 6 Treehouse Techdegree Python
+# Project 8 Treehouse Techdegree Python
 ## Mineral Catalog
 ### Description
 The mineral catalog comes with data to be loaded.
