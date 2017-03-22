@@ -18,7 +18,7 @@ It is not password protected and can only be displayed.
 Only for Development purposes django-debug-toolbar and coverage are included
 in the dependencies.
 
-###Analyze Data (optional: you can skip that step)
+### Analyze Data (optional: you can skip that step)
 If you want you can analyze the data by starting
 `python analyze.py` this will output two
 testfile `data_summary.txt` and `data_detail.txt`
@@ -26,7 +26,7 @@ in you directory: the summary contains information about the data
 that resides in `data/minerals.json`. The second file contains all the
 different values for each field, that has been found in there.
 
-###Load the data into the database
+### Load the data into the database
 
 Run:
 ```

@@ -48,6 +48,8 @@ def load_data(apps, schema_editor):
                             MINERALS_IMAGE_DIR,
                             new_filename)
                         copyfile(file, filepath)
+                        print(file)
+                        print(filepath)
                         setattr(mineral, 'image_filename', new_filename)
                 elif key == 'name':
                     setattr(mineral, 'name', value.capitalize())
