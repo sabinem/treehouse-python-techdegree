@@ -137,8 +137,9 @@ class MineralSearchHelpersTests(TestCase):
                     'gravity_to': "",
                 }
             ),
-            SearchParams(None, None, (3,Mineral.MAX_SPECIFIC_GRAVITY))
+            SearchParams(None, None, (3, Mineral.MAX_SPECIFIC_GRAVITY))
         )
+
     def test_get_search_params_from_request_gravity_upper(self):
         """search for a specific gravity range with a upper
         bound only: the range is completed with the min lower
@@ -152,7 +153,7 @@ class MineralSearchHelpersTests(TestCase):
                     'gravity_to': 5,
                 }
             ),
-            SearchParams(None, None, (Mineral.MIN_SPECIFIC_GRAVITY,5))
+            SearchParams(None, None, (Mineral.MIN_SPECIFIC_GRAVITY, 5))
         )
 
     def test_get_search_params_from_request_chemical_element(self):
@@ -167,7 +168,7 @@ class MineralSearchHelpersTests(TestCase):
                     'gravity_to': "",
                 }
             ),
-            SearchParams("Fe", None, None)
+            SearchParams(None, "Fe", None)
         )
 
     def test_get_search_params_from_request_searchterm(self):
@@ -182,7 +183,7 @@ class MineralSearchHelpersTests(TestCase):
                     'gravity_to': "",
                 }
             ),
-            SearchParams(None, "Ab", None)
+            SearchParams("Ab", None, None)
         )
 
     def test_get_search_params_from_request_combination(self):
@@ -197,7 +198,7 @@ class MineralSearchHelpersTests(TestCase):
                     'gravity_to': 5,
                 }
             ),
-            SearchParams("Fe", "Ab", (3,5))
+            SearchParams("Ab", "Fe", (3, 5))
         )
 
 
@@ -281,7 +282,7 @@ class MineralsSearchByFormViewTests(TestCase):
         }
         expected_minerals = \
             Mineral.minerals.filter_minerals_by_specific_gravity(
-                (3,Mineral.MAX_SPECIFIC_GRAVITY)
+                (3, Mineral.MAX_SPECIFIC_GRAVITY)
             )
         test_url = reverse('minerals:filter_by_form')
         resp = self.client.get(test_url, context)
@@ -303,7 +304,7 @@ class MineralsSearchByFormViewTests(TestCase):
         }
         expected_minerals = \
             Mineral.minerals.filter_minerals_by_specific_gravity(
-                (Mineral.MIN_SPECIFIC_GRAVITY,5)
+                (Mineral.MIN_SPECIFIC_GRAVITY, 5)
             )
         test_url = reverse('minerals:filter_by_form')
         resp = self.client.get(test_url, context)
@@ -313,7 +314,6 @@ class MineralsSearchByFormViewTests(TestCase):
             len(resp.context['minerals']),
             expected_minerals.count()
         )
-
 
     def test_minerals_search_view_combination(self):
         """search with combination displays the

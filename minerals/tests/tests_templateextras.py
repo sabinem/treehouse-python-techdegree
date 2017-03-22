@@ -44,11 +44,9 @@ class MineralTemplateTagTests(TestCase):
             '{% load minerals_extras %}'
             '{% random_mineral %}'
         )
-        print(rendered)
         pattern = r'href="[\w/]*/(?P<mineral>\w+)'
         match = re.search(pattern, rendered)
         url = match.group('mineral')
-        print(url)
         self.assertEquals(
             Mineral.minerals.filter(mineral_slug=url).count(), 1)
 
