@@ -5,3 +5,4 @@ db.*
 .idea/**
 *.pyc
 *.__pychache__
+*.txt
