@@ -12,7 +12,7 @@
     `source mc_venv/bin/activate`
 5. Install the requirements
     `pip install -r requirements.txt`
-6. Migrate the data `python mange.py migrate`
+6. Migrate the data `python manage.py migrate`
 7. Create a user with `python mange.py createsuperuser`
 8. Run the project with `python manage.py runserver`
 9. Login to the admin by going to `/admin` on the localhost
