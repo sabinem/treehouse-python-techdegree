@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="post">
+        {% comment %}{% if user.is_authenticated %}
+            <a class="btn btn-default" href="{% url 'item_edit' pk=item.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        {% endif %}{% endcomment %}
+        <h1>{{ item.name }}</h1>
+        <p><strong>Head Chef:</strong> {{ item.chef }}</p>
+        <p>{{ item.description }}</p>
+        <p><strong>Ingredients: </strong>{{ ingredients | join:", " }}</p>
+        {% if item.standard %}
+            <p><em>This item is available year-round.</em></p>
+        {% endif %}
+    </div>
+{% endblock %}

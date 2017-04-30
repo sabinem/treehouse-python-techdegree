@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="post">
+        <h1>
+            {% if user.is_authenticated %}
+                <a class="btn btn-default" href="{% url 'menu_edit' pk=menu.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+            {% endif %}
+            {{ menu.season }}
+        </h1>
+        <h2>On the menu this season:</h2>
+        <ul>
+            {% for item in items %}
+                <li><a href="{% url 'item_detail' pk=item.pk %}">{{ item }}</a></li>
+            {% endfor %}
+        </ul>
+        {% if menu.expiration_date %}
+            <div class="date">
+                Menu expires on {{ menu.expiration_date|date:"F j, Y" }}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
