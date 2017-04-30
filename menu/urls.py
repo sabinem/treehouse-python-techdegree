@@ -1,3 +1,4 @@
+"""urls of the menu app"""
 from django.conf.urls import url
 from . import views
 

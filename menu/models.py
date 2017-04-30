@@ -1,8 +1,9 @@
+"""models for the menu app"""
+from datetime import datetime
+
 from django.db import models
-from django.utils import timezone
 from django.conf import settings
 from django.core.exceptions import ValidationError
-from datetime import datetime
 
 
 SEASON_AUTMN = "Autumn"
@@ -26,6 +27,9 @@ SEASON_CHOICES = [
 
 
 def get_season_from_date(date):
+    """the season is determined from a given date
+    this is just needed to have a default for
+    correcting the data in the database at migration"""
     if date.month in range(3, 6):
         season = SEASON_SPRING
     elif date.month in range(6, 9):
@@ -37,15 +41,8 @@ def get_season_from_date(date):
     return season + " " + str(date.year)
 
 
-def validate_not_in_the_past(value):
-    today = timezone.now().date()
-    if value and value < today:
-        raise ValidationError(
-            ('The expiration date cannot be in the past!'),
-        )
-
-
 def validate_season(value):
+    """the season should contain a year and a season"""
     parts = value.split(" ")
     year = None
     season = parts[0]
@@ -64,13 +61,7 @@ def validate_season(value):
 
 
 class Menu(models.Model):
-
-    """menu of items
-    - valid for a season
-    - has a creation date and an expiration date
-    - the expiration date may be null, which means
-      that the menu does not expire
-    """
+    """ a menu consists of items"""
     season = models.CharField(
         'Season',
         max_length=20,
@@ -88,22 +79,19 @@ class Menu(models.Model):
         'Expiration Date',
         blank=True,
         null=True,
-        validators=[validate_not_in_the_past],
         help_text="when will this menu expire?")
 
     class Meta:
         ordering = ['expiration_date']
 
     def __str__(self):
+        """a menu is represented by its season"""
         return self.season
 
 
 class Item(models.Model):
-    """a menu item
-    - has ingredients
-    - has a chef
-    - may be standard or non standard
-    - has a creation date
+    """a menu item has ingredients
+    and a chef
     """
     name = models.CharField(max_length=200)
     description = models.TextField()
@@ -118,7 +106,7 @@ class Item(models.Model):
 
 
 class Ingredient(models.Model):
-    """ingredients for recipes"""
+    """ingredients for menu items"""
     name = models.CharField(max_length=200)
 
     def __str__(self):

@@ -16,7 +16,8 @@
 7. Create a user with `python manage.py createsuperuser`
 8. Run the project with `python manage.py runserver`
 9. Open a browser and login at `http://127.0.0.1:8000/admin`
-10. Test with `coverage run manage.py test`
+10. Go to `http://127.0.0.1:8000` and try the site
+11. Test with `coverage run manage.py test`
 11. Look at the coverage report with `coverage report`
 
 

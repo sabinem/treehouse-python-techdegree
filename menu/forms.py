@@ -1,3 +1,4 @@
+"""forms for the menu app"""
 from django import forms
 from django.forms.extras.widgets import SelectDateWidget
 from django.forms import ValidationError
@@ -6,8 +7,8 @@ from . import models
 
 
 class MenuForm(forms.ModelForm):
+    """form to edit or create a menu"""
     expiration_date = forms.DateTimeField(
-        input_formats=['%Y-%m-%d', '%m/%d/%Y', '%m/%d/%y'],
         widget=SelectDateWidget(years=range(2017, 2030))
     )
     items = forms.ModelMultipleChoiceField(
@@ -20,6 +21,8 @@ class MenuForm(forms.ModelForm):
         fields = ('season', 'items', 'expiration_date')
 
     def clean(self):
+        """the year appearing in the name of the season
+        should not be after the year of the expire date"""
         data = self.cleaned_data
         if 'season' in self.cleaned_data:
             season, year = models.validate_season(self.cleaned_data['season'])

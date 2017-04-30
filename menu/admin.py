@@ -1,3 +1,6 @@
+"""
+admin for menu app
+"""
 from django.contrib import admin
 from . import models
 

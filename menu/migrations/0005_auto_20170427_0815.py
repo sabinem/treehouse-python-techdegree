@@ -41,6 +41,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='menu',
             name='expiration_date',
-            field=models.DateField(blank=True, help_text='when will this menu expire?', null=True, validators=[menu.models.validate_not_in_the_past], verbose_name='Expiration Date'),
+            field=models.DateField(blank=True, help_text='when will this menu expire?', null=True, verbose_name='Expiration Date'),
         ),
     ]

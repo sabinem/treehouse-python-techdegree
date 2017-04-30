@@ -1,3 +1,4 @@
+"""views of the menu app"""
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.db.models import Q
@@ -7,6 +8,8 @@ from . import forms
 
 
 def menu_list(request):
+    """list all menus that have no expiration date or expire
+    in the future"""
     today = timezone.now().date()
     menus = models.Menu.objects.filter(
         Q(expiration_date__gte=today) | Q(expiration_date=None),
@@ -15,6 +18,7 @@ def menu_list(request):
 
 
 def menu_detail(request, pk):
+    """detail view of a menu"""
     menu = get_object_or_404(models.Menu, pk=pk)
     items = menu.items.all()
     return render(
@@ -23,6 +27,7 @@ def menu_detail(request, pk):
 
 
 def item_detail(request, pk):
+    """detail view of an item"""
     item = get_object_or_404(models.Item, pk=pk)
     ingredients = item.ingredients.all()
     return render(
@@ -31,6 +36,7 @@ def item_detail(request, pk):
 
 
 def create_new_menu(request):
+    """create a new menu"""
     form = forms.MenuForm()
     if request.method == "POST":
         form = forms.MenuForm(request.POST)
@@ -41,6 +47,7 @@ def create_new_menu(request):
 
 
 def edit_menu(request, pk):
+    """edit an existing menu"""
     menu = get_object_or_404(models.Menu, pk=pk)
     form = forms.MenuForm(instance=menu)
     if request.method == "POST":

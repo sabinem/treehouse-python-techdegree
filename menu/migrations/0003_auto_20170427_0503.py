@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='menu',
             name='expiration_date_new',
-            field=models.DateField(blank=True, help_text='when will this menu expire?', null=True, validators=[menu.models.validate_not_in_the_past], verbose_name='Expiration Date'),
+            field=models.DateField(blank=True, help_text='when will this menu expire?', null=True, verbose_name='Expiration Date'),
         ),
         migrations.AlterField(
             model_name='item',
