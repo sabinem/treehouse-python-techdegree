@@ -13,9 +13,9 @@
 5. Install the requirements
     `pip install -r requirements.txt`
 6. Migrate the data `python manage.py migrate`
-7. Create a user with `python mange.py createsuperuser`
+7. Create a user with `python manage.py createsuperuser`
 8. Run the project with `python manage.py runserver`
-9. Login to the admin by going to `/admin` on the localhost
+9. Open a browser and login at `http://127.0.0.1:8000/admin`
 10. Test with `coverage run manage.py test`
 11. Look at the coverage report with `coverage report`
 
