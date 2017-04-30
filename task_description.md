@@ -21,13 +21,14 @@ Write tests to increase test coverage to at least 75%.
 - Add migrations to correct existing data when data types change.
 - Add custom form validators
 
-###How you will be graded
-#### Database queries
+## How you will be graded
+
+### Database queries
 - No improvement over original number of queries.
 - No view has more than 5 queries. Queries take less than 100ms combined.
 - Queries take less than 60ms combined.
 
-####Template Inheritance
+### Template Inheritance
 - Little or no template inheritance is used.
 - Templates inherit nicely to reduce the total amount of code written.
 - N/A
