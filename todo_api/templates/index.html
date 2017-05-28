@@ -9,7 +9,7 @@
   Added /static to link href
   ===============================
   -->
-  <link rel="stylesheet" href="static/styles/main.css" type="text/css">
+  <link rel="stylesheet" href="../static/styles/main.css" type="text/css">
 </head>
 <body ng-app="todoListApp">
 
@@ -65,8 +65,8 @@
       <span ng-click="todo.completed = !todo.completed; todo.edited = true">
       </span>
       <label ng-hide="editing"
-        ng-click="editing=true">
-          {{todo.name}}
+        ng-click="editing=true"
+        ng-bind="todo.name" >
       </label>
       <input ng-show="editing"
              ng-blur="editing = false"
@@ -97,6 +97,6 @@
   Added /static to all script src below
   ===============================
   -->
-  <script src="app.js"></script>
+  <script src="../static/app.js"></script>
 </body>
 </html>

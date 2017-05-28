@@ -6,6 +6,7 @@ import json
 from flask import (Flask,
     make_response,
     jsonify,
+    render_template,
     g,
     request)
 
@@ -39,8 +40,8 @@ login_args = {
 }
 
 @app.route('/')
-def welcome():
-    return 'Welcome to the Todo Api Application'
+def index():
+    return render_template('index.html')
 
 
 @app.route('/api/v1/login', methods=['POST'])
