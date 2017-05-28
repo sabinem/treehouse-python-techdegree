@@ -9,23 +9,13 @@
 
 ## Run the server
 - Run the project with `python runserver.py`
-- the browers is now running on `http://127.0.0.1:8000`
-you do not need to go there though, since the server is just operationg as a
-backend.
-
-## Run the angular Frontend App
-- go into the folder `todo_frontend`
-- open `index.html` with a browser
 
 
+## Try the todo app
+- go to `http://127.0.0.1:8000`
+- login with username `testuser`and password: `treehouse`
+- you can then start you todo-list
 
-
-
-
-``
-Go to http://127.0.0.1:8000 and try the site
-Test with coverage run manage.py test
-Look at the coverage report with coverage report
-
-## Use
+## Testcoverage
+- run tests and see testcoverage with `nosetests --with-coverage --cover-html`
 
