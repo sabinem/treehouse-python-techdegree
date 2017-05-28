@@ -4,7 +4,6 @@ from todo_api.models import User, Todo
 from peewee import *
 
 import unittest
-import os
 from playhouse.test_utils import test_database
 
 test_db = SqliteDatabase(':memory:')
