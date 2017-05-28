@@ -53,7 +53,7 @@ angular.module('todoListApp', ['ngResource'])
     $scope.user.loggedin = false;
     $scope.user.username = '';
     $scope.user.password = '';
-    $scope.todos = Todo.query();
+    $scope.todos = [];
     $scope.message = "Goodbye for now!";
   };
   

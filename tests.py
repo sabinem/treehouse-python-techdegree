@@ -4,6 +4,7 @@ from todo_api.models import User, Todo
 from peewee import *
 
 import unittest
+import os
 from playhouse.test_utils import test_database
 
 test_db = SqliteDatabase(':memory:')
@@ -233,6 +234,16 @@ class BasicTest(unittest.TestCase):
     def test_welcome(self):
         response = self.tester.get('/', content_type='html/text')
         self.assertEqual(response.status_code, 200)
+
+    def test_initialize(self):
+        initialize()
+        tester = os.path.exists("todos.sqlite")
+        self.assertTrue(tester)
+
+
+class QueryTest(unittest.TestCase):
+    def test_get_todo_or_404(self):
+        pass
 
 
 if __name__ == '__main__':
