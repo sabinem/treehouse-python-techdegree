@@ -48,7 +48,7 @@ class User(Model):
         """
         try:
             cls.select().where(
-                (cls.email==email)|(cls.username**username)
+                (cls.email == email) | (cls.username ** username)
             ).get()
         except cls.DoesNotExist:
             user = cls(username=username, email=email)
@@ -67,7 +67,7 @@ class User(Model):
         except (SignatureExpired, BadSignature):
             return None
         else:
-            user = User.get(User.id==data['id'])
+            user = User.get(User.id == data['id'])
             return user
 
     @staticmethod

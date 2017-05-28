@@ -10,7 +10,6 @@ from webargs.flaskparser import parser
 
 from ..auth import auth
 from .. import models
-#import app
 
 todos_api = Blueprint('resources.todos', __name__)
 api = Api(todos_api)
@@ -40,7 +39,6 @@ class TodoSchema(mm.Schema):
        'self': mm.URLFor('.todo', id='<id>', _scheme='http', _external=True)
     })
 
-    #removed the envelope, since this works better with the Angular app
 
 todo_schema = TodoSchema()
 todos_schema = TodoSchema(many=True)
@@ -72,7 +70,6 @@ class TodoListAPI(Resource):
         return (result.data, 201)
 
 
-
 class TodoAPI(Resource):
     @auth.login_required
     def get(self, id):
@@ -91,9 +88,10 @@ class TodoAPI(Resource):
 
     @auth.login_required
     def delete(self, id):
-        query = models.Todo.delete().where(models.Todo.id==id)
+        query = models.Todo.delete().where(models.Todo.id == id)
         query.execute()
         return ('', 204)
+
 
 api.add_resource(TodoListAPI, '/todos', endpoint='todos')
 api.add_resource(TodoAPI, '/todos/<int:id>', endpoint='todo')

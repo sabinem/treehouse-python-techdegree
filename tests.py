@@ -4,7 +4,7 @@ from todo_api.models import User, Todo
 from peewee import *
 
 import unittest
-import os
+
 from playhouse.test_utils import test_database
 
 test_db = SqliteDatabase(':memory:')
@@ -93,16 +93,17 @@ class TestUserApi(TestWithData):
         self.tester = app.test_client(self)
 
     def test_resource_users_get(self):
-        resp = self.tester.get('/api/v1/users',
-                                content_type='application/json')
+        resp = self.tester.get(
+            '/api/v1/users',
+            content_type='application/json')
         self.assertEqual(resp.status_code, 200)
-        self.assertIn( '"username": "testuser"', resp.get_data(as_text=True))
+        self.assertIn('"username": "testuser"', resp.get_data(as_text=True))
 
     def test_resource_users_post(self):
         resp = self.tester.post('/api/v1/users',
                                 data=testuser2_data)
         self.assertEqual(resp.status_code, 201)
-        self.assertIn( '"username": "testuser2"', resp.get_data(as_text=True))
+        self.assertIn('"username": "testuser2"', resp.get_data(as_text=True))
 
     def test_resource_users_post_verify_password_notvalid(self):
         resp = self.tester.post('/api/v1/users',
@@ -120,8 +121,9 @@ class TestUserApi(TestWithData):
         self.assertEqual(resp.status_code, 400)
 
     def test_user_login(self):
-        resp = self.tester.post('/api/v1/login',
-                                data={'username': 'testuser', 'password': 'testpassword'})
+        resp = self.tester.post(
+            '/api/v1/login',
+            data={'username': 'testuser', 'password': 'testpassword'})
         self.assertEqual(resp.status_code, 200)
         self.assertIn('token', resp.get_data(as_text=True))
 
@@ -134,7 +136,6 @@ class TestUserApi(TestWithData):
         resp = self.tester.post('/api/v1/login',
                                 data={'username': 'x', 'password': 'y'})
         self.assertEqual(resp.status_code, 400)
-
 
 
 class TestTodoApi(TestWithData):
@@ -174,7 +175,8 @@ class TestTodoApi(TestWithData):
             headers=self.auth_header,
             data={'name': 'some new task'})
         self.assertEqual(resp.status_code, 201)
-        self.assertEqual(Todo.select().where(Todo.name == 'some new task').count(), 1)
+        self.assertEqual(
+            Todo.select().where(Todo.name == 'some new task').count(), 1)
 
     def test_resource_todos_post_unauthorized(self):
         resp = self.tester.post(
@@ -205,7 +207,8 @@ class TestTodoApi(TestWithData):
             '/api/v1/todos/' + str(self.todo2.id),
             headers=self.auth_header)
         self.assertEqual(resp.status_code, 204)
-        self.assertEqual(Todo.select().where(Todo.id == self.todo2.id).count(), 0)
+        self.assertEqual(
+            Todo.select().where(Todo.id == self.todo2.id).count(), 0)
 
     def test_resource_todo_delete_unauthorized(self):
         resp = self.tester.delete(
@@ -218,7 +221,8 @@ class TestTodoApi(TestWithData):
             headers=self.auth_header,
             data={'name': 'something else'})
         self.assertEqual(resp.status_code, 200)
-        self.assertEqual(Todo.get(Todo.id == self.todo1.id).name, 'something else')
+        self.assertEqual(Todo.get(Todo.id == self.todo1.id).name,
+                         'something else')
 
     def test_resource_todo_put_unauthorized(self):
         resp = self.tester.put(

@@ -4,18 +4,17 @@ Todo Api with Flask
 import json
 
 from flask import (Flask,
-    make_response,
-    jsonify,
-    render_template,
-    g,
-    request)
+                   make_response,
+                   jsonify,
+                   render_template,
+                   g,
+                   request)
 
 from flask_cors import CORS
 
 import webargs
 from webargs.flaskparser import parser
 
-from . import config
 from . import models
 
 # resources are imported as the api
@@ -63,5 +62,3 @@ def login():
         json.dumps({
             'error': 'user and password combination unknown'
         }), 400)
-
-

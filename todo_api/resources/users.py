@@ -10,7 +10,6 @@ from flask_marshmallow import Marshmallow
 import webargs
 from webargs.flaskparser import parser
 
-from ..auth import auth
 from .. import models
 
 
@@ -22,7 +21,9 @@ mm = Marshmallow(users_api)
 user_register_args = {
    'email': webargs.fields.Str(required=True),
    'username': webargs.fields.Str(required=True),
-   'password': webargs.fields.Str(required=True, validate=webargs.validate.Length(min=6)),
+   'password': webargs.fields.Str(
+       required=True,
+       validate=webargs.validate.Length(min=6)),
    'verify_password': webargs.fields.Str(required=True),
 }
 
@@ -31,6 +32,7 @@ class UserSchema(mm.Schema):
     class Meta:
         # Fields to expose
         fields = ('id', 'email', 'username', 'created_at')
+
 
 user_schema = UserSchema()
 users_schema = UserSchema(many=True)
@@ -56,4 +58,3 @@ class UserApi(Resource):
 
 
 api.add_resource(UserApi, '/users', endpoint='users')
-

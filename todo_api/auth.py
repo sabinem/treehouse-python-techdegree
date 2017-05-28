@@ -1,10 +1,9 @@
 from flask import g
-
-from flask_httpauth import HTTPBasicAuth, HTTPTokenAuth, MultiAuth
-
+from flask_httpauth import HTTPTokenAuth
 from . import models
 
 auth = HTTPTokenAuth(scheme='Token')
+
 
 @auth.verify_token
 def verify_token(token):
