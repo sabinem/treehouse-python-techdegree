@@ -22,15 +22,15 @@
 ## UserApi
 - there is a fully functional and testcovered user api, which is
 not used by the angular app so far
-- to explore it you could install httpie with
+
+### Explore the User Api
+to explore ist:
+
+- open another terminal window and install httpie with
 `pip install httpie`
 
-using **httpie** you can:
-- you can get all users at `http  GET  http://127.0.0.1:8000/api/v1/todos`
-- you can also post a new user at http  `POST  http://127.0.0.1:8000/api/v1/todos`
-- try at
-`http  POST  http://127.0.0.1:8000/api/v1/todos username="yourname"`
-and follow the instructions
-
-
-
+using **httpie** in that new window you can:
+- you can get all users at `http  GET  http://127.0.0.1:8000/api/v1/users`
+- you can also post a new user at http  `POST  http://127.0.0.1:8000/api/v1/users username="something"`
+- follow the instructions, that the api returns to you
+- with this new user you can log in at `http://127.0.0.1:8000` and continue working on your list
