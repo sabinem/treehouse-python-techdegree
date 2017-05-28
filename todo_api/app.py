@@ -40,19 +40,6 @@ login_args = {
 }
 
 
-@app.before_request
-def before_request():
-    """Connect to the database before each request."""
-    g.db = models.DATABASE
-    g.db.connect()
-
-
-@app.after_request
-def after_request(response):
-    """Close the database connection after each request."""
-    g.db.close()
-
-
 @app.route('/')
 def index():
     return render_template('index.html')

@@ -1,4 +1,4 @@
-from flask import Blueprint, abort, request
+from flask import Blueprint, abort, request, jsonify
 
 from flask_restful import (Resource, Api)
 # for marshaling responses
@@ -62,7 +62,7 @@ class TodoListAPI(Resource):
     def get(self):
         all_todos = models.Todo.select()
         result = todos_schema.dump(all_todos)
-        return result.data
+        return jsonify(result.data)
 
     @auth.login_required
     def post(self):
