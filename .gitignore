@@ -1,0 +1,6 @@
+docs/**
+__pycache__
+.idea/*
+.cache/*
+*.pyc
+*.sqlite
