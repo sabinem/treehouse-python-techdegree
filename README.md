@@ -10,7 +10,6 @@
 ## Run the server
 - Run the project with `python runserver.py`
 
-
 ## Try the todo app
 - go to `http://127.0.0.1:8000`
 - login with username `testuser`and password: `treehouse`
