@@ -3,8 +3,8 @@
 ## Install
 1. Download the project on your computer
 2. Unzip and go into the newly established directory
-3. Install a virtual environment: `python3 -m venv mc_venv`
-4. Activate the virtuale environment: `source mc_venv/bin/activate`
+3. Install a virtual environment: `python3 -m venv fa_venv`
+4. Activate the virtuale environment: `source fa_venv/bin/activate`
 5. Install the requirements `pip install -r requirements.txt`
 
 ## Run the server
@@ -17,5 +17,7 @@
 - you can then start you todo-list
 
 ## Testcoverage
-- run tests and see testcoverage with `nosetests --with-coverage --cover-html`
+- `coverage run tests.py`
+- `coverage report -m`
+
 
