@@ -1,0 +1,153 @@
+[
+  {
+    "name": "Francesca",
+    "image_filename": "1.jpg",
+    "breed": "Labrador",
+    "age": 72,
+    "gender": "f",
+    "size": "l"
+  },
+  {
+    "name": "Hank",
+    "image_filename": "2.jpg",
+    "breed": "French Bulldog",
+    "age": 14,
+    "gender": "m",
+    "size": "s"
+  },
+  {
+    "name": "Muffin",
+    "image_filename": "3.jpg",
+    "breed": "Boxer",
+    "age": 24,
+    "gender": "f",
+    "size": "xl"
+  },
+  {
+    "name": "Bjorn",
+    "image_filename": "4.jpg",
+    "breed": "Swedish Vallhund",
+    "age": 36,
+    "gender": "m",
+    "size": "m"
+  },
+  {
+    "name": "Hercules",
+    "image_filename": "5.jpg",
+    "breed": "Chihuahua",
+    "age": 96,
+    "gender": "m",
+    "size": "s"
+  },
+  {
+    "name": "Pez",
+    "image_filename": "6.jpg",
+    "breed": "Unknown Mix",
+    "age": 3,
+    "gender": "m",
+    "size": "m"
+  },
+  {
+    "name": "Cocoa",
+    "image_filename": "7.jpg",
+    "breed": "Chocolate Labrador Mix",
+    "age": 60,
+    "gender": "f",
+    "size": "l"
+  },
+  {
+    "name": "Lord Barkley",
+    "image_filename": "8.jpg",
+    "breed": "English Bulldog",
+    "age": 26,
+    "gender": "m",
+    "size": "m"
+  },
+  {
+    "name": "Sandy",
+    "image_filename": "9.jpg",
+    "breed": "Goldendoodle",
+    "age": 14,
+    "gender": "f",
+    "size": "l"
+  },
+  {
+    "name": "Cookie",
+    "image_filename": "10.jpg",
+    "breed": "Golden Spaniel Mix",
+    "age": 48,
+    "gender": "f",
+    "size": "m"
+  },
+  {
+    "name": "Custard",
+    "image_filename": "11.jpg",
+    "breed": "Yellow Lab",
+    "age": 84,
+    "gender": "m",
+    "size": "l"
+  },
+  {
+    "name": "Captain Jack",
+    "image_filename": "12.jpg",
+    "breed": "Pug Mix",
+    "age": 66,
+    "gender": "m",
+    "size": "s"
+  },
+  {
+    "name": "Gypsy",
+    "image_filename": "13.jpg",
+    "breed": "Golden Retriever",
+    "age": 30,
+    "gender": "f",
+    "size": "l"
+  },
+  {
+    "name": "Bella",
+    "image_filename": "14.jpg",
+    "breed": "Collie",
+    "age": 14,
+    "gender": "f",
+    "size": "l"
+  },
+  {
+    "name": "Gizmo",
+    "image_filename": "15.jpg",
+    "breed": "English Springer Spaniel",
+    "age": 78,
+    "gender": "m",
+    "size": "l"
+  },
+  {
+    "name": "Prince",
+    "image_filename": "16.jpg",
+    "age": 81,
+    "gender": "m",
+    "size": "s"
+  },
+  {
+    "name": "Sadie",
+    "image_filename": "17.jpg",
+    "breed": "Springer Spaniel",
+    "age": 50,
+    "gender": "f",
+    "size": "l"
+  },
+  {
+    "name": "Zumba",
+    "image_filename": "18.jpg",
+    "breed": "Yorkshire Terrier",
+    "age": 11,
+    "gender": "m",
+    "size": "s"
+  },
+  {
+    "name": "Elsa",
+    "image_filename": "19.jpg",
+    "breed": "Husky",
+    "age": 2,
+    "gender": "f",
+    "size": "m"
+  }
+]

@@ -1,0 +1,42 @@
+
+/* Custom css for pug or ugh */
+
+img {
+  max-width: 100%;
+}
+.dog-card {
+  background: white;
+  padding: 15px 20px;
+  margin-top: -9px;
+}
+.text-centered {
+  text-align: center;
+}
+.dog-controls a {
+  opacity: 0.75;
+  -webkit-transition: opacity 0.2s;
+  -moz-transition: opacity 0.2s;
+  -ms-transition: opacity 0.2s;
+  -o-transition: opacity 0.2s;
+  transition: opacity 0.2s;
+}
+  .dog-controls a:hover {
+    opacity: 1;
+  }
+  .dog-controls a:active {
+    position: relative;
+    top: 1px;
+  }
+footer {
+  font-size: 13px;
+  font-family: "Work Sans";
+  padding-bottom: 2em;
+}
+.current-tab a {
+  color: white;
+}
+
+button:disabled {
+  color: #dddddd;
+  box-shadow: 0 0 0 2px #dddddd inset;
+}
