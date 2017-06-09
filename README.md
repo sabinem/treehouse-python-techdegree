@@ -11,7 +11,7 @@
 - Activate the virtuale environment: `source dog_venv/bin/activate`
 - Install the requirements `pip install -r requirements.txt`
 - Establish the database: `python manage.py migrate`
-- Load the data: `python pugorugh/scripts/data_import.py`
+- Load the data: `python data_import.py`
 
 ## Run the server
 - `python manage.py runserver`
