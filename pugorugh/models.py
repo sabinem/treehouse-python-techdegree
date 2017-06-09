@@ -73,7 +73,7 @@ class DogManager(models.Manager):
 
 class Dog(models.Model):
     name = models.CharField('Name', max_length=255)
-    image_filename = models.ImageField(upload_to='pugorugh/static/images/dogs')
+    image_filename = models.CharField(max_length=255)
     breed = models.CharField('Breed', max_length=255, blank=True)
     age = models.IntegerField('Age in month')
     gender = models.CharField(
