@@ -1,20 +1,5 @@
 # Pug or Ugh
 
-admin
-admin123
-57bf45533d5835b887fa2a17ec73cf6e50679e1e
-
-
-testuser2
-admin123
-ebbe45ba967efb0eb10a57f0e0aec619ea637113
-
-admin
-admin123
-
-testuser
-test123
-
 ## Requirements
 
 Create the models, serializers, and views to power the provided Angular
@@ -99,24 +84,4 @@ The following routes are expected by the JavaScript application.
 * To change or set user preferences
 
 	* `/api/user/preferences/`
-
-
-# Installation
-
-1. download / virtual env
-
-2. python manage.py migrate
-
-3. python data_import.py
-
-4. python manage.py runserver
-
-from django.contrib import admin
-
-admin
-admin123
-
-testuser
-test123
-
 
