@@ -1,7 +1,14 @@
+"""data import for pugorugh app
+importing dogs from
+pugorugh/static/dog_details.json"""
 import os
 import django
 import json
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "backend.settings")
+django.setup()
 
+# pugorugh objects can only be imported after
+# django has been setup!
 from pugorugh.serializers import DogSerializer
 from pugorugh.models import Dog
 
