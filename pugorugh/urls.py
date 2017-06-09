@@ -1,3 +1,4 @@
+"""urls for the pugorugh app"""
 from django.conf.urls import url
 from django.views.generic import TemplateView
 from django.views.generic.base import RedirectView
@@ -6,7 +7,6 @@ from rest_framework.urlpatterns import format_suffix_patterns
 
 from . import views
 
-#from pugorugh.views import UserRegisterView
 
 # API endpoints
 urlpatterns = format_suffix_patterns([

@@ -1,13 +1,14 @@
 import os
 import django
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "backend.settings")
-django.setup()
+import json
 
 from pugorugh.serializers import DogSerializer
 from pugorugh.models import Dog
 
-import json
 
+os.environ.setdefault("DJANGO_SETTINGS_MODULE",
+                      "backend.settings")
+django.setup()
 count = Dog.objects.all().count()
 if count != 0:
     print("The database already existed. Nothing was done.")
@@ -23,7 +24,3 @@ else:
             print("--> The database contains now {} dogs".format(count))
         else:
             print(serializer.errors)
-
-
-
-
