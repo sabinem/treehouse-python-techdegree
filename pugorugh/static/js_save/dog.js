@@ -2,7 +2,6 @@ var Dog = React.createClass({
   displayName: "Dog",
 
   getInitialState: function () {
-    console.log("initial state dogs");
     return {
       filter: this.props.filter,
       dogs_for_filter_found: false
@@ -15,17 +14,11 @@ var Dog = React.createClass({
     this.serverRequest.abort();
   },
   componentWillReceiveProps: function (props) {
-    console.log("dogs receiving props");
-    this.setState({
-      details: undefined,
-      message: undefined,
-      filter: props.filter,
-      dogs_for_filter_found: false
-    }, this.getNext);
+    this.setState({ details: undefined, message: undefined, filter: props.filter }, this.getNext);
   },
   getNext: function () {
     this.serverRequest = $.ajax({
-      url: `api/dog/${this.state.details ? this.state.details.id : -1}/${this.state.filter}/next/`,
+      url: `api/dog/${ this.state.details ? this.state.details.id : -1 }/${ this.state.filter }/next/`,
       method: "GET",
       dataType: "json",
       headers: TokenAuth.getAuthHeader()
@@ -33,13 +26,15 @@ var Dog = React.createClass({
       this.setState({
         details: data,
         message: undefined,
-        dogs_for_filter_found: true
-      });
+        dogs_for_filter_found: true });
     }.bind(this)).fail(function (response) {
       var message = null;
       if (response.status == 404) {
-        //message = "No dogs matched your preferences.";
-        message = `You don't have any ${this.state.filter} dogs that fits your preference.`;
+        if (this.state.filter == "undecided") {
+          message = "No dogs matched your preferences.";
+        } else {
+          message = `You don't have any ${ this.state.filter } dogs.`;
+        }
       } else {
         message = response.error;
       }
@@ -48,7 +43,7 @@ var Dog = React.createClass({
   },
   changeDogStatus: function (newStatus) {
     this.serverRequest = $.ajax({
-      url: `api/dog/${this.state.details.id}/${newStatus}/`,
+      url: `api/dog/${ this.state.details.id }/${ newStatus }/`,
       method: "PUT",
       dataType: "json",
       headers: TokenAuth.getAuthHeader()
@@ -59,8 +54,6 @@ var Dog = React.createClass({
     }.bind(this));
   },
   getFirst: function () {
-    console.log("get first");
-    this.setState({ dogs_for_filter_found: false });
     this.getNext();
   },
   handlePreferencesClick: function (event) {
@@ -171,13 +164,13 @@ var Dog = React.createClass({
         "p",
         { className: "dog-card" },
         this.state.details.name,
-        "\u2022",
+        "•",
         this.state.details.breed,
-        "\u2022",
+        "•",
         this.state.details.age,
-        " Months\u2022",
+        " Months•",
         this.genderLookup[this.state.details.gender],
-        "\u2022",
+        "•",
         this.sizeLookup[this.state.details.size]
       ),
       this.dogControls()

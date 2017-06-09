@@ -15,11 +15,11 @@ var Preferences = React.createClass({
       headers: TokenAuth.getAuthHeader()
     }).done(function(data) {
       this.data = {
-        age: new Set(data.age? data.age.split(",") : ['b','y','a','s']),
-        gender: new Set(data.gender? data.gender.split(",") : ['m','f']),
-        size: new Set(data.size? data.size.split(",") : ['s','m','l','xl'])
+        age: new Set(data.age? data.age : ['b','y','a','s']),
+        gender: new Set(data.gender? data.gender : ['m','f']),
+        size: new Set(data.size? data.size : ['s','m','l','xl'])
       };
-      this.setState({ data: data });
+      this.setState({ data: this.data });
     }.bind(this));
   },
   componentWillUnmount: function() {
@@ -30,9 +30,9 @@ var Preferences = React.createClass({
   },
   save: function() {
     var json  = JSON.stringify({
-      age: Array.from(this.data.age).join(','),
-      gender: Array.from(this.data.gender).join(','),
-      size: Array.from(this.data.size).join(',')
+      age: Array.from(this.data.age),
+      gender: Array.from(this.data.gender),
+      size: Array.from(this.data.size)
     });
 
     $.ajax({

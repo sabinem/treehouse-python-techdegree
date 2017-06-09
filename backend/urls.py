@@ -14,26 +14,22 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
-from django.contrib import admin
 
 from rest_framework.authtoken import views as authtoken_views
 
 from rest_framework import routers
 
 from pugorugh import views as pugorugh_views
-from accounts import views as accounts_views
 
 router = routers.DefaultRouter()
-router.register(r'dog', pugorugh_views.DogViewSet)
-
+router.register(r'dogs', pugorugh_views.DogViewSet)
+router.register(r'userprefs', pugorugh_views.UserPrefViewSet)
+router.register(r'userprefs', pugorugh_views.UserViewSet)
 
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-
     # login by by restframework
     url(r'^api/user/login/', authtoken_views.obtain_auth_token),
-
 
     # pugorugh application
     url(r'^', include('pugorugh.urls')),
@@ -44,14 +40,12 @@ urlpatterns = [
         name='user_preferences_retrieve_update'),
 
     # registration by pugorugh auth
-    url(r'^api/user/x', accounts_views.UserRegisterView.as_view(), name='register-user'),
-
+    url(r'^api/user/', pugorugh_views.UserRegisterView.as_view(), name='register-user'),
 
     # authorization by restframework
     url(r'^api-auth/', include('rest_framework.urls',
                                namespace='rest_framework')),
 
-    # pugorugh api
-    url(r'^api/', include('pugorugh.urls', namespace='api')),
+    url(r'^api/admin/', include(router.urls, namespace='api-admin')),
 ]
 

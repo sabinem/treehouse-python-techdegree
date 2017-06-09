@@ -14,9 +14,6 @@ var Registration = React.createClass({
       this.setState({ message: message });
     }.bind(this));
   },
-  handleLoginClick: function (event) {
-    this.props.setView("login");
-  },
   disabled: function () {
     return this.state.user == '' || this.state.password == '' || this.state.password2 == '' || this.state.password != this.state.password2;
   },
@@ -36,11 +33,6 @@ var Registration = React.createClass({
         'button',
         { className: 'button', onClick: this.handleRegistration, disabled: this.disabled() },
         'Register'
-      ),
-      React.createElement(
-        'a',
-        { onClick: this.handleLoginClick },
-        'Login'
       )
     );
   }

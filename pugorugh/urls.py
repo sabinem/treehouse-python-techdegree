@@ -24,25 +24,25 @@ urlpatterns = format_suffix_patterns([
     # -------- Api ------------------------
 
     # change userdog status
-    url(r'^dog/(?P<dog_pk>\d+)/liked/$',
+    url(r'^api/dog/(?P<dog_pk>\d+)/liked/$',
         views.userdog_update_status_liked_view,
         name='userdog_update_like'),
-    url(r'^dog/(?P<dog_pk>\d+)/disliked/$',
+    url(r'^api/dog/(?P<dog_pk>\d+)/disliked/$',
         views.userdog_update_status_disliked_view,
         name='userdog_update_dislike'),
-    url(r'^dog/(?P<dog_pk>\d+)/undecided/$',
+    url(r'^api/dog/(?P<dog_pk>\d+)/undecided/$',
         views.userdog_update_status_undecided_view,
         name='userdog_update_undecided'),
 
     # get next dog with same status from pk
-    url(r'^dog/(?P<dog_pk>-?\d+)/liked/next/$',
+    url(r'^api/dog/(?P<dog_pk>-?\d+)/liked/next/$',
         views.userdog_retrieve_next_liked_view,
         name='userdog_retrieve_next_liked'),
-    url(r'^dog/(?P<dog_pk>-?\d+)/disliked/next/$',
+    url(r'^api/dog/(?P<dog_pk>-?\d+)/disliked/next/$',
         views.userdog_retrieve_next_disliked_view,
-        name='userdog_retrieve_next_liked'),
-    url(r'^dog/(?P<dog_pk>-?\d+)/undecided/next/$',
+        name='userdog_retrieve_next_disliked'),
+    url(r'^api/dog/(?P<dog_pk>-?\d+)/undecided/next/$',
         views.userdog_retrieve_next_undecided_view,
-        name='userdog_retrieve_next_liked'),
+        name='userdog_retrieve_next_undecided'),
 
 ])

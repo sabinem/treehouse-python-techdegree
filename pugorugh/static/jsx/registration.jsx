@@ -15,6 +15,9 @@ var Registration = React.createClass({
       }.bind(this)
     );
   },
+  handleLoginClick: function(event) {
+    this.props.setView("login");
+  },
   disabled: function() {
     return this.state.user == '' || this.state.password == '' || this.state.password2 == '' ||
       this.state.password != this.state.password2;
@@ -27,6 +30,7 @@ var Registration = React.createClass({
         <input type="password" placeholder="Password" valueLink={this.linkState('password')} />
         <input type="password" placeholder="Verify Password" valueLink={this.linkState('password2')} />
         <button className="button" onClick={this.handleRegistration} disabled={this.disabled()}>Register</button>
+        <a onClick={this.handleLoginClick}>Login</a>
       </div>
     );
   }

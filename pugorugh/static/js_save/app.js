@@ -2,7 +2,6 @@ var PugOrUgh = React.createClass({
   displayName: "PugOrUgh",
 
   getInitialState: function () {
-    console.log("initial state");
     return {
       userName: TokenAuth.getUsername()
     };
@@ -27,6 +26,7 @@ var PugOrUgh = React.createClass({
         var component = React.createElement(Login, { setView: this.setView });
         break;
     }
+
     this.setState({ view: component, viewName: view });
   },
   handleLogoutClick: function () {
@@ -75,7 +75,7 @@ var PugOrUgh = React.createClass({
               React.createElement(
                 "nav",
                 { disabled: this.state.view == "" },
-                TokenAuth.loggedIn() ? React.createElement(
+                React.createElement(
                   "ul",
                   { className: "circle--inline" },
                   React.createElement(
@@ -105,7 +105,7 @@ var PugOrUgh = React.createClass({
                       "Disliked"
                     )
                   )
-                ) : null
+                )
               )
             )
           )

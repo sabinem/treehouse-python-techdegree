@@ -1,5 +1,6 @@
 var Dog = React.createClass({
   getInitialState: function () {
+    console.log("initial state dogs");
     return {
         filter: this.props.filter,
         dogs_for_filter_found: false
@@ -12,7 +13,13 @@ var Dog = React.createClass({
     this.serverRequest.abort();
   },
   componentWillReceiveProps: function(props) {
-    this.setState({details: undefined, message: undefined, filter: props.filter}, this.getNext);
+    console.log("dogs receiving props");
+    this.setState({
+        details: undefined,
+        message: undefined,
+        filter: props.filter,
+        dogs_for_filter_found: false
+    }, this.getNext);
   },
   getNext: function () {
     this.serverRequest = $.ajax({
@@ -30,11 +37,8 @@ var Dog = React.createClass({
       .fail(function (response) {
         var message = null;
         if (response.status == 404) {
-          if (this.state.filter == "undecided") {
-            message = "No dogs matched your preferences.";
-          } else {
-            message = `You don't have any ${this.state.filter} dogs.`;
-          }
+            //message = "No dogs matched your preferences.";
+            message = `You don't have any ${this.state.filter} dogs that fits your preference.`;
         } else {
           message = response.error;
         }
@@ -55,6 +59,8 @@ var Dog = React.createClass({
       }.bind(this));
   },
   getFirst: function() {
+    console.log("get first");
+    this.setState({ dogs_for_filter_found: false });
     this.getNext();
   },
   handlePreferencesClick: function(event) {

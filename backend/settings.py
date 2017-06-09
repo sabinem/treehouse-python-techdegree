@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'pugorugh',
-    'accounts',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -112,15 +111,10 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        #'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.TokenAuthentication',
-        # 'rest_framework.authentication.BasicAuthentication',
-        # 'rest_framework.authentication.SessionAuthentication',
     ),
-
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    #'DEFAULT_PAGINATION_CLASS': 'pugorugh.pagination.LinkHeaderPagination',
-    'PAGE_SIZE': 100
+        'PAGE_SIZE': 100
 }
 
 

@@ -9,10 +9,9 @@ from rest_framework import pagination
 
 from multiselectfield import MultiSelectField
 
-
-class Unknown(Enum):
-    unknown = 'u'
-
+DISLIKED = 'd'
+UNDECIDED = 'u'
+LIKED = 'l'
 
 class Gender(Enum):
     male = 'm'
@@ -31,23 +30,21 @@ class Size(Enum):
     medium = 'm'
     large = 'l'
     xlarge = 'xl'
-    unknown = 'u'
 
 
 class Status(Enum):
-    liked = 'l'
-    disliked = 'd'
-
-
-def get_choices_with_unknown(cls):
-    choices = get_choices(cls)
-    choices.append((Unknown.unknown.value, Unknown.unknown.name))
-    return choices
+    liked = LIKED
+    disliked = DISLIKED
+    undecided = UNDECIDED
 
 
 def get_choices(cls):
     return [(x.value, x.name) for x in cls]
 
+
+def get_choices_as_string(cls):
+    values = [x.value for x in cls]
+    return ','.join(values)
 
 
 class DogManager(models.Manager):
@@ -76,20 +73,23 @@ class DogManager(models.Manager):
 
 class Dog(models.Model):
     name = models.CharField('Name', max_length=255)
-    image_filename = models.CharField(max_length=255)
+    image_filename = models.ImageField(upload_to='pugorugh/static/images/dogs')
     breed = models.CharField('Breed', max_length=255, blank=True)
     age = models.IntegerField('Age in month')
-    userdog = models.ManyToManyField(User)
     gender = models.CharField(
         'Gender',
         max_length=1,
-        choices=get_choices_with_unknown(Gender)
+        choices=get_choices(Gender),
+        blank=True
     )
     size = models.CharField(
         'Size',
         max_length=2,
-        choices=get_choices_with_unknown(Size)
+        choices=get_choices(Size),
+        blank=True
     )
+    trained = models.BooleanField(default=False),
+    vaccinated = models.BooleanField(default=False)
     objects = DogManager()
 
     class Meta:
@@ -110,29 +110,29 @@ class Dog(models.Model):
             return Age.senior.value
 
     def update_userdog_status(self, user, status):
-        try:
-            userdog = UserDog.objects.get(
-                user=user,
-                dog=self,
-            )
+        if status != UNDECIDED:
+            userdog, created = UserDog.objects.get_or_create(
+                    user=user,
+                    dog=self,
+                )
             userdog.status = status
             userdog.save()
-        except UserDog.DoesNotExist:
-            userdog = UserDog.objects.create(
+        else:
+            UserDog.objects.filter(
                 user=user,
                 dog=self,
-                status=status
-            )
+            ).delete()
 
-    def set_userdog_undecided(self, user):
+    def get_userdog_status(self, user):
         try:
             userdog = UserDog.objects.get(
                 user=user,
                 dog=self,
             )
-            userdog.delete()
         except UserDog.DoesNotExist:
-            pass
+            return UNDECIDED
+        else:
+            return userdog.status
 
 
 class UserDogManager(models.Manager):
@@ -149,7 +149,7 @@ class UserDog(models.Model):
     status = models.CharField(
         'Status',
         max_length=1,
-        choices=get_choices_with_unknown(Status))
+        choices=get_choices(Status))
 
     objects = UserDogManager()
 
@@ -157,25 +157,28 @@ class UserDog(models.Model):
         unique_together = ['user', 'dog']
 
     def __str__(self):
-        return "{} {} {}".format(self.user, self.status, self.dog)
+        return "{} {} {}".format(self.user, self.get_status_display(), self.dog)
 
 
 class UserPref(models.Model):
     user = models.OneToOneField(User, related_name='preferences')
-    age = models.CharField(
+    age = MultiSelectField(
         choices=get_choices(Age),
         max_length=50,
+        default=get_choices_as_string(Age)
     )
-    gender = models.CharField(
+    gender = MultiSelectField(
         choices=get_choices(Gender),
         max_length=50,
+        default=get_choices_as_string(Gender)
     )
-    size = models.CharField(
+    size = MultiSelectField(
         choices=get_choices(Size),
         max_length=50,
+        default=get_choices_as_string(Size)
     )
 
     def __str__(self):
-        return "{} {} {}".format(self.age, self.gender, self.size)
+        return "Age: {}, Gender: {}, Size: {}".format(self.age, self.gender, self.size)
 
 
