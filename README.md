@@ -18,9 +18,10 @@
 
 ## Try the application
 - go to `http://127.0.0.1:8000`
-- register
-- use the application: set your preferences and scroll througn the dogs and decide
-whether you like them or not!
+- open the tab `Register` and register with any username and password combination
+- you will be automatically logged in an able to set your preferences
+- scroll througn the dogs and decide on them!
+- have fun using and testing the application!
 
 ## Test coverage
 - run the tests with `coverage run manage.py test`
