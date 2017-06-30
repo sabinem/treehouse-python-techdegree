@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="bounds">
+        <div class="grid-30 centered">
+            <h2>Sign Up</h2>
+            <form method="post">{% csrf_token %}
+                {{ form.non_field_errors }}
+                {% for field in form %}
+                    {{ field.errors }}
+                    {{ field }}
+                {% endfor %}
+                <button class="button-primary" type="submit">Sign Up</button>
+                <a class="button" href="{% url 'accounts:login' %}">Sign In</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}

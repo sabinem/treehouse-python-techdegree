@@ -1,0 +1,98 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<div class="circle--actions--bar">
+    <div class="bounds">
+        <div class="grid-100">
+            <a class="button" href="{% url 'teambuilder:project_edit' project_pk=project.id %}">Edit Project</a>
+            <a class="button" href="{% url 'teambuilder:project_delete' project_pk=project.id %}">Delete Project</a>
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="bounds circle--page circle--article">
+    <div class="grid-70">
+        <div class="circle--article--header">
+            <h4 class="circle--article--section">Project</h4>
+            <h1 class="circle--article--title">{{ project.title }}</h1>
+            <p class="circle--article--byline"><a>{{ project.owner.name }}</a></p>
+        </div>
+
+        <div class="circle--article--body">
+            {{ project.description }}
+        </div>
+
+
+        <div class="circle--project--positions">
+            <h2>Positions</h2>
+
+            <ul class="circle--group--list">
+                {% for position in positions_not_applied %}
+                <li id="anchor{{ position.id }}" class="anchor">
+                    <h3>{{ position.skill }}</h3>
+                    <p>{{ position.description }}</p>
+                    {% if position.open %}
+                        <a class="button button-primary"
+                           href="{% url 'teambuilder:apply' position_pk=position.id %}"
+                        >
+                            Apply
+                        </a>
+                    {% else %}
+                        <a class="button button-primary button-inactive">Position Filled</a>
+                    {% endif %}
+                </li>
+                {% endfor %}
+                {% for position in positions_applied %}
+                <li id="anchor{{ position.id }}" class="anchor">
+                    <h3>{{ position.skill }}</h3>
+                    <p>{{ position.description }}</p>
+                    {% if position.open %}
+                        <a class="button button-primary button-inactive"
+                        >
+                            Applied
+                        </a>
+                    {% else %}
+                        <a class="button button-primary button-inactive">Position Filled</a>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="grid-25 grid-push-5">
+        <div class="circle--secondary--module">
+            <h3>Project Needs</h3>
+            <ul class="circle--link--list">
+                {% for need in needs %}
+                <li>
+                    <a href="">
+                        {{ need.need }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+
+        <div class="circle--secondary--module">
+            <h3>Project Timeline</h3>
+            <p>{{ project.project_timeline }}</p>
+        </div>
+
+        <div class="circle--secondary--module">
+            <h3>Applicant Requirements</h3>
+            <p>{{ project.applicant_requirements }}</p>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

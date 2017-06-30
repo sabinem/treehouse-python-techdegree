@@ -1,0 +1,16 @@
+/* for message */
+.circle--page.message {
+    margin-bottom: 0;
+}
+
+/* padding before avatar */
+.circle--primary--avatar::before {
+    padding-top:0;
+}
+
+/* display messages inline */
+
+ul.messages, ul.messages li {
+    display: inline;
+    list-style: none;
+}
