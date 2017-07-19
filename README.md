@@ -14,4 +14,4 @@ and makes team assignments to get balanced teams.
 
 ## Run program
 - Start the application with `python3 soccer_league.py`
-- It will generate a text file for each player with the team assignment
+- It will generate a text file for each player with the team assignment and print a report on the team assignments.
