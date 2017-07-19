@@ -1,12 +1,13 @@
-# Treehouse Python Techdegree:
-## 1. Project: Soccer League Team Assigments
+# Soccer League Team Assigments
+- 1st project for Treehouse Techdegree Python
+- [detailed requirements for the project](docs/assigment.md)
 
 ## Description
 - The app consists of one program `soccer_league.py`.
 - The program reads a file [data/soccer_players.csv](data/soccer_players.csv) of players
-and makes team assignments to get balanced teams.
+and makes team assignments to arrive at balanced teams.
 - It prints out letters to the players, which contain the team assignment and the date and time of the first practice and puts them in the result directory.
-[detailed description](docs/assigment.md)
+- [detailed requirements for the project](docs/assigment.md)
 
 ## Installation
 - Download the zip file to your computer and unzip
