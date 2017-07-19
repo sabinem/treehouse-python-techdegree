@@ -5,7 +5,7 @@
 - The app consists of one program `soccer_league.py`.
 - The program reads a file [data/soccer_players.csv](data/soccer_players.csv) of players.
 and makes team assignments to get balanced teams.
-- It prints out letters to the players, which contain the team assignment and the date and time of the first practice.
+- It prints out letters to the players, which contain the team assignment and the date and time of the first practice and puts them in the result directory.
 [detailed description](docs/assigment.md)
 
 ## Installation
