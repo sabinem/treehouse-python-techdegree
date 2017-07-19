@@ -1,9 +1,11 @@
 # Detailed Assignment
 
 ## Python Techdegree Treehouse Project 1
-This project was an assignment of Python Techdegree at Treehouse. Below you find the original description of the project.
+
+This project was an assignment of [Treehouse Techdegree Python](https://teamtreehouse.com/techdegree/python-web-development). Below you find the original description of the project.
 
 ## Description
+
 You have volunteered to be the Coordinator for your town’s youth soccer league. As part of your job you need to divide the 18 children who have signed up for the league into three even teams - Dragons, Sharks and Raptors. In years past, the teams have been unevenly matched, so this year you are doing your best to fix that. For each child, you will have the following information: Name, height (in inches), whether or not they have played soccer before, and their guardians’ names.
 
 The project has three major parts. For each part choose from the tools we have covered in the courses so far. Please don’t employ more advanced tools we haven’t covered yet, even if they are right for the job. However, if you identify a place where a more advanced tool is appropriate, please mention that in a code comment as you and your mentor may want to discuss it later.
@@ -33,5 +35,6 @@ As always, meaningful and concise code comments are expected. Your code should b
 - Save to disk, a personalized letter to the Guardians of each player. Specify: the player’s name, team name, and date/time of their first team practice. There should be a total of 18 letters, one for each player.
 - As always, please add concise and descriptive comments to your code and be sure to name your constants, variables and keys descriptively.
 
-##Extra Credit
+## Extra Credit
+
 - In order to get an “Exceeds Expectations” rating, also provide logic to ensure each team’s average height is within 1 inch of the others, as well as having each team contain the same number of experienced players.
