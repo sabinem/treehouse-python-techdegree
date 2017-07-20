@@ -10,7 +10,7 @@ The app is a mineral search site searching a given mineral database
 - markdown can be used for the descriptions
 
 ## Programming languages, frameworks, libraries
-- Django (Python Framework)
+- [Django](https://www.djangoproject.com/) (Python Framework)
 
 ## Installation
 - Download the zip file to your computer and unzip
