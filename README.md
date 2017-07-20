@@ -4,9 +4,9 @@
 
 ## Description
 The app builds a dialog for a csv-worklog per person
-- you can log in
-- enter logentries
-- search your worklog
+- you pick your worklog by entering your username, the log will then be stored in the corresponding csv file.
+- you may enter logentries
+- you may search your worklog
 
 ## Programm languages used
 - this is pure Python
