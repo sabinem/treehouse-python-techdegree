@@ -8,13 +8,13 @@
 and makes team assignments to arrive at balanced teams.
 - It prints out letters to the players, which contain the team assignment and the date and time of the first practice and puts them in a result directory.
 
-## Programm languages used
+## Programming languages, frameworks, libraries
 - this is pure Python
 
 ## Installation
 - Download the zip file to your computer and unzip
 - Go into the directory
 
-## Run program
+## Start application
 - Start the application with `python3 soccer_league.py`
 - It will generate a text file for each player with the team assignment and print a report on the team assignments.
