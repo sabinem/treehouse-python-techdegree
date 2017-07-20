@@ -10,10 +10,6 @@ In this project you will implement a console-based version of the popular battle
 
 ## Project Instructions
 
-Project Instructions
-
-To complete this project, follow the instructions below. If you get stuck, ask a question in the community.
-
 You’ll build a two player battleship game. Each player will place their ships without the other one watching. Then each player will take turns guessing locations where their opponent’s ships are. After the player has entered a location the screen will be cleared and the results of the guess will be displayed on the screen. The next player then has a turn. Players continue taking turns until one of the players guesses all of the locations on the board that opponent’s ships occupy. That player is declared the winner.
 Part of the purpose of this project is to test your ability to perform object oriented programming. To get full credit, you’ll need to write a minimum of three class definitions. You may write more than three though.
 The code should be clean, readable, and well organized and comply with Python PEP 8 standards.
@@ -22,10 +18,10 @@ The code should be clean, readable, and well organized and comply with Python PE
 Refer to players using their names whenever possible.
 ### Display an empty board.
 Clear the screen and display an empty board on the screen. Use the EMPTY marker for all locations on the board. The board displays column headers as letters in the alphabet and displays numeric row numbers along the left side of the board.
-Prompt user to place a ship.
+### Prompt user to place a ship.
 Under the board, prompt the user to enter one ship at a time. For each ship, ask if they want the ship to be oriented horizontally or vertically then ask which location on the board the first ships should be placed at: Below is an example prompt. You can use a different prompt.
 Place the location of the aircraft carrier (5 spaces): a2 Is it horizontal? (Y)/N: n
-Validate user input.
+### Validate user input.
 If, at any time, the player enters input that can’t be parsed then continue prompting until valid input has been entered. Tell the user why their input was invalid before prompting again.
 Be as accepting as possible of input. For example, spaces before or after the player’s input is allowed. Both lower and uppercase characters are also allowed. In order to reduce confusion, you may want to clear the screen and display the screen again before each attempt.
 Validate ship placement.
