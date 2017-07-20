@@ -3,8 +3,10 @@ __pycache__
 .cache/*
 *.pyc
 *.db
+venv/**
 .coverage
 .coveragerc
 coverage/*
 htmlcov/*
 worklogdb/worklog/new*
+worklogdb/**
