@@ -1,10 +1,12 @@
 # Mineral Catalog
 - 8th project for [Treehouse Techdegree Python](https://teamtreehouse.com/techdegree/python-web-development)
+- extends [project 6](https://github.com/sabinem/python_techdegree_project6_mineral_catalog)
 - [detailed requirements for the project](docs/assigment.md)
 
 ## Description
-The app is a mineral search site searching a given mineral database
-- extension of an earlier project [project 6](https://github.com/sabinem/python_techdegree_project6_mineral_catalog)
+The app is again a mineral search site searching a given mineral database
+- the queries are optimized in this version
+- additional search features have been added
 
 ## Programming languages, frameworks, libraries
 - [Django](https://www.djangoproject.com/) (Python Framework)
