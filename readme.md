@@ -10,9 +10,8 @@ The app builds a learning journal for one person
 - markdown can be used for the descriptions
 
 ## Programming languages, frameworks, libraries
-- Python
-- Flask
-- Peewee
+- Flask (Python Framework)
+- Peewee (SQLite-ORM)
 - Markdown
 
 ## Installation
