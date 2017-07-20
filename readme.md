@@ -1,53 +1,36 @@
-# Project 6 Treehouse Techdegree Python
-## Mineral Catalog
-###Description
-The mineral catalog comes with data to be loaded.
-It is not password protected and can only be displayed.
+# Mineral Catalog
+- 6th project for [Treehouse Techdegree Python](https://teamtreehouse.com/techdegree/python-web-development)
+- [detailed requirements for the project](docs/assigment.md)
 
-###Installation
-1. Download the project on your computer
-2. Unzip and go into the newly established directory
-3. Install a virtual environment:
-    `python3 -m venv mc_venv`
-4. Activate the virtuale environment:
-    `source mc_venv/bin/activate`
-5. Install the requirements
+## Description
+The app is a mineral search site searching a given mineral database
+- the user registers with a title and copyright-name
+- the journal is password protected
+- the journal consists of log entries, resources and tags
+- markdown can be used for the descriptions
+
+## Programming languages, frameworks, libraries
+- Django (Python Framework)
+
+## Installation
+- Download the zip file to your computer and unzip
+- Go into the directory
+- Install a virtual environment:
+    `virtualenv -p python3 p3venv`
+- Activate the virtuale environment:
+    `source p3venv/bin/activate`
+- Install the requirements
     `pip install -r requirements.txt`
-project has no external dependencies, other then Python 3
 
-###Analyze Data (optional: you can skip that step)
-If you want you can analyze the data by starting
-`python analyze.py` this will output two
-testfile `data_summary.txt` and `data_detail.txt`
-in you directory: the summary contains information about the data
-that resides in `data/minerals.json`. The second file contains all the
-different values for each field, that has been found in there.
+## Data
+- the mineral data is provided as [csv file `data/minerals.json`](data/minerals.json)
+- analysis of the data, see [`data/README.md`](data/README.md)
 
-####Findings
-* The data does include 3 duplicates, since the names are not all distinct.
-* Some minerals seem to have the same image file.
-* Only the group seems
-appropriate for a select field.
-* All fields are character fields.
-* Only the image caption needs to be a Textfield with a length of > 400.
-* Some names have to be shortened for the list page
-
-###Load the data into the database
-Run:
-```
-python manage.py migrate
-```
-This will load the data into the database and copy the image-files
+## Load the data
+- with `python manage.py migrate`:
+this will load the data into the database and copy the image-files
 into the static directory `minerals/static/minerals/images` directory.
 
-###Start the application
-Run:
-```
-python manage.py runserver
-```
-This will start the application.
-
-
-
-
-
+## Start application
+Start the application with
+    `python manage.py runserver.py`
