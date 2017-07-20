@@ -40,17 +40,17 @@ class RegisterForm(Form):
         ]
     )
     password2 = PasswordField(
-        'Confirm',
+        'Confirm password',
         validators=[validators.DataRequired()]
     )
     blog_title = StringField(
-        'Give your Learning Journal a Title. Do not include your name in it!',
+        'Give your learning journal a title',
         validators=[
             validators.DataRequired(),
         ]
     )
     blog_owner = StringField(
-        'Now we need your Name for the Copyright Statement',
+        'Name to use for the copyright statement',
         validators=[
             validators.DataRequired(),
         ]
