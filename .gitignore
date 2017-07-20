@@ -2,12 +2,5 @@ __pycache__
 .idea/*
 .cache/*
 *.pyc
-docs/*
-.coverage
-.coveragerc
-coverage/*
-htmlcov/*
-worklogdb/worklog/new*
-static/css/chosen.css
 *.db
 lj_venv/**
