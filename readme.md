@@ -4,10 +4,7 @@
 
 ## Description
 The app is a mineral search site searching a given mineral database
-- the user registers with a title and copyright-name
-- the journal is password protected
-- the journal consists of log entries, resources and tags
-- markdown can be used for the descriptions
+- extension of an earlier project [project 6](https://github.com/sabinem/python_techdegree_project6_mineral_catalog)
 
 ## Programming languages, frameworks, libraries
 - [Django](https://www.djangoproject.com/) (Python Framework)
@@ -27,9 +24,7 @@ The app is a mineral search site searching a given mineral database
 ## Data
 - the mineral data is provided as [csv file `data/minerals.json`](data/minerals.json)
 - analysis of the data, see [`data/README.md`](data/README.md)
-
-## Load the data
-- with `python manage.py migrate`:
+- load the data with `python manage.py migrate`:
 this will load the data into the database and copy the image-files
 into the static directory `minerals/static/minerals/images` directory.
 
