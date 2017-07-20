@@ -15,11 +15,11 @@ Everything else is explained, just start the application and try.
 1. Download project on your computer
 2. Go into the directory learning_journal
 3. Install a virtual environment:
-    `python3 -m venv lj_venv`
+    `virtualenv -p python3 p3venv`
 4. Activate the virtuale environment:
-    `source lj_venv/bin/activate`
+    `source p3venv/bin/activate`
 5. Install the requirements
-    `pip install -r requirements.txt`
+    `pip install -r requirements.txt` 
 
 ###Start Application
 Start the application with
