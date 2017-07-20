@@ -24,28 +24,30 @@ Place the location of the aircraft carrier (5 spaces): a2 Is it horizontal? (Y)/
 ### Validate user input.
 If, at any time, the player enters input that can’t be parsed then continue prompting until valid input has been entered. Tell the user why their input was invalid before prompting again.
 Be as accepting as possible of input. For example, spaces before or after the player’s input is allowed. Both lower and uppercase characters are also allowed. In order to reduce confusion, you may want to clear the screen and display the screen again before each attempt.
-Validate ship placement.
+### Validate ship placement.
 Verify that the ships fit on the board and that they don’t overlap with any existing ships. If a ship violates either of these rules, inform the player about the problem and prompt for a new location.
-Update the board.
+### Update the board.
 After the user places a ship, clear the screen and print the board to the screen with all of the ships that the player has placed up until that point displayed on the board using the appropriate symbols.
-Prompt second player to place their ships
+### Prompt second player to place their ships
 After the first player has placed all their ships, clear the screen and prompt the second player, by name, to begin placing their ships.
-Allow players to take turns.
+### Allow players to take turns.
 Clear the screen after each player has finished taking their turn. Prompt the next player, by name, that it is their turn. Prompt them to press enter to continue. This gives the previous player a chance to hand the computer to the next player so they don’t see each other’s boards
-Display boards to the screen.
+### Display boards to the screen.
 Clear the screen and print a board that shows where the current player has guessed so far. Use the appropriate markers to display which locations hit a ship, which locations are misses, and which locations are a sunken ship.
 On the same screen but on a separate printed board, print a board that displays where their opponent has guessed up until then. Use the appropriate markers to display which locations hit a ship, which locations are misses, and which locations are a sunken ship. This board also displays the full locations of the current player’s ships using the appropriate markers.
-Prompt player for guess.
+### Prompt player for guess.
 Prompt the player, by name, to guess where their opponent’s ships are by entering a location. For example:
 Bob, enter a location: f7
-Validate guess.
+### Validate guess.
 If the player enters a location that they’ve already guessed, then prompt the user for a new location after telling them why their previous guess was unacceptable.
-Display guess results.
+### Display guess results.
 Clear the screen, and print a message stating that the player missed, hit, or sunk a ship. Prompt the next player, by name, that it is their turn and to press enter to continue.
-Declare a winner.
+### Declare a winner.
 Continue the game until one of the players has sunk all of their opponent’s ships. Congratulate the winner with a final message. For an exceeds, display both the player’s boards on the screen.
-Before you submit your project for review, make sure you can check off all of the items on the Student Project Submission Checklist. The checklist is designed to help you make sure you’ve met the grading requirements and that your project is complete and ready to be submitted!
 
 ## Extra Credit
 
-- In order to get an “Exceeds Expectations” rating, also provide logic to ensure each team’s average height is within 1 inch of the others, as well as having each team contain the same number of experienced players.
+- The screen is cleared after an invalid entry. The board and prompts are redisplayed and the game informs the player why their input was unacceptable.
+Detailed error messages are displayed.
+- Error messages are detailed and include the invalid guess information.
+- Display both the player’s boards on the screen showing the ship positions.

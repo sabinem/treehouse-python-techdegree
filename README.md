@@ -4,7 +4,7 @@
 
 ## Description
 - The app starts a battleship game between two players, see
-[Wikipedia](https://en.wikipedia.org/wiki/Battleship_(game)#Description) for a description of the game.
+[Wikipedia](https://en.wikipedia.org/wiki/Battleship_(game)#Description) for a description of the battleship game.
 
 ## Programm languages used
 - this is pure Python
