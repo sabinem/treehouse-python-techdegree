@@ -70,7 +70,7 @@ class Player:
         After a player's move he is asked to hand over control
         to his opponent by hitting any key.
         """
-        input('{}, press any key when you are ready to give control'
+        input('{}, press Enter when you are ready to give control'
               ' to the other player.'
               .format(self.name))
 

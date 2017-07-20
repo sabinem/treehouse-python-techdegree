@@ -32,7 +32,7 @@ class Game:
               .format(self.player1))
         self.player2 = Player(opponent=self.player1)
         input('Great {} and {}! '
-              'Press any key when you are ready to start the game.'
+              'Press Enter when you are ready to start the game.'
               .format(self.player1, self.player2))
 
     def setup_player(self, player):
@@ -41,7 +41,7 @@ class Game:
         """
         clear_screen()
         input("{}! It is your turn to set up your battleships.\n"
-              "Press any key when you are ready to do that."
+              "Press Enter when you are ready to do that."
               .format(player))
         player.setup_ships()
 
@@ -52,7 +52,7 @@ class Game:
         """
         clear_screen()
         input("It is {}'s turn!\n{}, "
-              "press any key when you are ready to start you turn."
+              "press Enter when you are ready to start you turn."
               .format(player, player))
         clear_screen()
         opponent_player = self.get_opponent_in_game(player)
