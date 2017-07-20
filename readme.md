@@ -10,9 +10,9 @@ The app builds a learning journal for one person
 - markdown can be used for the descriptions
 
 ## Programming languages, frameworks, libraries
-- Flask (Python Framework)
-- Peewee (SQLite-ORM)
-- Markdown
+- [Flask](http://flask.pocoo.org/) (Python Framework)
+- [Peewee](http://docs.peewee-orm.com/) (SQLite-ORM)
+- [Markdown](https://de.wikipedia.org/wiki/Markdown)
 
 ## Installation
 - Download the zip file to your computer and unzip
