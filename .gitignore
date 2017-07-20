@@ -2,7 +2,6 @@ __pycache__
 .idea/*
 .cache/*
 *.pyc
-docs/*
 *.db*
 data*.txt
 db.sqlite3
