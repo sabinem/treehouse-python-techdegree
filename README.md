@@ -1,10 +1,19 @@
 # Todo Api with Flask and Angular
+- 10th project for [Treehouse Techdegree Python](https://teamtreehouse.com/techdegree/python-web-development)
+- [detailed requirements for the project](docs/assigment.md)
+
+## Description
+The task was to improve a simple given Django project
+
+## Programming languages, frameworks, libraries
+- [Flask Restful](https://flask-restful.readthedocs.io) (Python Framework)
+- [AngularJS](https://angularjs.org/)
 
 ## Install
 1. Download the project on your computer
 2. Unzip and go into the newly established directory
-3. Install a virtual environment: `python3 -m venv fa_venv`
-4. Activate the virtuale environment: `source fa_venv/bin/activate`
+3. Install a virtual environment: `virtualenv -p python3 p3venv`
+4. Activate the virtuale environment: `source p3venv/bin/activate`
 5. Install the requirements `pip install -r requirements.txt`
 
 ## Run the server
