@@ -1,6 +1,6 @@
 # Worklog with a Database
 - 4th project for [Treehouse Techdegree Python](https://teamtreehouse.com/techdegree/python-web-development)
-- [detailed requirements for the project](docs/assigment.md)
+- [detailed requirements for the project](docs/assignment.md)
 
 ## Description
 The app builds a dialog for a worklog with a database for the employees of a company
