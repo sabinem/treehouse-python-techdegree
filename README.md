@@ -1,6 +1,6 @@
 # Worklog
 - 3rd project for [Treehouse Techdegree Python](https://teamtreehouse.com/techdegree/python-web-development)
-- [detailed requirements for the project](docs/assigment.md)
+- [detailed requirements for the project](docs/assignment.md)
 
 ## Description
 The app builds a dialog for a csv-worklog per person
