@@ -1,6 +1,6 @@
 # Improve a Django project
 - 9th project for [Treehouse Techdegree Python](https://teamtreehouse.com/techdegree/python-web-development)
-- [detailed requirements for the project](docs/assigment.md)
+- [detailed requirements for the project](docs/assignment.md)
 
 ## Description
 The task was to improve a simple given Django project
@@ -30,5 +30,5 @@ The task was to improve a simple given Django project
 - Then see the coverage report at: `coverage report`
 
 ## Remark
-- since this is about improving an existing site, the database was given and is included in this 
+- since this is about improving an existing site, the database was given and is included in this
 repo
