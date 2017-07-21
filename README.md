@@ -1,6 +1,6 @@
 # Battleship Game
 - 2nd project for [Treehouse Techdegree Python](https://teamtreehouse.com/techdegree/python-web-development)
-- [detailed requirements for the project](docs/assigment.md)
+- [detailed requirements for the project](docs/assignment.md)
 
 ## Description
 - The app starts a battleship game between two players, see
