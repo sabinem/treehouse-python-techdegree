@@ -1,6 +1,6 @@
 # Todo Api with Flask and Angular
 - 10th project for [Treehouse Techdegree Python](https://teamtreehouse.com/techdegree/python-web-development)
-- [detailed requirements for the project](docs/assigment.md)
+- [detailed requirements for the project](docs/assignment.md)
 
 ## Description
 The task was to improve a simple given Django project
