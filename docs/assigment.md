@@ -1,6 +1,16 @@
-# Pug or Ugh
+# Detailed Assignment
 
-## Requirements
+## Python Techdegree Treehouse Project 11
+
+This project was an assignment of [Treehouse Techdegree Python](https://teamtreehouse.com/techdegree/python-web-development). Below you find the original description of the project.
+
+## Description
+
+Paw left or right in this app to help potential pet owners find the dog of their dreams! You will be provided with a fully coded front end site that is setup to access a backend that you will build. Your task is to build out the database and REST API backend using Django REST Framework that makes the whole thing work.
+
+## Project Instructions
+
+### Requirements
 
 Create the models, serializers, and views to power the provided React
 application. You can check through the supplied JavaScript to see what
@@ -12,7 +22,7 @@ You've been provided with HTML and CSS for a basic, mobile-friendly design.
 You've also been provided with a starter Django project and application, a
 serializer and views for authentication, and a bit more.
 
-## Starting
+### Starting
 
 Create a virtualenv and install the project requirements, which are listed in
 `requirements.txt`. The easiest way to do this is with `pip install -r
@@ -22,7 +32,7 @@ If you need to import dogs, a `data_import` script has been provided but it
 expects a `DogSerializer` and `Dog` model as outlined below to function
 properly.
 
-## Models
+### Models
 
 The following models and associated field names should be present as they
 will be expected by the JavaScript application.
@@ -59,13 +69,13 @@ will be expected by the JavaScript application.
 
 	`age`, `gender`, and `size` can contain multiple, comma-separated values
 
-## Serializers
+### Serializers
 
 You'll need to provide serializers for both the `Dog` and `UserPref` models.
 Each of them should reveal all of the fields with one exception: the `UserPref`
 serializer doesn't need to reveal the user.
 
-## Routes
+### Routes
 
 The following routes are expected by the JavaScript application.
 

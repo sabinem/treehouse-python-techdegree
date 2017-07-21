@@ -8,6 +8,4 @@ This frontend is made with React
 after installing babel on your computer:`
 
 ## Installation on Mac
-- `sudo npm install -g babel-cli
 - `sudo npm install -g babel-preset-react`
-

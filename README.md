@@ -1,15 +1,25 @@
 # Pug or Ugh:
-- 11th project for Treehouse Techdegree Python
+- 11th project for [Treehouse Techdegree Python](https://teamtreehouse.com/techdegree/python-web-development)
+- [detailed requirements for the project](docs/assigment.md)
 
-[Project Description]
-- You find the project description [here](docs/README.md)
+## Description
+The app is a dog matching site where users can pick their favorite dogs
+and bookmark them.
 
-## Install
-- Download the project on your computer
-- Unzip and go into the newly established directory
-- Install a virtual environment: `python3 -m venv dog_venv`
-- Activate the virtuale environment: `source dog_venv/bin/activate`
-- Install the requirements `pip install -r requirements.txt`
+## Programming languages, frameworks, libraries
+- Backend: Django Restframework
+- Frontend: React
+the frontend was given, but had to be twisted to work with the backend
+
+## Installation
+- Download the zip file to your computer and unzip
+- Go into the directory
+- Install a virtual environment:
+    `virtualenv -p python3 p3venv`
+- Activate the virtuale environment:
+    `source p3venv/bin/activate`
+- Install the requirements
+    `pip install -r requirements.txt`
 - Establish the database: `python manage.py migrate`
 - Load the data: `python data_import.py`
 
@@ -27,8 +37,23 @@
 - run the tests with `coverage run manage.py test`
 - get coverage report with `coverage report`
 
-## React
-This project uses React for the frontend. It includes both js and jsx file,
-even though in general you can generate js from jsx, see
+## Remarks
+For the React frontend both js and jsx file are included,
+even though in general js can be derived from jsx, by using babel
 [here](purorugh/static/jsx/README.md)
 
+
+
+## Installation
+- Download the zip file to your computer and unzip
+- Go into the directory
+- Install a virtual environment:
+    `virtualenv -p python3 p3venv`
+- Activate the virtuale environment:
+    `source p3venv/bin/activate`
+- Install the requirements
+    `pip install -r requirements.txt`
+
+## Start application
+Start the application with
+    `python3 runserver.py`
