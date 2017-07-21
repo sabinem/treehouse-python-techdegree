@@ -1,6 +1,3 @@
-# do not include private doc files
-docs/**
-
 # coverage output
 htmlcov/**
 .coverage
