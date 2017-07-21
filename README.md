@@ -41,17 +41,3 @@ the frontend was given, but had to be twisted to work with the backend
 For the React frontend both js and jsx file are included,
 even though in general js can be derived from jsx, by using babel
 [here](docs/jsx.md)
-
-## Installation
-- Download the zip file to your computer and unzip
-- Go into the directory
-- Install a virtual environment:
-    `virtualenv -p python3 p3venv`
-- Activate the virtuale environment:
-    `source p3venv/bin/activate`
-- Install the requirements
-    `pip install -r requirements.txt`
-
-## Start application
-Start the application with
-    `python3 runserver.py`
