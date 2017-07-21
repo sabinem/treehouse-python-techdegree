@@ -22,6 +22,8 @@ The app is again a mineral search site searching a given mineral database
 - Install the requirements
     `pip install -r requirements.txt`
 
+- Migrate with `python manage.py migrate`
+
 ## Start application
 Start the application with `python manage.py runserver.py`
 

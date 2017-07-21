@@ -16,11 +16,11 @@ class ProjectForm(forms.ModelForm):
         widgets = {
             'applicant_requirements': forms.Textarea(
                 attrs={
-                    'placeholder': 'Time estimate',
+                    'placeholder': 'Applicant requirements',
                     'style': 'resize: both; overflow: auto;'}),
             'project_timeline': forms.Textarea(
                 attrs={
-                    'placeholder': 'Project Title',
+                    'placeholder': 'Project Timeline',
                     'style': 'resize: both; overflow: auto;'}),
             'description': forms.Textarea(
                 attrs={
@@ -61,4 +61,3 @@ class PositionForm(forms.ModelForm):
 
 NewPositionsFormset = forms.formset_factory(
     PositionForm)
-
