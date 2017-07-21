@@ -1,6 +1,6 @@
 # Detailed Assignment
 
-## Python Techdegree Treehouse Project 6
+## Python Techdegree Treehouse Project 7
 
 This project was an assignment of [Treehouse Techdegree Python](https://teamtreehouse.com/techdegree/python-web-development). Below you find the original description of the project.
 
