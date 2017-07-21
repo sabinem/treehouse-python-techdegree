@@ -40,9 +40,7 @@ the frontend was given, but had to be twisted to work with the backend
 ## Remarks
 For the React frontend both js and jsx file are included,
 even though in general js can be derived from jsx, by using babel
-[here](purorugh/static/jsx/README.md)
-
-
+[here](docs/jsx.md)
 
 ## Installation
 - Download the zip file to your computer and unzip
