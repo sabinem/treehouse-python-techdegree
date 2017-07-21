@@ -28,3 +28,7 @@ The task was to improve a simple given Django project
 ## Test coverage
 - Run: `coverage run manage.py test`
 - Then see the coverage report at: `coverage report`
+
+## Remark
+- since this is about improving an existing site, the database was given and is included in this 
+repo
