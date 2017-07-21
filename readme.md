@@ -1,4 +1,4 @@
-# Mineral Catalog
+# Filtering and Searching the Mineral Catalog
 - 8th project for [Treehouse Techdegree Python](https://teamtreehouse.com/techdegree/python-web-development)
 - extends [project 6 of Treehouse Techdegree Python](https://github.com/sabinem/python_techdegree_project6_mineral_catalog)
 - [detailed requirements for the project](docs/assigment.md)
