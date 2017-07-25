@@ -120,6 +120,12 @@ USE_L10N = True
 
 USE_TZ = True
 
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+#EMAIL_FILE_PATH = '/tmp/app-emails'
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/

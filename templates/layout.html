@@ -20,6 +20,8 @@
     <script type="text/javascript" src="{% static 'js/autogrow.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/global.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/jquery.formset.js' %}"></script>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/static/icons/favicon.ico">
 </head>
 <body>
     <header class="circle--header">
@@ -63,11 +65,7 @@
             </div>
         </div>
     </header>
-    {% block action_bar %}{% endblock %}
-
     {% block content %}{% endblock %}
-
     {{ profile_form.media }}
-
 </body>
 </html>

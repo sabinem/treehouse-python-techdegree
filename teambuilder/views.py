@@ -9,10 +9,20 @@ from django.core.urlresolvers import reverse_lazy
 from django.views import generic
 from django.db.models import ProtectedError
 from django.contrib.auth import get_user_model
+from django.db import IntegrityError
+from django.core.mail import send_mail
+from django.shortcuts import render_to_response
+from django.template.context import RequestContext
+from django.db.models import Q
+
+from django.http import HttpResponse
+import json
+
 
 from braces.views import LoginRequiredMixin
 
 from . import models, forms
+from accounts import email
 
 
 User = get_user_model()
@@ -59,7 +69,7 @@ def project_delete(request, project_pk):
         project.delete()
     except ProtectedError:
         messages.add_message(
-            request, messages.INFO,
+            request, messages.ERROR,
             'You cannot delete a project, that has positions.'
             ' First edit the project and delete its postions.'
         )
@@ -74,12 +84,30 @@ def project_delete(request, project_pk):
 @login_required
 def position_apply(request, position_pk):
     """handeling the application of the request user
-    for a position"""
+    to a position"""
     position = get_object_or_404(models.Position, pk=position_pk)
-    position.apply(request.user)
-    messages.add_message(request, messages.INFO, 'Thank you for applying.')
-    return HttpResponseRedirect(reverse_lazy(
-        'teambuilder:project', kwargs={'project_pk': position.project_id}))
+    try:
+        position.apply(request.user)
+    except IntegrityError as e:
+        messages.add_message(request, messages.ERROR, e)
+        return HttpResponseRedirect(reverse_lazy(
+            'teambuilder:project', kwargs={'project_pk': position.project_id}))
+    else:
+        email.send_email(
+            'We received your application!',
+            '''Hello {}!
+            Thank you for your application to {} as {}, you will hear from the project owner
+            {} soon.'''
+                .format(request.user.name, position.project, position.skill, position.project.owner),
+            [request.user.email],
+        )
+
+        print("email was send")
+        messages.add_message(request, messages.INFO,
+                             'Thank you for applying. '
+                             'We have send you an email confirmation!')
+        return HttpResponseRedirect(reverse_lazy(
+            'teambuilder:project', kwargs={'project_pk': position.project_id}))
 
 
 @login_required
@@ -118,11 +146,12 @@ def project_create_view(request):
             project.owner = user
             project.save()
             for form in formset:
-                models.Position.objects.create(
-                    project=project,
-                    skill=form.cleaned_data['skill'],
-                    description=form.cleaned_data['description']
-                )
+                if 'skill' in form.cleaned_data:
+                    models.Position.objects.create(
+                        project=project,
+                        skill=form.cleaned_data['skill'],
+                        description=form.cleaned_data['description']
+                    )
 
             return HttpResponseRedirect(
                 reverse_lazy('teambuilder:project',
@@ -135,3 +164,36 @@ def project_create_view(request):
         'formset': formset,
         'projectform': projectform
     })
+
+
+
+
+def search_projects_by_term(request):
+    """ajax search in projects for a search term"""
+    searchterm = request.GET.get('searchterm')
+    response_data = {}
+    response_data['result'] = 'Create post successful!'
+    response_data['postpk'] = post.pk
+    response_data['text'] = post.text
+    response_data['created'] = post.created.strftime('%B %d, %Y %I:%M %p')
+    response_data['author'] = post.author.username
+
+    return HttpResponse(
+        json.dumps(response_data),
+        content_type="application/json"
+    )
+
+def search_projects_by_need(request):
+    """ajax search in projects for a need"""
+    searchterm = request.GET.get('searchterm')
+    response_data = {}
+    response_data['result'] = 'Create post successful!'
+    response_data['postpk'] = post.pk
+    response_data['text'] = post.text
+    response_data['created'] = post.created.strftime('%B %d, %Y %I:%M %p')
+    response_data['author'] = post.author.username
+
+    return HttpResponse(
+        json.dumps(response_data),
+        content_type="application/json"
+    )

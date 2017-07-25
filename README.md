@@ -38,3 +38,7 @@ Start the application with `python manage.py runserver.py`
 modelformfactory verstehen!!!
 
 3.
+
+## email
+open second window:
+'python -m smtpd -n -c DebuggingServer localhost:1025'

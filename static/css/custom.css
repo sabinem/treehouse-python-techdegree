@@ -14,3 +14,7 @@ ul.messages, ul.messages li {
     display: inline;
     list-style: none;
 }
+
+ul.messages li.error {
+    color:red;
+}

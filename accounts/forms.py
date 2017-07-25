@@ -10,6 +10,9 @@ from teambuilder.models import Skill, Project
 
 
 class UserCreateForm(UserCreationForm):
+    """Form to create a new user
+    for the custom user model
+    that the accounts app employs"""
     email = forms.EmailField(
         widget=forms.TextInput(
             attrs={
@@ -22,11 +25,13 @@ class UserCreateForm(UserCreationForm):
         widget=forms.PasswordInput(render_value=True, attrs={'placeholder': 'Confirm Password'}))
 
     class Meta:
+        """uses custom user model"""
         fields = ("email", "password1", "password2")
         model = get_user_model()
 
 
 class UserLoginForm(forms.Form):
+    """User login form for custom user model"""
     email = forms.EmailField(
         widget=forms.TextInput(
             attrs={
@@ -37,12 +42,14 @@ class UserLoginForm(forms.Form):
         widget=forms.PasswordInput(render_value=True, attrs={'placeholder': 'Password'}))
 
     class Meta:
+        """uses custom user model
+        """
         fields = ("email", "password")
         model = get_user_model()
 
 
 class ProfileForm(forms.ModelForm):
-    """Update UserProfile model information."""
+    """Form for updating the UserProfile"""
     name = forms.CharField(
             label='First Name',
             required=False,
@@ -62,8 +69,8 @@ class ProfileForm(forms.ModelForm):
     )
     avatar = forms.ImageField()
 
-
     class Meta:
+        """uses custom user model"""
         model = get_user_model()
         fields = ['name', 'bio', 'avatar']
         labels = {
@@ -72,20 +79,24 @@ class ProfileForm(forms.ModelForm):
 
 
 class SkillForm(forms.ModelForm):
+    """Form for entering skills"""
     skill = forms.ModelChoiceField(
         queryset=Skill.objects.all(),
         required=False)
 
     class Meta:
+        """based on the Skill model"""
         model = Skill
         fields = ['skill']
 
 
+# a formset is employed for entering skills
 SkillsFormSet = forms.formset_factory(
     SkillForm)
 
 
 class ProjectForm(forms.Form):
+    """Project form"""
     title = forms.CharField(
         max_length=255)
     link = forms.URLField(
@@ -96,6 +107,7 @@ class ProjectForm(forms.Form):
     id = forms.IntegerField(required=False)
 
 
+# a formset is employed for entering projects
 ProjectsFormSet = forms.formset_factory(ProjectForm)
 
 # TODO modelformfactory ist noch nicht im Einsatz

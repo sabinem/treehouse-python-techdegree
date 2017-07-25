@@ -4,13 +4,17 @@ models for the teambuilder app
 #TODO: pruning necessary!
 from enum import Enum
 
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 from django.db import models
 from django.db.models import Q
 from django.conf import settings
 from multiselectfield import MultiSelectField
+from django.db import IntegrityError
+from django.core.mail import send_mail
 
+
+APPLICATION_APPROVED = 'a'
+APPLICATION_UNDECIDED = '0'
+APPLICATION_REJECTED = 'r'
 
 class ApplicationStatus(Enum):
     Undecided = '0'
@@ -34,15 +38,17 @@ def get_choices_as_string(cls):
 
 
 class SkillManager(models.Manager):
-    def get_all_skills(self):
-        return self
-
+    """Skill manager"""
     def get_project_needs(self, project_pk):
+        """get all skills needed in a project"""
         positions = Position.objects.get_positons_by_project(project_pk=project_pk)
         return self.filter(id__in=positions.values('skill_id'))
 
-    def needs_for_user(self, user):
-        return self.filter(skill__position__project__owner=user).select_related('Position', 'Project', 'Skill')
+    def get_project_needs_for_users_projects(self, user):
+        project_ids = user.get_project_ids()
+        positions = Position.objects.get_positons_by_project_ids(project_ids=project_ids)
+        return \
+            self.filter(id__in=positions.values('skill_id'))
 
 
 class Skill(models.Model):
@@ -81,8 +87,8 @@ class Project(models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="projects")
     title = models.CharField('Title', max_length=255)
     description = models.TextField()
-    project_timeline = models.TextField(blank=True)
-    applicant_requirements = models.TextField(blank=True)
+    project_timeline = models.TextField()
+    applicant_requirements = models.TextField()
     link = models.URLField(blank=True)
 
     objects = ProjectManager()
@@ -109,7 +115,11 @@ class PositionManager(models.Manager):
 
     def get_positons_by_project(self, project_pk):
         return self.select_related('skill')\
-            .filter(project_id=project_pk)
+            .filter(project_id=project_id)
+
+    def get_positons_by_project_ids(self, project_ids):
+        return self.select_related('skill')\
+            .filter(project_id__in=project_ids)
 
     def get_open_positons_by_skill(self, skill):
         return self.select_related('project')\
@@ -154,6 +164,12 @@ class Position(models.Model):
         return "{} {}".format(self.project, self.skill)
 
     def apply(self, applicant):
+        if self.project.owner == applicant:
+            raise IntegrityError("You can not apply to your own project!")
+        if self.skill not in applicant.get_skills():
+            raise IntegrityError(
+                "You can not apply to a position when you do not have "
+                "the required skill! For this position you need to be a {}".format(self.skill))
         application, created = Application.objects.get_or_create(
             applicant=applicant, position=self)
         application.save()
@@ -185,7 +201,10 @@ class ApplicationManager(models.Manager):
     def get_applicants_by_status(self, status):
         return self.select_related('applicant').filter(status=status)
 
-    def applications_for_user(self, user):
+    def applications_for_a_users_projects(self, user):
+        return self.filter(position__project__owner=user).select_related('position')
+
+    def applications_for_a_project(self, user):
         return self.filter(position__project__owner=user).select_related('position')
 
     def position_ids_where_user_applied(self, user):
@@ -201,7 +220,6 @@ class Application(models.Model):
     status = MultiSelectField(
         choices=get_choices(ApplicationStatus),
         default=ApplicationStatus.Undecided.value)
-
     objects = ApplicationManager()
 
     def __str__(self):
@@ -210,6 +228,13 @@ class Application(models.Model):
     def approve(self):
         self.status = ApplicationStatus.Approved.value
         self.position.fill(applicant=self.applicant)
+        send_mail(
+            'Application approved',
+            'Your application has been approved.',
+            'from@example.com',
+            ['to@example.com'],
+            fail_silently=False,
+        )
         self.save()
 
     def reject(self):

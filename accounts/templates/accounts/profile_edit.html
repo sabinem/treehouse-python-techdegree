@@ -4,7 +4,7 @@
 <div class="circle--actions--bar">
     <nav class="bounds">
         <ul class="circle--pill--list">
-            <li><a href="">Applications</a></li>
+            <li><a href="{% url 'accounts:applications' profile_pk=user.id %}">Applications</a></li>
             <li><a class="selected" href="{% url 'accounts:profile' %}">Profile</a></li>
         </ul>
     </nav>
@@ -68,6 +68,7 @@
                     {% if user.avatar %}
                     <img id="avatar" width="200px" src="{% static user.avatar.url %}">
                     {% endif %}
+                    {{ profile_form.avatar }}
                     {{ profile_form.avatar.errors }}
                     {% if profile_form.avatar.errors %}
                         {% for error in profile_form.avatar.errors %}

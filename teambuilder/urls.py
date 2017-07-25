@@ -16,5 +16,9 @@ urlpatterns = [
 
     # action views
     url(r'^(?P<position_pk>\d+)/apply$', views.position_apply, name="apply"),
+
+    # search views
+    url(r'^search/$', views.search_projects_by_need, name='search_by_need'),
+    url(r'^search/$', views.search_projects_by_term, name='search_by_term'),
 ]
 
