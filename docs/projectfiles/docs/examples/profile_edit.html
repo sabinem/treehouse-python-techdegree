@@ -20,13 +20,13 @@
 
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="../../static/css/global.css">
+  <link rel="stylesheet" href="../../css/global.css">
 
   <!-- JS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-  <script type="text/javascript" src="../../static/js/autogrow.js"></script>
-  <script type="text/javascript" src="../../static/js/global.js"></script>
+  <script type="text/javascript" src="../../js/autogrow.js"></script>
+  <script type="text/javascript" src="../../js/global.js"></script>
 
 
 </head>
@@ -60,39 +60,34 @@
     </div>
   </header>
 
+  <div class="circle--actions--bar">
+    <nav class="bounds">
+      <ul class="circle--pill--list">
+        <li><a href="applications.html">Applications</a></li>
+        <li><a class="selected" href="profile.html">Profile</a></li>
+      </ul>
+    </nav>
+  </div>
+
   <div class="bounds circle--page">
     <div class="circle--page--header circle--fluid">
       <div class="circle--fluid--cell circle--fluid--primary">
-        <h2>Projects</h2>
+        <h2>Profile</h2>
       </div>
       <div class="circle--fluid--cell circle--fluid--secondary">
-        <a class="button button-primary icon-on-left" href="project_new.html">
-          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 13 13" style="enable-background:new 0 0 13 13;" xml:space="preserve" class="add">
-            <polygon points="7,6 7,0 6,0 6,6 0,6 0,7 6,7 6,13 7,13 7,7 13,7 13,6 "/>
-          </svg>
-          New Project
-        </a>
+        <a class="button button-primary icon-on-left" href="profile.html">Save Changes</a>
       </div>
     </div>
 
-    <div class="grid-25">
-      <div class="circle--filter circle--secondary--module">
-        <h4>Project Needs</h4>
-        <ul class="circle--filter--list">
-          <li><a class="selected">All Needs</a></li>
-          <li><a>Android Developer</a></li>
-          <li><a>Designer</a></li>
-          <li><a>Java Developer</a></li>
-          <li><a>PHP Developer</a></li>
-          <li><a>Python Developer</a></li>
-          <li><a>Rails Developer</a></li>
-          <li><a>WordPress Developer</a></li>
-          <li><a>iOS Developer</a></li>
-        </ul>
-      </div>
-    </div>
+    <div class="grid-70">
+      <input type="text" value="Wendy McElroy" placeholder="Full Name" class="circle--input--h1">
+      <div class="circle--article--body">
+        <textarea placeholder="Tell us about yourself...">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-    <div class="grid-70 grid-push-5">
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</textarea>
+      </div>
+
+      <h2>Past Projects</h2>
       <table class="u-full-width circle--table">
         <thead>
           <tr>
@@ -120,6 +115,42 @@
         </tbody>
       </table>
     </div>
+
+    <div class="grid-25 grid-push-5">
+
+      <div class="circle--secondary--module">
+        <div class="circle--primary--avatar">
+          <a class="button">
+            Upload Photo
+            <input type="file">
+          </a>
+        </div>
+      </div>
+
+      <div class="circle--secondary--module">
+        <h4>My Skills</h4>
+        <ul class="circle--clone--list">
+          <li>
+            <input type="text" placeholder="Skill" />
+            <a class="circle--clone--add">Add Skill</a>
+            <a class="circle--clone--remove">Remove</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="circle--secondary--module">
+        <h4>My Projects</h4>
+        <ul class="circle--clone--list">
+          <li>
+            <input type="text" placeholder="Project Name" />
+            <input type="text" placeholder="Project URL" />
+            <a class="circle--clone--add">Add Project</a>
+            <a class="circle--clone--remove">Remove</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
   </div>
 </body>
 </html>

@@ -1,6 +1,7 @@
 # Social Team Builder
 - 12th project for [Treehouse Techdegree Python](https://teamtreehouse.com/techdegree/python-web-development)
 - [detailed requirements for the project](docs/assignment.md)
+- [project files: html, that should be matched as appereance of the site](docs/projectfiles)
 
 ## Description
 The app is again a mineral search site searching a given mineral database
@@ -27,18 +28,13 @@ The app is again a mineral search site searching a given mineral database
 ## Start application
 Start the application with `python manage.py runserver.py`
 
-## Test coverage
-- Run: `coverage run manage.py test`
-- Then see the coverage report at: `coverage report`
-
-##TODO:
-
-1. avatar mit javascript kombinieren
-2. projects auf der profile seite speichern:
-modelformfactory verstehen!!!
-
-3.
-
 ## email
-open second window:
-'python -m smtpd -n -c DebuggingServer localhost:1025'
+- open second terminal window:
+- start email server with
+```
+python -m smtpd -n -c DebuggingServer localhost:1025
+```
+
+## Tests
+there are some tests, but testing was not part of the project
+requirements in this case

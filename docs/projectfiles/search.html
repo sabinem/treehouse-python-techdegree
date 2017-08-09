@@ -5,7 +5,7 @@
   <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
-  <title>Circle</title>
+  <title>Circle &bull; Search</title>
   <meta name="description" content="">
   <meta name="author" content="">
 
@@ -20,13 +20,13 @@
 
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="../../static/css/global.css">
+  <link rel="stylesheet" href="css/global.css">
 
   <!-- JS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-  <script type="text/javascript" src="../../static/js/autogrow.js"></script>
-  <script type="text/javascript" src="../../static/js/global.js"></script>
+  <script type="text/javascript" src="js/autogrow.js"></script>
+  <script type="text/javascript" src="js/global.js"></script>
 
 
 </head>
@@ -39,7 +39,7 @@
         </div>
         <div class="circle--fluid--cell circle--fluid--primary">
           <div class="circle--search">
-            <input type="text" placeholder="Search Projects..." />
+            <input type="text" placeholder="Search Projects..." value="sass" />
             <button>
               <svg version="1.1" class="search" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 12 12" xml:space="preserve">
                 <path d="M12,10.6L8.3,6.9C8.7,6.2,9,5.4,9,4.5C9,2,7,0,4.5,0S0,2,0,4.5S2,9,4.5,9c0.9,0,1.7-0.3,2.4-0.7l3.7,3.7L12,10.6z M2,4.5
@@ -60,53 +60,69 @@
     </div>
   </header>
 
-  <div class="circle--actions--bar">
-    <div class="bounds">
-      <div class="grid-100">
-        <a class="button button-primary" href="project.html">Save Project</a>
-        <a class="button button-text" href="index.html">Discard</a>
+  <div class="bounds circle--page">
+    <div class="circle--page--header circle--fluid">
+      <div class="circle--fluid--cell circle--fluid--primary">
+        <h2>Search</h2>
+        <p>Search research for: <span class="secondary-label">sass</span></p>
+      </div>
+      <div class="circle--fluid--cell circle--fluid--secondary">
+        <a class="button button-primary icon-on-left" href="project_new.html">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 13 13" style="enable-background:new 0 0 13 13;" xml:space="preserve" class="add">
+            <polygon points="7,6 7,0 6,0 6,6 0,6 0,7 6,7 6,13 7,13 7,7 13,7 13,6 "/>
+          </svg>
+          New Project
+        </a>
       </div>
     </div>
-  </div>
 
-  <div class="bounds circle--page circle--article">
-    <div class="grid-70">
-      <div class="circle--article--body">
-        <input type="text" class="circle--input--h1" placeholder="Project Title" />
-        <textarea placeholder="Project description..."></textarea>
-      </div>
-
-      <div class="circle--project--positions">
-        <h2>Positions</h2>
-
-        <ul class="circle--group--list circle--clone--list">
-          <li>
-            <input type="text" class="circle--input--h3" placeholder="Position Title" />
-            <textarea placeholder="Position description..."></textarea>
-            <a class="circle--clone--add">Add Position</a>
-            <a class="circle--clone--remove">Remove</a>
-          </li>
+    <div class="grid-25">
+      <div class="circle--filter circle--secondary--module">
+        <h4>Project Needs</h4>
+        <ul class="circle--filter--list">
+          <li><a class="selected">All Needs</a></li>
+          <li><a>Android Developer</a></li>
+          <li><a>Designer</a></li>
+          <li><a>Java Developer</a></li>
+          <li><a>PHP Developer</a></li>
+          <li><a>Python Developer</a></li>
+          <li><a>Rails Developer</a></li>
+          <li><a>WordPress Developer</a></li>
+          <li><a>iOS Developer</a></li>
         </ul>
-
-        <a class="button button-primary" href="project.html">Save Changes</a>
-
       </div>
     </div>
 
-    <div class="grid-25 grid-push-5">
-
-      <div class="circle--secondary--module">
-        <h3>Project Timeline</h3>
-        <textarea placeholder="Time estimate" class="circle--textarea--input"></textarea>
-      </div>
-
-      <div class="circle--secondary--module">
-        <h3>Applicant Requirements</h3>
-        <textarea></textarea>
-      </div>
+    <div class="grid-70 grid-push-5">
+      <table class="u-full-width circle--table">
+        <thead>
+          <tr>
+            <th>Project Title</th>
+            <th class="circle--cell--right">Project Needs</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="clickable-row" data-href="project.html">
+            <td>
+              <h3>Invoice Delivery Tool</h3>
+            </td>
+            <td class="circle--cell--right">
+              <span class="secondary-label">Rails Developer</span>
+            </td>
+          </tr>
+          <tr class="clickable-row" data-href="project.html">
+            <td>
+              <h3>Twitter Client</h3>
+            </td>
+            <td class="circle--cell--right">
+              <span class="secondary-label">Designer</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
     </div>
+
   </div>
-
 </body>
 </html>

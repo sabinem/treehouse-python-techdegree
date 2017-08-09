@@ -20,13 +20,13 @@
 
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="../../static/css/global.css">
+  <link rel="stylesheet" href="css/global.css">
 
   <!-- JS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-  <script type="text/javascript" src="../../static/js/autogrow.js"></script>
-  <script type="text/javascript" src="../../static/js/global.js"></script>
+  <script type="text/javascript" src="js/autogrow.js"></script>
+  <script type="text/javascript" src="js/global.js"></script>
 
 
 </head>
@@ -63,76 +63,50 @@
   <div class="circle--actions--bar">
     <nav class="bounds">
       <ul class="circle--pill--list">
-        <li><a class="selected" href="applications.html">Applications</a></li>
-        <li><a href="profile.html">Profile</a></li>
+        <li><a href="applications.html">Applications</a></li>
+        <li><a class="selected" href="profile.html">Profile</a></li>
       </ul>
     </nav>
   </div>
 
   <div class="bounds circle--page">
-    <div class="circle--page--header grid-100">
-      <h2>Applications</h2>
+    <div class="circle--page--header circle--fluid">
+      <div class="circle--fluid--cell circle--fluid--primary">
+        <h2>Profile</h2>
+      </div>
+      <div class="circle--fluid--cell circle--fluid--secondary">
+        <a class="button icon-on-left" href="profile_edit.html">Edit</a>
+      </div>
     </div>
 
-    <div class="grid-25">
-      <div class="circle--filter circle--secondary--module">
-        <h4>Status</h4>
-        <ul class="circle--filter--list">
-          <li><a class="selected">All Applications</a></li>
-          <li><a>New Applications</a></li>
-          <li><a>Accepted</a></li>
-          <li><a>Rejected</a></li>
-        </ul>
+    <div class="grid-70">
+      <h1>Wendy McElroy</h1>
+      <div class="circle--article--body">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       </div>
 
-      <div class="circle--filter circle--secondary--module">
-        <h4>My Projects</h4>
-        <ul class="circle--filter--list">
-          <li><a class="selected">All Projects</a></li>
-          <li><a>Currency Calculator</a></li>
-          <li><a>Twitter Client</a></li>
-        </ul>
-      </div>
-
-      <div class="circle--filter circle--secondary--module">
-        <h4>Project Needs</h4>
-        <ul class="circle--filter--list">
-          <li><a class="selected">All Needs</a></li>
-          <li><a>Android Developer</a></li>
-          <li><a>Designer</a></li>
-          <li><a>Java Developer</a></li>
-          <li><a>PHP Developer</a></li>
-          <li><a>Python Developer</a></li>
-          <li><a>Rails Developer</a></li>
-          <li><a>WordPress Developer</a></li>
-          <li><a>iOS Developer</a></li>
-        </ul>
-      </div>
-
-    </div>
-
-    <div class="grid-70 grid-push-5">
+      <h2>Past Projects</h2>
       <table class="u-full-width circle--table">
         <thead>
           <tr>
-            <th>Applicant</th>
-            <th class="circle--cell--right">Applicant Position</th>
+            <th>Project Title</th>
+            <th class="circle--cell--right">Project Needs</th>
           </tr>
         </thead>
         <tbody>
-          <tr class="clickable-row" data-href="profile.html">
+          <tr class="clickable-row" data-href="project.html">
             <td>
-              <h3>Jim Horton</h3>
-              <p>Currency Calculator</p>
+              <h3>Invoice Delivery Tool</h3>
             </td>
             <td class="circle--cell--right">
               <span class="secondary-label">Rails Developer</span>
             </td>
           </tr>
-          <tr class="clickable-row" data-href="profile.html">
+          <tr class="clickable-row" data-href="project.html">
             <td>
-              <h3>Jenny McMann</h3>
-              <p>Currency Calculator</p>
+              <h3>Twitter Client</h3>
             </td>
             <td class="circle--cell--right">
               <span class="secondary-label">Designer</span>
@@ -140,7 +114,36 @@
           </tr>
         </tbody>
       </table>
+    </div>
 
+    <div class="grid-25 grid-push-5">
+
+      <div class="circle--secondary--module">
+        <div class="circle--primary--avatar">
+
+        </div>
+      </div>
+
+      <div class="circle--secondary--module">
+        <h4>My Skills</h4>
+        <ul class="unloaded">
+          <li>Skill 1</li>
+          <li>Skill 2</li>
+          <li>Skill 3</li>
+          <li>Skill 4</li>
+          <li>Skill 5</li>
+        </ul>
+      </div>
+
+      <div class="circle--secondary--module">
+        <h4>My Projects</h4>
+        <ul class="circle--link--list">
+          <li><a>Project 1</a></li>
+          <li><a>Project 2</a></li>
+          <li><a>Project 3</a></li>
+          <li><a>Project 4</a></li>
+        </ul>
+      </div>
     </div>
 
   </div>
