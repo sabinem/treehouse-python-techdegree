@@ -5,7 +5,6 @@ from __future__ import unicode_literals
 from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
-import multiselectfield.db.fields
 
 
 class Migration(migrations.Migration):
@@ -21,7 +20,8 @@ class Migration(migrations.Migration):
             name='Application',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('status', multiselectfield.db.fields.MultiSelectField(choices=[('0', 'Undecided'), ('a', 'Approved'), ('r', 'Rejected')], default='0', max_length=5)),
+                ('status', models.CharField(
+                    choices=[('0', 'Undecided'), ('a', 'Approved'), ('r', 'Rejected')], default='0', max_length=1)),
                 ('applicant', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),

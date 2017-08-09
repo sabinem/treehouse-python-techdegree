@@ -11,7 +11,6 @@ The app is again a mineral search site searching a given mineral database
 ## Programming languages, frameworks, libraries
 - [Django](https://www.djangoproject.com/) (Python Framework)
 - django-debug-toolbar
-- coverage is used for determining test-coverage
 
 ## Installation
 - Download the zip file to your computer and unzip
