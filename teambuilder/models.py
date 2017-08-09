@@ -1,20 +1,13 @@
 """
 models for the teambuilder app
 """
-#TODO: pruning necessary!
 from enum import Enum
 
 from django.db import models
 from django.db.models import Q
 from django.conf import settings
-from multiselectfield import MultiSelectField
 from django.db import IntegrityError
-from django.core.mail import send_mail
 
-
-APPLICATION_APPROVED = 'a'
-APPLICATION_UNDECIDED = '0'
-APPLICATION_REJECTED = 'r'
 
 class ApplicationStatus(Enum):
     Undecided = '0'
@@ -29,14 +22,6 @@ def get_choices(cls):
     return [(x.value, x.name) for x in cls]
 
 
-def get_choices_as_string(cls):
-    """gets the choice values from an Enum as comma-separated-string:
-   'f,m'
-   """
-    values = [x.value for x in cls]
-    return ','.join(values)
-
-
 class SkillManager(models.Manager):
     """Skill manager"""
     def get_project_needs(self, project_pk):
@@ -45,7 +30,7 @@ class SkillManager(models.Manager):
         return self.filter(id__in=positions.values('skill_id'))
 
     def get_project_needs_for_users_projects(self, user):
-        project_ids = user.get_project_ids()
+        project_ids = user.get_user_project_ids()
         positions = Position.objects.get_positons_by_project_ids(project_ids=project_ids)
         return \
             self.filter(id__in=positions.values('skill_id'))
@@ -58,19 +43,17 @@ class Skill(models.Model):
     objects = SkillManager()
 
     def __str__(self):
-        return self.need
+        return self.skill
 
     def get_openings(self):
         return self.positions.all()
 
 
 class ProjectManager(models.Manager):
-    def get_projects_by_searchterm(self, searchterm):
+    def get_by_searchterm(self, searchterm=None):
         if searchterm:
             return self.filter(
-                Q(title__icontains=searchterm) | Q(description__icontains=searchterm))
-        else:
-            return self
+                Q(title__icontains=searchterm) | Q(description__icontains=searchterm)).values_list('id', flat=True)
 
     def get_projects_by_skill(self, skill_pk):
         positions = Position.objects.get_positons_by_skill(skill_pk=skill_pk)
@@ -81,7 +64,6 @@ class ProjectManager(models.Manager):
         return set([position.skill for position in positions])
 
 
-
 class Project(models.Model):
     """Projects are owned by a user"""
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="projects")
@@ -90,7 +72,6 @@ class Project(models.Model):
     project_timeline = models.TextField()
     applicant_requirements = models.TextField()
     link = models.URLField(blank=True)
-
     objects = ProjectManager()
 
     def __str__(self):
@@ -101,7 +82,6 @@ class Project(models.Model):
 
     def get_project_needs(self):
         return set([position.skill for position in self.get_positions()])
-
 
 
 class PositionManager(models.Manager):
@@ -115,7 +95,7 @@ class PositionManager(models.Manager):
 
     def get_positons_by_project(self, project_pk):
         return self.select_related('skill')\
-            .filter(project_id=project_id)
+            .filter(project_id=project_pk)
 
     def get_positons_by_project_ids(self, project_ids):
         return self.select_related('skill')\
@@ -186,11 +166,13 @@ class Position(models.Model):
     def test_candidate(self, user):
         return user in self.get_candidates()
 
+    def has_applications(self):
+        return self.candidates.count() != 0
 
 
 class ApplicationManager(models.Manager):
     def get_applicants_for_position(self, position_pk, status=None):
-        qs = self.select_related('applicant').filter(position_id=position_pk)
+        qs = self.select_related('applicant', 'position__project__owner', 'position').filter(position_id=position_pk)
         if status:
             qs.filter(status=status)
         return qs
@@ -198,27 +180,47 @@ class ApplicationManager(models.Manager):
     def application_for_user_and_position(self, user, position):
         return self.filter(applicant=user, position=position).exists()
 
+    def application_for_user_and_skill_exists(self, user, skill_pk):
+        return self.filter(applicant=user, position__skill_id=skill_pk).exists()
+
     def get_applicants_by_status(self, status):
         return self.select_related('applicant').filter(status=status)
 
     def applications_for_a_users_projects(self, user):
-        return self.filter(position__project__owner=user).select_related('position')
+        applications = self.filter(position__project__owner=user)\
+            .select_related('position', 'applicant', 'position__project', 'position__skill')
+        return applications
+
+    def applications_for_a_users_projects_per_status(self, user, status):
+        applications = self.filter(position__project__owner=user, status=status)\
+            .select_related('position', 'applicant', 'position__project', 'position__skill')
+        return applications
+
+    def applications_for_a_users_projects_per_need(self, user, need_pk):
+        applications = self.filter(position__project__owner=user, position__skill_id=need_pk)\
+            .select_related('position', 'applicant', 'position__project', 'position__skill')
+        return applications
+
+    def applications_for_a_users_projects_per_project(self, user, project_pk):
+        applications = self.filter(position__project__owner=user, position__project_id=project_pk)\
+            .select_related('position', 'applicant', 'position__project', 'position__skill')
+        return applications
 
     def applications_for_a_project(self, user):
-        return self.filter(position__project__owner=user).select_related('position')
+        applications = self.filter(position__project__owner=user).select_related('position', 'applicant')
+        return applications
 
     def position_ids_where_user_applied(self, user):
         return self.filter(applicant=user).values_list('position_id', flat=True)
-
-
 
 
 class Application(models.Model):
     """Users can apply for Positions"""
     applicant = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="applications")
     position = models.ForeignKey(Position, related_name="candidates")
-    status = MultiSelectField(
+    status = models.CharField(
         choices=get_choices(ApplicationStatus),
+        max_length=1,
         default=ApplicationStatus.Undecided.value)
     objects = ApplicationManager()
 
@@ -228,13 +230,6 @@ class Application(models.Model):
     def approve(self):
         self.status = ApplicationStatus.Approved.value
         self.position.fill(applicant=self.applicant)
-        send_mail(
-            'Application approved',
-            'Your application has been approved.',
-            'from@example.com',
-            ['to@example.com'],
-            fail_silently=False,
-        )
         self.save()
 
     def reject(self):

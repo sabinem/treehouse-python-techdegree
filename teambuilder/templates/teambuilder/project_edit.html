@@ -1,4 +1,5 @@
 {% extends 'layout.html' %}
+{% load static from staticfiles %}
 {% block content %}
 <form method="post">{% csrf_token %}
 <div class="circle--actions--bar">
@@ -20,7 +21,11 @@
             {{ projectform.description }}
         </div>
 
-        <div class="circle--project--positions">
+        <div class="circle--project--positions" id="positions_formset">
+
+            {{ formset.non_form_errors }}
+            {{ formset.management_form }}
+
             <h2>Positions</h2>
 
             <ul class="circle--group--list circle--clone--list">
@@ -32,8 +37,7 @@
             </ul>
 
             <button type="submit" class="button button-primary">Save Changes</button>
-            {{ formset.non_form_errors }}
-            {{ formset.management_form }}
+
         </div>
     </div>
 
@@ -53,13 +57,22 @@
     </div>
 </div>
 </form>
+<script type="text/javascript" src="{% static 'js/jquery.formset.js' %}"></script>
 <script type="text/javascript">
+    var total_forms = $('#id_positions-TOTAL_FORMS');
+    function addForm(row){
+        count = parseInt(total_forms.attr('value'));
+        console.log(total_forms.attr('value'));
+        total_forms.attr('value', count+1);
+        console.log(total_forms.attr('value'));
+    }
     $(function() {
         $('.link-formset').formset({
             addText: 'Add Position',
             deleteText: 'Remove',
             addCssClass: 'circle--clone--add',
-            deleteCssClass: 'circle--clone--remove'
+            deleteCssClass: 'circle--clone--remove',
+            added:addForm,
         });
     })
 </script>

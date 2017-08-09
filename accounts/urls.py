@@ -25,20 +25,32 @@ urlpatterns = [
         views.profile_edit_view,
         name='profile_edit'),
 
-    # work with applications to own projects
-    url(r'^profile/(?P<profile_pk>\d+)/applications$',
+    # a user can list applications to his projects
+    url(r'^profile/applications$',
         views.ApplicationsListView.as_view(),
         name="applications"),
 
-    # search applications
-    url(r'^search/$', views.search_applications, name='search_by_term'),
+    # he filter applications by status
+    url(r'^profile/applications/status/(?P<status>\w{1})$',
+        views.ApplicationsListView.as_view(),
+        name="applications_status"),
 
-    # reject application
+    # he can filter applications by need
+    url(r'^profile/applications/need/(?P<need_pk>\d+)$',
+        views.ApplicationsListView.as_view(),
+        name="applications_need"),
+
+    # he can filter applications by project
+    url(r'^profile/applications/project/(?P<project_pk>\d+)$',
+        views.ApplicationsListView.as_view(),
+        name="applications_project"),
+
+    # he can reject an application
     url(r'^reject-application/(?P<application_pk>\d+)$',
         views.reject_application,
         name='reject_application'),
 
-    # approve application
+    # he can approve application
     url(r'^approve-application/(?P<application_pk>\d+)$',
         views.approve_application,
         name='approve_application'),

@@ -1,15 +1,8 @@
 Django==1.11.2
-django-autocomplete-light==3.2.9
-django-bootstrap3==8.2.3
 django-braces==1.11.0
 django-debug-toolbar==1.8
 django-extensions==1.7.9
-django-multiselectfield==0.1.7
-django-tagging==0.4.5
-django-tagging-autocomplete==0.5.0
-olefile==0.44
 Pillow==4.1.1
-pytz==2017.2
 six==1.10.0
 sqlparse==0.2.3
 Werkzeug==0.12.2

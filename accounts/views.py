@@ -1,11 +1,11 @@
 """views for the accounts app
 the app uses a custom user model"""
-import json
 
 from django.contrib.messages.views import SuccessMessageMixin
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
-from django.contrib.auth import authenticate, login, logout, get_user_model
+from django.contrib.auth import (authenticate,
+                                 login, logout, get_user_model)
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.views import generic
@@ -79,10 +79,118 @@ class ProfileView(generic.TemplateView):
         else:
             profile_user = self.request.user
         context['user'] = profile_user
-        context['projects'] = profile_user.get_projects()
-        context['jobs'] = profile_user.get_jobs()
-        context['skills'] = profile_user.get_skills()
+        context['projects'] = profile_user.get_user_projects()
+        context['jobs'] = profile_user.get_user_jobs()
+        context['skills'] = profile_user.get_user_skills()
         return context
+
+
+class ApplicationsListView(generic.TemplateView):
+    """List applications for a users projects
+    this view can be called from several urls filtering the
+    applications according to the url parameters
+    - by project
+    - by status
+    - by project need
+    """
+    template_name = "accounts/applications.html"
+
+    def get_context_data(self, **kwargs):
+        """get context data to fill the template
+        - distinguish between request user and other users
+        - consider url parameters
+        """
+        context = super().get_context_data(**kwargs)
+
+
+        profile_user = self.request.user
+        context['profile_user'] = profile_user
+
+        if 'status' in kwargs:
+            applications = \
+                teambuilder_models.Application.objects.applications_for_a_users_projects_per_status(
+                    profile_user,
+                    status=kwargs['status']
+                )
+        elif 'need_pk' in kwargs:
+            need_pk = int(kwargs['need_pk'])
+            context['need_pk'] = need_pk
+            applications = \
+                teambuilder_models.Application.objects.applications_for_a_users_projects_per_need(
+                    profile_user,
+                    need_pk=need_pk
+                )
+        elif 'project_pk' in kwargs:
+            project_pk = int(kwargs['project_pk'])
+            context['project_pk'] = project_pk
+            applications = \
+                teambuilder_models.Application.objects.applications_for_a_users_projects_per_project(
+                    profile_user,
+                    project_pk=project_pk
+                )
+        else:
+            applications = \
+                teambuilder_models.Application.objects.applications_for_a_users_projects(
+                    profile_user
+                )
+        context['applications'] = applications
+
+        context['status'] = list(teambuilder_models.ApplicationStatus)
+
+        # enum type do not work in Django templates
+        context['application_status_undecided'] \
+            = teambuilder_models.ApplicationStatus.Undecided.value
+
+        context['projects'] = profile_user.get_user_projects()
+        context['needs'] = profile_user.get_user_projects_needs()
+
+        return context
+
+
+@login_required
+def approve_application(request, application_pk):
+    """approving a users application
+    - the applicant receives an email notification"""
+    application = get_object_or_404(teambuilder_models.Application, pk=application_pk)
+    developer = application.position.developer
+    application.approve()
+    email.send_email(
+        'Your application was approved!',
+        '''Hello {}!
+        Thank you for your application to {} as {}.
+        We are happy to inform you that your application has been
+        accepted. We will soon get in touch with you regarding
+        the details of this job. With regards, {}'''
+            .format(developer, application.position.project,
+                    application.position.skill, application.position.project.owner),
+        [developer.email],
+    )
+    return HttpResponseRedirect(reverse_lazy(
+        'accounts:applications', kwargs={'profile_pk':request.user.id}))
+
+
+@login_required
+def reject_application(request, application_pk):
+    """rejecting a users application
+    - the applicant receives an email notification
+    """
+    application = get_object_or_404(teambuilder_models.Application, pk=application_pk)
+    developer = application.position.developer
+    application.reject()
+    email.send_email(
+        'Your application was rejected!',
+        '''Hello {}!
+        Thank you for your application to {} as {}.
+        Unfortunately we could not consider your application.
+        The position has been filled. With regards, {}'''
+            .format(developer,
+                    application.position.project,
+                    application.position.skill,
+                    application.position.project.owner),
+        [developer.email],
+    )
+    return HttpResponseRedirect(reverse_lazy(
+        'accounts:applications', kwargs={'profile_pk':request.user.id}))
 
 
 @login_required
@@ -90,116 +198,44 @@ def profile_edit_view(request):
     """
     Allows a user to update his own profile.
     """
-    #TODO: save projects
-
-    #TODO: JAVASCRIPT for foto upload
     user = request.user
-    skills = request.user.get_skills()
-    jobs = request.user.get_jobs()
-    projects = request.user.get_projects()
+    skills = request.user.get_user_skills()
+    jobs = request.user.get_user_jobs()
+    projects = request.user.get_user_projects()
 
     skills_initial_data = [{'skill': skill}
                     for skill in skills]
-    projects_initial_data = [{'title': project.title, 'link': project.link, 'id':project.id}
-                  for project in projects]
 
     if request.method == 'POST':
 
         profile_form = forms.ProfileForm(request.POST, request.FILES, instance=request.user)
         skills_formset = forms.SkillsFormSet(request.POST, prefix='fs_skills')
-        projects_formset = forms.ProjectsFormSet(request.POST, prefix='fs_projects')
 
-        if profile_form.is_valid() and skills_formset.is_valid() and projects_formset.is_valid():
+        if profile_form.is_valid() and skills_formset.is_valid():
+            # save profile form
             profile_form.save()
-            new_skills = set([skill_form.cleaned_data.get('skill')
-                          for skill_form in skills_formset
-                          if skill_form.cleaned_data.get('skill')])
+
+            # skills: save set of skills
+            new_skills = [skill_form.cleaned_data.get('skill')
+                              for skill_form in skills_formset
+                              if not skill_form.cleaned_data.get('DELETE')
+                              and skill_form.cleaned_data.get('skill')]
             user.skills.clear()
-            user.skills.add(*new_skills)
-
-            #TODO: das funktioniert noch nicht! modelformfactory testen und verwenden
-            #projects = projects_formset.save(commit=False)
-            #for p in projects:
-            #    print(p)
-
-            #projects.save()
+            if new_skills:
+                new_skills_set = set(new_skills)
+                user.skills.add(*new_skills)
+            user.save()
 
             return HttpResponseRedirect(reverse_lazy('accounts:profile'))
     else:
         profile_form = forms.ProfileForm(instance=request.user)
-        skills_formset = forms.SkillsFormSet(initial=skills_initial_data, prefix='fs_skills')
-        projects_formset = forms.ProjectsFormSet(initial=projects_initial_data, prefix='fs_projects')
-
+        skills_formset = forms.SkillsFormSet(
+            initial=skills_initial_data,
+            prefix='fs_skills')
 
     return render(request, 'accounts/profile_edit.html', {
         'profile_form': profile_form,
         'skills_formset': skills_formset,
-        'projects_formset': projects_formset,
         'jobs': jobs,
+        'projects': projects
     })
-
-
-class ApplicationsListView(generic.TemplateView):
-    """List applications for a users projects"""
-    template_name = "accounts/applications.html"
-
-    def get_context_data(self, **kwargs):
-        """get context data to fill the template
-        - destinguish between request user and other users"""
-        if 'profile_pk' in kwargs:
-            profile_user = get_object_or_404(User, pk=kwargs['profile_pk'])
-        else:
-            profile_user = self.request.user
-        context = super().get_context_data(**kwargs)
-        context['profile_user'] = profile_user
-        context['status'] = list(teambuilder_models.ApplicationStatus)
-        context['application_status'] = teambuilder_models.ApplicationStatus
-
-
-        context['projects'] = profile_user.get_projects()
-        context['needs'] = profile_user.get_needs()
-        context['applications'] = \
-            teambuilder_models.Application.objects.applications_for_a_users_projects(profile_user)
-        for x in context['applications']:
-            print("status", x.status)
-        for x in context['application_status']:
-            print("enum", x.name, x.value)
-
-
-
-        #context['needs'] = models.Skill.objects.needs_for_user(user)
-        return context
-
-
-def search_applications(request):
-    """ajax search in applications"""
-    searchterm = request.GET.get('searchterm')
-    response_data = {}
-    response_data['result'] = 'Create post successful!'
-    response_data['postpk'] = post.pk
-    response_data['text'] = post.text
-    response_data['created'] = post.created.strftime('%B %d, %Y %I:%M %p')
-    response_data['author'] = post.author.username
-
-    return HttpResponse(
-        json.dumps(response_data),
-        content_type="application/json"
-    )
-
-
-@login_required
-def approve_application(request, application_pk):
-    """rejecting or approving an application"""
-    application = get_object_or_404(teambuilder_models.Application, pk=application_pk)
-    application.reject()
-    return HttpResponseRedirect(reverse_lazy(
-        'accounts:applications', kwargs={'profile_pk':request.user.id}))
-
-
-@login_required
-def reject_application(request, application_pk):
-    """rejecting or approving an application"""
-    application = get_object_or_404(teambuilder_models.Application, pk=application_pk)
-    application.approve()
-    return HttpResponseRedirect(reverse_lazy(
-        'accounts:applications', kwargs={'profile_pk':request.user.id}))

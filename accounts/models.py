@@ -24,7 +24,7 @@ class UserManager(BaseUserManager):
         user.save()
         return user
     
-    def create_superuser(self, email,password):
+    def create_superuser(self, email, password):
         """create a superuser from email and password"""
         user = self.create_user(
             email,
@@ -40,39 +40,59 @@ class User(AbstractBaseUser, PermissionsMixin):
     """custom user model
     includes profile fields, such
     as bio, avatar and skills"""
-    email = models.EmailField(unique=True)
-    date_joined = models.DateTimeField(default=timezone.now)
+    email = models.EmailField(
+        unique=True
+    )
+    date_joined = models.DateTimeField(
+        default=timezone.now
+    )
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-    avatar = models.ImageField('Avatar', blank=True, null=True, upload_to='avatars/', )
-    bio = models.TextField(blank=True)
+    avatar = models.ImageField(
+        'Avatar',
+        blank=True,
+        null=True,
+        upload_to='avatars/'
+    )
+    bio = models.TextField(
+        blank=True
+    )
     skills = models.ManyToManyField(
         Skill,
         related_name='skills',
-        blank=True)
-    name = models.CharField(max_length=255, blank=True)
+        blank=True
+    )
+    name = models.CharField(
+        max_length=255, blank=True
+    )
     objects = UserManager()
     USERNAME_FIELD = "email"
     
     def __str__(self):
         return self.name
 
-    def get_projects(self):
-        """gets all projects"""
+    def get_user_projects(self):
+        """gets all projects a user owns"""
         return self.projects.all()
 
-    def get_project_ids(self):
-        return self.projects.all().values_list('id', flat=True)
+    def get_user_project_ids(self):
+        """get the ids of the that a user
+        owns"""
+        return self.projects.all().values('id')
 
-    def get_jobs(self):
+    def get_user_jobs(self):
+        """get all jobs where the user is involved"""
         return self.jobs.all()
 
-    def get_skills(self):
-        """all skills that a user has"""
+    def get_user_skills(self):
+        """get all skills that a user has himself"""
         return self.skills.all()
 
-    def get_needs(self):
+    def get_user_projects_needs(self):
+        """get the skills needed in the projects that the user
+        owns"""
         return Skill.objects.get_project_needs_for_users_projects(user=self)
 
     def get_short_name(self):
+        """email replaces the name after sign up"""
         return self.email

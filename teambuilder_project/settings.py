@@ -145,3 +145,6 @@ INTERNAL_IPS = '127.0.0.1'
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
 AUTH_USER_MODEL = "accounts.User"
+
+from django.core.urlresolvers import reverse_lazy
+LOGIN_URL = 'accounts:login'

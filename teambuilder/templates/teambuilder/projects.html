@@ -3,7 +3,12 @@
 <div class="bounds circle--page">
     <div class="circle--page--header circle--fluid">
         <div class="circle--fluid--cell circle--fluid--primary">
+        {% if term %}
+            <h2>Search</h2>
+            <p>Search research for: <span class="secondary-label">{{ term }}</span></p>
+        {% else %}
             <h2>Projects</h2>
+        {% endif %}
             {% if messages %}
                 <ul class="messages">
                     {% for message in messages %}
@@ -26,10 +31,22 @@
         <div class="circle--filter circle--secondary--module">
             <h4>Project Needs</h4>
             <ul class="circle--filter--list">
-                <li><a class="selected all">All Needs</a></li>
+                <li>
+                    <a href="{% url 'teambuilder:projects' %}"
+                    {% if not need_pk %}
+                      class="selected all"
+                    {% endif %}
+                    >
+                    All Needs
+                    </a>
+                </li>
                 {% for skill in skills %}
                     <li>
-                        <a href="#">
+                        <a href="{% url 'teambuilder:projects_by_need' need_pk=skill.id %}"
+                           {% if skill.id == need_pk %}
+                               class="selected"
+                           {% endif %}
+                        >
                             {{ skill.need }}
                         </a>
                     </li>
@@ -44,6 +61,7 @@
             <tr>
                 <th>Project Title</th>
                 <th class="circle--cell--right">Project Needs</th>
+                <th class="circle--cell--right">Developer</th>
             </tr>
             </thead>
             <tbody>
@@ -55,37 +73,20 @@
                 <td class="circle--cell--right">
                     <span class="secondary-label">{{ position.skill.need }}</span>
                 </td>
+                <td class="circle--cell--right">
+                    {% if not position.open %}
+                        <span class="secondary-label">{{ position.developer.name }}</span>
+                    {% else %}
+                        <a class="button button-primary button-inactive">
+                            open
+                        </a>
+                    {% endif %}
+                </td>
             </tr>
             {% endfor %}
             </tbody>
         </table>
     </div>
 </div>
-<script type="text/javascript">
-
-    var project_needs_selector = $('.circle--filter--list a');
-    var project_needs_selector_all = $('.circle--filter--list .all');
-    var search_input =  $('.circle--search input');
-    var search_button = $('.circle--search button');
-
-    project_needs_selector.click(function(e) {
-        e.preventDefault(); //prevent the link from being followed
-        project_needs_selector.removeClass('selected');
-        search_input.val('');
-        $(this).addClass('selected');
-        alert($(this).text());
-    });
-
-
-    search_button.click(function(e) {
-        e.preventDefault(); //prevent the link from being followed
-            var all_project_needs = $('.circle--filter--list a.all').addClass('selected');
-        project_needs_selector.each(function(i) {
-            $(this).removeClass('selected');
-        });
-        project_needs_selector_all.addClass('selected');
-        alert(search_input.val());
-    });
-</script>
 
 {% endblock %}

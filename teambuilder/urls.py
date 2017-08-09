@@ -7,18 +7,19 @@ from . import views
 urlpatterns = [
     # projects accessible for anonymous users
     url(r'^$', views.ProjectListView.as_view(), name="projects"),
+    url(r'^(?P<term>\w+)$', views.ProjectListView.as_view(), name="projects"),
+    url(r'^need/(?P<need_pk>\d+)$', views.ProjectListView.as_view(), name="projects_by_need"),
+
+    # project detail
     url(r'^project/(?P<project_pk>\d+)$', views.ProjectDetailView.as_view(), name="project"),
 
     # project CRUD view for authenticated users only
     url(r'^project/(?P<project_pk>\d+)/edit$', views.project_edit_view, name="project_edit"),
     url(r'^project/(?P<project_pk>\d+)/delete$', views.project_delete, name="project_delete"),
-    url(r'^new$', views.project_create_view, name="project_new"),
+    url(r'^project/new$', views.project_create_view, name="project_new"),
 
     # action views
     url(r'^(?P<position_pk>\d+)/apply$', views.position_apply, name="apply"),
 
-    # search views
-    url(r'^search/$', views.search_projects_by_need, name='search_by_need'),
-    url(r'^search/$', views.search_projects_by_term, name='search_by_term'),
 ]
 

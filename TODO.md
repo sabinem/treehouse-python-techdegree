@@ -1,5 +1,11 @@
 # TODO
 
+
+##FEHLERLISTE
+
+formset stores only 1 additinal value, should be more possible!!!
+
+
 1. before javascript und ajax
 
 ### Formsets

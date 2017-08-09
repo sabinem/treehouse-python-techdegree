@@ -1,5 +1,5 @@
 """teambuilder views"""
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django import forms
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
@@ -10,19 +10,9 @@ from django.views import generic
 from django.db.models import ProtectedError
 from django.contrib.auth import get_user_model
 from django.db import IntegrityError
-from django.core.mail import send_mail
-from django.shortcuts import render_to_response
-from django.template.context import RequestContext
-from django.db.models import Q
 
-from django.http import HttpResponse
-import json
-
-
-from braces.views import LoginRequiredMixin
-
-from . import models, forms
 from accounts import email
+from . import models, forms
 
 
 User = get_user_model()
@@ -35,8 +25,21 @@ class ProjectListView(generic.TemplateView):
     def get_context_data(self, **kwargs):
         """gets data for the view"""
         context = super().get_context_data(**kwargs)
-        context['positions'] =  models.Position.objects.all()
         context['skills'] = models.Skill.objects.all()
+        print(kwargs)
+        if 'need_pk' in kwargs:
+            need_pk = int(kwargs['need_pk'])
+            context['need_pk'] = int(need_pk)
+            context['positions'] = models.Position.objects.get_positons_by_skill(
+                skill_pk=need_pk
+            )
+        elif 'term' in kwargs:
+            term = kwargs['term']
+            project_ids = models.Project.objects.get_by_searchterm(searchterm=term)
+            context['term'] = term
+            context['positions'] = models.Position.objects.get_positons_by_project_ids(project_ids=project_ids)
+        else:
+            context['positions'] = models.Position.objects.all()
         return context
 
 
@@ -50,21 +53,33 @@ class ProjectDetailView(generic.TemplateView):
         project = get_object_or_404(
             models.Project, id=kwargs['project_pk'])
         context['project'] = project
-        context['positions_applied'] =\
-            models.Position.objects.get_positions_for_project_where_user_applied(
-                project=project,
-                user=self.request.user)
-        context['positions_not_applied'] =\
-            models.Position.objects.get_positions_for_project_where_user_did_not_apply(
-                project=project,
-                user=self.request.user)
+        if self.request.user.is_authenticated:
+            context['positions_applied'] =\
+                models.Position.objects.get_positions_for_project_where_user_applied(
+                    project=project,
+                    user=self.request.user)
+            context['positions_not_applied'] =\
+                models.Position.objects.get_positions_for_project_where_user_did_not_apply(
+                    project=project,
+                    user=self.request.user)
+        else:
+            context['positions'] = \
+                models.Position.objects.get_positons_by_project(project_pk=project.id)
         context['needs'] = project.get_project_needs()
         return context
 
 
+@login_required
 def project_delete(request, project_pk):
     """deleting a project if it has no positions"""
     project = get_object_or_404(models.Project, pk=project_pk)
+    if request.user != project.owner:
+        messages.add_message(
+            request, messages.ERROR,
+            'You are not the owner of this project'
+        )
+        return HttpResponseRedirect(reverse_lazy(
+            'teambuilder:project', kwargs={'project_pk': project_pk}))
     try:
         project.delete()
     except ProtectedError:
@@ -101,8 +116,6 @@ def position_apply(request, position_pk):
                 .format(request.user.name, position.project, position.skill, position.project.owner),
             [request.user.email],
         )
-
-        print("email was send")
         messages.add_message(request, messages.INFO,
                              'Thank you for applying. '
                              'We have send you an email confirmation!')
@@ -115,11 +128,19 @@ def project_edit_view(request, project_pk):
     """Editing a project
     and its positions"""
     project = get_object_or_404(models.Project, pk=project_pk)
+    if request.user != project.owner:
+        messages.add_message(
+            request, messages.ERROR,
+            'You are not the owner of this project'
+        )
+        return HttpResponseRedirect(reverse_lazy(
+            'teambuilder:project', kwargs={'project_pk': project_pk}))
     if request.method == 'POST':
         formset = forms.ProjectWithPositionsFormSet(request.POST, instance=project)
         projectform = forms.ProjectForm(request.POST, instance=project)
         if formset.is_valid() and projectform.is_valid():
             projectform.save()
+            for form in formset:
             formset.save()
             return HttpResponseRedirect(
                 reverse_lazy('teambuilder:project',
@@ -166,34 +187,3 @@ def project_create_view(request):
     })
 
 
-
-
-def search_projects_by_term(request):
-    """ajax search in projects for a search term"""
-    searchterm = request.GET.get('searchterm')
-    response_data = {}
-    response_data['result'] = 'Create post successful!'
-    response_data['postpk'] = post.pk
-    response_data['text'] = post.text
-    response_data['created'] = post.created.strftime('%B %d, %Y %I:%M %p')
-    response_data['author'] = post.author.username
-
-    return HttpResponse(
-        json.dumps(response_data),
-        content_type="application/json"
-    )
-
-def search_projects_by_need(request):
-    """ajax search in projects for a need"""
-    searchterm = request.GET.get('searchterm')
-    response_data = {}
-    response_data['result'] = 'Create post successful!'
-    response_data['postpk'] = post.pk
-    response_data['text'] = post.text
-    response_data['created'] = post.created.strftime('%B %d, %Y %I:%M %p')
-    response_data['author'] = post.author.username
-
-    return HttpResponse(
-        json.dumps(response_data),
-        content_type="application/json"
-    )

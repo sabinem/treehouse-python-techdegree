@@ -1,11 +1,12 @@
+
+/* --------------- */
+/* message display */
+/* --------------- */
+
+
 /* for message */
 .circle--page.message {
     margin-bottom: 0;
-}
-
-/* padding before avatar */
-.circle--primary--avatar::before {
-    padding-top:0;
 }
 
 /* display messages inline */
@@ -17,4 +18,19 @@ ul.messages, ul.messages li {
 
 ul.messages li.error {
     color:red;
+}
+
+
+/* -------------- */
+/* profile avatar */
+/* -------------- */
+
+/* padding before avatar */
+.image-exists::before {
+    padding-top: 0;
+}
+
+/* image upload */
+.hidden-upload {
+    display: none;
 }

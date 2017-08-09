@@ -1,3 +1,5 @@
+"""admin for accounts app
+- uses custom user model"""
 from django.contrib import admin
 
 from . import models

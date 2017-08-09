@@ -1,18 +1,14 @@
+"""forms for the accounts app"""
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 
-#TODO modelformfactory ausprobieren
-from django.forms.models import modelformset_factory
-from django.forms.formsets import BaseFormSet
-
-from teambuilder.models import Skill, Project
+from teambuilder.models import Skill
 
 
 class UserCreateForm(UserCreationForm):
     """Form to create a new user
-    for the custom user model
-    that the accounts app employs"""
+    for the custom user model"""
     email = forms.EmailField(
         widget=forms.TextInput(
             attrs={
@@ -20,12 +16,19 @@ class UserCreateForm(UserCreationForm):
                 'placeholder': 'Email Address'}
         ))
     password1 = forms.CharField(
-        widget=forms.PasswordInput(render_value=True, attrs={'placeholder': 'Password'}))
+        widget=forms.PasswordInput(
+            render_value=True,
+            attrs={'placeholder': 'Password'}
+        )
+    )
     password2 = forms.CharField(
-        widget=forms.PasswordInput(render_value=True, attrs={'placeholder': 'Confirm Password'}))
+        widget=forms.PasswordInput(
+            render_value=True,
+            attrs={'placeholder': 'Confirm Password'}
+        )
+    )
 
     class Meta:
-        """uses custom user model"""
         fields = ("email", "password1", "password2")
         model = get_user_model()
 
@@ -39,11 +42,13 @@ class UserLoginForm(forms.Form):
                 'placeholder': 'Email Address'}
         ))
     password = forms.CharField(
-        widget=forms.PasswordInput(render_value=True, attrs={'placeholder': 'Password'}))
+        widget=forms.PasswordInput(
+            render_value=True,
+            attrs={'placeholder': 'Password'}
+        )
+    )
 
     class Meta:
-        """uses custom user model
-        """
         fields = ("email", "password")
         model = get_user_model()
 
@@ -70,7 +75,6 @@ class ProfileForm(forms.ModelForm):
     avatar = forms.ImageField()
 
     class Meta:
-        """uses custom user model"""
         model = get_user_model()
         fields = ['name', 'bio', 'avatar']
         labels = {
@@ -83,16 +87,17 @@ class SkillForm(forms.ModelForm):
     skill = forms.ModelChoiceField(
         queryset=Skill.objects.all(),
         required=False)
-
     class Meta:
-        """based on the Skill model"""
         model = Skill
         fields = ['skill']
 
 
 # a formset is employed for entering skills
 SkillsFormSet = forms.formset_factory(
-    SkillForm)
+    form=SkillForm,
+    can_delete=True,
+    extra=1,
+)
 
 
 class ProjectForm(forms.Form):
@@ -104,12 +109,10 @@ class ProjectForm(forms.Form):
             'placeholder': 'URL',
         }),
         required=False)
-    id = forms.IntegerField(required=False)
 
 
 # a formset is employed for entering projects
-ProjectsFormSet = forms.formset_factory(ProjectForm)
+ProjectsFormSet = forms.formset_factory(ProjectForm,
+                                        extra=0, can_delete=False)
 
-# TODO modelformfactory ist noch nicht im Einsatz
-ProjectsModelFormSet = forms.modelformset_factory(
-    Project, fields=('title', 'link'), form=ProjectForm)
+

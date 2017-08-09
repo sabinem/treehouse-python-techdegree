@@ -32,11 +32,26 @@ class ProjectForm(forms.ModelForm):
         }
 
 
+class PositionForm(forms.ModelForm):
+    class Meta:
+        model=models.Position
+        fields = ['skill', 'description']
+
+
+class NewPositionForm(forms.ModelForm):
+    class Meta:
+        model=models.Position
+        fields = ['skill', 'description']
+
+
+class ProjectSearchForm(forms.Form):
+    searchterm = forms.CharField(max_length=250)
+
+
 # Form for Project Positions
 ProjectWithPositionsFormSet = inlineformset_factory(
     models.Project,
     models.Position,
-    formset=BaseInlineFormSet,
     fields=('skill', 'description'),
     labels={
         'skill': "",
@@ -53,11 +68,5 @@ ProjectWithPositionsFormSet = inlineformset_factory(
 )
 
 
-class PositionForm(forms.ModelForm):
-    class Meta:
-        model=models.Position
-        fields = ['skill', 'description']
-
-
 NewPositionsFormset = forms.formset_factory(
-    PositionForm)
+    NewPositionForm)

@@ -1,0 +1,167 @@
+{% extends 'layout.html' %}
+{% load static from staticfiles %}
+{% block content %}
+    <div class="circle--actions--bar">
+        <nav class="bounds">
+            <ul class="circle--pill--list">
+                <li><a href="{% url 'accounts:applications' %}">Applications</a></li>
+                <li><a class="selected" href="{% url 'accounts:profile' %}">Profile</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="bounds circle--page">
+        <form method="post" enctype="multipart/form-data">{% csrf_token %}
+            <div class="circle--page--header circle--fluid">
+                <div class="circle--fluid--cell circle--fluid--primary">
+                    <h2>Profile</h2>
+                </div>
+                {{ profile_form.non_field_errors }}
+                <div class="circle--fluid--cell circle--fluid--secondary">
+                    <button class="button button-primary icon-on-left" type="submit">Save Changes</button>
+                </div>
+            </div>
+
+            <div class="grid-70">
+                {{ profile_form.name }}
+                {% if profile_form.name.errors %}
+                    {% for error in profile_form.name.errors %}
+                        {{ error|escape }}
+                    {% endfor %}
+                {% endif %}
+                <div class="circle--article--body">
+                    {{ profile_form.bio }}
+                    {% if profile_form.bio.errors %}
+                        {% for error in profile_form.bio.errors %}
+                            {{ error|escape }}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                <h2>Past Projects</h2>
+                <table class="u-full-width circle--table">
+                    <thead>
+                    <tr>
+                        <th>Project Title</th>
+                        <th class="circle--cell--right">Project Needs</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for job in jobs %}
+                        <tr class="clickable-row"
+                            href="">
+                            <td>
+                                <h3>{{ job.project.title }}</h3>
+                            </td>
+                            <td class="circle--cell--right">
+                                <span class="secondary-label">{{ job.skill.need }}</span>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="grid-25 grid-push-5">
+                <div class="circle--secondary--module">
+
+                    <div class="circle--primary--avatar">
+                        {% if user.avatar %}
+                            <img id="avatar" width="200px" src="{% static user.avatar.url %}">
+                        {% endif %}
+                        <a class="button visible-upload">
+                            Upload Photo
+                            <input type="file" class="visible-upload">
+                        </a>
+                        <div class="hidden-upload">
+                        {% if user.avatar %}
+                            <img id="avatar" width="200px" src="{% static user.avatar.url %}">
+                        {% endif %}
+                        {{ profile_form.avatar }}
+                        {{ profile_form.avatar.errors }}
+                        {% if profile_form.avatar.errors %}
+                            {% for error in profile_form.avatar.errors %}
+                                {{ error|escape }}
+                            {% endfor %}
+                        {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="circle--secondary--module">
+
+
+                    <h4>My Skills</h4>
+
+                    <ul class="circle--clone--list">
+                        {% for skill_form in skills_formset %}
+                            <li class="link-formset-skills">
+
+                                {{ skill_form }}
+
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    {{ skills_formset.non_form_errors }}
+                    {{ skills_formset.management_form }}
+                </div>
+
+                <div class="circle--secondary--module">
+                    <h4>My Projects</h4>
+
+
+                    <ul class="circle--clone--list">
+
+                    {% for project in projects %}
+                        <li>
+                            <a href="{% url 'teambuilder:project' project_pk=project.id %}">
+                                {{ project.title }}
+                            </a>
+                        </li>
+                    {% endfor %}
+
+                    </ul>
+
+                    {{ projects_formset.non_form_errors }}
+                    {{ projects_formset.management_form }}
+
+                    {% for form in formset %}
+                        {% for hidden in form.hidden_fields %}
+                            {{ hidden }}
+                        {% endfor %}
+                    {% endfor %}
+
+                    {% for hidden in form.hidden_fields %}
+                        {{ hidden }}
+                    {% endfor %}
+
+                </div>
+            </div>
+        </form>
+    </div>
+    <script type="text/javascript" src="{% static 'js/jquery.formset.js' %}"></script>
+    <script>
+
+        // uploading an image to the image field
+
+        var hidden_button = $('#id_avatar');
+        var visible_button = $('.visible-upload');
+        visible_button.click(function(ve) {
+           ve.preventDefault();
+           ve.stopPropagation();
+           hidden_button.click();
+        });
+
+        // jquery formset parameters
+
+        $(function() {
+            $('.link-formset-skills').formset({
+                prefix: '{{ skills_formset.prefix }}',
+                addText: 'Add Skill',
+                deleteText: 'Remove',
+                addCssClass: 'circle--clone--add',
+                deleteCssClass: 'circle--clone--remove'
+            });
+        })
+    </script>
+
+{% endblock %}

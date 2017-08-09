@@ -1,10 +1,10 @@
 $( document ).ready(function() {
 
+  var cloneListLink = $(".circle--clone--list")
   $('textarea').autogrow({onInitialize: true});
 
-
   //Cloner for infinite input lists
-  $(".circle--clone--list").on("click", ".circle--clone--add", function(){
+  cloneListLink.on("click", ".circle--clone--add", function(){
     var parent = $(this).parent("li");
     var copy = parent.clone();
     parent.after(copy);
@@ -12,7 +12,7 @@ $( document ).ready(function() {
     copy.find("*:first-child").focus();
   });
 
-  $(".circle--clone--list").on("click", "li:not(:only-child) .circle--clone--remove", function(){
+  cloneListLink.on("click", "li:not(:only-child) .circle--clone--remove", function(){
     var parent = $(this).parent("li");
     parent.remove();
   });
@@ -50,8 +50,5 @@ $( document ).ready(function() {
   input.wrap(function() {
     return "<a class='button " + state + "'>" + text + "</div>";
   });
-
-
-
 
 });
