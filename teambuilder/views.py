@@ -140,7 +140,6 @@ def project_edit_view(request, project_pk):
         projectform = forms.ProjectForm(request.POST, instance=project)
         if formset.is_valid() and projectform.is_valid():
             projectform.save()
-            for form in formset:
             formset.save()
             return HttpResponseRedirect(
                 reverse_lazy('teambuilder:project',
