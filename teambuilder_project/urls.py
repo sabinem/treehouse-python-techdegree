@@ -17,20 +17,12 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.views import generic
-from django.conf import settings
 
 
 urlpatterns = [
-    url(r'^hello$', generic.TemplateView.as_view(template_name="index.html")),
     url(r'^', include('teambuilder.urls', namespace='teambuilder')),
     url(r'^accounts/', include('accounts.urls', namespace='accounts')),
     url(r'^admin/', admin.site.urls),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
-
-if settings.DEBUG:
-    import debug_toolbar
-    urlpatterns += [
-        url(r'^__debug__/', include(debug_toolbar.urls)),
-    ]

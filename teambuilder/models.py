@@ -146,10 +146,10 @@ class Position(models.Model):
     def apply(self, applicant):
         if self.project.owner == applicant:
             raise IntegrityError("You can not apply to your own project!")
-        if self.skill not in applicant.get_skills():
+        if self.skill not in applicant.get_user_skills():
             raise IntegrityError(
                 "You can not apply to a position when you do not have "
-                "the required skill! For this position you need to be a {}".format(self.skill))
+                "the required skill! For this position you need to be a {}".format(self.skill.need))
         application, created = Application.objects.get_or_create(
             applicant=applicant, position=self)
         application.save()

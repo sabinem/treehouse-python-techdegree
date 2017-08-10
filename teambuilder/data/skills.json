@@ -1,0 +1,30 @@
+[
+  {
+    "skill": "Python",
+    "need": "Python Developer"
+  },
+  {
+    "skill": "Java",
+    "need": "Java Developer"
+  },
+  {
+    "skill": "Javascript",
+    "need": "Javascript Developer"
+  },
+  {
+    "skill": "Designer",
+    "need": "Graphic Designer"
+  },
+  {
+    "skill": "Big Data",
+    "need": "Big Data Engineer"
+  },
+  {
+    "skill": "Dev Ops",
+    "need": "Dev Ops"
+  },
+  {
+    "skill": "Angular",
+    "need": "Angular Specialist"
+  }
+]

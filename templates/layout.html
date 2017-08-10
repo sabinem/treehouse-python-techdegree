@@ -75,9 +75,11 @@
         var search_field = $('#search_term');
         var mainurl = $('#main_url');
         var url = "{% url 'teambuilder:projects' %}";
+        console.log(url);
         $(document).ready(function (){
             searchbutton.click(function() {
                var searchurl = mainurl.attr('href') + search_field.val();
+               console.log(searchurl);
                window.location.replace(searchurl);
             });
         });
