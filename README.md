@@ -37,3 +37,10 @@ python -m smtpd -n -c DebuggingServer localhost:1025
 ## Tests
 there are some tests, but testing was not part of the project
 requirements in this case
+
+## TODO
+- remove extensions and werkzeug
+
+- outcomment debug tool bar
+
+- load initial skills with migration

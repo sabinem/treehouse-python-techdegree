@@ -7,7 +7,7 @@ from . import views
 urlpatterns = [
     # projects accessible for anonymous users
     url(r'^$', views.ProjectListView.as_view(), name="projects"),
-    url(r'^(?P<term>\w+)$', views.ProjectListView.as_view(), name="projects"),
+    url(r'^search/(?P<term>\w+)$', views.ProjectListView.as_view(), name="projects"),
     url(r'^need/(?P<need_pk>\d+)$', views.ProjectListView.as_view(), name="projects_by_need"),
 
     # project detail
