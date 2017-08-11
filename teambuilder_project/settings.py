@@ -117,9 +117,6 @@ USE_TZ = True
 
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = 1025
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-#EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-#EMAIL_FILE_PATH = '/tmp/app-emails'
 
 
 # Static files (CSS, JavaScript, Images)
@@ -137,5 +134,4 @@ MEDIA_URL = '/media/'
 
 AUTH_USER_MODEL = "accounts.User"
 
-from django.core.urlresolvers import reverse_lazy
 LOGIN_URL = 'accounts:login'
