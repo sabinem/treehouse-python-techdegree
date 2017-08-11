@@ -33,15 +33,9 @@ Start the application with `python manage.py runserver.py`
 ```
 python -m smtpd -n -c DebuggingServer localhost:1025
 ```
+- afterwards you can watch here for emails being send out
 
 ## Tests
 there are some tests, but testing was not part of the project
 requirements in this case
 
-
-## TO DO :
--projects: man sollte nach skills suchen können
-
-
-
-- profil ohne foto lässt sich nicht speichern
