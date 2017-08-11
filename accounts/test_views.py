@@ -7,8 +7,6 @@ from django.core.urlresolvers import reverse
 
 from teambuilder.models import Skill, Project, Position
 
-from . import models
-
 
 User = get_user_model()
 
@@ -62,6 +60,7 @@ class AccountsRegisterTest(TestCase):
              'password2': 'bar123'})
         self.assertEquals(resp.status_code, 200)
 
+
 class AccountsRegisteredUserTest(TestCase):
     def setUp(self):
         """users are set up along with skills, projects,
@@ -104,11 +103,12 @@ class AccountsRegisteredUserTest(TestCase):
         self.position1 = Position.objects.create(**position1)
         self.position2 = Position.objects.create(**position2)
         self.position3 = Position.objects.create(**position3)
-        test_user1 = User.objects.create_user(email='testuser1', password='12345')
+        test_user1 = User.objects.create_user(email='testuser1',
+                                              password='12345')
         test_user1.save()
-        test_user2 = User.objects.create_user(email='testuser2', password='12345')
+        test_user2 = User.objects.create_user(email='testuser2',
+                                              password='12345')
         test_user2.save()
-
 
     def test_user_logout_view(self):
         """after logout the user is redirected to the projects page"""
@@ -116,7 +116,8 @@ class AccountsRegisteredUserTest(TestCase):
             'accounts:logout')
         )
         self.assertEquals(resp.status_code, 302)
-        self.assertRedirects(resp, reverse('teambuilder:projects'), status_code=302)
+        self.assertRedirects(resp, reverse('teambuilder:projects'),
+                             status_code=302)
 
     def test_user_login_view_accessible(self):
         """everyone should be able to get to the login view"""
@@ -127,7 +128,6 @@ class AccountsRegisteredUserTest(TestCase):
 
     def test_user_login_view(self):
         """login should work and redirect to the profile after success"""
-        login = self.client.login(username='testuser1', password='12345')
         resp = self.client.get(
             reverse('accounts:profile', )
         )

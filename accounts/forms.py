@@ -1,9 +1,8 @@
 """forms for the accounts app"""
-from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.contrib.auth import (authenticate,
-                                 login, get_user_model)
+                                 get_user_model)
 
 from teambuilder.models import Skill
 
@@ -91,7 +90,7 @@ class ProfileForm(forms.ModelForm):
         model = get_user_model()
         fields = ['name', 'bio', 'avatar']
         labels = {
-            'avatar':'Your Photo',
+            'avatar': 'Your Photo',
         }
 
 
@@ -100,6 +99,7 @@ class SkillForm(forms.ModelForm):
     skill = forms.ModelChoiceField(
         queryset=Skill.objects.all(),
         required=False)
+
     class Meta:
         model = Skill
         fields = ['skill']
@@ -127,5 +127,3 @@ class ProjectForm(forms.Form):
 # a formset is employed for entering projects
 ProjectsFormSet = forms.formset_factory(ProjectForm,
                                         extra=0, can_delete=False)
-
-

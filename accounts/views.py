@@ -106,7 +106,8 @@ class ApplicationsListView(generic.TemplateView):
 
         if 'status' in kwargs:
             applications = \
-                teambuilder_models.Application.objects.applications_for_a_users_projects_per_status(
+                teambuilder_models.Application.objects.\
+                applications_for_a_users_projects_per_status(
                     profile_user,
                     status=kwargs['status']
                 )
@@ -114,7 +115,8 @@ class ApplicationsListView(generic.TemplateView):
             need_pk = int(kwargs['need_pk'])
             context['need_pk'] = need_pk
             applications = \
-                teambuilder_models.Application.objects.applications_for_a_users_projects_per_need(
+                teambuilder_models.Application.objects.\
+                applications_for_a_users_projects_per_need(
                     profile_user,
                     need_pk=need_pk
                 )
@@ -122,13 +124,15 @@ class ApplicationsListView(generic.TemplateView):
             project_pk = int(kwargs['project_pk'])
             context['project_pk'] = project_pk
             applications = \
-                teambuilder_models.Application.objects.applications_for_a_users_projects_per_project(
+                teambuilder_models.Application.objects.\
+                applications_for_a_users_projects_per_project(
                     profile_user,
                     project_pk=project_pk
                 )
         else:
             applications = \
-                teambuilder_models.Application.objects.applications_for_a_users_projects(
+                teambuilder_models.Application.objects.\
+                applications_for_a_users_projects(
                     profile_user
                 )
         context['applications'] = applications
@@ -149,7 +153,8 @@ class ApplicationsListView(generic.TemplateView):
 def approve_application(request, application_pk):
     """approving a users application
     - the applicant receives an email notification"""
-    application = get_object_or_404(teambuilder_models.Application, pk=application_pk)
+    application = get_object_or_404(
+        teambuilder_models.Application, pk=application_pk)
     developer = application.applicant
     application.approve()
     email.send_email(
@@ -159,8 +164,10 @@ def approve_application(request, application_pk):
         We are happy to inform you that your application has been
         accepted. We will soon get in touch with you regarding
         the details of this job. With regards, {}'''
-            .format(developer, application.position.project,
-                    application.position.skill, application.position.project.owner),
+        .format(
+            developer, application.position.project,
+            application.position.skill,
+            application.position.project.owner),
         [developer.email],
     )
     return HttpResponseRedirect(reverse_lazy(
@@ -172,7 +179,8 @@ def reject_application(request, application_pk):
     """rejecting a users application
     - the applicant receives an email notification
     """
-    application = get_object_or_404(teambuilder_models.Application, pk=application_pk)
+    application = get_object_or_404(
+        teambuilder_models.Application, pk=application_pk)
     developer = application.applicant
     application.reject()
     email.send_email(
@@ -181,10 +189,10 @@ def reject_application(request, application_pk):
         Thank you for your application to {} as {}.
         Unfortunately we could not consider your application.
         The position has been filled. With regards, {}'''
-            .format(developer,
-                    application.position.project,
-                    application.position.skill,
-                    application.position.project.owner),
+        .format(developer,
+                application.position.project,
+                application.position.skill,
+                application.position.project.owner),
         [developer.email],
     )
     return HttpResponseRedirect(reverse_lazy(
@@ -202,12 +210,14 @@ def profile_edit_view(request):
     projects = request.user.get_user_projects()
 
     skills_initial_data = [{'skill': skill}
-                    for skill in skills]
+                           for skill in skills]
 
     if request.method == 'POST':
 
-        profile_form = forms.ProfileForm(request.POST, request.FILES, instance=request.user)
-        skills_formset = forms.SkillsFormSet(request.POST, prefix='fs_skills')
+        profile_form = forms.ProfileForm(
+            request.POST, request.FILES, instance=request.user)
+        skills_formset = forms.SkillsFormSet(
+            request.POST, prefix='fs_skills')
 
         if profile_form.is_valid() and skills_formset.is_valid():
             # save profile form
@@ -215,12 +225,11 @@ def profile_edit_view(request):
 
             # skills: save set of skills
             new_skills = [skill_form.cleaned_data.get('skill')
-                              for skill_form in skills_formset
-                              if not skill_form.cleaned_data.get('DELETE')
-                              and skill_form.cleaned_data.get('skill')]
+                          for skill_form in skills_formset
+                          if not skill_form.cleaned_data.get('DELETE') and
+                          skill_form.cleaned_data.get('skill')]
             user.skills.clear()
             if new_skills:
-                new_skills_set = set(new_skills)
                 user.skills.add(*new_skills)
             user.save()
 

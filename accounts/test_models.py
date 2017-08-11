@@ -52,7 +52,6 @@ position1 = {
 }
 
 
-
 class CustomUserModelManagerTest(TestCase):
     """Model Tests for Custom User Model Manager"""
     def test_create_user_valid(self):
@@ -72,7 +71,8 @@ class CustomUserModelManagerTest(TestCase):
         """a superuser is created with privileges
         email"""
         user = User.objects.create_superuser(**newadminuser_valid)
-        self.assertEquals(user, User.objects.get(email=newadminuser_valid['email']))
+        self.assertEquals(user, User.objects.get(
+            email=newadminuser_valid['email']))
         self.assertTrue(user.is_staff)
         self.assertTrue(user.is_superuser)
 
@@ -153,5 +153,3 @@ class CustomUserModelTest(TestCase):
         self.assertSetEqual(
             set(self.user1.get_user_projects_needs()),
             {self.skill2})
-
-
