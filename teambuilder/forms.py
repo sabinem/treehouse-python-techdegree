@@ -7,11 +7,12 @@ from . import models
 
 class ProjectForm(forms.ModelForm):
     """Project Form"""
+
     class Meta:
         model = models.Project
         fields = ['title', 'description', 'project_timeline', 'applicant_requirements']
         labels = {
-            'avatar':'Your Photo',
+            'avatar': 'Your Photo',
         }
         widgets = {
             'applicant_requirements': forms.Textarea(
@@ -34,13 +35,13 @@ class ProjectForm(forms.ModelForm):
 
 class PositionForm(forms.ModelForm):
     class Meta:
-        model=models.Position
+        model = models.Position
         fields = ['skill', 'description']
 
 
 class NewPositionForm(forms.ModelForm):
     class Meta:
-        model=models.Position
+        model = models.Position
         fields = ['skill', 'description']
 
 
@@ -59,14 +60,13 @@ ProjectWithPositionsFormSet = inlineformset_factory(
     },
     widgets={
         'description': forms.Textarea(
-                attrs={
-                    'placeholder': 'Position description...',
-                    'style': 'resize: both; overflow: auto;'}),
+            attrs={
+                'placeholder': 'Position description...',
+                'style': 'resize: both; overflow: auto;'}),
     },
     can_delete=True,
     extra=1
 )
-
 
 NewPositionsFormset = forms.formset_factory(
     NewPositionForm)

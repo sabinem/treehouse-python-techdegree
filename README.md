@@ -37,3 +37,11 @@ python -m smtpd -n -c DebuggingServer localhost:1025
 ## Tests
 there are some tests, but testing was not part of the project
 requirements in this case
+
+
+## TO DO :
+-projects: man sollte nach skills suchen können
+
+
+
+- profil ohne foto lässt sich nicht speichern

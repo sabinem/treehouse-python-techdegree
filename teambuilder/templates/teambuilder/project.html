@@ -1,37 +1,27 @@
 {% extends 'layout.html' %}
 {% block content %}
+    {% if project.owner == request.user %}
+        <div class="circle--actions--bar">
+            <div class="bounds">
 
-    <div class="circle--actions--bar">
-        <div class="bounds">
-            {%  if project.owner == request.user %}
                 <div class="grid-100">
                     <a class="button" href="{% url 'teambuilder:project_edit' project_pk=project.id %}">Edit Project</a>
-                    <a class="button" href="{% url 'teambuilder:project_delete' project_pk=project.id %}">Delete Project</a>
+                    <a class="button" href="{% url 'teambuilder:project_delete' project_pk=project.id %}">Delete
+                        Project</a>
                 </div>
-            {% endif %}
-        </div>
-    </div>
 
-    <div class="circle--actions--bar">
-        <div class="bounds">
-            <div class="grid-100">
-                {% if messages %}
-                    <ul class="messages">
-                        {% for message in messages %}
-                        <li{% if message.tags %} class="message {{ message.tags }}"{% endif %}>{{ message }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
             </div>
         </div>
-    </div>
+    {% endif %}
     <div class="bounds circle--page circle--article">
         <div class="grid-70">
             <div class="circle--article--header">
                 <h4 class="circle--article--section">Project</h4>
                 <h1 class="circle--article--title">{{ project.title }}</h1>
-                <p class="circle--article--byline">
-                    <a href="{% url 'accounts:profile_other' profile_pk=project.owner.id %}">{{ project.owner.name }}</a>
+                <p class="circle--article--byline">Project Owner:
+                    <a href="{% url 'accounts:profile_other' profile_pk=project.owner.id %}">
+                        {{ project.owner.name }}
+                    </a>
                 </p>
             </div>
 
@@ -44,50 +34,22 @@
                 <h2>Positions</h2>
 
                 <ul class="circle--group--list">
-                    {% if user.is_authenticated %}
-                    {% for position in positions_not_applied %}
-                    <li id="anchor{{ position.id }}" class="anchor">
-                        <h3>{{ position.skill }}</h3>
-                        <p>{{ position.description }}</p>
-                            {% if position.open and request.user != position.project.owner %}
+                    {% for position in positions %}
+                        <li id="anchor{{ position.id }}" class="anchor">
+                            <h3>{{ position.skill }}</h3>
+                            <p>{{ position.description }}</p>
+                            {% if position.open %}
                                 <a class="button button-primary"
                                    href="{% url 'teambuilder:apply' position_pk=position.id %}"
                                 >
                                     Apply
                                 </a>
-                            {% elif not position.open %}
-                                <a class="button button-primary button-inactive">Position Filled</a>
-                                <span>{{ position.developer.name }}</span>
-                            {% else %}
-                                <a href="{% url 'accounts:applications' %}"
-                                   class="button button-primary button-inactive">
-                                    Received Applications: {{ position.candidates.count }}
-                                </a>
-                            {% endif %}
-                        </li>
-                        {% endfor %}
-                        {% for position in positions_applied %}
-                        <li id="anchor{{ position.id }}" class="anchor">
-                            <h3>{{ position.skill }}</h3>
-                            <p>{{ position.description }}</p>
-                            {% if position.open %}
-                                <a class="button button-primary button-inactive"
-                                >
-                                    Applied
-                                </a>
                             {% else %}
                                 <a class="button button-primary button-inactive">Position Filled</a>
                             {% endif %}
                         </li>
-                        {% endfor %}
-                    {% else %}
-                        {% for position in positions %}
-                        <li id="anchor{{ position.id }}" class="anchor">
-                            <h3>{{ position.skill }}</h3>
-                            <p>{{ position.description }}</p>
-                        </li>
-                        {% endfor %}
-                    {% endif %}
+                    {% endfor %}
+
                 </ul>
             </div>
 
@@ -96,17 +58,29 @@
         <div class="grid-25 grid-push-5">
             <div class="circle--secondary--module">
                 <h3>Project Needs</h3>
-                <ul class="circle--link--list">
-                    {% for need in needs %}
+                <ul class="circle--filter--list">
                     <li>
-                        <a href="">
-                            {{ need.need }}
+                        <a href="{% url 'teambuilder:project' project_pk=project.id %}"
+                                {% if not need_pk %}
+                           class="selected all"
+                                {% endif %}
+                        >
+                            All Needs
                         </a>
                     </li>
+                    {% for skill in skills %}
+                        <li>
+                            <a href="{% url 'teambuilder:project_by_need' project_pk=project.id need_pk=skill.id %}"
+                                    {% if skill.id == need_pk %}
+                               class="selected"
+                                    {% endif %}
+                            >
+                                {{ skill.need }}
+                            </a>
+                        </li>
                     {% endfor %}
                 </ul>
             </div>
-
 
             <div class="circle--secondary--module">
                 <h3>Project Timeline</h3>

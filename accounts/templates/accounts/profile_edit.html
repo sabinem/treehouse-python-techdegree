@@ -11,31 +11,40 @@
     </div>
 
     <div class="bounds circle--page">
-        <form method="post" enctype="multipart/form-data">{% csrf_token %}
+        <form method="post" enctype="multipart/form-data" novalidate>{% csrf_token %}
             <div class="circle--page--header circle--fluid">
                 <div class="circle--fluid--cell circle--fluid--primary">
                     <h2>Profile</h2>
                 </div>
-                {{ profile_form.non_field_errors }}
+                <div class="form-errors">
+                    {{ profile_form.non_field_errors }}
+                </div>
                 <div class="circle--fluid--cell circle--fluid--secondary">
                     <button class="button button-primary icon-on-left" type="submit">Save Changes</button>
                 </div>
             </div>
 
             <div class="grid-70">
-                {{ profile_form.name }}
-                {% if profile_form.name.errors %}
-                    {% for error in profile_form.name.errors %}
-                        {{ error|escape }}
-                    {% endfor %}
-                {% endif %}
-                <div class="circle--article--body">
-                    {{ profile_form.bio }}
-                    {% if profile_form.bio.errors %}
-                        {% for error in profile_form.bio.errors %}
+                <div class="form-errors">
+                    {% if profile_form.name.errors %}
+                        {% for error in profile_form.name.errors %}
                             {{ error|escape }}
                         {% endfor %}
                     {% endif %}
+                </div>
+                {{ profile_form.name }}
+
+                <div class="circle--article--body">
+                    <div class="form-errors">
+                        {% if profile_form.bio.errors %}
+                            {% for error in profile_form.bio.errors %}
+                                {{ error|escape }}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    {{ profile_form.bio }}
+
+
                 </div>
                 <h2>Past Projects</h2>
                 <table class="u-full-width circle--table">
@@ -63,9 +72,20 @@
 
             <div class="grid-25 grid-push-5">
                 <div class="circle--secondary--module">
+                    Currently: {{ user.avatar }}
+                    <div class="form-errors">
 
+                        {% if profile_form.avatar.errors %}
+                            <div class="form-errors">
+                            {% for error in profile_form.avatar.errors %}
+                                {{ error|escape }}
+                            {% endfor %}
+                            </div>
+
+                        {% endif %}
+                    </div>
                     <div class="circle--primary--avatar
-                         {% if user.avatar %}image-exists{% endif %}">
+                        {% if user.avatar %}image-exists{% endif %}">
                         {% if user.avatar %}
                             <img id="avatar" width="200px" src="{% static user.avatar.url %}">
                         {% endif %}
@@ -73,14 +93,9 @@
                             Upload Photo
                             <input type="file" class="visible-upload">
                         </a>
+
                         <div class="hidden-upload">
-                        {{ profile_form.avatar }}
-                        {{ profile_form.avatar.errors }}
-                        {% if profile_form.avatar.errors %}
-                            {% for error in profile_form.avatar.errors %}
-                                {{ error|escape }}
-                            {% endfor %}
-                        {% endif %}
+                            {{ profile_form.avatar }}
                         </div>
                     </div>
                 </div>
@@ -99,7 +114,9 @@
                             </li>
                         {% endfor %}
                     </ul>
-                    {{ skills_formset.non_form_errors }}
+                    <div class="form-errors">
+                        {{ skills_formset.non_form_errors }}
+                    </div>
                     {{ skills_formset.management_form }}
                 </div>
 
@@ -109,18 +126,15 @@
 
                     <ul class="circle--clone--list">
 
-                    {% for project in projects %}
-                        <li>
-                            <a href="{% url 'teambuilder:project' project_pk=project.id %}">
-                                {{ project.title }}
-                            </a>
-                        </li>
-                    {% endfor %}
+                        {% for project in projects %}
+                            <li>
+                                <a href="{% url 'teambuilder:project' project_pk=project.id %}">
+                                    {{ project.title }}
+                                </a>
+                            </li>
+                        {% endfor %}
 
                     </ul>
-
-                    {{ projects_formset.non_form_errors }}
-                    {{ projects_formset.management_form }}
 
                     {% for form in formset %}
                         {% for hidden in form.hidden_fields %}
@@ -143,15 +157,15 @@
 
         var hidden_button = $('#id_avatar');
         var visible_button = $('.visible-upload');
-        visible_button.click(function(ve) {
-           ve.preventDefault();
-           ve.stopPropagation();
-           hidden_button.click();
+        visible_button.click(function (ve) {
+            ve.preventDefault();
+            ve.stopPropagation();
+            hidden_button.click();
         });
 
         // jquery formset parameters
 
-        $(function() {
+        $(function () {
             $('.link-formset-skills').formset({
                 prefix: '{{ skills_formset.prefix }}',
                 addText: 'Add Skill',

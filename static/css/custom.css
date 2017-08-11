@@ -14,12 +14,20 @@
 ul.messages, ul.messages li {
     display: inline;
     list-style: none;
+    padding-left:50px;
 }
 
 ul.messages li.error {
     color:red;
 }
 
+
+/* -------------- */
+/* form errors    */
+/* -------------- */
+.form-errors {
+    color:red;
+}
 
 /* -------------- */
 /* profile avatar */

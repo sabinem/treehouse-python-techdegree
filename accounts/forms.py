@@ -2,6 +2,8 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
+from django.contrib.auth import (authenticate,
+                                 login, get_user_model)
 
 from teambuilder.models import Skill
 
@@ -52,19 +54,28 @@ class UserLoginForm(forms.Form):
         fields = ("email", "password")
         model = get_user_model()
 
+    def clean(self):
+        cleaned_data = super(UserLoginForm, self).clean()
+        user = authenticate(
+            email=cleaned_data['email'],
+            password=cleaned_data['password']
+        )
+        if user is None:
+            raise forms.ValidationError("Invalid login")
+
 
 class ProfileForm(forms.ModelForm):
     """Form for updating the UserProfile"""
     name = forms.CharField(
             label='First Name',
-            required=False,
+            required=True,
             widget=forms.TextInput(
                 attrs={'placeholder': 'Name',
                        'class': 'circle--input--h1'})
         )
     bio = forms.CharField(
         label='About You',
-        required=False,
+        required=True,
         widget=forms.Textarea(
             attrs={
                 'placeholder': 'Tell us about yourself ...',
@@ -72,7 +83,9 @@ class ProfileForm(forms.ModelForm):
             }
         )
     )
-    avatar = forms.ImageField()
+    avatar = forms.ImageField(
+        required=True
+    )
 
     class Meta:
         model = get_user_model()

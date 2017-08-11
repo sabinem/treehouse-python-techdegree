@@ -2,20 +2,15 @@
 {% block content %}
     <div class="bounds">
         <div class="grid-30 centered">
-             {% if messages %}
-                <div class="messages">
-                    {% for message in messages %}
-                    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
-                        <div class="container">{{ message|safe }}</div>
-                    </div>
-                    {% endfor %}
-                </div>
-            {% endif %}
             <h2>Sign In</h2>
             <form method="post">{% csrf_token %}
-                {{ form.non_field_errors }}
+                <div class="form-errors">
+                    {{ form.non_field_errors }}
+                </div>
                 {% for field in form %}
-                    {{ field.errors }}
+                    <div class="form-errors">
+                        {{ field.errors }}
+                    </div>
                     {{ field }}
                 {% endfor %}
                 <button type="submit" class="button-primary">Sign In</button>

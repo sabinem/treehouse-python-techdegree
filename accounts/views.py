@@ -31,7 +31,7 @@ class LoginView(generic.FormView):
         user = authenticate(
             email=form.cleaned_data['email'],
             password=form.cleaned_data['password']
-        )
+            )
         login(self.request, user)
         return super().form_valid(form)
 
@@ -101,8 +101,6 @@ class ApplicationsListView(generic.TemplateView):
         - consider url parameters
         """
         context = super().get_context_data(**kwargs)
-
-
         profile_user = self.request.user
         context['profile_user'] = profile_user
 
@@ -152,7 +150,7 @@ def approve_application(request, application_pk):
     """approving a users application
     - the applicant receives an email notification"""
     application = get_object_or_404(teambuilder_models.Application, pk=application_pk)
-    developer = application.position.developer
+    developer = application.applicant
     application.approve()
     email.send_email(
         'Your application was approved!',
@@ -166,7 +164,7 @@ def approve_application(request, application_pk):
         [developer.email],
     )
     return HttpResponseRedirect(reverse_lazy(
-        'accounts:applications', kwargs={'profile_pk':request.user.id}))
+        'accounts:applications'))
 
 
 @login_required
@@ -175,7 +173,7 @@ def reject_application(request, application_pk):
     - the applicant receives an email notification
     """
     application = get_object_or_404(teambuilder_models.Application, pk=application_pk)
-    developer = application.position.developer
+    developer = application.applicant
     application.reject()
     email.send_email(
         'Your application was rejected!',
@@ -190,7 +188,7 @@ def reject_application(request, application_pk):
         [developer.email],
     )
     return HttpResponseRedirect(reverse_lazy(
-        'accounts:applications', kwargs={'profile_pk':request.user.id}))
+        'accounts:applications'))
 
 
 @login_required

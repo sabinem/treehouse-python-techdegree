@@ -1,69 +1,78 @@
 {% extends "layout.html" %}
 {% load static from staticfiles %}
 {% block content %}
-<form method="post">{% csrf_token %}
-<div class="circle--actions--bar">
-    <div class="bounds">
-        <div class="grid-100">
-            <button class="button button-primary" type="submit">Save Project</button>
-            <a class="button button-text" href="{% url 'teambuilder:projects' %}">Discard</a>
-        </div>
-    </div>
-</div>
-
-<div class="bounds circle--page circle--article">
-    <div class="grid-70">
-        <div class="circle--article--body">
-            {{ projectform.non_field_errors }}
-            {{ projectform.title.errors }}
-            {{ projectform.title }}
-            {{ projectform.description.errors }}
-            {{ projectform.description }}
+    <form method="post">{% csrf_token %}
+        <div class="circle--actions--bar">
+            <div class="bounds">
+                <div class="grid-100">
+                    <button class="button button-primary" type="submit">Save Project</button>
+                    <a class="button button-text" href="{% url 'teambuilder:projects' %}">Discard</a>
+                </div>
+            </div>
         </div>
 
-        <div class="circle--project--positions">
-            <h2>Positions</h2>
+        <div class="bounds circle--page circle--article">
+            <div class="grid-70">
+                <div class="circle--article--body">
+                    <div class="form-errors">
+                        {{ projectform.non_field_errors }}
 
-            <ul class="circle--group--list circle--clone--list">
-                {% for form in formset %}
-                <li class="link-formset">
-                    {{ form }}
-                </li>
-                {% endfor %}
-            </ul>
+                        {{ projectform.title.errors }}
+                    </div>
+                    {{ projectform.title }}
+                    <div class="form-errors">
+                        {{ projectform.description.errors }}
+                    </div>
+                    {{ projectform.description }}
+                </div>
 
-            <button type="submit" class="button button-primary" href="project.html">Save Changes</button>
-            {{ formset.non_form_errors }}
-            {{ formset.management_form }}
+                <div class="circle--project--positions">
+                    <h2>Positions</h2>
+
+                    <ul class="circle--group--list circle--clone--list">
+                        {% for form in formset %}
+                            <li class="link-formset">
+                                {{ form }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                    <button type="submit" class="button button-primary" href="project.html">Save Changes</button>
+                    <div class="form-errors">
+                        {{ formset.non_form_errors }}
+                    </div>
+                    {{ formset.management_form }}
+                </div>
+            </div>
+
+            <div class="grid-25 grid-push-5">
+
+                <div class="circle--secondary--module">
+                    <h3>Project Timeline</h3>
+                    <div class="form-errors">
+                        {{ projectform.project_timeline.errors }}</div>
+                    {{ projectform.project_timeline }}
+                </div>
+
+                <div class="circle--secondary--module">
+                    <h3>Applicant Requirements</h3>
+                    <div class="form-errors">
+                        {{ projectform.applicant_requirements.errors }}</div>
+                    {{ projectform.applicant_requirements }}
+                </div>
+
+            </div>
         </div>
-    </div>
-
-    <div class="grid-25 grid-push-5">
-
-        <div class="circle--secondary--module">
-            <h3>Project Timeline</h3>
-            {{ projectform.project_timeline.errors }}
-            {{ projectform.project_timeline }}
-        </div>
-
-        <div class="circle--secondary--module">
-            <h3>Applicant Requirements</h3>
-            {{ projectform.applicant_requirements.errors }}
-            {{ projectform.applicant_requirements }}
-        </div>
-
-    </div>
-</div>
-</form>
-<script type="text/javascript" src="{% static 'js/jquery.formset.js' %}"></script>
-<script type="text/javascript">
-    $(function() {
-        $('.link-formset').formset({
-            addText: 'Add Position',
-            deleteText: 'Remove',
-            addCssClass: 'circle--clone--add',
-            deleteCssClass: 'circle--clone--remove'
-        });
-    })
-</script>
+    </form>
+    <script type="text/javascript" src="{% static 'js/jquery.formset.js' %}"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('.link-formset').formset({
+                addText: 'Add Position',
+                deleteText: 'Remove',
+                addCssClass: 'circle--clone--add',
+                deleteCssClass: 'circle--clone--remove'
+            });
+        })
+    </script>
 {% endblock %}

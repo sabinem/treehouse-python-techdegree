@@ -23,66 +23,83 @@
     <link rel="shortcut icon" href="/static/icons/favicon.ico">
 </head>
 <body>
-    <header class="circle--header">
-        <div class="bounds">
-            <div class="circle--fluid">
-                <div class="circle--fluid--cell">
-                    <h1 class="hide-text circle--logo"><a class="logo" id="main_url" href="{% url 'teambuilder:projects' %}">Circle</a></h1>
-                </div>
-                <div class="circle--fluid--cell circle--fluid--primary">
-                    <div class="circle--search">
-                        <input id="search_term" type="text" placeholder="Search Projects..."/>
-                        <button id="search_projects">
-                            <svg version="1.1" class="search" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 12 12" xml:space="preserve">
+<header class="circle--header">
+    <div class="bounds">
+        <div class="circle--fluid">
+            <div class="circle--fluid--cell">
+                <h1 class="hide-text circle--logo"><a class="logo" id="main_url"
+                                                      href="{% url 'teambuilder:projects' %}">Circle</a></h1>
+            </div>
+            <div class="circle--fluid--cell circle--fluid--primary">
+                <div class="circle--search">
+                    <input id="search_term" type="text" placeholder="Search Projects..."/>
+                    <button id="search_projects">
+                        <svg version="1.1" class="search" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 12 12" xml:space="preserve">
                     <path d="M12,10.6L8.3,6.9C8.7,6.2,9,5.4,9,4.5C9,2,7,0,4.5,0S0,2,0,4.5S2,9,4.5,9c0.9,0,1.7-0.3,2.4-0.7l3.7,3.7L12,10.6z M2,4.5
                     C2,3.1,3.1,2,4.5,2S7,3.1,7,4.5C7,5.9,5.9,7,4.5,7S2,5.9,2,4.5z"/>
                   </svg>
-                        </button>
-                    </div>
-                </div>
-                <div class="circle--fluid--cell circle--fluid--secondary">
-                    <nav>
-                        <ul class="circle--inline">
-                            {% if user.is_authenticated %}
-                                <li>
-                                    <a href="{% url 'accounts:profile' %}">
-                                       {% if request.user.name %}
-                                           {{ request.user.name }}
-                                       {% else %}
-                                          {{ request.user.email }}
-                                       {% endif %}
-                                    </a>
-                                </li>
-                                <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
-                            {% else %}
-                                <li><a href="{% url 'accounts:register' %}">Sign Up</a></li>
-                                <li><a href="{% url 'accounts:login' %}">Sign In</a></li>
-                            {% endif %}
-                        </ul>
-                    </nav>
+                    </button>
                 </div>
             </div>
+            <div class="circle--fluid--cell circle--fluid--secondary">
+                <nav>
+                    <ul class="circle--inline">
+                        {% if user.is_authenticated %}
+                            <li>
+                                <a href="{% url 'accounts:profile' %}">
+                                    {% if request.user.name %}
+                                        {{ request.user.name }}
+                                    {% else %}
+                                        {{ request.user.email }}
+                                    {% endif %}
+                                </a>
+                            </li>
+                            <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+                        {% else %}
+                            <li><a href="{% url 'accounts:register' %}">Sign Up</a></li>
+                            <li><a href="{% url 'accounts:login' %}">Sign In</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+
+            </div>
         </div>
-    </header>
-    {% block content %}{% endblock %}
-    {{ profile_form.media }}
-    <script>
+    </div>
+</header>
+{% if messages %}
+    <div class="circle--actions--bar">
+        <div class="bounds">
 
-        // searching in the projects by term
-        // this field is always accessible!
 
-        var searchbutton = $('#search_projects');
-        var search_field = $('#search_term');
-        var mainurl = $('#main_url');
-        var url = "{% url 'teambuilder:projects' %}";
-        console.log(url);
-        $(document).ready(function (){
-            searchbutton.click(function() {
-               var searchurl = mainurl.attr('href') + search_field.val();
-               console.log(searchurl);
-               window.location.replace(searchurl);
-            });
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+
+
+        </div>
+    </div>
+{% endif %}
+{% block content %}{% endblock %}
+{{ profile_form.media }}
+<script>
+
+    // searching in the projects by term
+    // this field is always accessible!
+
+    var searchbutton = $('#search_projects');
+    var search_field = $('#search_term');
+    var mainurl = $('#main_url');
+    var url = "{% url 'teambuilder:projects' %}";
+    console.log(url);
+    $(document).ready(function () {
+        searchbutton.click(function () {
+            var searchurl = mainurl.attr('href') + search_field.val();
+            console.log(searchurl);
+            window.location.replace(searchurl);
         });
-    </script>
+    });
+</script>
 </body>
 </html>

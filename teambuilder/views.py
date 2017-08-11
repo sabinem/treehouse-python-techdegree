@@ -14,7 +14,6 @@ from django.db import IntegrityError
 from accounts import email
 from . import models, forms
 
-
 User = get_user_model()
 
 
@@ -26,7 +25,6 @@ class ProjectListView(generic.TemplateView):
         """gets data for the view"""
         context = super().get_context_data(**kwargs)
         context['skills'] = models.Skill.objects.all()
-        print(kwargs)
         if 'need_pk' in kwargs:
             need_pk = int(kwargs['need_pk'])
             context['need_pk'] = int(need_pk)
@@ -53,19 +51,18 @@ class ProjectDetailView(generic.TemplateView):
         project = get_object_or_404(
             models.Project, id=kwargs['project_pk'])
         context['project'] = project
-        if self.request.user.is_authenticated:
-            context['positions_applied'] =\
-                models.Position.objects.get_positions_for_project_where_user_applied(
-                    project=project,
-                    user=self.request.user)
-            context['positions_not_applied'] =\
-                models.Position.objects.get_positions_for_project_where_user_did_not_apply(
-                    project=project,
-                    user=self.request.user)
+        if 'need_pk' in kwargs:
+            need_pk = int(kwargs['need_pk'])
+            context['need_pk'] = int(need_pk)
+            context['positions'] = \
+                models.Position.objects.get_positons_by_skill_and_project(
+                    skill_pk=need_pk,
+                    project_pk=project.id
+                )
         else:
             context['positions'] = \
                 models.Position.objects.get_positons_by_project(project_pk=project.id)
-        context['needs'] = project.get_project_needs()
+        context['skills'] = models.Skill.objects.all()
         return context
 
 
@@ -93,7 +90,7 @@ def project_delete(request, project_pk):
     else:
         messages.add_message(request, messages.INFO, 'The project has been deleted.')
         return HttpResponseRedirect(reverse_lazy(
-           'teambuilder:projects'))
+            'teambuilder:projects'))
 
 
 @login_required
@@ -158,6 +155,14 @@ def project_create_view(request):
     """Creating a project
     and its positions"""
     user = request.user
+    if not user.name:
+        messages.add_message(
+            request, messages.ERROR,
+            'You must first edit and complete your profile, before you can '
+            'create projects.'
+        )
+        return HttpResponseRedirect(reverse_lazy(
+            'accounts:profile'))
     if request.method == 'POST':
         formset = forms.NewPositionsFormset(request.POST)
         projectform = forms.ProjectForm(request.POST)
@@ -184,5 +189,3 @@ def project_create_view(request):
         'formset': formset,
         'projectform': projectform
     })
-
-

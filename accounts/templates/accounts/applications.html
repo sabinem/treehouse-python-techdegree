@@ -3,129 +3,130 @@
 {% block content %}
 
 
-  <div class="circle--actions--bar">
-    <nav class="bounds">
-      <ul class="circle--pill--list">
-        <li><a class="selected">Applications</a></li>
-        <li><a href="{% url 'accounts:profile' %}">Profile</a></li>
-      </ul>
-    </nav>
-  </div>
-
-  <div class="bounds circle--page">
-    <div class="circle--page--header grid-100">
-      <h2>Applications</h2>
+    <div class="circle--actions--bar">
+        <nav class="bounds">
+            <ul class="circle--pill--list">
+                <li><a class="selected">Applications</a></li>
+                <li><a href="{% url 'accounts:profile' %}">Profile</a></li>
+            </ul>
+        </nav>
     </div>
 
+    <div class="bounds circle--page">
+        <div class="circle--page--header grid-100">
+            <h2>Applications</h2>
+        </div>
 
-    <div class="grid-25">
-      <div class="circle--filter circle--secondary--module">
-        <h4>Status</h4>
-        <ul class="circle--filter--list status">
-          <li><a href="{% url 'accounts:applications' %}"
-                {% if not view.kwargs.status %}
-                  class="selected all"
-                {% endif %}
-          >All Applications</a></li>
-          <li><a>New Applications</a></li>
-          {% for status in status %}
-            <li><a href="{% url 'accounts:applications_status' status=status.value %}"
-                   {% if status.value == view.kwargs.status %}
-                       class="selected"
-                   {% endif %}
-            >{{ status.name }}</a></li>
-          {% endfor %}
-        </ul>
-      </div>
 
-      <div class="circle--filter circle--secondary--module">
-        <h4>My Projects</h4>
-        <ul class="circle--filter--list projects">
-          <li><a href="{% url 'accounts:applications' %}"
-          {% if not project_pk %}
-              class="selected all"
-          {% endif %}
-          >All Projects</a></li>
-          {% for project in projects %}
-            <li><a href="{% url 'accounts:applications_project' project_pk=project.id %}"
-                   {% if project.id == project_pk %}
-                       class="selected"
-                   {% endif %}
-            >
-                {{ project.title }}
-            </a></li>
-          {% endfor %}
-        </ul>
-      </div>
+        <div class="grid-25">
+            <div class="circle--filter circle--secondary--module">
+                <h4>Status</h4>
+                <ul class="circle--filter--list status">
+                    <li><a href="{% url 'accounts:applications' %}"
+                            {% if not view.kwargs.status %}
+                           class="selected all"
+                            {% endif %}
+                    >All Applications</a></li>
+                    <li><a>New Applications</a></li>
+                    {% for status in status %}
+                        <li><a href="{% url 'accounts:applications_status' status=status.value %}"
+                                {% if status.value == view.kwargs.status %}
+                               class="selected"
+                                {% endif %}
+                        >{{ status.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
 
-      <div class="circle--filter circle--secondary--module">
-        <h4>Project Needs</h4>
-        <ul class="circle--filter--list needs">
-          <li><a href="{% url 'accounts:applications' %}"
-                  {% if not need_pk %}
-                  class="selected all"
-                  {% endif %}
-          >All Needs</a></li>
-          {% for need in needs %}
-            <li><a href="{% url 'accounts:applications_need' need_pk=need.id %}"
-                   {% if need.id == need_pk %}
-                       class="selected"
-                   {% endif %}
-            >{{ need.need }}
-            </a></li>
-          {% endfor %}
-        </ul>
-      </div>
-    </div>
+            <div class="circle--filter circle--secondary--module">
+                <h4>My Projects</h4>
+                <ul class="circle--filter--list projects">
+                    <li><a href="{% url 'accounts:applications' %}"
+                            {% if not project_pk %}
+                           class="selected all"
+                            {% endif %}
+                    >All Projects</a></li>
+                    {% for project in projects %}
+                        <li><a href="{% url 'accounts:applications_project' project_pk=project.id %}"
+                                {% if project.id == project_pk %}
+                               class="selected"
+                                {% endif %}
+                        >
+                            {{ project.title }}
+                        </a></li>
+                    {% endfor %}
+                </ul>
+            </div>
 
-    <div class="grid-70 grid-push-5">
-      <table class="u-full-width circle--table">
-        <thead>
-          <tr>
-            <th>Applicant</th>
-            <th class="circle--cell--right">Applicant Position</th>
-            <th class="circle--cell--right"></th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for application in applications %}
-                <tr class="clickable-row" data-href="{% url 'accounts:profile_other' profile_pk=application.applicant_id %}">
-                    <td>
-                        <h3>{{ application.applicant.name }}{{ application.applicant_id }}</h3>
-                        <p>{{ application.position.project }}</p>
-                    </td>
-                    <td class="circle--cell--right">
-                        <span class="secondary-label">{{ application.position.skill }}</span>
-                    </td>
-                    <td class="circle--cell--right">
-                        {% if application.status == application_status_undecided %}
-                            <a class="button button-primary"
+            <div class="circle--filter circle--secondary--module">
+                <h4>Project Needs</h4>
+                <ul class="circle--filter--list needs">
+                    <li><a href="{% url 'accounts:applications' %}"
+                            {% if not need_pk %}
+                           class="selected all"
+                            {% endif %}
+                    >All Needs</a></li>
+                    {% for need in needs %}
+                        <li><a href="{% url 'accounts:applications_need' need_pk=need.id %}"
+                                {% if need.id == need_pk %}
+                               class="selected"
+                                {% endif %}
+                        >{{ need.need }}
+                        </a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="grid-70 grid-push-5">
+            <table class="u-full-width circle--table">
+                <thead>
+                <tr>
+                    <th>Applicant</th>
+                    <th class="circle--cell--right">Applicant Position</th>
+                    <th class="circle--cell--right"></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for application in applications %}
+                    <tr class="clickable-row"
+                        data-href="{% url 'accounts:profile_other' profile_pk=application.applicant_id %}">
+                        <td>
+                            <h3>{{ application.applicant.email }}</h3>
+                            <p>{{ application.position.project }}</p>
+                        </td>
+                        <td class="circle--cell--right">
+                            <span class="secondary-label">{{ application.position.skill }}</span>
+                        </td>
+                        <td class="circle--cell--right">
+                            {% if application.status == application_status_undecided %}
+                                <a class="button button-primary"
                                    href="{% url 'accounts:approve_application' application_pk=application.id %}"
                                 >
-                                Approve
-                            </a>
-                            <a class="button button-primary"
-                               href="{% url 'accounts:reject_application' application_pk=application.id %}"
+                                    Approve
+                                </a>
+                                <a class="button button-primary"
+                                   href="{% url 'accounts:reject_application' application_pk=application.id %}"
                                 >
-                                Reject
-                            </a>
-                        {% else %}
-                            <a class="button button-primary button-inactive">
-                              {{ application.get_status_display }}
-                            </a>
-                        {% endif %}
-                    </td>
-                </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+                                    Reject
+                                </a>
+                            {% else %}
+                                <a class="button button-primary button-inactive">
+                                    {{ application.get_status_display }}
+                                </a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
 
     </div>
+    <script>
 
-  </div>
-<script>
-
-</script>
+    </script>
 
 
 {% endblock %}

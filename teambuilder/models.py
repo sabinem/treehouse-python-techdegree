@@ -24,6 +24,7 @@ def get_choices(cls):
 
 class SkillManager(models.Manager):
     """Skill manager"""
+
     def get_project_needs(self, project_pk):
         """get all skills needed in a project"""
         positions = Position.objects.get_positons_by_project(project_pk=project_pk)
@@ -86,27 +87,31 @@ class Project(models.Model):
 
 class PositionManager(models.Manager):
     def get_positions_by_developer(self, user):
-        return self.select_related('project')\
+        return self.select_related('project') \
             .filter(developer=user, open=False)
 
     def get_positons_by_skill(self, skill_pk):
-        return self.select_related('project')\
+        return self.select_related('project') \
             .filter(skill_id=skill_pk)
 
+    def get_positons_by_skill_and_project(self, skill_pk, project_pk):
+        return self.select_related('project', 'skill') \
+            .filter(skill_id=skill_pk, project_id=project_pk)
+
     def get_positons_by_project(self, project_pk):
-        return self.select_related('skill')\
+        return self.select_related('skill') \
             .filter(project_id=project_pk)
 
     def get_positons_by_project_ids(self, project_ids):
-        return self.select_related('skill')\
+        return self.select_related('skill') \
             .filter(project_id__in=project_ids)
 
     def get_open_positons_by_skill(self, skill):
-        return self.select_related('project')\
+        return self.select_related('project') \
             .filter(skill=skill, open=False)
 
     def get_open_positons_by_skill_set(self, skills):
-        return self.select_related('project')\
+        return self.select_related('project') \
             .filter(skill__in=skills, open=False)
 
     def positions_for_user(self, user):
@@ -148,8 +153,12 @@ class Position(models.Model):
             raise IntegrityError("You can not apply to your own project!")
         if self.skill not in applicant.get_user_skills():
             raise IntegrityError(
-                "You can not apply to a position when you do not have "
-                "the required skill! For this position you need to be a {}".format(self.skill.need))
+                "You are not a {}. You do not have the required skill for this position."
+                    .format(self.skill.need))
+        if Application.objects.application_for_user_and_position(user=applicant, position=self):
+            raise IntegrityError(
+                "You already applied to that position."
+                    .format(self.skill.need))
         application, created = Application.objects.get_or_create(
             applicant=applicant, position=self)
         application.save()
@@ -187,22 +196,22 @@ class ApplicationManager(models.Manager):
         return self.select_related('applicant').filter(status=status)
 
     def applications_for_a_users_projects(self, user):
-        applications = self.filter(position__project__owner=user)\
+        applications = self.filter(position__project__owner=user) \
             .select_related('position', 'applicant', 'position__project', 'position__skill')
         return applications
 
     def applications_for_a_users_projects_per_status(self, user, status):
-        applications = self.filter(position__project__owner=user, status=status)\
+        applications = self.filter(position__project__owner=user, status=status) \
             .select_related('position', 'applicant', 'position__project', 'position__skill')
         return applications
 
     def applications_for_a_users_projects_per_need(self, user, need_pk):
-        applications = self.filter(position__project__owner=user, position__skill_id=need_pk)\
+        applications = self.filter(position__project__owner=user, position__skill_id=need_pk) \
             .select_related('position', 'applicant', 'position__project', 'position__skill')
         return applications
 
     def applications_for_a_users_projects_per_project(self, user, project_pk):
-        applications = self.filter(position__project__owner=user, position__project_id=project_pk)\
+        applications = self.filter(position__project__owner=user, position__project_id=project_pk) \
             .select_related('position', 'applicant', 'position__project', 'position__skill')
         return applications
 

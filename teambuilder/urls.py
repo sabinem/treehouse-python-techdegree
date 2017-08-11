@@ -3,7 +3,6 @@ from django.conf.urls import url
 
 from . import views
 
-
 urlpatterns = [
     # projects accessible for anonymous users
     url(r'^$', views.ProjectListView.as_view(), name="projects"),
@@ -12,6 +11,8 @@ urlpatterns = [
 
     # project detail
     url(r'^project/(?P<project_pk>\d+)$', views.ProjectDetailView.as_view(), name="project"),
+    url(r'^project/(?P<project_pk>\d+)/need/(?P<need_pk>\d+)$',
+        views.ProjectDetailView.as_view(), name="project_by_need"),
 
     # project CRUD view for authenticated users only
     url(r'^project/(?P<project_pk>\d+)/edit$', views.project_edit_view, name="project_edit"),
@@ -22,4 +23,3 @@ urlpatterns = [
     url(r'^(?P<position_pk>\d+)/apply$', views.position_apply, name="apply"),
 
 ]
-
