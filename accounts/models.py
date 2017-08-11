@@ -8,7 +8,7 @@ from django.contrib.auth.models import (
 from django.db import models
 from django.utils import timezone
 
-from teambuilder.models import Position, Skill, Project
+from teambuilder.models import Skill
 
 
 class UserManager(BaseUserManager):
@@ -23,7 +23,7 @@ class UserManager(BaseUserManager):
         user.set_password(password)
         user.save()
         return user
-    
+
     def create_superuser(self, email, password):
         """create a superuser from email and password"""
         user = self.create_user(
@@ -67,7 +67,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
     objects = UserManager()
     USERNAME_FIELD = "email"
-    
+
     def __str__(self):
         return self.name
 

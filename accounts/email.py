@@ -14,7 +14,7 @@ class EmailThread(threading.Thread):
         self.content = content
         threading.Thread.__init__(self)
 
-    def run (self):
+    def run(self):
         """sending the email"""
         send_mail(
             self.subject,
@@ -23,6 +23,7 @@ class EmailThread(threading.Thread):
             self.recipient_list,
             fail_silently=False,
         )
+
 
 def send_email(subject, content, recipient_list):
     """sending email"""

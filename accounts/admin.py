@@ -14,4 +14,3 @@ class UserAdmin(admin.ModelAdmin):
         return obj.userprofile.name
 
 admin.site.register(models.User, UserAdmin)
-
