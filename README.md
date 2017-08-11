@@ -24,7 +24,7 @@ The app is again a mineral search site searching a given mineral database
 - Migrate with `python manage.py migrate`
 
 ## Start application
-Start the application with `python manage.py runserver.py`
+Start the application with `python manage.py runserver`
 
 ## email
 - open second terminal window:
