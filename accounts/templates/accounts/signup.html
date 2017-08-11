@@ -3,6 +3,7 @@
     <div class="bounds">
         <div class="grid-30 centered">
             <h2>Sign Up</h2>
+            <p>Only signed in user can create projects or apply for jobs</p>
             <form method="post">{% csrf_token %}
                 <div class="form-errors">
                     {{ form.non_field_errors }}

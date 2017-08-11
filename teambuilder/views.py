@@ -97,6 +97,14 @@ def project_delete(request, project_pk):
 def position_apply(request, position_pk):
     """handeling the application of the request user
     to a position"""
+    if not request.user.name:
+        messages.add_message(
+            request, messages.ERROR,
+            'You must first edit your profile, before you can '
+            'apply.'
+        )
+        return HttpResponseRedirect(reverse_lazy(
+            'accounts:profile'))
     position = get_object_or_404(models.Position, pk=position_pk)
     try:
         position.apply(request.user)
