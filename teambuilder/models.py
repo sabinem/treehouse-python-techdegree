@@ -27,12 +27,14 @@ class SkillManager(models.Manager):
 
     def get_project_needs(self, project_pk):
         """get all skills needed in a project"""
-        positions = Position.objects.get_positons_by_project(project_pk=project_pk)
+        positions = Position.objects.get_positons_by_project(
+            project_pk=project_pk)
         return self.filter(id__in=positions.values('skill_id'))
 
     def get_project_needs_for_users_projects(self, user):
         project_ids = user.get_user_project_ids()
-        positions = Position.objects.get_positons_by_project_ids(project_ids=project_ids)
+        positions = Position.objects.get_positons_by_project_ids(
+            project_ids=project_ids)
         return \
             self.filter(id__in=positions.values('skill_id'))
 
@@ -54,7 +56,9 @@ class ProjectManager(models.Manager):
     def get_by_searchterm(self, searchterm=None):
         if searchterm:
             return self.filter(
-                Q(title__icontains=searchterm) | Q(description__icontains=searchterm)).values_list('id', flat=True)
+                Q(title__icontains=searchterm) |
+                Q(description__icontains=searchterm))\
+                .values_list('id', flat=True)
 
     def get_projects_by_skill(self, skill_pk):
         positions = Position.objects.get_positons_by_skill(skill_pk=skill_pk)
@@ -67,7 +71,8 @@ class ProjectManager(models.Manager):
 
 class Project(models.Model):
     """Projects are owned by a user"""
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="projects")
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL, related_name="projects")
     title = models.CharField('Title', max_length=255)
     description = models.TextField()
     project_timeline = models.TextField()
@@ -118,12 +123,16 @@ class PositionManager(models.Manager):
         return self.filter(project__owner=user).select_related('Project')
 
     def get_positions_for_project_where_user_applied(self, project, user):
-        position_ids_for_user = Application.objects.position_ids_where_user_applied(user)
+        position_ids_for_user = \
+            Application.objects.position_ids_where_user_applied(user)
         return self.filter(project=project, id__in=position_ids_for_user)
 
-    def get_positions_for_project_where_user_did_not_apply(self, project, user):
-        position_ids_for_user = Application.objects.position_ids_where_user_applied(user)
-        return self.filter(project=project).exclude(id__in=position_ids_for_user)
+    def get_positions_for_project_where_user_did_not_apply(
+            self, project, user):
+        position_ids_for_user = \
+            Application.objects.position_ids_where_user_applied(user)
+        return self.filter(project=project)\
+            .exclude(id__in=position_ids_for_user)
 
 
 class Position(models.Model):
@@ -153,12 +162,14 @@ class Position(models.Model):
             raise IntegrityError("You can not apply to your own project!")
         if self.skill not in applicant.get_user_skills():
             raise IntegrityError(
-                "You are not a {}. You do not have the required skill for this position."
-                    .format(self.skill.need))
-        if Application.objects.application_for_user_and_position(user=applicant, position=self):
+                "You are not a {}. You do not have the "
+                "required skill for this position."
+                .format(self.skill.need))
+        if Application.objects.application_for_user_and_position(
+                user=applicant, position=self):
             raise IntegrityError(
                 "You already applied to that position."
-                    .format(self.skill.need))
+                .format(self.skill.need))
         application, created = Application.objects.get_or_create(
             applicant=applicant, position=self)
         application.save()
@@ -181,7 +192,9 @@ class Position(models.Model):
 
 class ApplicationManager(models.Manager):
     def get_applicants_for_position(self, position_pk, status=None):
-        qs = self.select_related('applicant', 'position__project__owner', 'position').filter(position_id=position_pk)
+        qs = self.select_related('applicant',
+                                 'position__project__owner',
+                                 'position').filter(position_id=position_pk)
         if status:
             qs.filter(status=status)
         return qs
@@ -190,42 +203,63 @@ class ApplicationManager(models.Manager):
         return self.filter(applicant=user, position=position).exists()
 
     def application_for_user_and_skill_exists(self, user, skill_pk):
-        return self.filter(applicant=user, position__skill_id=skill_pk).exists()
+        return self.filter(
+            applicant=user, position__skill_id=skill_pk).exists()
 
     def get_applicants_by_status(self, status):
         return self.select_related('applicant').filter(status=status)
 
     def applications_for_a_users_projects(self, user):
         applications = self.filter(position__project__owner=user) \
-            .select_related('position', 'applicant', 'position__project', 'position__skill')
+            .select_related('position',
+                            'applicant',
+                            'position__project',
+                            'position__skill')
         return applications
 
-    def applications_for_a_users_projects_per_status(self, user, status):
-        applications = self.filter(position__project__owner=user, status=status) \
-            .select_related('position', 'applicant', 'position__project', 'position__skill')
+    def applications_for_a_users_projects_per_status(
+            self, user, status):
+        applications = self.filter(
+            position__project__owner=user, status=status) \
+            .select_related('position',
+                            'applicant',
+                            'position__project',
+                            'position__skill')
         return applications
 
     def applications_for_a_users_projects_per_need(self, user, need_pk):
-        applications = self.filter(position__project__owner=user, position__skill_id=need_pk) \
-            .select_related('position', 'applicant', 'position__project', 'position__skill')
+        applications = self.filter(
+            position__project__owner=user, position__skill_id=need_pk) \
+            .select_related('position',
+                            'applicant',
+                            'position__project',
+                            'position__skill')
         return applications
 
     def applications_for_a_users_projects_per_project(self, user, project_pk):
-        applications = self.filter(position__project__owner=user, position__project_id=project_pk) \
-            .select_related('position', 'applicant', 'position__project', 'position__skill')
+        applications = self.filter(
+            position__project__owner=user, position__project_id=project_pk) \
+            .select_related('position',
+                            'applicant',
+                            'position__project',
+                            'position__skill')
         return applications
 
     def applications_for_a_project(self, user):
-        applications = self.filter(position__project__owner=user).select_related('position', 'applicant')
+        applications = self.filter(
+            position__project__owner=user).select_related(
+            'position', 'applicant')
         return applications
 
     def position_ids_where_user_applied(self, user):
-        return self.filter(applicant=user).values_list('position_id', flat=True)
+        return self.filter(applicant=user).values_list(
+            'position_id', flat=True)
 
 
 class Application(models.Model):
     """Users can apply for Positions"""
-    applicant = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="applications")
+    applicant = models.ForeignKey(
+        settings.AUTH_USER_MODEL, related_name="applications")
     position = models.ForeignKey(Position, related_name="candidates")
     status = models.CharField(
         choices=get_choices(ApplicationStatus),

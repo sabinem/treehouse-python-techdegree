@@ -1,6 +1,5 @@
 """teambuilder views"""
-from django.http import HttpResponseRedirect, HttpResponse
-from django import forms
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -28,14 +27,18 @@ class ProjectListView(generic.TemplateView):
         if 'need_pk' in kwargs:
             need_pk = int(kwargs['need_pk'])
             context['need_pk'] = int(need_pk)
-            context['positions'] = models.Position.objects.get_positons_by_skill(
-                skill_pk=need_pk
-            )
+            context['positions'] = \
+                models.Position.objects.get_positons_by_skill(
+                    skill_pk=need_pk
+                )
         elif 'term' in kwargs:
             term = kwargs['term']
-            project_ids = models.Project.objects.get_by_searchterm(searchterm=term)
+            project_ids = models.Project.objects.get_by_searchterm(
+                searchterm=term)
             context['term'] = term
-            context['positions'] = models.Position.objects.get_positons_by_project_ids(project_ids=project_ids)
+            context['positions'] = \
+                models.Position.objects.get_positons_by_project_ids(
+                    project_ids=project_ids)
         else:
             context['positions'] = models.Position.objects.all()
         return context
@@ -61,7 +64,8 @@ class ProjectDetailView(generic.TemplateView):
                 )
         else:
             context['positions'] = \
-                models.Position.objects.get_positons_by_project(project_pk=project.id)
+                models.Position.objects.get_positons_by_project(
+                    project_pk=project.id)
         context['skills'] = models.Skill.objects.all()
         return context
 
@@ -88,7 +92,9 @@ def project_delete(request, project_pk):
         return HttpResponseRedirect(reverse_lazy(
             'teambuilder:project', kwargs={'project_pk': project_pk}))
     else:
-        messages.add_message(request, messages.INFO, 'The project has been deleted.')
+        messages.add_message(request,
+                             messages.INFO,
+                             'The project has been deleted.')
         return HttpResponseRedirect(reverse_lazy(
             'teambuilder:projects'))
 
@@ -116,9 +122,13 @@ def position_apply(request, position_pk):
         email.send_email(
             'We received your application!',
             '''Hello {}!
-            Thank you for your application to {} as {}, you will hear from the project owner
+            Thank you for your application to {} as {},
+            you will hear from the project owner
             {} soon.'''
-                .format(request.user.name, position.project, position.skill, position.project.owner),
+            .format(request.user.name,
+                    position.project,
+                    position.skill,
+                    position.project.owner),
             [request.user.email],
         )
         messages.add_message(request, messages.INFO,
@@ -141,7 +151,8 @@ def project_edit_view(request, project_pk):
         return HttpResponseRedirect(reverse_lazy(
             'teambuilder:project', kwargs={'project_pk': project_pk}))
     if request.method == 'POST':
-        formset = forms.ProjectWithPositionsFormSet(request.POST, instance=project)
+        formset = forms.ProjectWithPositionsFormSet(
+            request.POST, instance=project)
         projectform = forms.ProjectForm(request.POST, instance=project)
         if formset.is_valid() and projectform.is_valid():
             projectform.save()

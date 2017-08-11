@@ -1,6 +1,6 @@
 """forms for the teambuilder app"""
 from django import forms
-from django.forms.models import BaseInlineFormSet, inlineformset_factory
+from django.forms.models import inlineformset_factory
 
 from . import models
 
@@ -10,7 +10,8 @@ class ProjectForm(forms.ModelForm):
 
     class Meta:
         model = models.Project
-        fields = ['title', 'description', 'project_timeline', 'applicant_requirements']
+        fields = ['title', 'description',
+                  'project_timeline', 'applicant_requirements']
         labels = {
             'avatar': 'Your Photo',
         }
