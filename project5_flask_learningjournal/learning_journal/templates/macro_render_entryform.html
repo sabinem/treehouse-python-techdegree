@@ -1,0 +1,23 @@
+{% macro render_entryform(form) %}
+    {% from 'macro_render_field.html' import render_field %}
+    {{form.hidden_tag()}}
+    {{render_field(form.title)}}
+    {{render_field(form.date)}}
+    {{render_field(form.time_spent)}}
+    {{render_field(form.learned)}}
+    {{render_field(form.resources)}}
+    {% if not form.resources.choices %}
+        <p id="notification-resources">
+            In order to add a resource you must first add resources.
+            Save your work now
+            and add resources later.
+        </p>
+    {% endif %}
+    {{render_field(form.tags)}}
+    {% if not form.tags.choices %}
+        <p id="notification-tags">
+            In order to add a tag you must first add tags. Save your work now
+            add tags later.
+        </p>
+    {% endif %}
+{% endmacro %}

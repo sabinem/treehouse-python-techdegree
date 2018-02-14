@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% from 'macro_render_field.html' import render_field %}
+
+{% block content %}
+    <div class="edit-entry">
+        <h2>Login</h2>
+        <form method="POST" action="" class="form">
+            {{ form.hidden_tag() }}
+            {% for field in form %}
+                {{ render_field(field) }}
+            {% endfor %}
+            <input type="submit" id="submit" class="button" value="Login">
+        </form>
+    </div>
+{% endblock %}

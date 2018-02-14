@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% from 'macro_render_tag.html' import render_tag %}
+{% block content %}
+    <div class="breadcrumb">
+        Tag
+    </div>
+    {{ render_tag(tag) }}
+    <form method='POST' action=''>
+        {{ form.hidden_tag() }}
+        <h3 class="notification-warning">Delete Tag</h3>
+        <p class="notification-warning">Do you really want to delete this tag?</p>
+        <div class="buttons">
+            <input type="submit" value="Yes, delete Tag" class="button">
+            <a href="{{ url_for('view_tag', tag_id = tag.id) }}" class="button button-secondary">No, Cancel</a>
+        </div>
+    </form>
+{% endblock %}

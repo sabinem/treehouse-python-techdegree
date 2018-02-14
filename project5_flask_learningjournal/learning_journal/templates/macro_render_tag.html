@@ -1,0 +1,27 @@
+{% macro render_tag(tag, entries=None) %}
+{% from 'macro_render_date.html' import render_date %}
+    <article>
+        <h1 class="page-title">{{ tag.title }}</h1>
+        <div class="page-content">
+            <h3>Description:</h3>
+            {{ tag.description | mistune_markdown | safe }}
+        </div>
+        {% if entries %}
+            <div class="secondary">
+                <h3 class="secondary-title">Tagged Entries:</h3>
+                <ul class="secondary-list">
+                    {% for entry in entries %}
+                        <li>
+                            <a class="list-title" href="{{ url_for('view_entry', entry_id = entry.id) }}">
+                                {{ entry.title }}
+                                <span class="list-subtitle">
+                                    {{ render_date(entry.date) }}
+                                </span>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </article>
+{% endmacro %}

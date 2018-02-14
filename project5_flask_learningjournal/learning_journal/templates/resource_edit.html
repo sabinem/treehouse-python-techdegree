@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% from 'macro_render_resourceform.html' import render_resourceform %}
+{% block content %}
+    <h2>Edit Resource</h2>
+    <form method='POST' action=''>
+        {{ render_resourceform(form) }}
+        <div class="buttons">
+            <input type="submit" value="Update Resource" class="button">
+            <a href="{{ url_for('view_resource', resource_id = form.id.data) }}" class="button button-secondary">Cancel</a>
+        </div>
+    </form>
+{% endblock %}

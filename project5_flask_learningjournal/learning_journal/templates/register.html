@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% from 'macro_render_field.html' import render_field %}
+{% block content %}
+    <h2>Please register!</h2>
+    <p>This will ensure your content is password protected!
+    </p>
+    <form method="POST" action="" class="form">
+        {{ form.hidden_tag() }}
+        {% for field in form %}
+            {{ render_field(field) }}
+        {% endfor %}
+        <input type="submit" id="submit" class="button" value="Register">
+    </form>
+{% endblock %}

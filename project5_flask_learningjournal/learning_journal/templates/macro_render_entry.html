@@ -1,0 +1,28 @@
+{% macro render_entry(entry, resources, tags) %}
+    {% from 'macro_render_date.html' import render_date %}
+    <article>
+        <p class="blog_date">{{ render_date(entry.date) }}</p>
+        <p class="time_spent">{{ entry.time_spent }} Hours</p>
+        <h1 class="page-title">{{ entry.title }}</h1>
+        <p class="tags">
+            {% for tag in tags %}
+                 <a href="{{ url_for('view_tag', tag_id = tag.id) }}">{{ tag.title }}</a>
+            {% endfor %}
+        </p>
+        <div class="page-content">
+            {{ entry.learned| mistune_markdown | safe }}
+        </div>
+        {% if resources %}
+            <div class="secondary">
+                <h3 class="secondary-title">Resources to Remember:</h3>
+                <ul class="secondary-list">
+                {% for resource in resources %}
+                    <li>
+                        <a href="{{ url_for('view_resource', resource_id = resource.id) }}">{{ resource.title }}</a>
+                    </li>
+                {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </article>
+{% endmacro %}

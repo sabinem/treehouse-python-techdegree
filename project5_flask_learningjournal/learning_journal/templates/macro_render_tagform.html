@@ -1,0 +1,6 @@
+{% macro render_tagform(form) %}
+    {% from 'macro_render_field.html' import render_field %}
+    {{ form.hidden_tag() }}
+    {{ render_field(form.title) }}
+    {{ render_field(form.description) }}
+{% endmacro %}

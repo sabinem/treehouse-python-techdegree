@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% from 'macro_render_tagform.html' import render_tagform %}
+{% block content %}
+    <div class="breadcrumb">
+        Tag
+    </div>
+    <h2>Edit Tag</h2>
+    <form method='POST' action=''>
+        {{ render_tagform(form) }}
+        <div class="buttons">
+            <input type="submit" value="Update Tag" class="button">
+            <a href="{{ url_for('view_tag', tag_id = form.id.data) }}" class="button button-secondary">Cancel</a>
+        </div>
+    </form>
+{% endblock %}

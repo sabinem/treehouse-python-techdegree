@@ -1,0 +1,28 @@
+{% macro render_resource(resource, entries=None) %}
+{% from 'macro_render_date.html' import render_date %}
+    <article>
+        <h1>{{ resource.title }}</h1>
+        <p>{{ resource.abstract }}</p>
+        <div class="description">
+            <h3>Description:</h3>
+            {{ resource.links | mistune_markdown | safe }}
+        </div>
+        {% if entries %}
+            <div class="secondary">
+                <h3 class="secondary-title">Entries that mention this Resource:</h3>
+                <ul class="secondary-list">
+                    {% for entry in entries %}
+                        <li>
+                            <a class="list-title" href="{{ url_for('view_entry', entry_id = entry.id) }}">
+                                {{ entry.title }}
+                                <span class="list-subtitle">
+                                    {{ render_date(entry.date) }}
+                                </span>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </article>
+{% endmacro %}

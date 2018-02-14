@@ -1,0 +1,15 @@
+{% macro render_field(field) %}
+    <div class="field">
+    {% if field.name != 'csrf_token' %}
+        <label for="{{ field.name }}">
+             {{ field.label }}
+        </label>
+    {% endif %}
+    {% if field.errors %}
+        {% for error in field.errors %}
+            <div class="error">{{ error }}</div>
+        {% endfor %}
+    {% endif %}
+    {{ field() }}
+    </div>
+{% endmacro %}

@@ -1,0 +1,21 @@
+
+/* ===========================================
+   Errors and Notifications
+============================================== */
+.notification, .error {
+	text-align: center;
+	color: #d1645c;
+}
+
+/* ------- used for delete ------------------*/
+
+.notification-warning{
+	color: #d1645c;
+}
+
+/* ------- used for chosen select ------------*/
+
+#notification-tags, #notification-resources {
+	color: #d1645c;
+	display: none;
+}

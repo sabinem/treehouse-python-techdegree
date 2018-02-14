@@ -1,0 +1,3 @@
+{% macro render_date(date) %}
+    <time datetime="{{ date }}">{{ date.strftime('%B, %d %Y') }}</time>
+{% endmacro %}

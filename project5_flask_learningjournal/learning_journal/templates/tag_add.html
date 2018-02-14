@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% set active_page = "add_tag" %}
+{% from 'macro_render_tagform.html' import render_tagform %}
+{% block content %}
+    <h2>Add Tag</h2>
+    <form method='POST' action=''>
+        {{ render_tagform(form) }}
+        <div class="buttons">
+            <input type="submit" value="Publish Tag" class="button">
+            <a href="{{ url_for('list_tags')  }}" class="button button-secondary">Cancel</a>
+        </div>
+    </form>
+{% endblock %}
