@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+{% load static from staticfiles %}
+
+<!-- Page Title
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{% block title %}Create profile{% endblock %}
+
+<!-- Nav Header
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{% block navheader %}Create Profile{% endblock %}
+
+<!-- Sidebar Navigation
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{% block nav %}
+    <p>Please create your Profile!</p>
+{% endblock %}
+
+<!-- Main Content
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{% block content %}
+    <h1>Please create your Profile!</h1>
+    {%  include 'client_side_form_checking.html' %}
+    <form method="POST" action="{% url 'profiles:create' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% include "form_template.html" with form=user_form %}
+        <img src="{{ user_form.avatar.url }}">{{ profile.avatar.url }}
+        {% include "form_template.html" with form=profile_form %}
+        <button type="submit">Save changes</button>
+        <a class=".circle--search button" id="reset" type="button" href="{% url 'profiles:create' %}">
+            Reset
+        </a>
+    </form>
+{% endblock %}
+
+<!-- Extra JS
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{% block js %}
+    {% include "form_js.html" %}
+{% endblock %}

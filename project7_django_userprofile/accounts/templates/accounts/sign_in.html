@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% load static from staticfiles %}
+
+<!-- Page Title
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{% block title %}Sign In{% endblock %}
+
+<!-- Nav Header
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{% block navheader %}Sign in{% endblock %}
+
+<!-- Main Content
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{% block content %}
+    <h1>Sign in to the Circle</h1>
+    <p>Please sign in with your username and password</p>
+    {%  include 'client_side_form_checking.html' %}
+    <form method="POST" action="{% url 'accounts:sign_in' %}">
+        {% csrf_token %}
+        {% include "form_template.html" with form=form %}
+        <input type="submit" class="button-primary" value="Sign In">
+        <a class=".circle--search button" id="reset" type="button" href="{% url 'accounts:sign_in' %}">
+            Reset
+        </a>
+    </form>
+{% endblock %}
+
+<!-- Extra JS
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{% block js %}
+    {% include "form_js.html" %}
+{% endblock %}

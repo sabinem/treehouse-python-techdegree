@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+
+<!-- Page Title
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{% block title %}Circler {{ profile.user.username }}{% endblock %}
+
+<!-- Nav Header
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{% block navheader %}Circler<br>{{ profile.user.username }}{% endblock %}
+
+<!-- Sidebar Navigation
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{% block nav %}
+    {% if count == 1 %}
+       <p>You are the only circler so far</p>
+    {% else %}
+        <p>Do you want to circle through the community</p>
+        <ul>
+            <li><a href="{% url 'profiles:other' pk=next_profile.user_id %}">get next member</a></li>
+        </ul>
+    {% endif %}
+{% endblock %}
+
+<!-- Main Content
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{% block content %}
+    <h1>Circle Profile</h1>
+    <h2>{{ profile.user.first_name }} {{ profile.user.last_name }}</h2>
+    <img src="{{ profile.avatar.url }}">
+    <table class="profile">
+        {% if profile.show_email %}
+            <tr>
+                <td>Date of birth:</td>
+                <td>{{ profile.date_of_birth }}</td>
+            </tr>
+        {% endif %}
+        {% if profile.show_email %}
+            <tr>
+                <td>Email address:</td>
+                <td>{{ user.email }}</td>
+            </tr>
+        {% endif %}
+    </table>
+    <h2>Biography</h2>
+    <div>{{ profile.bio }}</div>
+{% endblock %}

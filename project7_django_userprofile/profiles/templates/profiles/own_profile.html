@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+
+<!-- Page Title
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{% block title %}Your Profile{% endblock %}
+
+<!-- Nav Header
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{% block navheader %}Your Profile{% endblock %}
+
+<!-- Sidebar Navigation
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{% block nav %}
+    <p>What do you want to do</p>
+    <ul>
+        <li><a href="{% url 'profiles:edit' %}">Edit your profile?</a></li>
+        <li><a href="{% url 'accounts:change_password' %}">Change your Password?</a></li>
+        <li><a href="{% url 'profiles:transform_avatar' %}">Edit your Avatar</a></li>
+        <li><a href="{% url 'profiles:other' pk=user.pk %}">See how your profile is shown to other users</a></li>
+    </ul>
+{% endblock %}
+
+<!-- Main Content
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{% block content %}
+    <h1>Your own Profile!</h1>
+    <h2>{{ profile.user.first_name }} {{ profile.user.last_name }}</h2>
+    <img src="{{ profile.avatar.url }}">
+    <table class="profile">
+        <tr>
+            <td>Date of birth:</td>
+            <td>{{ profile.date_of_birth }}</td>
+        </tr>
+        <tr>
+            <td>Email address:</td>
+            <td>{{ user.email }}</td>
+        </tr>
+    </table>
+    <h2>Biography</h2>
+    <div>{{ profile.bio }}</div>
+{% endblock %}

@@ -1,0 +1,176 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Basic Page Needs
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %} | Circle</title>
+
+    <!-- Mobile Specific Metas
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- FONTS
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,500'
+          rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Cousine'
+          rel='stylesheet' type='text/css'>
+
+    <!-- CSS
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="{% static "css/global.css" %}">
+    <link rel="stylesheet" href="{% static "css/customstyles.css" %}">
+
+    <!-- Extra CSS
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    {% block css %}{% endblock %}
+
+</head>
+<body>
+
+<!-- Main Navigation header with active links
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<nav class="circle--header">
+    <div class="bounds">
+        <div class="circle--fluid">
+            {% url 'home' as home_url %}
+            {% url 'profiles:list' as list_url %}
+            <div class="circle--fluid--cell">
+                <h1 class="hide-text circle--logo">
+                    <a class="logo" href="
+                        {% if not user.is_authenticated %}
+                           {{ home_url }}
+                        {% else %}
+                           {{ list_url }}
+                        {% endif %}
+                        ">
+                    </a>
+                </h1>
+            </div>
+            <div class="circle--fluid--cell circle--fluid--primary">
+                <nav>
+                    {% url 'profiles:own' as profile_url %}
+                    <ul class="circle--inline">
+                        <li>
+                            <a
+                                    {% if request.get_full_path <= list_url and request.get_full_path != profile_url %}
+                                        class="active_url"
+                                    {% endif %}
+                                        href="
+                               {% if not user.is_authenticated %}
+                                  {{ home_url }}
+                               {% else %}
+                                  {{ list_url }}
+                               {% endif %}
+                               ">
+                                The Circle
+                            </a>
+                        </li>
+                        {% if user.is_authenticated %}
+                            <li>
+                                <a href="{{ profile_url }}"
+                                        {% if profile_url == request.get_full_path %}
+                                   class="active_url"
+                                        {% endif %}
+                                >
+                                    {{ user.username }}
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+            <div class="circle--fluid--cell circle--fluid--secondary">
+                <nav>
+                    <ul class="circle--inline">
+                        {% if not user.is_authenticated %}
+                            <li>
+                                {% url 'accounts:sign_in' as sign_in_url %}
+                                <a href="{{ sign_in_url }}"
+                                        {% if request.get_full_path == sign_in_url %}
+                                   class="active_url"
+                                        {% endif %}
+                                >
+                                    Sign In
+                                </a>
+                            </li>
+                            <li>
+                                {% url 'accounts:sign_up' as sign_up_url %}
+                                <a href="{{ sign_up_url }}"
+                                        {% if request.get_full_path == sign_up_url %}
+                                   class="active_url"
+                                        {% endif %}
+                                >
+                                    Sign Up
+                                </a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="{% url 'accounts:sign_out' %}">Sign Out
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="bounds circle--page">
+    {% block body %}
+        <div class="grid-25">
+            <nav>
+
+                <!-- Nav Header
+                –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+                <header class="circle-image-img-25">
+                    <span class="circle-image-text-25">
+                        {% block navheader %}{% endblock %}
+                    </span>
+                </header>
+
+                <!-- Sidebar Navigation
+                –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+                {% block nav %}{% endblock %}
+
+                <!-- Messages
+                –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+                {% block messages %}{% endblock %}
+                {% if messages %}
+                    <ul class="messages centered grid-75">
+                        {% for message in messages %}
+                            <li{% if message.tags %}
+                                class="{{ message.tags }}"{% endif %}>
+                                {% if 'safe' in message.tags %}{{ message|safe }}{% else %}{{ message }}{% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </nav>
+        </div>
+        <div class="grid-75">
+
+            <!-- Main Content
+            –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+            <main>{% block content %}{% endblock %}</main>
+        </div>
+    {% endblock %}
+</div>
+
+<!-- JS
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/jquery.autogrow/1.2.2/jquery.autogrow.js"></script>
+<script type="text/javascript" src="{% static "js/global.js" %}"></script>
+
+<!-- Extra JS
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{% block js %}{% endblock %}
+</body>
+</html>

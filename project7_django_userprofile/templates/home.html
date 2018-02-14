@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+<!-- Page Title
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{% block title %}Change my Password{% endblock %}
+
+<!-- Nav Header
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{% block navheader %}
+The Circle
+{% endblock %}
+
+<!-- Sidebar Navigation
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{% block nav %}
+    <p>Do you have an account with us?</p>
+    <ul>
+        <li><a href="{% url 'accounts:sign_in' %}">Sign in here</a></li>
+    </ul>
+{% endblock %}
+
+<!-- Main Content
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{% block content %}
+    <h1>Welcome to the Circle!</h1>
+    <p>
+        We are a cool new Membership Site!
+    </p>
+    <ul>
+        <li>design your avatar</li>
+        <li>provide your bio</li>
+        <li>connect with other programmers </li>
+    </ul>
+    <a class="circle-image-img-75" href="{% url 'accounts:sign_up' %}">
+        <h3 class="circle-image-text-75">Get started now</h3></a>
+{% endblock %}
+

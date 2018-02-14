@@ -1,0 +1,16 @@
+<!-- Form Template
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{{ form.non_field_errors }}
+{% for field in form %}
+    <div class="fieldWrapper">
+        {{ field.errors }}
+        {{ field.label_tag }} {{ field }}
+        {% if field.help_text %}
+            <p class="help">{{ field.help_text|safe }}</p>
+        {% endif %}
+        {{ field.type }}
+        {% if field.url %}
+            <img src="{{ field.url }}">{{ field }}
+        {% endif %}
+    </div>
+{% endfor %}

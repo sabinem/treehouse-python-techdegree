@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+
+<!-- Page Title
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{% block title %}Community{% endblock %}
+
+<!-- Nav Header
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{% block navheader %}Community{% endblock %}
+
+<!-- Main Content
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+{% block content %}
+    <h1>Circle Community</h1>
+    <ul>
+        {% for profile in profiles %}
+            <li>
+                <a href="{% url 'profiles:other' pk=profile.user.pk %}">
+                    {{ profile.user.username }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
