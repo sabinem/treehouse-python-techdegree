@@ -1,0 +1,8 @@
+__pycache__
+.idea/*
+.cache/*
+*.pyc
+*.db*
+data*.txt
+db.sqlite3
+minerals/static/minerals/images/*

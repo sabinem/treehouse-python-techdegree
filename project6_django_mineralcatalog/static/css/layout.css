@@ -1,0 +1,45 @@
+.header_wrapper {
+    position: relative;
+    bottom:10px;
+    height:80px;
+}
+
+.logo {
+    display: block;
+    fill: #384033;
+    position: absolute;
+    left: 10px;
+    height:80px;
+    top:-30px;
+}
+
+.logo__name {
+    top:-20px;
+    position: absolute;
+    left:140px;
+    line-height: 1em;
+}
+@media (min-width: 540px) { .logo__name { top:-10px;}
+}
+
+.logo__text {
+    font-size: 13px;
+    position:absolute;
+    top:50px;
+    left:10px;
+}
+
+.logo--middle {
+    fill: #406b44;
+}
+
+.footer {
+    background-color: #384033;
+    box-shadow: 0 0 100px 50px #CAE5D2;
+    color: #fff;
+    padding: 20px 0 20px 0;
+    position: fixed;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+}
