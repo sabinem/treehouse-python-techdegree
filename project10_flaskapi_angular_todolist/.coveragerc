@@ -1,0 +1,18 @@
+[run]
+include =
+    todo_api/*
+
+
+omit =
+    todo_api/resources/__init__.py
+
+
+
+[report]
+exclude_lines =
+  pragma: no cover
+
+    # Don't complain if non-runnable code isn't run:
+    if __name__ == .__main__.:
+
+show_missing = True
