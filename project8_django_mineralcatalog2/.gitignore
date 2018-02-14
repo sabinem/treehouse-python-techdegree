@@ -1,0 +1,24 @@
+# coverage output
+htmlcov/**
+.coverage
+
+# do not include copied image files
+minerals/static/minerals/images/*.jpg
+minerals/static/minerals/images/*.JPG
+minerals/static/minerals/images/*.png
+minerals/static/minerals/images/*.png
+minerals/static/minerals/images/*.jpeg
+minerals/static/minerals/images/*.gif
+
+# database is generated
+db.*
+
+# pycharm settings
+.idea/**
+
+# cached code
+*.pyc
+*.__pychache_
+
+# analyze.py output_
+*.txt

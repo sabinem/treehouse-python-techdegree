@@ -1,0 +1,16 @@
+<div class="grid-25">
+<ul class="group-search">
+   {% for group in groups %}
+      <li>
+          {% with slug=group|slugify %}
+          <a class="search {% if active_group == group.0 %}
+               active_search
+             {% endif %}"
+              href="{% url 'minerals:filter_by_group' group_slug=group.1 %}">
+              {{ group.0 }}
+          </a>
+          {% endwith %}
+      </li>
+   {% endfor %}
+</ul>
+</div>

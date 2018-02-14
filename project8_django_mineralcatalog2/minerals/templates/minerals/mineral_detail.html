@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% load static %}
+{% load minerals_extras %}
+{% block bounds_class %}bounds-small{% endblock %}
+{% block main_class %}mineral__container{% endblock %}
+{% block content %}
+  <div class="inner_container grid-75">
+    <h1 class="mineral__name">{{ mineral.name }}</h1>
+    <div class="mineral__image-bg">
+        {% if mineral.image_path %}
+        <img class="mineral__image" src="{% static mineral.image_path %}">
+        {% endif %}
+        {% if mineral.image_caption != '' %}
+        <p class="mineral__caption">{{ mineral.image_caption }}</p>
+        {% endif %}
+    </div>
+    <div class="mineral__table-container">
+        <table class="mineral__table">
+            {% mineral_fields mineral=mineral %}
+        </table>
+    </div>
+      </div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% load minerals_extras %}
+{% block bounds_class %}{% endblock %}
+{% block main_class %}{% endblock %}
+{% block content %}
+<div class="grid-75">
+    {% if minerals %}
+    <ul class="minerals__container">
+        {% for mineral in minerals %}
+            <li class="minerals__item">
+                <a class="minerals__anchor"
+                   href="{% url 'minerals:detail' mineral_slug=mineral.mineral_slug %}">
+                    {{ mineral }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <div class="empty-search">
+        Sorry, no minerals were found for this search
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

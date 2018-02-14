@@ -1,0 +1,19 @@
+.letter-search li {display: inline-block;}
+.letter-search {text-align: center; margin-bottom: 0;}
+.group-search {float: left;}
+.group-search li {list-style: none; background: #CAE5D2;}
+.inner_container {background: white;}
+.mineral__container {background: #CAE5D2;}
+.active_search {font-weight: bold; color:#384033;}
+#search-form label {display: block; margin-bottom: 0;}
+#search-form p {display: inline; border: 1px solid black; border-radius: 50%;}
+#search-form input {width: 200px; color: #666; background: #ecfaf8; margin-bottom:0;}
+button.search-button {background-color: #384033; color: white; display: inline;
+               border: 1px solid black; border-radius: 50%;}
+.minerals__search {background-color: #CAE5D2;
+                    text-align: center; width: 100%; }
+.minerals__search .minerals__anchor { display: inline; color: #fff; padding: 6px 24px 5px 24px; background: #ecfaf8;}
+.minerals__search .minerals__anchor:hover { color: black; background: #ecfaf8;}
+.searchresult {height:30px; color: #689b98; text-align: center; margin-bottom: 0;}
+.logo__text{margin-bottom: 20px;}
+.noUi-horizontal{width:300px;}
