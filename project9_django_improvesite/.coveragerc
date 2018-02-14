@@ -1,0 +1,29 @@
+[run]
+include = menu/*
+
+[report]
+exclude_lines =
+  pragma: no cover
+
+    # Don't complain about missing debug-only code:
+    def __unicode__
+    def __repr__
+    if self\.debug
+
+    # Don't complain if tests don't hit defensive assertion code:
+    raise AssertionError
+    raise NotImplementedError
+
+    # Don't complain if non-runnable code isn't run:
+    if 0:
+    if settings.DEBUG:
+    if __name__ == .__main__.:
+
+omit =
+    menu/tests*.py
+    mysite/settings/*
+    menu/migrations/*auto*
+    menu/__init__.py
+    menu/*/__init__.py
+
+show_missing = True
