@@ -1,0 +1,4 @@
+coverage==4.4.1
+Django==1.9.9
+djangorestframework==3.4.1
+django-multiselectfield==0.1.7

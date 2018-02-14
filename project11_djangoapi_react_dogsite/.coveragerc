@@ -1,0 +1,14 @@
+[run]
+source =
+    pugorugh
+
+
+[report]
+omit =
+    pugorugh/migrations/*
+    pugorugh/tests/*
+    pugorugh/urls.py
+    pugorugh/apps.py
+    pugorugh/__init__.py
+
+show_missing = True
