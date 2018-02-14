@@ -1,0 +1,22 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+header {
+    background: white;
+}
+
+header p, header h1 {
+    color:black;
+    font-family: Arial;
+}
+
+#banner {
+    background: #add4e7;
+    border: none;
+}
+
+body {
+    background:lightgray;
+}
