@@ -1,0 +1,44 @@
+
+/* --------------- */
+/* message display */
+/* --------------- */
+
+
+/* for message */
+.circle--page.message {
+    margin-bottom: 0;
+}
+
+/* display messages inline */
+
+ul.messages, ul.messages li {
+    display: inline;
+    list-style: none;
+    padding-left:50px;
+}
+
+ul.messages li.error {
+    color:red;
+}
+
+
+/* -------------- */
+/* form errors    */
+/* -------------- */
+.form-errors {
+    color:red;
+}
+
+/* -------------- */
+/* profile avatar */
+/* -------------- */
+
+/* padding before avatar */
+.image-exists::before {
+    padding-top: 0;
+}
+
+/* image upload */
+.hidden-upload {
+    display: none;
+}

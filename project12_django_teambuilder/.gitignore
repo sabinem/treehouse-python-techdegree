@@ -1,0 +1,6 @@
+.idea/**
+*.pyc
+p3venv/**
+*.sqlite3
+static/media/avatars/*.jpg
+__pycache__

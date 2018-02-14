@@ -1,0 +1,93 @@
+{% extends 'layout.html' %}
+{% load static from staticfiles %}
+{% block content %}
+    <div class="circle--actions--bar">
+        <nav class="bounds">
+            <ul class="circle--pill--list">
+                <li><a href="{% url 'accounts:applications' %}">Applications</a></li>
+                <li><a {% if request.user == profile_user %}
+                    class="selected"
+                {% endif %}
+                    href="{% url 'accounts:profile' %}">Profile</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="bounds circle--page">
+        <div class="circle--page--header circle--fluid">
+            <div class="circle--fluid--cell circle--fluid--primary">
+                <h2>Profile</h2>
+            </div>
+            {% if request.user.id == user.id %}
+                <div class="circle--fluid--cell circle--fluid--secondary">
+                    <a class="button icon-on-left" href="{% url 'accounts:profile_edit' %}">
+                        Edit
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="grid-70">
+            <h1>{{ user.name }}</h1>
+            <div class="circle--article--body">
+                {{ user.bio }}
+            </div>
+
+            <h2>Past Projects</h2>
+            <table class="u-full-width circle--table">
+                <thead>
+                <tr>
+                    <th>Project Title</th>
+                    <th class="circle--cell--right">Project Needs</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for job in jobs %}
+                    <tr class="clickable-row"
+                        data-href="{% url 'teambuilder:project' project_pk=job.project_id %}">
+                        <td>
+                            <h3>{{ job.project.title }}</h3>
+                        </td>
+                        <td class="circle--cell--right">
+                            <span class="secondary-label">{{ job.skill.need }}</span>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="grid-25 grid-push-5">
+
+            <div class="circle--secondary--module">
+                <div class="circle--primary--avatar {% if user.avatar %}image-exists{% endif %}">
+                    {% if user.avatar %}
+                        <img id="avatar" width="200px" src="{% static user.avatar.url %}">
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="circle--secondary--module">
+                <h4>My Skills</h4>
+                <ul class="unloaded">
+                    {% for skill in skills %}
+                        <li>{{ skill }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="circle--secondary--module">
+                <h4>My Projects</h4>
+                <ul class="circle--link--list">
+                    {% for project in projects %}
+                        <li>
+                            <a href="{% url 'teambuilder:project' project_pk=project.id %}">
+                                {{ project.title }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
