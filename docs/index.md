@@ -1,29 +1,20 @@
-# Treehouse Python Techdegree - My year at Treehouse
-I accomplished the **Python Treehouse Techdegree**.
+# My year at Treehouse
+I was enrolled in the **Python Treehouse Techdegree**. 
 
-## About the Treehouse Techdegree Program
-This is a year long program, that takes you through 12 complete Python projects, covering the main frameworks, such as **Django** and **Flask** and state of the art skills for combining frontends with **API Backends**
+## About
+Treehouse offers a 6-12 month long Python Tech program. The main seeling point of that program is that you build up a repository of work, that you may showcase to future employers. This work is essentially what I store in this repo.
 
-The focus is on practical projects, that are programmed from scratch. Eventually the frontend is provided, programmed in a Javascript framenwork such as **Angular** or **React** or as pure stylesheets. The goal has been always to match the provided design of the site. In that way the focus was on programming a backend, that fits the frondend teams demands.
+## Full Stack of Webdevelopment
+The projects cover the full stack of Webdevelopment in Python. We took these steps:
+1. Pure Python projects (Projects 1-4)
+2. Flask and Django Applications (Projects 5, 6, 7, 8, 9, 12)
+3. Flask and Django Apis coupled with an Angular or React Frontend (Projects 10, 11) 
 
-## The Skills I got from there
-- Python: classes, list comprehension, file-i/o
-- the main python webframeworks: Flask, Django
-- building an API with Flask or Django-Restframework
-- tweaking Angular and React to work with an API Backend
-- customizing the Django User
+## Projects in Detail
 
-## Tutoring upon graduating
-After graduating I continued to help out there as a contractor for 3 month, grading the very projects I had done myself. It was interesting to see all of this from the other side. But after 3 month I felt I wanted to move on.
-
-## Showcasing My Work:
-
-## Pure Python Projects
-
-We started from scratch with pure Python, no frameworks:
-
-### [Project 1: Build a Soccer League](https://github.com/sabinem/python_techdegree_project1_soccer_league) 
-This was a simple **file-io exercise** with some list comprehensions: we had to build a team rooster for soccer and mail letters to the guardians.
+### Project 1: Build a Soccer League
+- pure python / file-io
+We had to build a simple program that would compute a team rooster and produce assignment letters.
 
 ### [Project 2: Battleship Game](https://github.com/sabinem/python_techdegree_project2_battleshipgame)
 This was a nice exercise for **designing classes**. Battleships, players and board were all candidates for classes.
