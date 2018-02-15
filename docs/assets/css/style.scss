@@ -7,7 +7,7 @@
 header {
     background: #62b3b2;
 }
-header p, header h1 {
+header p, header h1 a {
     font-family: 'Open Sans', sans-serif;  
     color: white;
     
@@ -15,30 +15,29 @@ header p, header h1 {
 
 // style banner and github button
 #banner {
-    background: #689aca;
+    background: #3399cc;
     border: none;
 }
 #banner .fork, #banner a.button.fork:hover, #banner a.button.fork {
-    background: #fed043;
+    background: #62b3b2;
     border: none;
 }
 #banner a.button.fork strong {
     color: white;   
-    color: black;
 }
 
 // style body 
 body {
-    background: #689aca;
+    background: white;
     font-family: 'Open Sans', sans-serif;    
 }
 
 // style navigation links in the sidebar
 nav ul li.tag-h1 a, nav ul li.tag-h2 a {
-    color: white;
+    color: #62b3b2;
 }
 nav ul li.tag-h1.active a, nav ul li.tag-h2.active a {
-    color: #fed043;
+    color: black;
 }
 
 // section 
