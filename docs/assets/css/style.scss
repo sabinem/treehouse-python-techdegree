@@ -1,22 +1,42 @@
 ---
 ---
-
+// import site theme
 @import "{{ site.theme }}";
 
+// style header 
 header {
-    background: white;
+    background: #62b3b2;
 }
-
 header p, header h1 {
-    color:black;
-    font-family: Arial;
+    font-family: 'Open Sans', sans-serif;  
+    color: white;
+    
 }
 
+// style banner and github button
 #banner {
-    background: #add4e7;
+    background: #689aca;
     border: none;
 }
+#banner .fork, #banner a.button.fork:hover, #banner a.button.fork {
+    background: #fed043;
+    border: none;
+}
+#banner a.button.fork strong {
+    color: white;   
+    color: black;
+}
 
+// style body 
 body {
-    background:lightgray;
+    background: #689aca;
+    font-family: 'Open Sans', sans-serif;    
+}
+
+// style navigation links in the sidebar
+nav ul li.tag-h1 a, nav ul li.tag-h2 a {
+    color: white;
+}
+nav ul li.tag-h1.active a, nav ul li.tag-h2.active a {
+    color: #fed043;
 }
