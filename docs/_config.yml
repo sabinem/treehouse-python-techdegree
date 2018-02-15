@@ -1,3 +1,5 @@
 theme: jekyll-theme-leap-day
 index_url: 'https://sabinem.github.io/treehouse-python-techdegree/' 
 base_url: 'https://sabinem.github.io/'
+title: Python Techdegree at Treehouse
+description: Here you find my project from the Python Techdegree at Treehouse
