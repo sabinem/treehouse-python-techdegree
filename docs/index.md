@@ -12,11 +12,14 @@ The projects cover the full stack of Webdevelopment in Python. We took these ste
 
 ## Projects in Detail
 
-### Project 1: Build a Soccer League
-- pure python / file-io
-We had to build a simple program that would compute a team rooster and produce assignment letters.
+## Pure Python
 
-### [Project 2: Battleship Game](https://github.com/sabinem/python_techdegree_project2_battleshipgame)
+### Project 1: Build a Soccer League
+- about: We had to build a simple program that would compute a team rooster and produce assignment letters.
+- technical: file-io, commandline-tool
+
+### [Project 2: Battleship Game](https://github.com/sabinem/project2_battleshipgame)
+- class design
 This was a nice exercise for **designing classes**. Battleships, players and board were all candidates for classes.
 
 ### [Project 3: Worklog filebased](https://github.com/sabinem/python_techdegree_project3_worklog)
