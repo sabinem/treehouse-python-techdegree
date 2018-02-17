@@ -4,14 +4,14 @@ I was enrolled in the **Python Treehouse Techdegree**.
 ## About
 Treehouse offers a 6-12 month long Python Tech program. The main seeling point of that program is that you build up a repository of work, that you may showcase to future employers. This work is essentially what I store in this repo.
 
-## Full Stack of Webdevelopment
-The projects cover the full stack of Webdevelopment in Python. We took these steps:
+## Full Stack of Webdevelopment: Projects
+The practical projects, that were part of this program, cover the range of Full Stack of Webdevelopment in Python:
 1. Pure Python projects (Projects 1-4)
-2. Flask and Django Applications (Projects 5, 6, 7, 8, 9, 12)
-3. Flask and Django Apis coupled with an Angular or React Frontend (Projects 10, 11)
+2. Flask or Django Applications (Projects 5, 6, 7, 8, 9, 12)
+3. Flask or Django Apis coupled with an Angular or React Frontend (Projects 10, 11)
 
-## Projects in Detail
-All projects have:
+## Installing Projects
+You can install and try all project in a virtual environment
 - a README file that comes with instructions on how to install and use them.
 - a requirements.txt file, that states what packages they need in their virtual environment
 
