@@ -1,5 +1,5 @@
 # My year at Treehouse
-I was enrolled in the **Python Treehouse Techdegree**. 
+I was enrolled in the **Python Treehouse Techdegree**.
 
 ## About
 Treehouse offers a 6-12 month long Python Tech program. The main seeling point of that program is that you build up a repository of work, that you may showcase to future employers. This work is essentially what I store in this repo.
@@ -8,11 +8,11 @@ Treehouse offers a 6-12 month long Python Tech program. The main seeling point o
 The projects cover the full stack of Webdevelopment in Python. We took these steps:
 1. Pure Python projects (Projects 1-4)
 2. Flask and Django Applications (Projects 5, 6, 7, 8, 9, 12)
-3. Flask and Django Apis coupled with an Angular or React Frontend (Projects 10, 11) 
+3. Flask and Django Apis coupled with an Angular or React Frontend (Projects 10, 11)
 
 ## Projects in Detail
 All projects have:
-- a README file that comes with instructions on how to install and use them. 
+- a README file that comes with instructions on how to install and use them.
 - a requirements.txt file, that states what packages they need in their virtual environment
 
 You can download the repo and try install one of the projects, according to its instructions and try it out. They are supposed to all work, even though I am not longer actively working on them. This is why gathered them in one repo all together now, since they are just examples, not active projects.
@@ -22,12 +22,12 @@ Below you find them listed with short descriptions.
 ## Pure Python Projects
 
 ### Project 1: Build a Soccer League
-- about: We had to build a simple program that would compute a team rooster and produce assignment letters.
-- technical: file-io, commandline-tool, list-comprehensions
+- **about:** We had to build a simple program that would compute a team rooster and produce assignment letters.
+- **technical:** file-io, commandline-tool, list-comprehensions
 
 ### Project 2: Battleship Game
-- technical: designing classes, commandline tool,
-- about: implementing the well known battleship game on the command line
+- **technical:** designing classes, commandline tool,
+- **about:** implementing the well known battleship game on the command line
 
 
 
