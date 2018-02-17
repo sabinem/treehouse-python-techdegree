@@ -6,23 +6,27 @@
 // style header 
 header {
     background: #62b3b2;
+    background: white;
 }
 header p, header h1 a {
     font-family: 'Open Sans', sans-serif;  
-    color: white;
-    
+    color: #62b3b2;
 }
 
 // style banner and github button
 #banner {
+    //background: #3399cc;
+    background: #f7915d;
     border: none;
 }
 #banner .fork, #banner a.button.fork:hover, #banner a.button.fork {
     background: #62b3b2;
+    background: white;
     border: none;
 }
 #banner a.button.fork strong {
-    color: white;   
+    color: #62b3b2;
+    color: #f7915d;
 }
 
 // style body 
