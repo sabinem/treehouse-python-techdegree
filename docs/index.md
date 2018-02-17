@@ -73,6 +73,6 @@ Below you find them listed with short descriptions.
 
 ## Django APIs
 
-## Project 11: Dog matching Site
+### Project 11: Dog matching Site
 - about: api as backend for a dog matching site
 - technical: django rest api as backend for a given react frontend, token authentication
