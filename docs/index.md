@@ -11,16 +11,25 @@ The projects cover the full stack of Webdevelopment in Python. We took these ste
 3. Flask and Django Apis coupled with an Angular or React Frontend (Projects 10, 11) 
 
 ## Projects in Detail
+All projects have:
+- a README file that comes with instructions on how to install and use them. 
+- a requirements.txt file, that states what packages they need in their virtual environment
 
-## Pure Python
+You can download the repo and try install one of the projects, according to its instructions and try it out. They are supposed to all work, even though I am not longer actively working on them. This is why gathered them in one repo all together now, since they are just examples, not active projects.
+
+Below you find them listed with short descriptions.
+
+## Pure Python Projects
 
 ### Project 1: Build a Soccer League
 - about: We had to build a simple program that would compute a team rooster and produce assignment letters.
-- technical: file-io, commandline-tool
+- technical: file-io, commandline-tool, list-comprehensions
 
-### [Project 2: Battleship Game](https://github.com/sabinem/project2_battleshipgame)
-- class design
-This was a nice exercise for **designing classes**. Battleships, players and board were all candidates for classes.
+### Project 2: Battleship Game
+- technical: designing classes, commandline tool,
+- about: implementing the well known battleship game on the command line
+
+
 
 ### [Project 3: Worklog filebased](https://github.com/sabinem/python_techdegree_project3_worklog)
 Here I build a **dialog system on the command line from scratch**. This worklog was a file based searchable worklog system.
