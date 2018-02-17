@@ -3,14 +3,15 @@
 // import site theme
 @import "{{ site.theme }}";
 
-// style header 
+// style header
 header {
     background: #62b3b2;
     background: white;
 }
 header p, header h1 a {
-    font-family: 'Open Sans', sans-serif;  
+    font-family: 'Open Sans', sans-serif;
     color: #62b3b2;
+    text-shadow:none;
 }
 
 // style banner and github button
@@ -29,10 +30,10 @@ header p, header h1 a {
     color: #f7915d;
 }
 
-// style body 
+// style body
 body {
     background: white;
-    font-family: 'Open Sans', sans-serif;    
+    font-family: 'Open Sans', sans-serif;
 }
 
 // style navigation links in the sidebar
@@ -43,7 +44,7 @@ nav ul li.tag-h1.active a, nav ul li.tag-h2.active a {
     color: black;
 }
 
-// section 
+// section
 section {
     background: white;
 }
