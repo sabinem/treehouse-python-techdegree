@@ -43,14 +43,39 @@ Below you find them listed with short descriptions.
 - about: learning journal with markdown and tagging
 - technical: sqlight, orm: peewee, flask, markdown
 
+## Pure Django Projects
+
 ### Project 6: Mineral Catalog with Django
-- about: learning journal with markdown and tagging
-- technical: sqlight, orm: peewee, flask, markdown
+- about: searchable mineral catalog from imported json data
+- technical: database: sqlight, framework: django, data: json
 
-This was a datadriven project with **Django**. We builded a searchable catalog for data that was given as a json file.
+### Project 7: User Profile Site
+- about: user profile site with modifiable avatars
+- technical: database: sqlight, framework: django, image-transformations: Pillow
 
-### [Project 7: Learning Journal with Flask](https://github.com/sabinem/python_techdegree_project5_learning_journal)
-### [Project 8: Learning Journal with Flask](https://github.com/sabinem/python_techdegree_project5_learning_journal)
+### Project 8: Mineral Catalog revisited
+- about: user profile site with modifiable avatars
+- technical: database: sqlight, framework: django, image-transformations: Pillow
+
+### Project 9: Improve a Django Site
+- about: user profile site with modifiable avatars
+- technical: database: sqlight, framework: django, image-transformations: Pillow
+
+### Project 12: Social Team Builder
+
+## Flask APIs
+
+### Project 10: TODO List
+
+## Django APIs
+
+## Project 11: Dog matching Site
+
+
+
+
+
+ Flask](https://github.com/sabinem/python_techdegree_project5_learning_journal)
 ### [Project 9: Learning Journal with Flask](https://github.com/sabinem/python_techdegree_project5_learning_journal)
 ### [Project 10: Learning Journal with Flask](https://github.com/sabinem/python_techdegree_project5_learning_journal)
 ### [Project 11: Learning Journal with Flask](https://github.com/sabinem/python_techdegree_project5_learning_journal)
