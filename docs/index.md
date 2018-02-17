@@ -54,33 +54,25 @@ Below you find them listed with short descriptions.
 - technical: database: sqlight, framework: django, image-transformations: Pillow
 
 ### Project 8: Mineral Catalog revisited
-- about: user profile site with modifiable avatars
-- technical: database: sqlight, framework: django, image-transformations: Pillow
+- enriching project 6, the mineral catalog from json data
+- technical: database: sqlight, framework: django, django-debug-toolbar, django queries
 
 ### Project 9: Improve a Django Site
-- about: user profile site with modifiable avatars
-- technical: database: sqlight, framework: django, image-transformations: Pillow
+- about: improving an existing site, that offered restaurant-menus
+- technical: database: sqlight, framework: django
 
 ### Project 12: Social Team Builder
+- about: user profile site with modifiable avatars
+- technical: database: sqlight, framework: django, email-backend, customized django-user
 
 ## Flask APIs
 
 ### Project 10: TODO List
+- about: api as backend for a todo list application
+- technical: flask api as backend for a given angular frontend, token authentication
 
 ## Django APIs
 
 ## Project 11: Dog matching Site
-
-
-
-
-
- Flask](https://github.com/sabinem/python_techdegree_project5_learning_journal)
-### [Project 9: Learning Journal with Flask](https://github.com/sabinem/python_techdegree_project5_learning_journal)
-### [Project 10: Learning Journal with Flask](https://github.com/sabinem/python_techdegree_project5_learning_journal)
-### [Project 11: Learning Journal with Flask](https://github.com/sabinem/python_techdegree_project5_learning_journal)
-### [Project 12: Social Team Builder](https://github.com/sabinem/python_techdegree_project12_teambuilder)
-In this project the **django user model was customized**, otherwise it used **django formsets**
-
-## Back to sabinem.github.io
-Finished? You want to go back to the [homepage](index.md)?
+- about: api as backend for a dog matching site
+- technical: django rest api as backend for a given react frontend, token authentication
