@@ -22,27 +22,31 @@ Below you find them listed with short descriptions.
 ## Pure Python Projects
 
 ### Project 1: Build a Soccer League
-- **about:** We had to build a simple program that would compute a team rooster and produce assignment letters.
-- **technical:** file-io, commandline-tool, list-comprehensions
+- about: We had to build a simple program that would compute a team rooster and produce assignment letters.
+- technical: file i/o, commandline tool, list comprehensions
 
 ### Project 2: Battleship Game
-- **technical:** designing classes, commandline tool,
-- **about:** implementing the well known battleship game on the command line
+- about: implementing the well known battleship game on the command line
+- technical: designing classes, commandline tool,
 
+### Project 3: Worklog filebased
+- about: filebased searchable worklog
+- technical: commandline tool, commandline dialog, regular expressions
 
-
-### [Project 3: Worklog filebased](https://github.com/sabinem/python_techdegree_project3_worklog)
-Here I build a **dialog system on the command line from scratch**. This worklog was a file based searchable worklog system.
-
-### [Project 4: Worklog with a database](https://github.com/sabinem/python_techdegree_project4_worklogdb)
-We repeated the worklog from project 3 using a database this time and a simple **ORM: Peewee**
+### Project 4: Worklog with a database
+- about: worklog with database
+- technical: sqlight, orm: peewee, commandline tool
 
 ## Pure Flask Projects
 
-### [Project 5: Learning Journal with Flask](https://github.com/sabinem/python_techdegree_project5_learning_journal)
-Our first Project with **Flask** was a Learning Journal, that came with **tagging** and used **markddown**.
+### Project 5: Learning Journal with Flask
+- about: learning journal with markdown and tagging
+- technical: sqlight, orm: peewee, flask, markdown
 
-### [Project 6: Mineral Catalog with Django](https://github.com/sabinem/python_techdegree_project5_learning_journal)
+### Project 6: Mineral Catalog with Django
+- about: learning journal with markdown and tagging
+- technical: sqlight, orm: peewee, flask, markdown
+
 This was a datadriven project with **Django**. We builded a searchable catalog for data that was given as a json file.
 
 ### [Project 7: Learning Journal with Flask](https://github.com/sabinem/python_techdegree_project5_learning_journal)
