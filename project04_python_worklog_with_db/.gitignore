@@ -9,4 +9,4 @@ venv/**
 coverage/*
 htmlcov/*
 worklogdb/worklog/new*
-worklogdb/**
+
