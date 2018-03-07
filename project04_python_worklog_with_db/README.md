@@ -17,7 +17,7 @@ The app builds a dialog for a worklog with a database for the employees of a com
 - Download the zip file to your computer and unzip
 - Go into the directory
 - Install a virtual environment:
-    `virtualenv -p python3 p3venv`
+    `virtualenv -p python3 venv`
 - Activate the virtuale environment:
     `source venv/bin/activate`
 - Install the requirements
