@@ -8,5 +8,3 @@ venv/**
 .coveragerc
 coverage/*
 htmlcov/*
-worklogdb/worklog/new*
-
